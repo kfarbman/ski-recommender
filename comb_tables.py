@@ -5,17 +5,17 @@ import monarch_table
 import DP_table
 import WP_table
 
-resorts = {'Loveland': ['Loveland.txt', 'CO'],
-           'Arapahoe Basin': ['Arapahoe_Basin.txt', 'CO'],
-           'Copper': ['Copper.txt', 'CO'],
-           'Eldora': ['Eldora.txt', 'CO'],
-           'Alpine Meadows': ['Alpine_Meadows.txt', 'CA'],
-           'Vail': ['Vail.txt', 'CO'],
-           'Monarch': ['Monarch.txt', 'CO'],
-           'Crested Butte': ['Crested_Butte.txt', 'CO'],
-           'Taos': ['Taos.txt', 'NM'],
-           'Diamond Peak': ['DP.txt', 'NV'],
-           'Winter Park': ['WP.csv', 'CO']}
+resorts = {'Loveland': ['data/Loveland.txt', 'CO'],
+           'Arapahoe Basin': ['data/Arapahoe_Basin.txt', 'CO'],
+           'Copper': ['data/Copper.txt', 'CO'],
+           'Eldora': ['data/Eldora.txt', 'CO'],
+           'Alpine Meadows': ['data/Alpine_Meadows.txt', 'CA'],
+           'Vail': ['data/Vail.txt', 'CO'],
+           'Monarch': ['data/Monarch.txt', 'CO'],
+           'Crested Butte': ['data/Crested_Butte.txt', 'CO'],
+           'Taos': ['data/Taos.txt', 'NM'],
+           'Diamond Peak': ['data/DP.txt', 'NV'],
+           'Winter Park': ['data/WP.csv', 'CO']}
            
 loveland_script = ['Loveland', 'Arapahoe Basin', 'Copper', 'Eldora', 'Alpine Meadows']
 vail_script = ['Vail']
