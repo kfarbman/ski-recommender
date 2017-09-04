@@ -1,0 +1,472 @@
+            B.         S KI T ER R A I N
+            The existing ski terrain at Vail is comprised of 193 named trails, including maintained and groomed
+            ski trails and open bowls. Additionally Vail provides a variety of named and unnamed tree skiing
+            areas, glades and chutes. An inventory of all skiable terrain reveals that there is a total of
+            approximately 5,571 acres of lift-served skiable terrain at Vail.
+
+            The formalized ski trail network accommodates the entire range of skier ability levels from beginner
+            to expert although there is a lack of extremely steep terrain. Many skiers access the East Vail Chutes
+            beyond the ski area permit to satisfy their desire for extreme terrain. Overall, the trail layout is well
+            conceived, in terms of minimal cross-traffic, lack of skier traffic bottlenecks, and provision of a
+            logical and free-flowing skier circulation.
+
+            Table 3-2 outlines the terrain that constitutes Vail‟s formal ski trail network.
+
+                                                            TABLE 3-2:
+                                           TERRAIN SPECIFICATIONS – EXISTING CONDITIONS
+                            Top     Bottom      Vert     Horiz.    Slope     Avg               Avg.    Max
+                                                                                    Area
+     Trail Name            Elev.     Elev.      Drop     Length   Length    Width              Grade   Grade     Ability Level
+                             (ft)     (ft)       (ft)      (ft)     (ft)     (ft)   (acre)      (%)     (%)
+02 Avanti Lower             9,824    9,315      510.0     2,845   2,890.3    367     24.3       18%     34%    Low Intermediate
+02 Avanti Upper            10,750   10,083      667.3     2,784   2,862.9    368     24.2       23%     36%      Intermediate
+                                                                                                                  Advanced
+02 Avanti-Cookshack       10,083     9,824      258.2     654      703.1     221     3.6       37%     47%
+                                                                                                                 Intermediate
+02 Berries                10,585    10,120      465.7    2,125    2,175.1    208     10.4      21%     38%       Intermediate
+02 Berries Catwalk        10,624    10,579       45.4     599      601.2      44      0.6       8%     13%          Novice
+                                                                                                                  Advanced
+02 Berries-Cookshack      10,120     9,746      373.4    1,268    1,321.7    204     6.2       28%     48%
+                                                                                                                 Intermediate
+02 Chair 2 Lift Line      10,067     9,739      327.2    1,267    1,308.6    98      2.9       25%     44%       Intermediate
+02 Chaos Canyon            9,850     9,667      182.9    1,920    1,928.7    40      1.8       9%      20%          Novice
+02 Cold Feet              10,088     9,992       95.8     793      798.7     41      0.8       12%     21%          Novice
+                                                                                                                  Advanced
+02 Cookshack               10,169    9,879      290.6     775      828.0     149     2.8       35%     50%
+                                                                                                                 Intermediate
+02 Lodgepole              10,537     9,307     1,229.5   5,646    5,778.3    226     30.0      21%     37%       Intermediate
+02 Mid-Vail Express       10,760    10,169      590.5    2,611    2,677.0    315     19.3      22%     35%       Intermediate
+02 Overeasy               10,567    10,237      330.1    1,764    1,794.3    238     9.8       18%     31%     Low Intermediate
+02 Pickeroon              10,710    10,111      598.7    2,584    2,652.0    279     17.0      23%     40%       Intermediate
+02 Pickeroon Lower         9,790     9,700       90.1     696      701.8     240     3.9       13%     17%          Novice
+02 Pickeroon-                                                                                                     Advanced
+                           10,111    9,790      321.4     869      926.4     215     4.6       35%     50%
+   Cookshack                                                                                                     Intermediate
+02 Ricochet                9,890     9,745      145.0     500      520.6     236     2.8       28%     33%     Low Intermediate
+03 Challenge              10,659    10,297      361.2    1,224    1,276.3    426     12.5      28%     56%          Expert
+03 Eagles Nest Ridge      10,990    10,330      660.0    6,579    6,612.1    209     31.8      10%     21%          Novice
+                                                                                                                  Advanced
+03 Hunky Dory             10,980    10,469      510.8    2,019    2,082.8    505     24.1      25%     46%
+                                                                                                                 Intermediate
+                                                                                                                  Advanced
+03 Kangaroo Cornice       10,840    10,640      200.0     624      655.3     736     11.1      31%     46%
+                                                                                                                 Intermediate
+03 Lookma                  10,526   10,180      345.7     988     1,046.3    395     9.5       33%     70%          Expert
+
+
+                                VAIL RESORT – MASTER DEVELOPMENT PLAN UPDATE – AUGUST 2007
+                                                            19
+                                                       TABLE 3-2:
+                                      TERRAIN SPECIFICATIONS – EXISTING CONDITIONS
+                        Top        Bottom   Vert      Horiz.    Slope     Avg             Avg.    Max
+                                                                                 Area
+    Trail Name          Elev.       Elev.   Drop      Length   Length    Width            Grade   Grade    Ability Level
+                         (ft)        (ft)    (ft)      (ft)      (ft)     (ft)   (acre)    (%)     (%)
+                                                                                                             Advanced
+03 South Lookma         10,443     10,170   273.1     1,182    1,213.1    392     10.9    23%     54%
+                                                                                                            Intermediate
+03 The Meadows          10,768     10,156   612.1     3,920    3,967.9    324     29.5    15%     31%     Low Intermediate
+04 Cappuccino           10,897     10,484   413.1     1,371    1,431.9    164     5.4     29%     37%       Intermediate
+04 Christmas            10,801     10,160   641.8     2,596    2,674.3    24      1.5     24%     34%     Low Intermediate
+04 Expresso             10,944     10,305   639.1     2,104    2,199.1    169     8.5     29%     42%       Intermediate
+04 Mountain Top Lift
+                        11,078     10,398   679.9     1,960    2,075.0    157     7.5     33%     73%         Expert
+   Line
+04 Powerline Glade      11,202     10,731    470.2    2,047    2,100.8    438     21.1    22%     31%          Glade
+04 Powerline Trees      10,830     10,425    405.0     933     1,017.1    360      8.4    40%     65%          Glade
+04 Ramshorn             11,238     10,461    777.0    3,332    3,421.6    269     21.1    23%     43%       Intermediate
+04 Ramshorn Glade       11,126     10,726    400.2    1,717    1,763.1    200      8.1    23%     44%          Glade
+04 Swingsville          10,908     10,237    671.7    2,513    2,601.5    262     15.6    26%     37%       Intermediate
+04 Swingsville Ridge    11,250     10,791    459.3    3,228    3,260.2    173     13.0    14%     24%          Novice
+04 The Skipper          10,912     10,600    311.4    1,067    1,111.3    123      3.2    28%     59%          Expert
+04 Whistle Pig          11,028     10,739    289.0     925      969.4     146      3.2    30%     41%       Intermediate
+04 Windows Road         11,163     10,901    262.3    2,534    2,547.8    113      6.6    10%     20%          Novice
+04 Zot                  11,173     10,372    801.3    2,689    2,805.6    170     10.9    29%     63%          Expert
+05 Apres Trees East     10,245      9,810    435.0     402      592.3     415      5.6    73%     80%          Glade
+05 Apres Trees West     10,245      9,810    435.0     759      874.8     703     14.1    50%     80%          Glade
+05 Apres Vous           10,570      9,750    820.0    1,646    1,838.9   1,236    52.2    45%     54%        Exp Bowl
+05 Campbell's           10,954     10,127    826.5    1,935    2,104.1    257     12.4    39%     51%        Exp Bowl
+05 Chicken Yard         10,571      9,753    817.4    1,648    1,839.3    358     15.1    44%     70%        Exp Bowl
+05 Cow's Face           10,718     10,025    692.4    1,507    1,658.6    318     12.1    42%     50%        Exp Bowl
+05 Forever              11,081      9,670   1,411.2   3,528    3,799.9   1,369   119.4    37%     53%        Exp Bowl
+05 Headwall             11,085     10,904    181.9    3,308    3,313.3   1,055    80.3    5%      11%        Exp Bowl
+05 High Noon            11,172     10,886    285.7    1,543    1,568.8    264      9.5    18%     46%        Exp Bowl
+05 Ho Chi Min Trail     11,090     11,090     0.0     3,200    3,200.0    101      7.4     0%      5%       Intermediate
+05 Milt's Face          11,070     10,244    826.0    2,132    2,286.7    580     30.4    36%     50%        Exp Bowl
+05 Morning Side Ridge   10,943      9,993    950.2    2,143    2,344.6    459     24.7    41%     56%        Exp Bowl
+05 Never                10,359      9,646    713.1    1,546    1,702.5    714     27.9    42%     66%        Exp Bowl
+05 OS                   10,350      9,563    787.3    2,567    2,685.1   1,309    80.7    29%     76%          Glade
+05 Ptarmigan Cornice    11,005     10,835    169.8     461      490.9    1,550    17.5    35%     47%          Glade
+05 Ptarmigan Ridge      10,739     10,373    366.8    2,325    2,353.3    727     39.3    16%     38%       Intermediate
+05 Ricky's Ridge        10,878      9,935    942.7    2,535    2,704.8    872     54.1    35%     55%        Exp Bowl
+05 Sama's                9,910      9,550    360.0     760      841.0     625     12.1    43%     47%          Glade
+05 Seldom               10,588      9,747    840.5    2,651    2,780.9    807     51.5    30%     74%        Exp Bowl
+05 Straight Shot        10,943     10,030    913.3    2,194    2,376.9    669     36.5    38%     53%        Exp Bowl
+05 Sun Up Catwalk       10,138      9,402    736.0    4,836    4,892.1    116     13.0    15%     25%        Exp Bowl
+05 Sundown Catwalk       9,992      9,394    597.8    3,471    3,522.0    130     10.5    17%     24%        Exp Bowl
+05 The Slot             11,110     10,138    971.5    3,077    3,226.9    356     26.4    30%     42%        Exp Bowl
+05 Turkey Yard          10,130      9,430    700.0    1,141    1,338.6    394     12.1    52%     75%          Glade
+
+
+                                VAIL RESORT – MASTER DEVELOPMENT PLAN UPDATE – AUGUST 2007
+                                                            20
+                                                       TABLE 3-2:
+                                      TERRAIN SPECIFICATIONS – EXISTING CONDITIONS
+                        Top       Bottom    Vert     Horiz.    Slope     Avg             Avg.    Max
+                                                                                Area
+     Trail Name        Elev.       Elev.    Drop     Length   Length    Width            Grade   Grade    Ability Level
+                         (ft)       (ft)     (ft)      (ft)     (ft)     (ft)   (acre)    (%)     (%)
+05 Widge's Ridge       10,757     10,059    697.9     1,892   2,016.2    616     28.5     35%     48%       Exp Bowl
+05 Windows             10,934     10,110    824.0     1,942   2,109.9   1,002    48.5     39%     74%       Exp Bowl
+05 Windows Trees       11,110     10,550    560.0     3,713   3,755.0    288     24.8     15%     65%         Glade
+05 Wow                 11,201      9,762   1,439.3    3,713   3,982.2    748     68.3     36%     54%       Exp Bowl
+06 Aspen Alley          8,811      8,631    180.6      757     777.8      57      1.0     23%     39%      Intermediate
+06 Brisk Walk           9,279      8,770    509.4     6,760   6,779.6     50      7.7     8%      21%         Novice
+06 Chair 6 Lift Line    9,399      9,243    156.3      759     774.6     992     17.6     20%     30%    Low Intermediate
+06 Follow Me Road       9,059      8,944    115.0     1,568   1,572.2     30      1.1      7%     11%        Beginner
+                                                                                                            Advanced
+06 Golden Peak Race    9,351       8,300   1,051.3   3,970    4,107.0    41      3.9     26%     49%
+                                                                                                           Intermediate
+06 Grand Junction
+                       9,399       9,273   126.1     2,368    2,371.4    35      1.9      5%     10%        Beginner
+   Catwalk
+06 Mule Skinner         9,177      8,947    229.3    1,133    1,156.3    145     3.8     20%     28%     Low Intermediate
+06 Pony Express         9,240      9,008    232.5    1,168    1,191.2    61      1.7     20%     41%       Intermediate
+06 Ruder's Route        9,399      8,233   1,166.5   5,125    5,256.2    420     50.7    22%     33%     Low Intermediate
+06 Whippersnapper       9,399      8,842    556.8    2,589    2,648.0    130      7.9    21%     36%       Intermediate
+06 Windish Way          8,401      8,344     57.2     764      765.7     79      1.4      7%     11%         Beginner
+07 Baccarat            10,439     10,216    223.1     787      818.1     206     3.9     27%     44%       Intermediate
+07 Dealer's Choice     10,562      9,837    724.3    2,577    2,676.4    324     19.9    27%     40%       Intermediate
+                                                                                                            Advanced
+07 Dueces Wild         10,880     10,301   579.5     1,634    1,733.7    653     26.0    33%     50%
+                                                                                                           Intermediate
+07 Faro                10,755     10,189    566.4    1,475    1,580.0    568     20.6    36%     56%          Expert
+07 Faro Glade          10,716     10,110    606.1    1,670    1,776.7    698     28.5    34%     54%          Glade
+07 Game Trail          10,323      9,970    352.8    3,888    3,904.0     28     2.5      9%     12%         Beginner
+07 Lost Boy            10,983      9,803   1,180.1   7,421    7,514.7    179     30.9    16%     34%     Low Intermediate
+07 Ouzo                10,690      9,943    747.3    2,009    2,143.1    250     12.3    35%     56%          Expert
+07 Ouzo Glade          10,652      9,887    765.0    2,096    2,231.1   1,205    61.7    34%     61%          Glade
+                                                                                                            Advanced
+07 Showboat            10,973      9,855   1,118.4   4,303    4,446.0    240     24.5    25%     47%
+                                                                                                           Intermediate
+                                                                                                            Advanced
+07 The Woods           10,840     10,000   840.0     2,498    2,635.5    221     13.4    32%     50%
+                                                                                                           Intermediate
+                                                                                                            Advanced
+07 Wild Card           10,891      9,803   1,087.8   4,083    4,225.0    299     29.0    26%     50%
+                                                                                                           Intermediate
+08 Bwana Loop          8,695       8,505   189.9     1,781    1,791.5    37      1.5     11%     14%          Novice
+08 Cheetah             8,950       8,650   300.0     1,587    1,615.1    41      1.5     19%     22%          Novice
+08 Cheetah Gully       9,170       8,300   870.0     2,824    2,955.0    459     31.2    29%     64%          Glade
+08 Lionshead Catwalk   8,485       8,335   150.1     2,698    2,701.7    59       3.7     6%     15%          Novice
+                                                                                                            Advanced
+08 Old 9 Lift Line     9,610       9,090   520.0     1,334    1,431.8    159     5.2     36%     54%
+                                                                                                           Intermediate
+08 Old Midway
+                       9,050       9,000    50.0      667      668.9     33      0.5      7%     11%        Beginner
+   Catwalk
+08 The Preserve        9,287       8,329   957.5     3,593    3,718.5    199     17.0    26%     47%       Intermediate
+09 Columbine           9,957       9,338   618.8     3,031    3,093.5    16      1.1     20%     41%       Intermediate
+
+
+                               VAIL RESORT – MASTER DEVELOPMENT PLAN UPDATE – AUGUST 2007
+                                                           21
+                                                       TABLE 3-2:
+                                      TERRAIN SPECIFICATIONS – EXISTING CONDITIONS
+                        Top       Bottom   Vert      Horiz.    Slope     Avg             Avg.    Max
+                                                                                Area
+     Trail Name        Elev.       Elev.   Drop      Length   Length    Width            Grade   Grade    Ability Level
+                        (ft)        (ft)    (ft)       (ft)     (ft)     (ft)   (acre)    (%)     (%)
+09 Coyote Crossing     10,220     10,050   170.0      1,550   1,559.3     35      1.3     11%     12%        Beginner
+                                                                                                            Advanced
+09 Ledges Lower        9,599       9,171   427.6     1,181    1,256.0    839     24.2    34%     48%
+                                                                                                           Intermediate
+09 Ledges Upper        10,467      9,599   867.8     4,283    4,370.0     3      0.3     20%     40%       Intermediate
+09 Minni Ha Ha          9,834      9,659   175.5      850      867.6     259     5.2     20%     27%     Low Intermediate
+09 Minnie's Cutoff      9,825      9,727    97.7      863      869.0     922     18.4    11%     19%          Novice
+09 Minnie's Mile                                                                                            Advanced
+                       9,642       9,103   539.2     1,594    1,682.8    149     5.8     32%     53%
+   Lower                                                                                                   Intermediate
+09 Minnie's Mile
+                       9,927       9,642   284.6     1,871    1,892.2    35      1.5     15%     31%     Low Intermediate
+   Upper
+09 Minnies Mile
+                       10,209      9,927   281.9      895      938.6     318     6.8     30%     45%       Intermediate
+   Upper Face
+09 Practice Pkwy       10,210      9,880   329.6     3,475    3,490.6    50      4.0      9%     14%          Novice
+                                                                                                            Advanced
+10 Blue Ox             10,959      9,565   1,394.8   4,982    5,173.4    158     18.8    27%     49%
+                                                                                                           Intermediate
+10 Ch 10 Access        11,052     11,027     24.1    1,038    1,038.3    80      1.9      2%     7%          Beginner
+10 Choker Cutoff        9,738      9,565    172.7    1,816    1,824.2    82      3.4      9%     14%          Novice
+10 Highline            11,022      9,273   1,749.4   6,813    7,034.0    188     30.4    25%     59%          Expert
+                                                                                                            Advanced
+10 Klickity Klack      9,607       9,355   252.0      626      674.4     157     2.4     37%     45%
+                                                                                                           Intermediate
+                                                                                                            Advanced
+10 Log Chute           9,630       9,297   333.2      774      842.7     164     3.2     40%     48%
+                                                                                                           Intermediate
+10 Roger's Glade       10,156      9,672   483.9     2,080    2,135.9    286     14.0    23%     47%          Glade
+                                                                                                            Advanced
+10 Roger's Run         10,692      9,727   964.5     3,183    3,326.3    151     11.6    29%     51%
+                                                                                                           Intermediate
+11 First Step          11,069     10,632    436.4    1,713    1,767.8    313     12.7    25%     55%          Expert
+11 Flapjack            11,022      9,720   1,301.9   7,139    7,256.4    245     40.8    18%     35%       Intermediate
+                                                                                                            Advanced
+11 Gandy Dancer        10,986     10,007   979.4     3,269    3,412.9    247     19.4    29%     50%
+                                                                                                           Intermediate
+11 Hairbag Alley       10,510      9,785   725.0     3,110    3,193.4    89      6.5     23%     43%          Glade
+11 Lift Line           10,372      9,742   629.0     2,028    2,123.7    64      3.1     30%     42%          Glade
+11 North Rim           11,143     10,870   272.7      686      738.2     315     5.3     37%     72%          Expert
+11 Northface Catwalk    9,706      9,150   556.1     5,100    5,130.2    38      4.5     11%     17%          Novice
+                                                                                                            Advanced
+11 Northstar           10,219      9,793   425.5     1,825    1,874.3    457     19.6    23%     49%
+                                                                                                           Intermediate
+                                                                                                            Advanced
+11 Northwoods          10,977     10,333   643.6     2,014    2,114.6    391     19.0    30%     47%
+                                                                                                           Intermediate
+11 Prima Cornice       10,781      9,977    803.6    1,716    1,895.1    247     10.7    42%     86%          Glade
+11 Prima Lower          9,510      9,129    381.0    1,213    1,270.9    301     8.8     30%     40%       Intermediate
+11 Prima Upper         10,791      9,510   1,280.7   3,414    3,645.8    282     23.6    35%     59%          Expert
+11 Pronto              10,000      9,729    271.1     694      745.2     164     2.8     36%     55%          Expert
+11 Riva Glade          10,757      9,980    776.6    2,262    2,391.5    320     17.6    32%     50%          Glade
+11 Riva Ridge Lower     9,382      8,240   1,142.6   6,295    6,397.4    149     21.9    18%     40%       Intermediate
+
+
+
+                               VAIL RESORT – MASTER DEVELOPMENT PLAN UPDATE – AUGUST 2007
+                                                           22
+                                                       TABLE 3-2:
+                                      TERRAIN SPECIFICATIONS – EXISTING CONDITIONS
+                       Top        Bottom   Vert      Horiz.    Slope      Avg             Avg.    Max
+                                                                                 Area
+    Trail Name         Elev.       Elev.   Drop      Length   Length     Width            Grade   Grade    Ability Level
+                        (ft)        (ft)    (ft)      (ft)      (ft)      (ft)   (acre)    (%)     (%)
+                                                                                                             Advanced
+11 Riva Ridge Upper    10,777      9,686   1,090.4   3,640    3,800.1     210     18.3    29%     50%
+                                                                                                            Intermediate
+11 Skid Road            9,667      9,280   386.9     4,124    4,142.1     50      4.8     9%      12%         Beginner
+11 Smokey's            10,770     10,150   620.0     1,955    2,051.0     406     19.1    30%     80%          Glade
+11 Snag Park           10,914     10,402   511.1     2,052    2,115.1     325     15.8    24%     44%       Intermediate
+11 Snag Park Lower     10,840     10,525   315.0     1,593    1,623.8    1,200    44.7    19%     39%          Glade
+11 Snag Park Upper     11,050     10,840   210.0      671      703.1     2,131    34.4    30%     65%          Glade
+11 South Rim           11,236     10,645   591.0     2,016    2,100.7     198     9.5     28%     63%          Expert
+11 Timberline
+                       11,245     10,720   524.6     5,588    5,612.6     35      4.5      9%     14%         Novice
+   Catwalk.
+11 Timberline Face     11,235     11,100   135.0      531      547.9      314     4.0     25%     39%       Intermediate
+11 Tourist Trap         9,685      9,380   305.0      666      732.5      364      6.1    42%     58%          Expert
+11 Transmontane         9,964      9,708   256.8     4,018    4,026.2     35      3.2      6%      9%         Beginner
+12 Gopher Hill          8,369      8,238   131.9     1,031    1,039.0     336     8.0     13%     18%          Novice
+14 Boomer              11,218     10,720   498.0     2,474    2,523.5     271     15.7    20%     35%       Intermediate
+14 Sourdough           11,230     10,762   468.1     2,062    2,114.6     283     13.8    22%     34%     Low Intermediate
+14 Tin Pants           11,207     10,799   408.3     2,637    2,668.4     201     12.3    15%     22%          Novice
+14 Tin Pants Catwalk   11,023     10,971    51.3      680      681.6       38      0.6     8%     10%         Beginner
+14 Whiskey Jack        11,239     10,735   504.3     2,594    2,642.8     182     11.1    19%     35%     Low Intermediate
+14 Whiskey Jack
+                       11,230     10,917   312.6     3,093    3,108.5     35      2.5     10%     14%         Novice
+   Catwalk
+15 Teaching Area       10,335     10,223    112.2      928      934.8     652     14.0    12%     17%          Novice
+16 Bear Tree            8,962      8,341    620.9     2,541    2,615.3    290     17.4    24%     40%       Intermediate
+16 Compromise           9,595      9,390    205.0      938      960.1      46      1.0    21%     21%          Novice
+16 Front Side Chutes    9,200      8,600    600.0     1,717   1,818.8     817     34.1    33%     70%          Glade
+16 Giant Steps          9,337      8,210   1,127.2    3,808    3,971.5    299     27.3    28%     56%          Expert
+16 Gitalong Road       10,152      8,364   1,788.6   21,990   22,062.6     61     30.8     8%     18%          Novice
+16 Hairbag Alley
+                       9,685       9,300   385.0     1,476    1,525.4     73      2.6     25%     42%          Glade
+   Lower
+16 Head First          8,449       8,211    237.6     504      557.2      322     4.1     43%     62%         Expert
+16 International       9,338       8,196   1,142.4   3,640    3,815.4     235     20.6    30%     60%         Expert
+16 Lionsway Cutoff     9,070       9,000     70.0     311      318.8      118     0.9     22%     23%         Novice
+16 Lower Lionsway      9,335       9,040    295.0    1,967    1,989.0      78      3.5    15%     17%         Novice
+16 Mid-Vail Milling
+                       10,174     10,155    19.1      463      463.4      265     2.8      4%     12%         Beginner
+   Area
+16 Mill Creek Road     8,760       8,568   191.8     2,834    2,840.5      31     2.0     7%      14%         Novice
+16 Mud Slide Chutes    9,430       8,700   730.0     1,407    1,585.1    1,474    53.6    46%     70%         Glade
+16 Pump House
+                       9,770       8,850   920.0     2,845    2,990.1     601     41.2    31%     65%          Glade
+   Chutes
+16 Spruce Face         10,103      9,867   236.0      929      958.1      273     6.0     25%     32%     Low Intermediate
+16 Upper Lionsway      10,140      9,800   340.0     3,434    3,450.8     63      5.0     10%     12%        Beginner
+16 Vail Village
+                       8,465       8,241   223.9     2,553    2,562.8     38      2.2      9%     16%         Novice
+   Catwalk
+
+
+                               VAIL RESORT – MASTER DEVELOPMENT PLAN UPDATE – AUGUST 2007
+                                                           23
+                                                         TABLE 3-2:
+                                        TERRAIN SPECIFICATIONS – EXISTING CONDITIONS
+                         Top        Bottom   Vert      Horiz.    Slope      Avg             Avg.    Max
+                                                                                   Area
+    Trail Name           Elev.       Elev.   Drop      Length   Length     Width            Grade   Grade    Ability Level
+                          (ft)        (ft)    (ft)       (ft)     (ft)      (ft)   (acre)    (%)     (%)
+16 Villages Catwalk      8,685       8,525   159.8      1,521   1,529.4      40      1.4     10%     18%        Novice
+16 Vista Bahn Line
+                         10,200     10,000   200.0      735      761.7      87      1.5     26%     30%     Low Intermediate
+   Upper
+17 Over Yonder           10,529     10,009   519.3     1,547    1,631.8    1,093    40.9    32%     40%       Intermediate
+17 Way Over Yonder       10,423      9,718   705.1     1,779    1,913.6    1,629    71.6    37%     59%          Glade
+                                                                                                               Advanced
+17 Yonder                11,218     10,050   1,168.0   4,311    4,466.4    1,029   105.5    26%     48%
+                                                                                                              Intermediate
+                                                                                                               Advanced
+17 Yonder Gully          11,091     10,165   925.6     2,926    3,068.9     401     28.2    30%     53%
+                                                                                                              Intermediate
+                                                                                                               Advanced
+19 Born Free             10,283      8,130   2,152.9   10,003   10,232.5    264     62.1    21%     46%
+                                                                                                              Intermediate
+19 Gondola Lift Line      9,920      9,569    351.6    1,734    1,769.1     144     5.8     20%     38%       Intermediate
+19 Post Road              9,713      8,946    766.9    8,455    8,489.7     30      5.9     9%      25%          Novice
+19 Simba Face             8,955      8,672    283.0     640      699.9      396     6.4     40%     57%          Expert
+19 Simba Lower            8,672      8,279    393.0    1,768    1,811.6     231     9.6     22%     37%     Low Intermediate
+19 Simba Racer           10,291     10,003    287.9     920      964.1      197     4.4     30%     44%       Intermediate
+19 Simba Upper           10,326      8,955   1,370.6   6,746    6,883.7     286     45.2    20%     36%     Low Intermediate
+20 Cascade Way            8,493      8,060    432.5    3,213    3,242.0     41      3.0     13%     24%          Novice
+                                                                                                               Advanced
+21 Bolshoi Ballroom      11,166     10,186   979.8     3,496    3,630.7     625     52.1    27%     49%
+                                                                                                              Intermediate
+21 China Bowl Egress     10,277      9,820    456.9     3,860   3,886.9     268     23.9    12%     30%       Intermediate
+21 China Wall            11,440     11,250    190.0      596      625.6    1,080    15.5    30%     60%        Exp Bowl
+21 Chopstix              11,343     10,668    674.3     2,783    2,863.5    733     48.2    24%     32%       Intermediate
+21 Dragon's Teeth        11,221     10,524    697.3     2,291   2,394.8     851     46.8    29%     65%        Exp Bowl
+21 Genghis Khan          11,117     10,222    894.3     1,855   2,059.3     646     30.6    43%     61%        Exp Bowl
+21 Gorky Park            11,248     10,751    496.4     1,305    1,396.1   1,018    32.6    36%     53%        Exp Bowl
+21 Jade Glade            11,230     10,473    756.4     1,727    1,885.4    918     39.7    40%     55%        Exp Bowl
+21 Orient Express        11,019     10,054    965.1     1,985   2,207.2    1,344    68.1    44%     72%        Exp Bowl
+21 Poppyfields East      11,350     10,251   1,098.9    4,688   4,814.7     735     81.3    23%     33%     Low Intermediate
+21 Poppyfields West      11,219     10,277    941.9     3,790   3,905.5     639     57.3    24%     41%       Intermediate
+21 Rasputin's Revenge    11,066     10,129    936.5     2,391   2,568.0     500     29.5    36%     58%        Exp Bowl
+21 Red Square            11,121     10,448    673.2     1,742    1,867.7    729     31.3    36%     53%        Exp Bowl
+21 Shangri-La            11,265     10,032   1,232.7    5,039    5,187.8   1,267   150.9    24%     45%       Intermediate
+21 Shangri-La Glades     10,826      9,878    947.9     3,190   3,327.5     816     62.3    28%     44%       Intermediate
+21 Shangri-la Glades E   10,620      9,898    722.6     2,196   2,312.0     474     25.2    31%     58%          Glade
+21 Silk Road             10,455      9,788    666.7     8,227    8,254.2    148     28.0    8%      20%     Low Intermediate
+21 Sleepy Time           11,085      9,520   1,565.0   16,452   16,526.3     30     11.4     9%     20%     Low Intermediate
+21 to Two Elk            11,375     11,200    175.0     2,793    2,798.5    114     7.3     6%      15%     Low Intermediate
+21 West Wall             10,900      9,900   1,000.2    3,023    3,184.4   1,271    92.9    31%     58%        Exp Bowl
+22 Inner Mongolia                                                                                              Advanced
+                         11,495     10,226   1,269.1   3,664    3,877.6    2,187   194.6    33%     58%
+   Bowl                                                                                                       Intermediate
+22 Outer Mongolia                                                                                              Advanced
+                         11,380     10,348   1,031.8   3,863    3,998.0    2,596   238.3    26%     50%
+   Bowl                                                                                                       Intermediate
+
+
+                                 VAIL RESORT – MASTER DEVELOPMENT PLAN UPDATE – AUGUST 2007
+                                                             24
+                                                      TABLE 3-2:
+                                     TERRAIN SPECIFICATIONS – EXISTING CONDITIONS
+                      Top        Bottom   Vert      Horiz.    Slope      Avg             Avg.    Max
+                                                                                Area
+     Trail Name       Elev.       Elev.   Drop      Length   Length     Width            Grade   Grade    Ability Level
+                       (ft)        (ft)    (ft)      (ft)      (ft)      (ft)   (acre)    (%)     (%)
+22 Upper Mongolia                                                                                           Advanced
+                      11,492     11,201   291.7     1,065    1,104.2    3,816    96.7    26%     40%
+   Bowl                                                                                                    Intermediate
+26 Bwama-Simba
+                      9,770       9,735    35.0      395      396.5      172     1.6      9%     12%         Beginner
+   Collector
+                                                                                                            Advanced
+26 Bwana              10,043      8,275   1,768.2   6,516    6,751.7     232     35.9    26%     51%
+                                                                                                           Intermediate
+26 Bwana Upper        10,254     10,104   150.3      150      212.6      643     3.1     71%     44%       Intermediate
+26 Cubs Way Upper      9,975      9,920    55.0      369      373.1      137     1.2     15%     18%          Novice
+26 Cubs Way            9,690      9,370   320.0     3,739    3,752.7     41      3.5     9%      12%         Beginner
+26 Pride Lower         9,381      9,222   158.5      580      601.0      167     2.3     26%     32%     Low Intermediate
+26 Pride Upper        10,008      9,703   305.1     1,496    1,527.0     231     8.1     20%     37%     Low Intermediate
+                                                                                                            Advanced
+26 Pride Upper Face   10,088     10,008    79.5      209      224.0      139     0.7     35%     46%
+                                                                                                           Intermediate
+                                                                                                            Advanced
+26 Safari             9,762       8,366   1,396.2   4,734    4,935.2     275     31.1    28%     53%
+                                                                                                           Intermediate
+27 Black Forest
+                      9,320       9,300    20.0      195      196.0      206     0.9     10%     12%         Beginner
+   Milling Area
+27 Nastar              9,713      9,410    303.6     1,459   1,489.8     274     9.4     20%     33%     Low Intermediate
+27 Pay-to-Race         9,668      9,327    341.6    1,661    1,695.8     252     9.8     20%     40%       Intermediate
+29 Ranger Racoon       8,260      8,230     30.0      432     433.0      187      1.9     7%      8%         Beginner
+36 East Tea Cup       10,587     10,000    587.3    2,342    2,414.5     683     37.8    24%     56%        Exp Bowl
+36 Emperor's Choice   11,239     10,076   1,163.3   4,309    4,463.4     557     57.1    26%     49%        Exp Bowl
+36 Marmot Valley      10,087      9,588    499.4    2,264    2,318.6     728     38.7    22%     36%        Exp Bowl
+36 Morning Thunder    10,512     10,130    381.9    1,677    1,719.9    1,460    57.7    22%     52%        Exp Bowl
+36 Red Zinger         10,847     10,098    749.1    2,293    2,412.3     608     33.7    31%     46%        Exp Bowl
+36 Tea Cup Glades     10,330      9,629    701.4    3,157    3,234.0     957     71.1    22%     57%          Glade
+36 to Two Elk         11,240     11,215     25.3    1,744    1,744.2     107     4.3     1%       5%         Beginner
+37 Big Rock Park      10,961     10,012    949.2    5,043    5,131.2     258     30.4    18%     32%     Low Intermediate
+37 Cloud 9            11,480      9,572   1,908.4   18,297   18,396.0     57     24.1    10%     30%     Low Intermediate
+37 Encore             10,793      9,618   1,175.0    3,739   3,919.7     191     17.2    30%     77%          Expert
+37 Heavy Metal        10,895     10,029    866.7    3,115    3,233.6     261     19.4    27%     56%          Expert
+37 Iron Mask          11,096     10,183    912.7    2,657    2,809.2     515     33.2    32%     66%          Expert
+                                                                                                            Advanced
+37 Little Ollie       10,962     10,081   881.7     2,713    2,852.6     450     29.4    31%     48%
+                                                                                                           Intermediate
+37 Lovers Leap        11,299     10,318    980.3    3,390    3,529.0     430     34.9    28%     70%          Expert
+37 Skree Field        11,254     10,499    755.4    2,677    2,781.2     513     32.7    27%     66%          Expert
+37 Steep and Deep     11,479     10,609    869.7    2,788    2,920.9     309     20.7    30%     72%          Expert
+37 The Divide         11,476      9,613   1,863.4   8,134    8,345.1     222     42.5    22%     63%          Expert
+                                                                                                            Advanced
+38 Champagne Glade    11,475     10,150   1,324.6   4,582    4,769.9     657     71.9    28%     52%
+                                                                                                           Intermediate
+                                                                                                            Advanced
+38 In The Wuides      11,263     10,128   1,134.7   3,427    3,609.8     767     63.5    31%     46%
+                                                                                                           Intermediate
+38 Kellys Toll Road   10,136      9,580   556.0     6,361    6,385.2     80      11.7     9%     17%     Low Intermediate
+
+
+
+                              VAIL RESORT – MASTER DEVELOPMENT PLAN UPDATE – AUGUST 2007
+                                                          25
+                                                         TABLE 3-2:
+                                        TERRAIN SPECIFICATIONS – EXISTING CONDITIONS
+                         Top        Bottom      Vert      Horiz.      Slope       Avg                   Avg.       Max
+                                                                                              Area
+     Trail Name          Elev.       Elev.      Drop      Length     Length      Width                  Grade      Grade        Ability Level
+                          (ft)        (ft)       (ft)      (ft)        (ft)       (ft)       (acre)      (%)        (%)
+                                                                                                                                 Advanced
+38 Montane Glade         10,981     10,149      831.3      2,380      2,520.8     1,067       61.8       33%         47%
+                                                                                                                                Intermediate
+39 China Spur            10,121      9,977      144.5      1,506      1,512.8       35         1.2       10%         20%      Low Intermediate
+                                                                                                                                 Advanced
+39 Grand Review          11,563     10,083     1,480.1     6,279      6,451.3      243        36.0       23%         51%
+                                                                                                                                Intermediate
+                                                                                                                                 Advanced
+39 Hornsilver            11,555     10,573      981.7      3,416      3,554.6      379        30.9       28%         51%
+                                                                                                                                Intermediate
+                                                                                                                                 Advanced
+39 Petes Lift Line       10,809     10,041      768.6      2,366      2,488.0      173         9.9       31%         45%
+                                                                                                                                Intermediate
+                                                                                                                                 Advanced
+39 Resolultion Upper     11,512     10,628      884.2      4,055      4,150.4      312        29.7       21%         53%
+                                                                                                                                Intermediate
+                                                                                                                                 Advanced
+39 Resolution Lower      10,436     10,169      267.4       796        839.6       203         3.9       32%         47%
+                                                                                                                                Intermediate
+                                                                                                                                 Advanced
+39 The Star              11,136     10,104     1,031.7     3,439      3,590.0      438        36.1       29%         49%
+                                                                                                                                Intermediate
+TOTAL                                                                                        5,571
+
+           The following table and charts illustrate the distribution of terrain by skier ability level for the
+           developed trail network, as well as the distribution of the active skier population at Vail. The terrain
+           distribution is compared to both Vail‟s actual market (guest surveyed) and to the industry norm for
+           terrain distribution. The source of the Vail skier/rider distribution is from customer surveys
+           performed by Vail Associates on Vail Mountain.
+
+           Table 3-3 indicates that although the trail network at Vail has less mid-level terrain (novice, low
+           intermediate, intermediate) and more advanced level terrain (advanced intermediate, expert) than the
+           market norms, it is in balance with its existing customers (guests surveyed). The table indicates that
+           there is a slight deficiency in expert terrain; guest surveys have also identified that there is a demand
+           for „extreme‟ steep terrain that is currently lacking at Vail. 2
+
+
+
+
+           2While Vail has close to adequate amounts of expert terrain, that terrain is at the lower end of the expert range and the
+           area has virtually no extreme terrain.
+
+                                 VAIL RESORT – MASTER DEVELOPMENT PLAN UPDATE – AUGUST 2007
+                                                             26
+

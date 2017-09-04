@@ -1,0 +1,132 @@
+                                        Table 4­2: Terrain Specifications – Existing Conditions 
+                               Top        Bot.      Vert.      Slope    Avg.       Slope      Avg.     Max 
+            Trail Area/Name    Elev.      Elev.     Rise      Length    Width      Area      Grade    Grade         Ability Level 
+                                (ft)       (ft)      (ft)       (ft)     (ft)     (acres)     (%)      (%) 
+  Over the Rainbow             11,924    10,858     1,066     2,404      319       17.6       50       69      Expert
+  Zoom                         11,405    11,005      400       839       195        3.7       55       66      Expert
+  Avalanche Bowl               11,840    11,405      435      1,141      255        6.7       42       76      Expert
+  Tiger's Tail                 11,856    11,469      386      1,183      136        3.7       35       61      Expert
+  Spillway                     11,849    11,631      218       702       198        3.2       33       41      Intermediate
+  Waterfall                    11,638    11,515      124       370       172        1.5       36       45      Adv. Intermediate
+  Upper Richard's              11,816    11,702      113       348       159        1.3       35       38      Intermediate
+  Cat Walk                     11,856    11,644      212      1,830       63        2.7       12       31      Low Intermediate
+  Holy Cat                     11,141    10,917      224       505        90        1.0       50       67      Expert
+  Busy Gully                   11,421    10,903      518      1,394      115        3.7       41       65      Expert
+  Cats Meow                    11,515    10,889      625      1,806      144        6.0       38       65      Expert
+  Nix Nox                      11,530    11,023      507      1,658      153        5.8       32       50      Adv. Intermediate
+  Richard's Run                11,633    11,120      513      1,931      156        6.9       28       37      Intermediate
+  Mambo                        11,652    11,181      471      2,095      149        7.2       23       28      Low Intermediate
+  Tempest                      11,695    11,392      303      1,306      117        3.5       24       35      Intermediate
+  Excelleration                11,720    11,446      275      1,006      131        3.0       29       47      Adv. Intermediate
+  T-bar Road                   11,388    11,318      69        498        83        1.0       14       18      Low Intermediate
+  Un-named trail section
+                               11,336    11,103      233      1,143       50        1.3       21       26      Low Intermediate
+  (below T-bar Road)
+  Home Run                     11,200    10,895      305      2,333      174        9.3       13       22      Novice
+  Tango Road                   11,121    10,999      123      1,297       97        2.9       10       16      Novice
+  Bennett's Bowl               11,984    11,614      370      1,833      567       23.9       21       31      Low Intermediate
+  Fire Bowl                    11,978    11,631      347      2,447      432       24.3       14       27      Novice
+  North Turtle Creek           11,617    11,342      274      1,264      231        6.7       22       26      Novice
+  Drifter                      11,556    11,268      288      1,191      107        2.9       25       31      Low Intermediate
+
+
+
+
+Loveland Ski Area                                                                                                                    IV-11
+                                                                                                             Loveland Ski Area
+                                      Table 4­2: Terrain Specifications – Existing Conditions 
+                             Top        Bot.      Vert.      Slope    Avg.       Slope      Avg.       Max 
+          Trail Area/Name    Elev.      Elev.     Rise      Length    Width      Area      Grade      Grade          Ability Level 
+                              (ft)       (ft)      (ft)       (ft)     (ft)     (acres)     (%)        (%) 
+  Fire Cut                   11,613    11,121      491      1,985      244       11.1        26         40      Intermediate
+  Tomahawk                   11,712    11,445      267       888       178        3.6        32         47      Adv. Intermediate
+  Apollo (Lower)             11,900    11,592      308       905       256        5.3        37         59      Expert
+  Apollo (Upper)             12,193    11,898      295      1,901      249       10.9        16         28      Adv. Intermediate
+  Mercury                    12,137    11,706      431      1,986      932       42.5        22         31      Low Intermediate
+  Telestar                   12,187    11,887      299      1,249      309        8.9        25         40      Intermediate
+  Sunburst Bowl              12,197    11,866      331      1,702      861       33.6        20         33      Intermediate
+  North Chutes               11,850    11,507      342      1,032      204        4.8        35         53      Adv. Intermediate
+  North Chute                11,739    11,471      267       788       129        2.3        36         51      Adv. Intermediate
+  Fail Safe Trees I          11,722    11,416      305       876       172        3.5        37         45      Adv. Intermediate
+  Fail Safe Trees II         11,414    11,237      177       377       395        3.4        53         58      Expert
+  Perfect Bowl               11,731    11,456      275       835       761       14.6        35         48      Adv. Intermediate
+  Splashdown                 11,882    11,136      745      2,135      338       16.6        38         59      Expert
+  Sunburst Chutes            11,844    11,384      460      1,405      233        7.5        35         58      Expert
+  West Ropes                 11,781    11,481      300       868       287        5.7        37         43      Expert
+  Zip Trail                  11,915    11,263      652      4,523       76        7.9        15         31      Low Intermediate
+  Fail Safe                  11,513    11,335      178      1,350       60        1.9        13         24      Low Intermediate
+  Scrub                      11,460    11,125      335       883       330        6.7        41         49      Adv. Intermediate
+  Lower Creek Trail          11,331    11,120      211      1,275       96        2.8        17         25      Low Intermediate
+  Dealer's Choice            11,878    11,719      158      1,351      104        3.2        12         29      Low Intermediate
+  Forest Meadow              11,719    11,313      406      2,638      262       15.9        16         32      Low Intermediate
+  Keno                       11,840    11,448      392      1,751      202        8.1        23         36      Intermediate
+  South Blackjack            11,868    11,603      266      1,107      164        4.2        26         36      Intermediate
+  North Blackjack            11,752    11,603      149       579       141        1.9        27         42      Intermediate
+  Blackjack (Lower)          11,318    11,223      95        631       156        2.3        15         20      Novice
+
+
+
+IV-12                                                                                      2013 Master Plan – Review Draft December 2012
+                                     Table 4­2: Terrain Specifications – Existing Conditions 
+                            Top        Bot.      Vert.      Slope    Avg.       Slope      Avg.     Max 
+         Trail Area/Name    Elev.      Elev.     Rise      Length    Width      Area      Grade    Grade         Ability Level 
+                             (ft)       (ft)      (ft)       (ft)     (ft)     (acres)     (%)      (%) 
+  Blackjack (Upper)         11,602    11,318      284      1,462      124        4.2       20       28      Intermediate
+  Roulette                  11,862    11,458      404      1,819      182        7.6       23       42      Intermediate
+  Straight Flush            11,837    11,474      364      1,471      182        6.1       26       38      Intermediate
+  Royal Flush               11,768    11,514      254      1,083      175        4.3       24       32      Low Intermediate
+  Sani Flush                11,728    11,583      144       577       141        1.9       26       40      Intermediate
+  Deuces Wild               11,877    11,622      255      1,415      178        5.8       19       34      Low Intermediate
+  South Turtle Creek        11,633    11,414      219      1,171      166        4.5       19       26      Low Intermediate
+  Turtle Creek              11,458    11,121      337      1,906      150        6.6       18       28      Novice
+  Zippity Split             12,130    11,805      325      2,568       51        3.0       13       30      Low Intermediate
+  Tickler Gulch             12,066    11,601      465      2,039      740       34.7       24       39      Intermediate
+  Zip Basin Street          12,123    11,657      467      1,922      220        9.7       25       45      Intermediate
+  Chet's Run                12,124    11,279      845      3,552      264       21.6       25       40      Intermediate
+  Hook 'Em Horns            11,875    11,497      378      1,088      608       15.2       37       48      Adv. Intermediate
+  In The Mood               12,014    11,524      489      1,648      485       18.4       32       51      Adv. Intermediate
+  The Plunge                12,106    11,948      158       747       372        6.4       22       45      Adv. Intermediate
+  Awesome II                12,122    11,711      411      1,729      284       11.3       25       48      Adv. Intermediate
+  Awesome                   12,129    11,301      828      5,381      287       35.5       16       39      Intermediate
+  The Face                  11,298    10,958      341      1,149       99        2.6       31       51      Adv. Intermediate
+  Primer Bowl               12,683    12,059      624      2,245      598       30.8       29       61      Expert
+  Rip Curl                  12,686    12,204      482      1,249      363       10.4       42       53      Adv. Intermediate
+  Patrol Bowl (Lower)       12,227    12,050      177      1,172      589       15.9       15       18      Adv. Intermediate
+  Patrol Bowl (Upper)       12,634    12,227      407       844       472        9.1       57       89      Expert
+  Upper #4 Headwall         12,515    12,095      419      1,897      650       28.3       23       52      Adv. Intermediate
+  Rookie Road               12,716    12,079      637      4,084      151       14.2       16       51      Adv. Intermediate
+  Challenger                12,530    12,108      422      1,662      558       21.3       27       49      Adv. Intermediate
+
+
+
+Loveland Ski Area                                                                                                                 IV-13
+                                                                                                               Loveland Ski Area
+                                        Table 4­2: Terrain Specifications – Existing Conditions 
+                               Top        Bot.      Vert.      Slope    Avg.       Slope      Avg.       Max 
+          Trail Area/Name      Elev.      Elev.     Rise      Length    Width      Area      Grade      Grade          Ability Level 
+                                (ft)       (ft)      (ft)       (ft)     (ft)     (acres)     (%)        (%) 
+  North Star                   12,498    12,124      374      1,624      645       24.1        24         52      Adv. Intermediate
+  South Chutes                 11,933    11,520      413      1,374      858       27.1        32         52      Adv. Intermediate
+  Our Bowl                     12,051    11,611      439      1,547      532       18.9        30         48      Adv. Intermediate
+  #4 Headwall                  12,095    11,738      358      1,038      1,025     24.4        37         57      Expert
+  Creek Trail                  11,726    11,333      392      2,023      225       10.5        20         29      Adv. Intermediate
+  Castle Rock                  12,540    12,073      466      1,332      350       10.7        38         53      Adv. Intermediate
+  Jelly Roll                   12,439    12,024      416      1,342      991       30.5        33         60      Expert
+  Switchback (Lower)           10,943    10,829      113       575       153        2.0        20         27      Low Intermediate
+  Switchback (Upper)           11,451    10,943      508      1,747      139        5.6        30         39      Intermediate
+  Twist (Lower)                10,898    10,740      158       820        90        1.7        20         28      Low Intermediate
+  Twist (Upper)                11,440    10,898      542      1,770      188        7.6        32         46      Intermediate
+  Double Dip                   11,401    10,987      414      1,240      132        3.8        35         43      Intermediate
+  Zig-Zag                      11,453    10,637      816      6,367       76       11.1        13         30      Low Intermediate
+  Boomerang                    10,943    10,646      297      1,859      108        4.6        16         26      Novice
+  All Smiles                   10,772    10,666      106       878       220        4.4        12         20      Novice
+  Take Off                     10,772    10,645      128      1,248      212        6.1        10         17      Novice
+  Magic Carpet Slope           10,658    10,640      18        266       254        1.6        7          11      Beginner
+  TOTAL                                                      140,480                903
+  Light Gray = Valley Trails
+
+
+
+
+IV-14                                                                                        2013 Master Plan – Review Draft December 2012
+
