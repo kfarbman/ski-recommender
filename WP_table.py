@@ -23,7 +23,7 @@ def fix_dtype(filename,resort,location):
     df = df[df['ability_level'] != 0]
     columns_to_change = ['top_elev_(ft)','bottom_elev_(ft)','slope_length_(ft)']
     for column in columns_to_change:
-        df[column] = df[column].apply(lambda x: x.replace(',','')).astype(float)
+        df[column] = df[column].astype(float)
     df['vert_rise_(ft)'] = df['vert_rise_(ft)'].astype(float)
     df['avg_grade_(%)'] = df['avg_grade_(%)'].apply(lambda x: x.replace('%','')).astype(float)
     df['resort'] = resort
