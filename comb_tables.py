@@ -4,6 +4,7 @@ import vail_table
 import monarch_table
 import DP_table
 import WP_table
+import BC_table
 
 resorts = {'Loveland': ['data/Loveland.txt', 'CO'],
            'Arapahoe Basin': ['data/Arapahoe_Basin.txt', 'CO'],
@@ -15,13 +16,15 @@ resorts = {'Loveland': ['data/Loveland.txt', 'CO'],
            'Crested Butte': ['data/Crested_Butte.txt', 'CO'],
            'Taos': ['data/Taos.txt', 'NM'],
            'Diamond Peak': ['data/DP.txt', 'NV'],
-           'Winter Park': ['data/WP.csv', 'CO']}
+           'Winter Park': ['data/WP.csv', 'CO'],
+           'Beaver Creek': ['data/Beaver_Creek.txt', 'CO']}
            
 loveland_script = ['Loveland', 'Arapahoe Basin', 'Copper', 'Eldora', 'Alpine Meadows']
 vail_script = ['Vail']
 monarch_script = ['Monarch', 'Crested Butte', 'Taos']
 DP_script = ['Diamond Peak']
 WP_script = ['Winter Park']
+BC_script = ['Beaver Creek']
 
 d = {}
 
@@ -43,6 +46,9 @@ for resort in DP_script:
 for resort in WP_script:
     filename, location = resorts[resort]
     d[resort] = WP_table.fix_dtype(filename,resort,location)
+for resort in BC_script:
+    filename, location = resorts[resort]
+    d[resort] = BC_table.fix_dtype(filename,resort,location)
     
 columns = ['trail_name', 'top_elev_(ft)', 'bottom_elev_(ft)', 'vert_rise_(ft)', 'slope_length_(ft)', 'avg_width_(ft)', 'slope_area_(acres)', 'avg_grade_(%)', 'max_grade_(%)', 'ability_level','resort','location']   
 
