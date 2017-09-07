@@ -17,6 +17,7 @@ DP_URL = 'https://jollyturns.com/resort/united-states-of-america/diamond-peak/sk
 WP_URL = 'https://jollyturns.com/resort/united-states-of-america/winter-park-resort/skiruns-green'
 BC_URL = 'https://jollyturns.com/resort/united-states-of-america/beaver-creek-resort/skiruns-green'
 
+URLs = [LL_URL,AB_URL,C_URL,E_URL,AM_URL,V_URL,M_URL,CB_URL,T_URL,DP_URL,WP_URL,BC_URL]
 
 LL_nums = [10,17,38,23,12,1]
 AB_nums = [7,6,33,37,36,2] # A basin
@@ -30,6 +31,8 @@ T_nums = [13,13,20,37,50,0]
 DP_nums = [6,2,14,14,0,1]
 WP_nums = [25,32,38,78,9,7] # WP
 BC_nums = [24,42,47,39,12,2]
+
+nums = [LL_nums,AB_nums,C_nums,E_nums,AM_nums,V_nums,M_nums,CB_nums,T_nums,DP_nums,WP_nums,BC_nums]
 
 browser = webdriver.PhantomJS()
 
@@ -74,21 +77,54 @@ def make_run_df(lst):
     df['Length (mi)'] = df['Length (mi)'].astype(float)
     return df
 
-WP_runs = make_tables(WP_URL,WP_nums)
-AB_runs = make_tables(AB_URL,AB_nums)
+# WP_runs = make_tables(WP_URL,WP_nums)
+# AB_runs = make_tables(AB_URL,AB_nums)
+# 
+# WP_greens, WP_blues, WP_blacks, WP_bb = WP_runs
+# AB_greens, AB_blues, AB_blacks, AB_bb = AB_runs
+# 
+# WP_green_df = make_run_df(WP_greens)
+# WP_blue_df = make_run_df(WP_blues)
+# WP_black_df = make_run_df(WP_blacks)
+# WP_bb_df = make_run_df(WP_bb)
+# 
+# AB_green_df = make_run_df(AB_greens)
+# AB_blue_df = make_run_df(AB_blues)
+# AB_black_df = make_run_df(AB_blacks)
+# AB_bb_df = make_run_df(AB_bb)
 
-WP_greens, WP_blues, WP_blacks, WP_bb = WP_runs
-AB_greens, AB_blues, AB_blacks, AB_bb = AB_runs
+def make_df_dicts(URL,nums):
+    resort = {}
+    greens, blues, blacks, bb = make_tables(URL,nums)
+    levels = ['green','blue','black','bb']
+    for i,j in zip(levels,[greens,blues,blacks,bb]):
+        if len(j) == 0:
+            resort[i] = None
+        else:
+            resort[i] = make_run_df(j)
+    return resort
 
-WP_green_df = make_run_df(WP_greens)
-WP_blue_df = make_run_df(WP_blues)
-WP_black_df = make_run_df(WP_blacks)
-WP_bb_df = make_run_df(WP_bb)
+loveland_script = ['Loveland', 'Arapahoe Basin', 'Copper', 'Eldora', 'Alpine Meadows']
+vail_script = ['Vail']
+monarch_script = ['Monarch', 'Crested Butte', 'Taos']
+DP_script = ['Diamond Peak']
+WP_script = ['Winter Park']
+BC_script = ['Beaver Creek']
 
-AB_green_df = make_run_df(AB_greens)
-AB_blue_df = make_run_df(AB_blues)
-AB_black_df = make_run_df(AB_blacks)
-AB_bb_df = make_run_df(AB_bb)
+resorts = loveland_script + vail_script + monarch_script + DP_script + WP_script + BC_script
+
+d = {}
+for resort,URL,nums in zip(resorts,URLs,nums):
+    d[resort] = make_df_dicts(URL,nums)
+    
+loveland_greens = [word.encode('ascii','ignore').strip().decode('utf-8') for word in d['Loveland']['green']['Name']]
+loveland_blues = [word.encode('ascii','ignore').strip().decode('utf-8') for word in d['Loveland']['blue']['Name']]
+loveland_blacks = [word.encode('ascii','ignore').strip().decode('utf-8') for word in d['Loveland']['black']['Name']]
+loveland_bbs = [word.encode('ascii','ignore').strip().decode('utf-8') for word in d['Loveland']['bb']['Name']]
+
+def get_trails_list(resort,level):
+    return [word.encode('ascii','ignore').strip().decode('utf-8') for word in d[resort][level]['Name']]
+
 
 # 
 # def get_table(URL):
