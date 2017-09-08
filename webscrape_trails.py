@@ -123,7 +123,10 @@ loveland_blacks = [word.encode('ascii','ignore').strip().decode('utf-8') for wor
 loveland_bbs = [word.encode('ascii','ignore').strip().decode('utf-8') for word in d['Loveland']['bb']['Name']]
 
 def get_trails_list(resort,level):
-    return [word.encode('ascii','ignore').strip().decode('utf-8') for word in d[resort][level]['Name']]
+    if d[resort][level] is None:
+        return None
+    else:
+        return [word.encode('ascii','ignore').strip().decode('utf-8') for word in d[resort][level]['Name']]
 
 
 # 
