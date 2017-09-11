@@ -37,6 +37,13 @@ nums = [LL_nums,AB_nums,C_nums,E_nums,AM_nums,V_nums,M_nums,CB_nums,T_nums,DP_nu
 browser = webdriver.PhantomJS()
 
 def make_tables(URL,nums):
+    '''
+    Inputs:
+    URL from URLs (str)
+    nums of trails of each color from nums (list)
+    Outputs:
+    4 tables of trails by color (tuple of tables)
+    '''
     browser.get(URL)
     time.sleep(3)
 
@@ -63,6 +70,12 @@ def make_tables(URL,nums):
 lift_cols = ['Name', 'Bottom', 'Top', 'Vertical Rise']
 
 def make_run_df(lst):
+    '''
+    Inputs:
+    table from make_tables (table)
+    Outputs:
+    dataframe of trails of that color (DataFrame)
+    '''
     runs_cols = ['Name', 'Bottom (ft)', 'Top (ft)', 'Vertical Drop (ft)', 'Length (mi)']
     df = pd.DataFrame(lst)
     df.columns = runs_cols
@@ -94,6 +107,13 @@ def make_run_df(lst):
 # AB_bb_df = make_run_df(AB_bb)
 
 def make_df_dicts(URL,nums):
+    '''
+    Inputs:
+    URL from URLs (str)
+    nums from nums (list)
+    Outputs:
+    dictionary of {level: level_df} (dict)
+    '''
     resort = {}
     greens, blues, blacks, bb = make_tables(URL,nums)
     levels = ['green','blue','black','bb']
@@ -113,20 +133,20 @@ BC_script = ['Beaver Creek']
 
 resorts = loveland_script + vail_script + monarch_script + DP_script + WP_script + BC_script
 
-d = {}
+dct = {} # {resort: {level: level_df}}
 for resort,URL,nums in zip(resorts,URLs,nums):
-    d[resort] = make_df_dicts(URL,nums)
+    dct[resort] = make_df_dicts(URL,nums)
     
-loveland_greens = [word.encode('ascii','ignore').strip().decode('utf-8') for word in d['Loveland']['green']['Name']]
-loveland_blues = [word.encode('ascii','ignore').strip().decode('utf-8') for word in d['Loveland']['blue']['Name']]
-loveland_blacks = [word.encode('ascii','ignore').strip().decode('utf-8') for word in d['Loveland']['black']['Name']]
-loveland_bbs = [word.encode('ascii','ignore').strip().decode('utf-8') for word in d['Loveland']['bb']['Name']]
-
-def get_trails_list(resort,level):
-    if d[resort][level] is None:
-        return None
-    else:
-        return [word.encode('ascii','ignore').strip().decode('utf-8') for word in d[resort][level]['Name']]
+# loveland_greens = [word.encode('ascii','ignore').strip().decode('utf-8') for word in d['Loveland']['green']['Name']]
+# loveland_blues = [word.encode('ascii','ignore').strip().decode('utf-8') for word in d['Loveland']['blue']['Name']]
+# loveland_blacks = [word.encode('ascii','ignore').strip().decode('utf-8') for word in d['Loveland']['black']['Name']]
+# loveland_bbs = [word.encode('ascii','ignore').strip().decode('utf-8') for word in d['Loveland']['bb']['Name']]
+# 
+# def get_trails_list(resort,level):
+#     if d[resort][level] is None:
+#         return []
+#     else:
+#         return [word.encode('ascii','ignore').strip().decode('utf-8') for word in d[resort][level]['Name']]
 
 
 # 

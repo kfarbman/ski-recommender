@@ -28,7 +28,8 @@ resorts = {'Loveland': ['data/Loveland.txt', 'CO'],
            'Diamond Peak': ['data/DP.txt', 'NV'],
            'Winter Park': ['data/WP.csv', 'CO'],
            'Beaver Creek': ['data/Beaver_Creek.txt', 'CO']}
-           
+
+# which resorts work with which script           
 loveland_script = ['Loveland', 'Arapahoe Basin', 'Copper', 'Eldora', 'Alpine Meadows']
 vail_script = ['Vail']
 monarch_script = ['Monarch', 'Crested Butte', 'Taos']
@@ -36,8 +37,8 @@ DP_script = ['Diamond Peak']
 WP_script = ['Winter Park']
 BC_script = ['Beaver Creek']
 
-d = {}
 
+d = {}
 for resort in loveland_script:
     filename, location = resorts[resort]
     d[resort]= loveland_table.fix_dtype(filename,resort,location)
@@ -63,12 +64,13 @@ for resort in BC_script:
 columns = ['trail_name', 'top_elev_(ft)', 'bottom_elev_(ft)', 'vert_rise_(ft)', 'slope_length_(ft)', 'avg_width_(ft)', 'slope_area_(acres)', 'avg_grade_(%)', 'max_grade_(%)', 'ability_level','resort','location']   
 
 whole_table = pd.concat(d.values())
-whole_table = whole_table[columns]
+whole_table = whole_table[columns] # making sure the columns are in the correct order
 CO_resorts = whole_table[whole_table['location'] == 'CO']
 
 
 
 ### from my ipython notebook
+# standardizing the ability levels
 whole_table['ability_level'][whole_table['ability_level'] == 'Advanced Intermediate'] = 'Advanced'
 whole_table['ability_level'][whole_table['ability_level'] == 'Adv. Intermediate'] = 'Advanced'
 whole_table['ability_level'][whole_table['ability_level'] == 'Hike To'] = 'Expert'
@@ -89,12 +91,19 @@ DP = whole_table[whole_table['resort'] == 'Diamond Peak']
 WP = whole_table[whole_table['resort'] == 'Winter Park']
 BC = whole_table[whole_table['resort'] == 'Beaver Creek']
 
-resorts = [loveland,AB,copper,eldora,AM,vail,monarch,CB,taos,DP,WP,BC]
+
+resort_dfs = [loveland,AB,copper,eldora,AM,vail,monarch,CB,taos,DP,WP,BC]
 
 
 '''fixing trail names'''
-trail_names_to_fix = [copper,AM,vail,monarch,CB,taos,DP]
+trail_names_to_fix = [copper,AM,vail,monarch,CB,taos,DP,eldora]
 def fix_trail_names(df):
+    '''
+    Inputs:
+    df from trail_names_to_fix (DataFrame)
+    Outputs:
+    df w/ trail name fixed - removing number at beginning (DataFrame)
+    '''
     df['trail_name'] = df['trail_name'].apply(lambda x: ' '.join(x.split()[1:]))
     return df
 for trail in trail_names_to_fix:
@@ -183,10 +192,18 @@ grooms = [groomed_LL,groomed_AB,groomed_c,groomed_e,groomed_AM,groomed_v,groomed
 
 '''adding groomed column'''
 def add_groomed_col(df,groomed_lst):
+    '''  
+    Inputs:
+    resort_df from resort_dfs (DataFrame)
+    groomed_lst from grooms (list)
+    Outputs:
+    resort_df w/ groomed column added (DataFrame)
+    '''
     df['groomed'] = 0
     df['groomed'][df['trail_name'].isin(groomed_lst)] = 1
     return df
-for resort, groom in zip(resorts,grooms):
+    
+for resort, groom in zip(resort_dfs,grooms):
     add_groomed_col(resort,groom)
     
     
