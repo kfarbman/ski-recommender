@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import pandas as pd
 from selenium import webdriver
 import time
+import pickle
 
 LL_URL = 'https://jollyturns.com/resort/united-states-of-america/loveland-ski-area/skiruns-green'
 AB_URL = 'https://jollyturns.com/resort/united-states-of-america/arapahoe-basin/skiruns-green'
@@ -136,6 +137,11 @@ resorts = loveland_script + vail_script + monarch_script + DP_script + WP_script
 dct = {} # {resort: {level: level_df}}
 for resort,URL,nums in zip(resorts,URLs,nums):
     dct[resort] = make_df_dicts(URL,nums)
+    
+    
+output = open('resort_dict.pkl', 'wb')
+pickle.dump(dct, output)
+output.close()
     
 # loveland_greens = [word.encode('ascii','ignore').strip().decode('utf-8') for word in d['Loveland']['green']['Name']]
 # loveland_blues = [word.encode('ascii','ignore').strip().decode('utf-8') for word in d['Loveland']['blue']['Name']]
