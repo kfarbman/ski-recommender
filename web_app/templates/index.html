@@ -1,18 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
 
-<!-- <form action='/resort/'>
-  <select name='resorts'>
-    {% for resort in df['resort'].unique() %}
-      <option value="{{resort}}">{{resort}}</option>
-    {% endfor %}
-  </select>
-  <input type="submit">
-</form> -->
+<style>
+.green {background-color:rgba(0, 255, 0, .3);}
+.blue {background-color:rgba(0, 0, 255, .3);}
+.black {background-color:rgba(0, 0, 0, .3);}
+.bb {background-color:rgba(0, 0, 0, .3);}
+</style>
 
+<form action='/recommendations', method='POST'>
 <select name="resort" id="select_resort" class="selectpicker form-control">
     <option selected="selected">Select a Resort...</option>
-    {% for resort in df['resort'].unique() %}
+    {% for resort in df['resort'].unique()|sort %}
     <option value="{{ resort }}">{{ resort }}</option>
     {% endfor %}
 </select>
@@ -38,11 +37,13 @@
 
             if (resort.length) {
                 dropdown.trail.empty();
-                $.getJSON("{{ get_trails }}", {resort: resort}, function(data) {
+                $.getJSON("{{ url_for('get_trails') }}", {resort: resort}, function(data) {
                     console.log(data);
                     data.forEach(function(item) {
                         dropdown.trail.append(
                             $('<option>', {
+                                // style: df['colors'].iloc[item.id]
+                                class: "green",
                                 value: item.id,
                                 text: item.name
                             })
@@ -60,6 +61,26 @@
 
     });
 </script>
+
+
+<select name="dest_resort" id="select_resort_dest" class="selectpicker form-control">
+    <option selected="selected">Where are you skiing today?</option>
+    <option value=''>Anywhere</option>
+    {% for dest_resort in df['resort'].unique()|sort %}
+    <option value="{{ dest_resort }}">{{ dest_resort }}</option>
+    {% endfor %}
+</select>
+
+<select name="num_recs" id="select_num_recs" class="selectpicker form-control">
+    <option selected="selected">How many recommendations would you like?</option>
+    {% for i in range(1,21) %}
+    <option value="{{ i }}">{{ i }}</option>
+    {% endfor %}
+</select>
+
+<button type="submit" />Recommend</div>
+
+</form>
 
 
 {% endblock %}

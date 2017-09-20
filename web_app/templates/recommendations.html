@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+.green {background-color:rgba(0, 255, 0, 1);}
+.blue {background-color:rgba(0, 0, 255, 1); color:rgba(255,255,255,1);}
+.black {background-color:rgba(0, 0, 0, 1); color:rgba(255,255,255,1);}
+.doubleblack {background-color:rgba(0, 0, 0, 1); color:rgba(255,255,255,1);}
+</style>
+
+<h2>Your Trail</h2>
+<table class=table>
+  <tr>
+  {% for col in rec_df.columns %}
+  <th>{{col}}</th>
+  {% endfor %}
+  </tr>
+  {% for _, row in rec_df.iloc[:1].iterrows() %}
+  <tr class="{{ row.Rating.lower().replace(' ','') }}">
+    {% for entry in row %}
+    <td>{{ entry }}</td>
+    {% endfor %}
+  </tr>
+  {% endfor %}
+</table>
+
+<h2>Recommendations</h2>
+<table class=table>
+  <tr>
+  <th></th>
+  {% for col in rec_df.columns %}
+  <th>{{col}}</th>
+  {% endfor %}
+  </tr>
+  {% for i, row in rec_df.iloc[1:].iterrows() %}
+  <tr class="{{row.Rating.lower().replace(' ','')}}">
+    <td>{{i}}</td>
+    {% for entry in row %}
+    <td>{{ entry }}</td>
+    {% endfor %}
+  </tr>
+  {% endfor %}
+</table>
+
+{% endblock %}

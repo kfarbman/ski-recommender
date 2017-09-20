@@ -135,7 +135,12 @@ groomed_c = ['Lower Easy Road Traverse', 'Upper Easy Road Traverse', 'Upper Leap
              'Upper Carefree', "Lower Easy Feelin'", "Upper Easy Feelin'", 'Hidden Vein', 'Vein Glory', 'Lower Loverly', 'Scooter',
              'Gem', 'Easy Rider', 'Rugrat', 'The Glide', 'Slingshot', 'Clear Cut', 'Copperopolis']
 
-groomed_e = ['']
+groomed_e = ['Tenderfoot I', 'Tenderfoot II', 'Ho Hum', 'Easy Way', 'Bunnyfair', 'Fox Tail', 'Snail', 'Quickway', 'Sundance', 
+             'Upper Bunny Fair', 'Corkscrew', 'Little Hawk TRV', 'Bonanza', 'Chute', 'Sunkid Slope', 'Middle Jolly Jug', 
+             'Lower Jolly Jug', "Mary's Way", 'Summer Road', 'Sunset', 'Challenge', 'Challenge Liftline', 'Crewcut', 'Hornblower', 
+             'Hotdog Alley', 'International', 'Klondike', 'Windmill', 'Corona Road', 'La Belle Dame', 'Corona TRV', 'Dream & Scream', 
+             "Four O' Clock Trail", 'Lower Ambush', 'Lower Diamond Back', 'Sidewinder', 'Upper Diamond Back', 'Around the Horn', 
+             'Corona', 'Muleshoe', 'Pipeline', 'Wayback']
 
 groomed_AM = ['East Creek', 'Weasel Run', 'Lakeview to Weasel', "Nick’s Run", 'Leisure Lane', 'Outer Limits', 'Shooting Star',
               'Twilight Zone', 'Meadow Run', 'Charity', 'Dance Floor', 'Rock Garden', "Sandy’s Corner", "Werner’s Schuss", 
@@ -456,6 +461,17 @@ colors = {'green': 1, 'blue': 2, 'black': 3, 'bb': 4, 'color': 0}
 
 final_df['ability_nums'] = final_df['ability_level'].map(ability_levels)
 final_df['color_nums'] = final_df['colors'].map(colors)
+
+final_df = final_df.reset_index(drop=True)
+
+final_df['trail_name'].iloc[424] = 'Teaching Terrain 1'
+final_df['trail_name'].iloc[425] = 'Teaching Terrain 2'
+final_df['trail_name'].iloc[750] = 'Teaching Terrain 1'
+final_df['trail_name'].iloc[751] = 'Teaching Terrain 2'
+final_df['trail_name'].iloc[901] = 'Whistle Stop Lower'
+final_df['trail_name'].iloc[908] = 'Whistle Stop Upper'
+for i, j in zip(range(1116,1125),range(1,10)):
+    final_df['trail_name'].iloc[i] = final_df['trail_name'].iloc[i] + " " + str(j)
 
 
 output = open('df.pkl', 'wb')
