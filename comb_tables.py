@@ -472,6 +472,19 @@ final_df['trail_name'].iloc[901] = 'Whistle Stop Lower'
 final_df['trail_name'].iloc[908] = 'Whistle Stop Upper'
 for i, j in zip(range(1116,1125),range(1,10)):
     final_df['trail_name'].iloc[i] = final_df['trail_name'].iloc[i] + " " + str(j)
+    
+
+'''fixing Monarch trail names'''
+a = list(final_df['trail_name'][final_df['resort'] == 'Monarch'])
+b = [x.split() for x in a]
+c = [''.join(x) if len(x[0]) == 1 else ' '.join(x) for x in b]
+c[19] = 'Quick Draw'
+c[20] = 'KC Cutoff'
+c[41] = "Doc's Run"
+c[42] = 'Dire Straits'
+c[47] = 'Great Divide'
+c[53] = "Geno's Meadow"
+final_df['trail_name'][final_df['resort'] == 'Monarch'] = c
 
 
 output = open('df.pkl', 'wb')

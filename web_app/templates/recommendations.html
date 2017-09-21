@@ -16,7 +16,7 @@
   {% endfor %}
   </tr>
   {% for _, row in rec_df.iloc[:1].iterrows() %}
-  <tr class="{{ row.Rating.lower().replace(' ','') }}">
+  <tr class="{{ row.Difficulty.lower().replace(' ','') }}">
     {% for entry in row %}
     <td>{{ entry }}</td>
     {% endfor %}
@@ -33,7 +33,7 @@
   {% endfor %}
   </tr>
   {% for i, row in rec_df.iloc[1:].iterrows() %}
-  <tr class="{{row.Rating.lower().replace(' ','')}}">
+  <tr class="{{row.Difficulty.lower().replace(' ','')}}">
     <td>{{i}}</td>
     {% for entry in row %}
     <td>{{ entry }}</td>
@@ -42,8 +42,17 @@
   {% endfor %}
 </table>
 
+<div>
 Disclaimer: Just because a run is in this list, does not mean that you should ski on it! Use your own discretion!
-
-<embed src="../../images/Loveland.pdf">
-
+</div>
+<div>
+  <h3>
+<a href={{resort_links[1]}}><center>Today's trail report</center></a>
+</h3>
+</div>
+<div>
+  <center>
+<embed src={{resort_links[0]}} height="1200px" width="1800">
+</center>
+</div>
 {% endblock %}

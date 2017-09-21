@@ -30,6 +30,7 @@ def fix_dtype(filename,resort,location):
     df['location'] = location
     df.drop(['horiz_dist','plan_acres','deg_grade'],axis=1, inplace=True)
     df.loc[df['avg_width_(ft)'] == 'None', 'avg_width_(ft)'] = round((df['slope_area_(acres)']/df['slope_length_(ft)'])*43560,2)
+    df['avg_width_(ft)'] = df['avg_width_(ft)'].astype(float)
     for num in skill_levels.keys():
         df.loc[df['ability_level'] == num, 'ability_level'] = skill_levels[num]
     return df
