@@ -58,7 +58,7 @@ def recommendations():
     rec_df['color_names'][rec_df['color_names'] == 'black'] = 'Black'
     rec_df['color_names'][rec_df['color_names'] == 'bb'] = 'Double Black'
     rec_df = rec_df[['trail_name','resort','location','color_names','groomed','top_elev_(ft)','bottom_elev_(ft)','vert_rise_(ft)','slope_length_(ft)','avg_width_(ft)','slope_area_(acres)','avg_grade_(%)','max_grade_(%)']]
-    rec_df.columns = ['Trail Name', 'Resort','Location','Rating','Groomed','Top Elev (ft)', 'Bottom Elev (ft)', 'Vert Rise (ft)', 'Slope Length (ft),', 'Avg Width (ft)', 'Slope Area (acres)', 'Avg Grade (%)', 'Max Grade (%)']
+    rec_df.columns = ['Trail Name', 'Resort','Location','Rating','Groomed','Top Elev (ft)', 'Bottom Elev (ft)', 'Vert Rise (ft)', 'Slope Length (ft)', 'Avg Width (ft)', 'Slope Area (acres)', 'Avg Grade (%)', 'Max Grade (%)']
     return render_template('recommendations.html',rec_df=rec_df)
     
 @app.route('/get_trails')
@@ -67,8 +67,8 @@ def get_trails():
     # print(resort)
     if resort:
         sub_df = df[df['resort'] == resort]
-        id_name = zip(list(sub_df.index),list(sub_df['trail_name']))
-        data = [{"id": str(x[0]), "name": x[1]} for x in id_name]
+        id_name_color = zip(list(sub_df.index),list(sub_df['trail_name']),list(sub_df['colors']))
+        data = [{"id": str(x[0]), "name": x[1], "color": x[2]} for x in id_name_color]
         # print(data)
     return jsonify(data)
     
