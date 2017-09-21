@@ -64,7 +64,7 @@
 
 
 <select name="dest_resort" id="select_resort_dest" class="selectpicker form-control">
-    <option selected="selected">Where are you skiing today?</option>
+    <option selected="selected" value = ''>Where are you skiing today?</option>
     <option value=''>Anywhere</option>
     {% for dest_resort in df['resort'].unique()|sort %}
     <option value="{{ dest_resort }}">{{ dest_resort }}</option>
@@ -72,7 +72,7 @@
 </select>
 
 <select name="num_recs" id="select_num_recs" class="selectpicker form-control">
-    <option selected="selected">How many recommendations would you like?</option>
+    <option selected="" value=5>How many recommendations would you like?</option>
     {% for i in range(1,21) %}
     <option value="{{ i }}">{{ i }}</option>
     {% endfor %}

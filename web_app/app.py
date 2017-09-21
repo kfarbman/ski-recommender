@@ -10,12 +10,13 @@ app = Flask(__name__)
 with open('../df.pkl','rb') as f:
     df = pickle.load(f)    
     
-features = ['top_elev_(ft)', 
-            'bottom_elev_(ft)', 
-            'vert_rise_(ft)', 
-            'slope_length_(ft)', 
-            'avg_width_(ft)', 
-            'slope_area_(acres)', 
+features = [
+            # 'top_elev_(ft)', 
+            # 'bottom_elev_(ft)', 
+            # 'vert_rise_(ft)', 
+            # 'slope_length_(ft)', 
+            # 'avg_width_(ft)', 
+            # 'slope_area_(acres)', 
             'avg_grade_(%)', 
             'max_grade_(%)', 
             'groomed']
@@ -58,7 +59,7 @@ def recommendations():
     rec_df['color_names'][rec_df['color_names'] == 'black'] = 'Black'
     rec_df['color_names'][rec_df['color_names'] == 'bb'] = 'Double Black'
     rec_df = rec_df[['trail_name','resort','location','color_names','groomed','top_elev_(ft)','bottom_elev_(ft)','vert_rise_(ft)','slope_length_(ft)','avg_width_(ft)','slope_area_(acres)','avg_grade_(%)','max_grade_(%)']]
-    rec_df.columns = ['Trail Name', 'Resort','Location','Rating','Groomed','Top Elev (ft)', 'Bottom Elev (ft)', 'Vert Rise (ft)', 'Slope Length (ft)', 'Avg Width (ft)', 'Slope Area (acres)', 'Avg Grade (%)', 'Max Grade (%)']
+    rec_df.columns = ['Trail Name', 'Resort','Location','Difficulty','Groomed','Top Elev (ft)', 'Bottom Elev (ft)', 'Vert Rise (ft)', 'Slope Length (ft)', 'Avg Width (ft)', 'Slope Area (acres)', 'Avg Grade (%)', 'Max Grade (%)']
     return render_template('recommendations.html',rec_df=rec_df)
     
 @app.route('/get_trails')
