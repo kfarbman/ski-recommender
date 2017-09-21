@@ -51,10 +51,25 @@ def cos_sim_recs(index, n=5, resort=None):
     total = pd.concat((orig_row,rec_df))
     return total
     
-
-@app.route('/', methods=['GET','POST'])
+def mtn_recommender(index, n=5):
+    trail = X[index].reshape(1,-1)
+    cs = cosine_similarity(trail, X)[0]
+    df['cosine_sim'] = cs
+    s = df.groupby('resort').mean()['cosine_sim'].sort_values()[::-1]
+    orig_row = df.loc[[index]].rename(lambda x: 'original')
+    return orig_row, list(s.index[:n])
+    
+@app.route('/', methods =['GET','POST'])    
 def index():
+    return render_template('home.html')
+
+@app.route('/trails', methods=['GET','POST'])
+def trails():
     return render_template('index.html',df=df)
+    
+@app.route('/mountains', methods=['GET','POST'])
+def mountains():
+    return render_template('mtn_index.html',df=df)
     
 @app.route('/recommendations', methods=['GET','POST'])
 def recommendations():
@@ -78,6 +93,17 @@ def recommendations():
     else:
         resort_links = links[dest_resort]
     return render_template('recommendations.html',rec_df=rec_df,resort_links=resort_links)
+    
+@app.route('/mtn_recommendations', methods=['GET','POST'])
+def mtn_recommendations():
+    resort = request.form['resort']
+    trail = request.form['trail']
+    index = int(trail)
+    num_recs = int(request.form['num_recs'])
+    row, recs = mtn_recommender(index,num_recs)
+    resort_links = [links[resort] for resort in recs]
+    return render_template('mtn_recommendations.html',row=row,recs=recs,resort_links=resort_links)
+    
     
 @app.route('/get_trails')
 def get_trails():

@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+.green {background-color:rgba(0, 255, 0, .3);}
+.blue {background-color:rgba(0, 0, 255, .3);}
+.black {background-color:rgba(0, 0, 0, .3);}
+.bb {background-color:rgba(0, 0, 0, .3);}
+</style>
+
+<form action='/mtn_recommendations', method='POST'>
+<select name="resort" id="select_resort" class="selectpicker form-control">
+    <option selected="selected">Select a Resort...</option>
+    {% for resort in df['resort'].unique()|sort %}
+    <option value="{{ resort }}">{{ resort }}</option>
+    {% endfor %}
+</select>
+
+<select name="trail" id="select_trail" class="selectpicker form-control" disabled>
+    <option>Select a Trail...</option>
+</select>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script charset="utf-8" type="text/javascript">
+    $(function() {
+        var dropdown = {
+            resort: $('#select_resort'),
+            trail: $('#select_trail')
+        };
+
+        // function to call XHR and update goodsrec dropdown
+        function updateTrail() {
+            var resort = dropdown.resort.val();
+            dropdown.trail.attr('disabled', 'disabled');
+            console.log(resort);
+
+            if (resort.length) {
+                dropdown.trail.empty();
+                $.getJSON("{{ url_for('get_trails') }}", {resort: resort}, function(data) {
+                    console.log(data);
+                    data.forEach(function(item) {
+                        dropdown.trail.append(
+                            $('<option>', {
+                                // style: df['colors'].iloc[item.id]
+                                class: item.color,
+                                value: item.id,
+                                text: item.name
+                            })
+                        );
+                    });
+                    dropdown.trail.removeAttr('disabled');
+                });
+            }
+        }
+
+        // event listener to customer dropdown change
+        dropdown.resort.on('change', function() {
+            updateTrail();
+        });
+
+    });
+</script>
+
+
+<select name="num_recs" id="select_num_recs" class="selectpicker form-control">
+    <option selected="" value=5>How many recommendations would you like?</option>
+    {% for i in range(1,21) %}
+    <option value="{{ i }}">{{ i }}</option>
+    {% endfor %}
+</select>
+
+<button type="submit" />Recommend</div>
+
+</form>
+
+
+{% endblock %}

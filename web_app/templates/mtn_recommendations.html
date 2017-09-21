@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+.green {background-color:rgba(0, 255, 0, 1);}
+.blue {background-color:rgba(0, 0, 255, 1); color:rgba(255,255,255,1);}
+.black {background-color:rgba(0, 0, 0, 1); color:rgba(255,255,255,1);}
+.doubleblack {background-color:rgba(0, 0, 0, 1); color:rgba(255,255,255,1);}
+</style>
+
+<h2>Your Trail</h2>
+<table class=table>
+  <tr>
+  {% for col in row.columns %}
+  <th>{{col}}</th>
+  {% endfor %}
+  </tr>
+  <tr>
+    {% for _, item in row.iloc[:].iterrows() %}
+    <tr class="{{ item.colors.lower().replace(' ','') }}">
+      {% for entry in item %}
+      <td>{{ entry }}</td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+  </tr>
+</table>
+
+<h2>Recommendations</h2>
+<table class=table>
+  {% for item in recs %}
+  <tr>
+    <td>{{item}}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+<!-- <div>
+Disclaimer: Just because a run is in this list, does not mean that you should ski on it! Use your own discretion!
+</div>
+<div>
+  <h3>
+<a href={{resort_links[1]}}><center>Today's trail report</center></a>
+</h3>
+</div>
+<div>
+  <center>
+<embed src={{resort_links[0]}} height="1200px" width="1800">
+</center>
+</div> -->
+{% endblock %}
