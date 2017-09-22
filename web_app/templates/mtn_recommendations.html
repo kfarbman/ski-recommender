@@ -17,7 +17,7 @@
   </tr>
   <tr>
     {% for _, item in row.iloc[:].iterrows() %}
-    <tr class="{{ item.colors.lower().replace(' ','') }}">
+    <tr class="{{ item.Difficulty.lower().replace(' ','') }}">
       {% for entry in item %}
       <td>{{ entry }}</td>
       {% endfor %}
@@ -26,26 +26,16 @@
   </tr>
 </table>
 
-<h2>Recommendations</h2>
+<h2>Because you like skiing on {{row['Trail Name'].item()}}, you might like skiing at:</h2>
+
 <table class=table>
   {% for item in recs %}
   <tr>
-    <td>{{item}}</td>
+    <td><a href={{links[item][1]}}>{{item}}</a></td>
+    <td><img src={{links[item][0]}} heigh="300px" width="300px"></td>
   </tr>
   {% endfor %}
 </table>
 
-<!-- <div>
-Disclaimer: Just because a run is in this list, does not mean that you should ski on it! Use your own discretion!
-</div>
-<div>
-  <h3>
-<a href={{resort_links[1]}}><center>Today's trail report</center></a>
-</h3>
-</div>
-<div>
-  <center>
-<embed src={{resort_links[0]}} height="1200px" width="1800">
-</center>
-</div> -->
+
 {% endblock %}

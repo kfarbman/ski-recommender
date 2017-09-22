@@ -101,8 +101,16 @@ def mtn_recommendations():
     index = int(trail)
     num_recs = int(request.form['num_recs'])
     row, recs = mtn_recommender(index,num_recs)
-    resort_links = [links[resort] for resort in recs]
-    return render_template('mtn_recommendations.html',row=row,recs=recs,resort_links=resort_links)
+    row['groomed'][row['groomed'] == 1] = 'Groomed'
+    row['groomed'][row['groomed'] == 0] = 'Ungroomed'
+    row['color_names'] = row['colors']
+    row['color_names'][row['color_names'] == 'green'] = 'Green'
+    row['color_names'][row['color_names'] == 'blue'] = 'Blue'
+    row['color_names'][row['color_names'] == 'black'] = 'Black'
+    row['color_names'][row['color_names'] == 'bb'] = 'Double Black'
+    row = row[['trail_name','resort','location','color_names','groomed','top_elev_(ft)','bottom_elev_(ft)','vert_rise_(ft)','slope_length_(ft)','avg_width_(ft)','slope_area_(acres)','avg_grade_(%)','max_grade_(%)']]
+    row.columns = ['Trail Name', 'Resort','Location','Difficulty','Groomed','Top Elev (ft)', 'Bottom Elev (ft)', 'Vert Rise (ft)', 'Slope Length (ft)', 'Avg Width (ft)', 'Slope Area (acres)', 'Avg Grade (%)', 'Max Grade (%)']
+    return render_template('mtn_recommendations.html',row=row,recs=recs,links=links)
     
     
 @app.route('/get_trails')
@@ -111,7 +119,7 @@ def get_trails():
     # print(resort)
     if resort:
         sub_df = df[df['resort'] == resort]
-        id_name_color = zip(list(sub_df.index),list(sub_df['trail_name']),list(sub_df['colors']))
+        id_name_color = [("","Select a Trail...","white")] + list(zip(list(sub_df.index),list(sub_df['trail_name']),list(sub_df['colors'])))
         data = [{"id": str(x[0]), "name": x[1], "color": x[2]} for x in id_name_color]
         # print(data)
     return jsonify(data)

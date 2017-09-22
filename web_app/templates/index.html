@@ -6,8 +6,15 @@
 .blue {background-color:rgba(0, 0, 255, .3);}
 .black {background-color:rgba(0, 0, 0, .3);}
 .bb {background-color:rgba(0, 0, 0, .3);}
+.white {background-color:rgba(255, 255, 255, .3);}
+.main {margin-top:100px;}
+body {
+  background-image: url('http://www.mycoloradolife.com/Pictures/Skiing/Telluride/Telluride-Ski-Resort-Mountains.JPG');
+  background-size: 100%
+}
 </style>
 
+<div class="main">
 <form action='/recommendations', method='POST'>
 <select name="resort" id="select_resort" class="selectpicker form-control">
     <option selected="selected">Select a Resort...</option>
@@ -81,6 +88,7 @@
 <button type="submit" />Recommend</div>
 
 </form>
+</div>
 
 
 {% endblock %}
