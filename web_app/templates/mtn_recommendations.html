@@ -28,11 +28,20 @@
 
 <h2>Because you like skiing on {{row['Trail Name'].item()}}, you might like skiing at:</h2>
 
+<h2>Recommendations</h2>
 <table class=table>
-  {% for item in recs %}
   <tr>
-    <td><a href={{links[item][1]}}>{{item}}</a></td>
-    <td><img src={{links[item][0]}} heigh="300px" width="300px"></td>
+  {% for col in results_df.columns %}
+  <th><center>{{col}}</center></th>
+  {% endfor %}
+  <th><center>Today's Trail Info (link)</center></th>
+  </tr>
+  {% for _, row in results_df.iloc[:].iterrows() %}
+  <tr>
+    {% for entry in row %}
+    <td><center>{{ entry }}</center></td>
+    {% endfor %}
+    <td><center><a href="{{links[row.Resort][1]}}"><img src={{links[row.Resort][0]}} height="100px" width="200px"></a></center></td>
   </tr>
   {% endfor %}
 </table>

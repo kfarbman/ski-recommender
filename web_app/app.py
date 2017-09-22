@@ -10,9 +10,11 @@ app = Flask(__name__)
 with open('../df.pkl','rb') as f:
     df = pickle.load(f)    
     
-features = [
-            # 'top_elev_(ft)', 
-            # 'bottom_elev_(ft)', 
+with open('../mtn_df.pkl','rb') as f:
+    mtn_df = pickle.load(f)
+    
+features = ['top_elev_(ft)', 
+            'bottom_elev_(ft)', 
             'vert_rise_(ft)', 
             'slope_length_(ft)', 
             'avg_width_(ft)', 
@@ -23,6 +25,29 @@ features = [
 X = df[features].values    
 ss = StandardScaler()
 X = ss.fit_transform(X)
+
+mtn_features = ['top_elev_(ft)', 
+                'bottom_elev_(ft)', 
+                'vert_rise_(ft)', 
+                'slope_length_(ft)', 
+                'avg_width_(ft)', 
+                'slope_area_(acres)', 
+                'avg_grade_(%)', 
+                'max_grade_(%)', 
+                'groomed',
+                'resort_bottom',
+                'resort_top',
+                'greens',
+                'blues',
+                'blacks',
+                'bbs',
+                'lifts',
+                'price']
+                
+X_mtn = mtn_df[mtn_features].values    
+X_mtn = ss.fit_transform(X_mtn)
+
+resort_stats_df = mtn_df[['resort', 'resort_bottom','resort_top','greens','blues','blacks','bbs','lifts','price']].drop_duplicates()
 
 links = {'Loveland': ["../static/images/Loveland.jpg", "http://skiloveland.com/trail-lift-report/"],
            'Arapahoe Basin': ['http://arapahoebasin.com/ABasin/image-library/inline-landscape/A-BASIN-17-18-Front.jpg', 'http://arapahoebasin.com/ABasin/snow-conditions/terrain.aspx'],
@@ -52,12 +77,24 @@ def cos_sim_recs(index, n=5, resort=None):
     return total
     
 def mtn_recommender(index, n=5):
-    trail = X[index].reshape(1,-1)
-    cs = cosine_similarity(trail, X)[0]
-    df['cosine_sim'] = cs
-    s = df.groupby('resort').mean()['cosine_sim'].sort_values()[::-1]
-    orig_row = df.loc[[index]].rename(lambda x: 'original')
+    trail = X_mtn[index].reshape(1,-1)
+    cs = cosine_similarity(trail, X_mtn)[0]
+    mtn_df['cosine_sim'] = cs
+    s = mtn_df.groupby('resort').mean()['cosine_sim'].sort_values()[::-1]
+    orig_row = mtn_df.loc[[index]].rename(lambda x: 'original')
     return orig_row, list(s.index[:n])
+    
+def clean_df_for_recs(df):
+    df['groomed'][df['groomed'] == 1] = 'Groomed'
+    df['groomed'][df['groomed'] == 0] = 'Ungroomed'
+    df['color_names'] = df['colors']
+    df['color_names'][df['color_names'] == 'green'] = 'Green'
+    df['color_names'][df['color_names'] == 'blue'] = 'Blue'
+    df['color_names'][df['color_names'] == 'black'] = 'Black'
+    df['color_names'][df['color_names'] == 'bb'] = 'Double Black'
+    df = df[['trail_name','resort','location','color_names','groomed','top_elev_(ft)','bottom_elev_(ft)','vert_rise_(ft)','slope_length_(ft)','avg_width_(ft)','slope_area_(acres)','avg_grade_(%)','max_grade_(%)']]
+    df.columns = ['Trail Name', 'Resort','Location','Difficulty','Groomed','Top Elev (ft)', 'Bottom Elev (ft)', 'Vert Rise (ft)', 'Slope Length (ft)', 'Avg Width (ft)', 'Slope Area (acres)', 'Avg Grade (%)', 'Max Grade (%)']
+    return df
     
 @app.route('/', methods =['GET','POST'])    
 def index():
@@ -79,15 +116,7 @@ def recommendations():
     dest_resort = request.form['dest_resort']
     num_recs = int(request.form['num_recs'])
     rec_df = cos_sim_recs(index,num_recs,dest_resort)
-    rec_df['groomed'][rec_df['groomed'] == 1] = 'Groomed'
-    rec_df['groomed'][rec_df['groomed'] == 0] = 'Ungroomed'
-    rec_df['color_names'] = rec_df['colors']
-    rec_df['color_names'][rec_df['color_names'] == 'green'] = 'Green'
-    rec_df['color_names'][rec_df['color_names'] == 'blue'] = 'Blue'
-    rec_df['color_names'][rec_df['color_names'] == 'black'] = 'Black'
-    rec_df['color_names'][rec_df['color_names'] == 'bb'] = 'Double Black'
-    rec_df = rec_df[['trail_name','resort','location','color_names','groomed','top_elev_(ft)','bottom_elev_(ft)','vert_rise_(ft)','slope_length_(ft)','avg_width_(ft)','slope_area_(acres)','avg_grade_(%)','max_grade_(%)']]
-    rec_df.columns = ['Trail Name', 'Resort','Location','Difficulty','Groomed','Top Elev (ft)', 'Bottom Elev (ft)', 'Vert Rise (ft)', 'Slope Length (ft)', 'Avg Width (ft)', 'Slope Area (acres)', 'Avg Grade (%)', 'Max Grade (%)']
+    rec_df = clean_df_for_recs(rec_df)
     if dest_resort == '':
         resort_links = links[resort]
     else:
@@ -101,17 +130,12 @@ def mtn_recommendations():
     index = int(trail)
     num_recs = int(request.form['num_recs'])
     row, recs = mtn_recommender(index,num_recs)
-    row['groomed'][row['groomed'] == 1] = 'Groomed'
-    row['groomed'][row['groomed'] == 0] = 'Ungroomed'
-    row['color_names'] = row['colors']
-    row['color_names'][row['color_names'] == 'green'] = 'Green'
-    row['color_names'][row['color_names'] == 'blue'] = 'Blue'
-    row['color_names'][row['color_names'] == 'black'] = 'Black'
-    row['color_names'][row['color_names'] == 'bb'] = 'Double Black'
-    row = row[['trail_name','resort','location','color_names','groomed','top_elev_(ft)','bottom_elev_(ft)','vert_rise_(ft)','slope_length_(ft)','avg_width_(ft)','slope_area_(acres)','avg_grade_(%)','max_grade_(%)']]
-    row.columns = ['Trail Name', 'Resort','Location','Difficulty','Groomed','Top Elev (ft)', 'Bottom Elev (ft)', 'Vert Rise (ft)', 'Slope Length (ft)', 'Avg Width (ft)', 'Slope Area (acres)', 'Avg Grade (%)', 'Max Grade (%)']
-    return render_template('mtn_recommendations.html',row=row,recs=recs,links=links)
-    
+    results_df = pd.DataFrame(columns=['resort', 'resort_bottom','resort_top','greens','blues','blacks','bbs','lifts','price'])
+    for rec in recs:
+        results_df = results_df.append(resort_stats_df[resort_stats_df['resort'] == rec])
+    row = clean_df_for_recs(row)
+    results_df.columns = ['Resort','Bottom Elevation (ft)', 'Top Elevation (ft)', 'Percent Greens', 'Percent Blues', 'Percent Blacks', 'Percent Double  Blacks', 'Number of Lifts', 'Price']
+    return render_template('mtn_recommendations.html',row=row,results_df=results_df,links=links)
     
 @app.route('/get_trails')
 def get_trails():
