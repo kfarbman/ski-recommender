@@ -19,7 +19,7 @@ body {
 
 <form action='/mtn_recommendations', method='POST'>
 <select name="resort" id="select_resort" class="selectpicker form-control">
-    <option selected="selected">Select a Resort...</option>
+    <option selected="selected">Select a resort with your favorite trail...</option>
     {% for resort in df['resort'].unique()|sort %}
     <option value="{{ resort }}">{{ resort }}</option>
     {% endfor %}

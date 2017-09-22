@@ -11,12 +11,12 @@ import pickle
 import warnings
 warnings.filterwarnings('ignore')
 
-import loveland_table
-import vail_table
-import monarch_table
-import DP_table
-import WP_table
-import BC_table
+import create_tables.loveland_table
+import create_tables.vail_table
+import create_tables.monarch_table
+import create_tables.DP_table
+import create_tables.WP_table
+import create_tables.BC_table
 
 resorts = {'Loveland': ['data/Loveland.txt', 'CO'],
            'Arapahoe Basin': ['data/Arapahoe_Basin.txt', 'CO'],
@@ -43,25 +43,25 @@ BC_script = ['Beaver Creek']
 d = {}
 for resort in loveland_script:
     filename, location = resorts[resort]
-    d[resort]= loveland_table.fix_dtype(filename,resort,location)
+    d[resort]= create_tables.loveland_table.fix_dtype(filename,resort,location)
 for resort in vail_script:
     filename, location = resorts[resort]
-    d[resort]= vail_table.fix_dtype(filename,resort,location)
+    d[resort]= create_tables.vail_table.fix_dtype(filename,resort,location)
     del d[resort]['horiz_length']
 for resort in monarch_script:
     filename, location = resorts[resort]
-    d[resort]= monarch_table.fix_dtype(filename,resort,location)
+    d[resort]= create_tables.monarch_table.fix_dtype(filename,resort,location)
     del d[resort]['plan_length']
 for resort in DP_script:
     filename, location = resorts[resort]
-    d[resort]= DP_table.fix_dtype(filename,resort,location)
+    d[resort]= create_tables.DP_table.fix_dtype(filename,resort,location)
     d[resort].drop(['plan_length', 'pct_inc', 'plan_area'],axis=1,inplace=True)
 for resort in WP_script:
     filename, location = resorts[resort]
-    d[resort] = WP_table.fix_dtype(filename,resort,location)
+    d[resort] = create_tables.WP_table.fix_dtype(filename,resort,location)
 for resort in BC_script:
     filename, location = resorts[resort]
-    d[resort] = BC_table.fix_dtype(filename,resort,location)
+    d[resort] = create_tables.BC_table.fix_dtype(filename,resort,location)
     
 columns = ['trail_name', 'top_elev_(ft)', 'bottom_elev_(ft)', 'vert_rise_(ft)', 'slope_length_(ft)', 'avg_width_(ft)', 'slope_area_(acres)', 'avg_grade_(%)', 'max_grade_(%)', 'ability_level','resort','location']   
 
