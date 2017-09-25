@@ -124,16 +124,18 @@ def recommendations():
     # CHECKBOX FUNCTIONALITY!!!
     resort = request.form['resort']
     trail = request.form['trail']
-    index = int(trail)
-    dest_resort = request.form['dest_resort']
-    num_recs = int(request.form['num_recs'])
-    rec_df = cos_sim_recs(index,num_recs,dest_resort,color_lst)
-    rec_df = clean_df_for_recs(rec_df)
-    if dest_resort == '':
-        resort_links = links[resort]
-    else:
-        resort_links = links[dest_resort]
-    return render_template('recommendations.html',rec_df=rec_df,resort_links=resort_links)
+    if trail != '':
+        index = int(trail)
+        dest_resort = request.form['dest_resort']
+        num_recs = int(request.form['num_recs'])
+        rec_df = cos_sim_recs(index,num_recs,dest_resort,color_lst)
+        rec_df = clean_df_for_recs(rec_df)
+        if dest_resort == '':
+            resort_links = links[resort]
+        else:
+            resort_links = links[dest_resort]
+        return render_template('recommendations.html',rec_df=rec_df,resort_links=resort_links)
+    return 'You must select a trail.'
     
 @app.route('/mtn_recommendations', methods=['GET','POST'])
 def mtn_recommendations():

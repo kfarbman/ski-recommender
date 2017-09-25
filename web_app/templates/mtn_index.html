@@ -7,14 +7,17 @@
 .black {background-color:rgba(0, 0, 0, .3);}
 .bb {background-color:rgba(0, 0, 0, .3);}
 .white {background-color:rgba(255, 255, 255, .3);}
-.main {margin-top:100px;}
+.main {
+  background-color: rgba(255, 255, 255, 0.5);
+  margin-top: 100px;
+}
 body {
   background-image: url('http://www.mycoloradolife.com/Pictures/Skiing/Telluride/Telluride-Ski-Resort-Mountains.JPG');
   background-size: 100%
 }
 </style>
 
-<div class="main">
+<div class="main" style="padding: 20px 25% 20px 25%;">
 
 
 <form action='/mtn_recommendations', method='POST'>
@@ -79,7 +82,7 @@ body {
     {% endfor %}
 </select>
 
-<button type="submit" />Recommend</div>
+<button type="submit" style="background-color: cornflowerblue; color: white; border-radius: 16px; padding-left: 12px; padding-right: 12px; font-size: 16px; font-weight: bold;"/>Recommend</div>
 
 </form>
 
