@@ -215,7 +215,7 @@ for resort, groom in zip(resort_dfs,grooms):
     
     
 '''importing pickled dict from webscrape_trails.py'''
-pkl_file = open('resort_dict.pkl', 'rb')
+pkl_file = open('data/resort_dict.pkl', 'rb')
 dct = pickle.load(pkl_file)
 pkl_file.close()    
     
@@ -486,7 +486,10 @@ c[47] = 'Great Divide'
 c[53] = "Geno's Meadow"
 final_df['trail_name'][final_df['resort'] == 'Monarch'] = c
 
+'''fix trail name'''
+final_df['trail_name'][final_df['trail_name'] == 'Litter Pierre'] = 'Little Pierre'
 
-output = open('df.pkl', 'wb')
+
+output = open('data/df.pkl', 'wb')
 pickle.dump(final_df, output)
 output.close()

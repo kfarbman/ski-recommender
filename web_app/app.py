@@ -7,10 +7,10 @@ from sklearn.preprocessing import StandardScaler
 
 app = Flask(__name__)
 
-with open('../df.pkl','rb') as f:
+with open('../data/df.pkl','rb') as f:
     df = pickle.load(f)    
     
-with open('../mtn_df.pkl','rb') as f:
+with open('../data/mtn_df.pkl','rb') as f:
     mtn_df = pickle.load(f)
     
 features = ['top_elev_(ft)', 
