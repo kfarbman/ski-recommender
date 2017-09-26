@@ -1,4 +1,10 @@
-# ski-recommender
+# Ski Run Recommender
+
+Karen Farbman
+
+Galvanize Data Science Immersive - October 2017-07
+
+## Background
 
 As I was prepping for my PSIA Level 3 exam at Vail (never having skied at Vail), 
 word on the slopes was that the mogul portion of the ski exam was going to be 
@@ -14,12 +20,23 @@ even at a mountain you know nothing about? You can find runs at a mountain you'r
 unfamiliar with that are similar to a run you love. Or you can find out what a run 
 you've never skied on is like by finding out which runs it is like at a resort you know.
 
-Try it out: http://ec2-34-233-11-239.compute-1.amazonaws.com:8080/
+## Web Application
 
+[Ski Run Recommender](http://ec2-34-233-11-239.compute-1.amazonaws.com:8080/)
 
-Technologies: sklearn, flask, matplotlib, html/javascript/css, pandas, numpy, BeautifulSoup, AWS EC2
+## Data Collection and Cleaning
 
+I began by downloading pdfs of the Master Development plans from various monutains. I converted a table of information on the current runs from the pdfs into text files and parsed the text files 
+into tables to put in pandas DataFrames. I needed to pay special 
+attention to the differences in the tables from the different resorts. 
+I found archived grooming reports for each resort to add as another feature. Since the Master Development Plans classify the runs differently than trail maps, I also webscraped Jollyturns.com to get the trails by colors. Since the Master Developments plans didn't necessarily have the same trails that were on the grooming reports and Jollyturns, I had to reconcile which trails I was using (and account for differences in spelling).
 
+## Technologies Used
+
+sklearn, flask, matplotlib, html/javascript/css, pandas, numpy, BeautifulSoup, AWS EC2
+
+## Repo structure
+```
 create_tables
 -has scripts which take in pdf/txt/csv and convert to a dataframe by resort
 -slightly different conditions from tables meant using different scripts
@@ -72,3 +89,4 @@ resort_stats.py
 webscrape_trails.py
 -webscrapes to get trails by color for each resort
 -saves a pickle of dictionary of results
+```
