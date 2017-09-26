@@ -123,6 +123,8 @@ def recommendations():
         color_lst = ['green','blue','black','bb']
     # CHECKBOX FUNCTIONALITY!!!
     resort = request.form['resort']
+    if resort == '':
+        return 'You must select a trail from your favorite resort.'
     trail = request.form['trail']
     if trail != '':
         index = int(trail)
@@ -140,6 +142,8 @@ def recommendations():
 @app.route('/mtn_recommendations', methods=['GET','POST'])
 def mtn_recommendations():
     resort = request.form['resort']
+    if resort == '':
+        return 'You must select a trail from your favorite resort.'
     trail = request.form['trail']
     if trail != '':
         index = int(trail)

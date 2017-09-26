@@ -20,14 +20,14 @@ body {
 <div class="main" style="padding: 20px 25% 20px 25%;">
 <form action='/recommendations', method='POST'>
 <select name="resort" id="select_resort" class="selectpicker form-control">
-    <option selected="selected">Select a resort with your favorite trail...</option>
+    <option selected="selected" value = ''>Select a resort with your favorite trail...</option>
     {% for resort in df['resort'].unique()|sort %}
     <option value="{{ resort }}">{{ resort }}</option>
     {% endfor %}
 </select>
 
 <select name="trail" id="select_trail" class="selectpicker form-control" disabled>
-    <option>Select a Trail...</option>
+    <option selected="selected" value = ''>Select a Trail...</option>
 </select>
 
 
