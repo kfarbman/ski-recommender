@@ -141,15 +141,17 @@ def recommendations():
 def mtn_recommendations():
     resort = request.form['resort']
     trail = request.form['trail']
-    index = int(trail)
-    num_recs = int(request.form['num_recs'])
-    row, recs = mtn_recommender(index,num_recs)
-    results_df = pd.DataFrame(columns=['resort', 'resort_bottom','resort_top','greens','blues','blacks','bbs','lifts','price'])
-    for rec in recs:
-        results_df = results_df.append(resort_stats_df[resort_stats_df['resort'] == rec])
-    row = clean_df_for_recs(row)
-    results_df.columns = ['Resort','Bottom Elevation (ft)', 'Top Elevation (ft)', 'Percent Greens', 'Percent Blues', 'Percent Blacks', 'Percent Double  Blacks', 'Number of Lifts', 'Price']
-    return render_template('mtn_recommendations.html',row=row,results_df=results_df,links=links)
+    if trail != '':
+        index = int(trail)
+        num_recs = int(request.form['num_recs'])
+        row, recs = mtn_recommender(index,num_recs)
+        results_df = pd.DataFrame(columns=['resort', 'resort_bottom','resort_top','greens','blues','blacks','bbs','lifts','price'])
+        for rec in recs:
+            results_df = results_df.append(resort_stats_df[resort_stats_df['resort'] == rec])
+        row = clean_df_for_recs(row)
+        results_df.columns = ['Resort','Bottom Elevation (ft)', 'Top Elevation (ft)', 'Percent Greens', 'Percent Blues', 'Percent Blacks', 'Percent Double  Blacks', 'Number of Lifts', 'Price']
+        return render_template('mtn_recommendations.html',row=row,results_df=results_df,links=links)
+    return 'You must select a trail.'
     
 @app.route('/get_trails')
 def get_trails():
