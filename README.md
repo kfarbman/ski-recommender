@@ -12,6 +12,8 @@ How awesome would it be to find runs similar to a given run based on their featu
 
 ## Web Application: [Ski Run Recommender](http://ec2-34-233-11-239.compute-1.amazonaws.com:8080/)
 
+Created using Flask and self-hosted on AWS.
+
 ## Data Collection and Cleaning
 
 I began by downloading pdfs of the Master Development plans from various monutains. I converted a table of information on the current runs from the pdfs into text files and parsed the text files 
@@ -19,9 +21,15 @@ into tables to put in pandas DataFrames. I needed to pay special
 attention to the differences in the tables from the different resorts. 
 I found archived grooming reports for each resort to add as another feature. Since the Master Development Plans classify the runs differently than trail maps, I also webscraped Jollyturns.com to get the trails by colors. Since the Master Developments plans didn't necessarily have the same trails that were on the grooming reports and Jollyturns, I had to reconcile which trails I was using (and account for differences in spelling).
 
+I ended up with 1125 runs from 12 different resorts. The features used for trail recommendations include Trail Top Elevation, Trail Bottom Elevation, Vertical Drop, Slope Length, Slope Average Width, Slope Area, Average Grade, Max Grade, and Groomed. The features used for mountain recommendations include all the features for trail recommendations plus Resort Top Elevation, Resort Bottom Elevation, Percent Green, Blue, Black, and Double Black trails, Number of Lifts, and Price.
+
 ## Technologies Used
 
-sklearn, flask, matplotlib, html/javascript/css, pandas, numpy, BeautifulSoup, AWS EC2
+BeautifulSoup, selenium, pandas, numpy, sklearn, matplotlib, flask, html/javascript/css, AWS
+
+## Recommender System
+
+This recommender takes into account information about the runs. It looks at a run and calculates how similar it is to every other run. The runs are sorted from most similar to least similar and then filtered by resort or difficulty level if desired. So why is this useful for this project? Because you can start with a run you know you like, and it can give you back the ones that are most similar to it.
 
 ## Repo structure
 ```
