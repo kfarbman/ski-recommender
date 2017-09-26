@@ -1,11 +1,24 @@
 # ski-recommender
 
-http://ec2-34-233-11-239.compute-1.amazonaws.com:8080/
+As I was prepping for my PSIA Level 3 exam at Vail (never having skied at Vail), 
+word on the slopes was that the mogul portion of the ski exam was going to be 
+on Prima and Pronto. From my research on Vail, I knew that Prima and Pronto were 
+black and double black, but I didn't know what to compare them to. With Winter Park 
+as my home mountain, I had skied a huge range of black mogul runs, and they were all 
+vastly different. Someone told me that if I could ski Outhouse at Winter Park, 
+that was a pretty good indicator of how I would do on Prima or Pronto - they had a 
+similar slope and width and were ungroomed. 
 
+How awesome would it be to find runs similar to a given run based on their features, 
+even at a mountain you know nothing about? You can find runs at a mountain you're 
+unfamiliar with that are similar to a run you love. Or you can find out what a run 
+you've never skied on is like by finding out which runs it is like at a resort you know.
 
-Working on creating a ski run recommender.
+Try it out: http://ec2-34-233-11-239.compute-1.amazonaws.com:8080/
+
 
 Technologies: sklearn, flask, matplotlib, html/javascript/css, pandas, numpy, BeautifulSoup, AWS EC2
+
 
 create_tables
 -has scripts which take in pdf/txt/csv and convert to a dataframe by resort
