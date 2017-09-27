@@ -163,6 +163,9 @@ def get_trails():
     # print(resort)
     if resort:
         sub_df = df[df['resort'] == resort]
+        sub_df['trail_name'] = sub_df['trail_name'].apply(lambda x: x.split()).apply(lambda x: (x[1:] + ['Upper']) if (x[0] == 'Upper') else x).apply(lambda x: ' '.join(x))
+        sub_df['trail_name'] = sub_df['trail_name'].apply(lambda x: x.split()).apply(lambda x: (x[1:] + ['Lower']) if (x[0] == 'Lower') else x).apply(lambda x: ' '.join(x))
+        sub_df.sort_values(by='trail_name',inplace=True)
         id_name_color = [("","Select a Trail...","white")] + list(zip(list(sub_df.index),list(sub_df['trail_name']),list(sub_df['colors'])))
         data = [{"id": str(x[0]), "name": x[1], "color": x[2]} for x in id_name_color]
         # print(data)
