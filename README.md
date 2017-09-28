@@ -12,6 +12,22 @@ How awesome would it be to find runs similar to a given run based on their featu
 
 ## Web Application: [Ski Run Recommender](http://ec2-34-233-11-239.compute-1.amazonaws.com:8080/)
 
+![image](web_app/static/images/home.png)
+
+From the homepage, you can choose if you want a specific trail recommendation, or if you want a recommendation on which mountain to ski.
+
+Then, you can select a trail that you like from a resort that you know. You have the option to select which resort you would like recommendations at (for the trail recommender), which difficulty trails you would like included (also for the trail recommender) and how many recommendations you would like.
+
+![image](web_app/static/images/trail_page.png)
+
+This will bring up a page with the original trail, as well as the recommendations and their stats, trail maps, and links to the resorts' trail report for that day.
+
+Trail Recommendations:
+![image](web_app/static/images/recommendations_page.png)
+
+Mountain Recommendations:
+![image](web_app/static/images/mtn_rec_page.png)
+
 Created using Flask and self-hosted on AWS.
 
 ## Data Collection and Cleaning
@@ -38,8 +54,9 @@ This recommender takes into account information about the runs. It looks at a ru
 |     ├── mtn_df.pkl (pickle of dataframe used for mountain recommendations from make_mtn_df.py)
 |     └── resort_dict.pkl (pickle of dictionary of resort/color dataframes from webscrape_trails.py)
 ├── notebooks (contains scripts used for testing and visualizations)
-|     ├── visualizations.ipynb (interesting visualizations)
-|     └── clustering.ipynb (visualizations of clustering methods)
+|     ├── clustering.ipynb (visualizations of clustering methods)
+|     ├── supervised_learning.ipynb (a look into classification models of runs)
+|     └── visualizations.ipynb (interesting visualizations)
 ├── src
 |     ├── create_tables (contains scripts which take in pdf/txt/csv and convert to a dataframe by resort; slightly different conditions from tables meant using different scripts)
 |     ├── comb_tables.py
