@@ -2,7 +2,7 @@
 
 Karen Farbman
 
-Galvanize Data Science Immersive - October 2017-07
+Galvanize Data Science Immersive - October 2017
 
 ## Background
 
@@ -18,7 +18,7 @@ From the homepage, you can choose if you want a specific trail recommendation, o
 
 Then, you can select a trail that you like from a resort that you know. You have the option to select which resort you would like recommendations at (for the trail recommender), which difficulty trails you would like included (also for the trail recommender) and how many recommendations you would like.
 
-![image](web_app/static/images/trail_page.png)
+![image](web_app/static/images/trail_page2.png)
 
 This will bring up a page with the original trail, as well as the recommendations and their stats, trail maps, and links to the resorts' trail report for that day.
 
