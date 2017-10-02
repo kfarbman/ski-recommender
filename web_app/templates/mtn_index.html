@@ -19,14 +19,13 @@ body {
 
 <div class="main" style="padding: 20px 25% 20px 25%;">
 
-  <h2>How it works:</h2>
-      <b><p>To get recommendations for what mountain to ski at based on a run that you like...</p>
-      <p>Step 1: Choose a resort that you have skied at.</p>
-      <p>Step 2: Choose a trail that you know you liked at that ski area.</p>
-      <p>Step 3 (Optional): Choose how many mountain recommendations you want.</p>
-    <p>Go forth and ski!</p></b>
+  <h3><b>To get recommendations for what mountain to ski at based on a run that you like:</b></h3>
+
+<br>
+
 
 <form action='/mtn_recommendations', method='POST'>
+  <div><h4><b>Step 1: Choose a resort that you have skied at.</b></h4></div>
 <select name="resort" id="select_resort" class="selectpicker form-control">
     <option selected="selected" value = ''>Select a resort with your favorite trail...</option>
     {% for resort in df['resort'].unique()|sort %}
@@ -34,8 +33,11 @@ body {
     {% endfor %}
 </select>
 
+<br><br>
 
-<h4><a href="#" id="make_url"><font color="black"><b><u>Need help remembering trails?</u></b></font></a></h4>
+
+<div><h4><b>Step 2: Choose a trail that you know you liked at that ski area.</b>
+<a href="#" id="make_url"><font color="black"><b><u>Need help remembering trails?</u></b></font></a></h4></div>
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -113,13 +115,17 @@ body {
     });
 </script>
 
+<br><br>
 
+<div><h4><b>Step 3 (Optional): Choose how many mountain recommendations you want.</b></h4></div>
 <select name="num_recs" id="select_num_recs" class="selectpicker form-control">
     <option selected="" value=5>How many recommendations would you like?</option>
     {% for i in range(1,21) %}
     <option value="{{ i }}">{{ i }}</option>
     {% endfor %}
 </select>
+
+<br><br>
 
 <button type="submit" style="background-color: cornflowerblue; color: white; border-radius: 16px; padding-left: 12px; padding-right: 12px; font-size: 16px; font-weight: bold;"/>Recommend</div>
 
