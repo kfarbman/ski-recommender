@@ -19,6 +19,16 @@ body {
 
 
 <div class="main" style="padding: 20px 25% 20px 25%;">
+  
+  <h2>How it works:</h2>
+      <b><p>To get recommendations of which trails to ski based on a trail you know like...</p>
+      <p>Step 1: Choose a resort that you have skied at.</p>
+      <p>Step 2: Choose a trail that you know you liked at that ski area.</p>
+      <p>Step 3 (Optional): Choose the resort where you want trails recommended. It can be where you are planning to ski today or anywhere for general reference.</p>
+      <p>Step 4 (Optional): Choose how many recommendations you want.</p>
+      <p>Step 5 (Optional): Choose what difficulty level trails you would like recommended.</p>
+    <p>Go forth and ski!</p></b>
+
 <form action='/recommendations', method='POST'>
 <select name="resort" id="select_resort" class="selectpicker form-control">
     <option selected="selected" value = ''>Select a resort with your favorite trail...</option>
@@ -26,6 +36,39 @@ body {
     <option value="{{ resort }}">{{ resort }}</option>
     {% endfor %}
 </select>
+
+
+<h4><a href="#" id="make_url"><font color="black"><b><u>Need help remembering trails?</u></b></font></a></h4>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script charset="utf-8" type="text/javascript">
+    $(function() {
+        var dropdown = {
+            resort: $('#select_resort'),
+            trail: $('#select_trail')
+        };
+
+        function getURL() {
+            var resort = dropdown.resort.val();
+            if (resort.length) {
+              $('#make_url').click(function(e) {
+                e.preventDefault();
+                var url = "/trail_map/"+dropdown.resort.val();
+                window.location.href = url;
+              });
+            }
+        }
+
+        dropdown.resort.on('change', function() {
+            getURL();
+        });
+
+    });
+</script>
+
+
+
 
 <select name="trail" id="select_trail" class="selectpicker form-control" disabled>
     <option selected="selected" value = ''>Select a Trail...</option>
@@ -93,7 +136,7 @@ body {
   The highest difficulty I would like recommended is: 
 </h4>
 <h6>
-  ***Keep an open mind! Trails of the difficulty higher or lower than you typically ski can be just as doable and fun!***
+  <b><i>***Keep an open mind! Trails of the difficulty higher or lower than you typically ski can be just as doable and fun!***</i></b>
 </h6>
 <form action='/recommendations', method='GET'>
   <input type="checkbox" name="green" value="green"> <b>Green Trails</b><br>

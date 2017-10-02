@@ -19,6 +19,12 @@ body {
 
 <div class="main" style="padding: 20px 25% 20px 25%;">
 
+  <h2>How it works:</h2>
+      <b><p>To get recommendations for what mountain to ski at based on a run that you like...</p>
+      <p>Step 1: Choose a resort that you have skied at.</p>
+      <p>Step 2: Choose a trail that you know you liked at that ski area.</p>
+      <p>Step 3 (Optional): Choose how many mountain recommendations you want.</p>
+    <p>Go forth and ski!</p></b>
 
 <form action='/mtn_recommendations', method='POST'>
 <select name="resort" id="select_resort" class="selectpicker form-control">
@@ -27,6 +33,39 @@ body {
     <option value="{{ resort }}">{{ resort }}</option>
     {% endfor %}
 </select>
+
+
+<h4><a href="#" id="make_url"><font color="black"><b><u>Need help remembering trails?</u></b></font></a></h4>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script charset="utf-8" type="text/javascript">
+    $(function() {
+        var dropdown = {
+            resort: $('#select_resort'),
+            trail: $('#select_trail')
+        };
+
+        function getURL() {
+            var resort = dropdown.resort.val();
+            if (resort.length) {
+              $('#make_url').click(function(e) {
+                e.preventDefault();
+                var url = "/trail_map/"+dropdown.resort.val();
+                window.location.href = url;
+              });
+            }
+        }
+
+        dropdown.resort.on('change', function() {
+            getURL();
+        });
+
+    });
+</script>
+
+
+
 
 <select name="trail" id="select_trail" class="selectpicker form-control" disabled>
     <option selected="selected" value = ''>Select a Trail...</option>

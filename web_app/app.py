@@ -157,10 +157,10 @@ def mtn_recommendations():
         return render_template('mtn_recommendations.html',row=row,results_df=results_df,links=links)
     return 'You must select a trail.'
     
+  
 @app.route('/get_trails')
 def get_trails():
     resort = request.args.get('resort')
-    # print(resort)
     if resort:
         sub_df = df[df['resort'] == resort]
         sub_df['trail_name'] = sub_df['trail_name'].apply(lambda x: x.split()).apply(lambda x: (x[1:] + ['Upper']) if (x[0] == 'Upper') else x).apply(lambda x: ' '.join(x))
@@ -170,6 +170,11 @@ def get_trails():
         data = [{"id": str(x[0]), "name": x[1], "color": x[2]} for x in id_name_color]
         # print(data)
     return jsonify(data)
+    
+@app.route('/trail_map/<resort>')
+def trail_map(resort):
+    resort_image = links[resort][0]
+    return render_template('trail_map.html',resort_image=resort_image)
     
 if  __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080, debug=True, threaded=True)
