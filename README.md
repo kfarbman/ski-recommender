@@ -43,9 +43,15 @@ I ended up with 1125 runs from 12 different resorts. The features used for trail
 
 BeautifulSoup, selenium, pandas, numpy, sklearn, matplotlib, flask, html/javascript/css, AWS
 
+<div style="width:40%">![image](web_app/static/images/workflow.png)</div>
+
 ## Recommender System
 
 This recommender takes into account information about the runs. It looks at a run and calculates how similar it is to every other run. The runs are sorted from most similar to least similar and then filtered by resort or difficulty level if desired. So why is this useful for this project? Because you can start with a run you know you like, and it can give you back the ones that are most similar to it.
+
+## Future Steps
+
+In the future, I'd like to add more trails from more resorts. Ideally, I'd also like to add information on aspect to indicate snow conditions. A potential addition would be daily grooming information instead of static. 
 
 ## Repo structure
 ```
