@@ -10,7 +10,7 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 import time
 
-pkl_file = open('df.pkl', 'rb')
+pkl_file = open('../data/df.pkl', 'rb')
 df = pickle.load(pkl_file)
 pkl_file.close() 
 
@@ -63,7 +63,7 @@ for resort in elevs_colors_lifts_price:
     df['lifts'][df['resort'] == resort] = elevs_colors_lifts_price[resort][6]
     df['price'][df['resort'] == resort] = elevs_colors_lifts_price[resort][7]
     
-output = open('mtn_df.pkl', 'wb')
+output = open('../data/mtn_df.pkl', 'wb')
 pickle.dump(df, output)
 output.close()
 

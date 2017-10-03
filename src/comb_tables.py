@@ -18,18 +18,18 @@ import create_tables.DP_table
 import create_tables.WP_table
 import create_tables.BC_table
 
-resorts = {'Loveland': ['data/Loveland.txt', 'CO'],
-           'Arapahoe Basin': ['data/Arapahoe_Basin.txt', 'CO'],
-           'Copper': ['data/Copper.txt', 'CO'],
-           'Eldora': ['data/Eldora.txt', 'CO'],
-           'Alpine Meadows': ['data/Alpine_Meadows.txt', 'CA'],
-           'Vail': ['data/Vail.txt', 'CO'],
-           'Monarch': ['data/Monarch.txt', 'CO'],
-           'Crested Butte': ['data/Crested_Butte.txt', 'CO'],
-           'Taos': ['data/Taos.txt', 'NM'],
-           'Diamond Peak': ['data/DP.txt', 'NV'],
-           'Winter Park': ['data/WP.csv', 'CO'],
-           'Beaver Creek': ['data/Beaver_Creek.txt', 'CO']}
+resorts = {'Loveland': ['../data/Loveland.txt', 'CO'],
+           'Arapahoe Basin': ['../data/Arapahoe_Basin.txt', 'CO'],
+           'Copper': ['../data/Copper.txt', 'CO'],
+           'Eldora': ['../data/Eldora.txt', 'CO'],
+           'Alpine Meadows': ['../data/Alpine_Meadows.txt', 'CA'],
+           'Vail': ['../data/Vail.txt', 'CO'],
+           'Monarch': ['../data/Monarch.txt', 'CO'],
+           'Crested Butte': ['../data/Crested_Butte.txt', 'CO'],
+           'Taos': ['../data/Taos.txt', 'NM'],
+           'Diamond Peak': ['../data/DP.txt', 'NV'],
+           'Winter Park': ['../data/WP.csv', 'CO'],
+           'Beaver Creek': ['../data/Beaver_Creek.txt', 'CO']}
 
 # which resorts work with which script           
 loveland_script = ['Loveland', 'Arapahoe Basin', 'Copper', 'Eldora', 'Alpine Meadows']
@@ -215,7 +215,7 @@ for resort, groom in zip(resort_dfs,grooms):
     
     
 '''importing pickled dict from webscrape_trails.py'''
-pkl_file = open('resort_dict.pkl', 'rb')
+pkl_file = open('../data/resort_dict.pkl', 'rb')
 dct = pickle.load(pkl_file)
 pkl_file.close()    
     
@@ -486,7 +486,10 @@ c[47] = 'Great Divide'
 c[53] = "Geno's Meadow"
 final_df['trail_name'][final_df['resort'] == 'Monarch'] = c
 
+'''fix trail name'''
+final_df['trail_name'][final_df['trail_name'] == 'Litter Pierre'] = 'Little Pierre'
 
-output = open('df.pkl', 'wb')
+
+output = open('../data/df.pkl', 'wb')
 pickle.dump(final_df, output)
 output.close()

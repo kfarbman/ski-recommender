@@ -7,10 +7,10 @@ from sklearn.preprocessing import StandardScaler
 
 app = Flask(__name__)
 
-with open('../df.pkl','rb') as f:
+with open('../data/df.pkl','rb') as f:
     df = pickle.load(f)    
     
-with open('../mtn_df.pkl','rb') as f:
+with open('../data/mtn_df.pkl','rb') as f:
     mtn_df = pickle.load(f)
     
 features = ['top_elev_(ft)', 
@@ -157,16 +157,24 @@ def mtn_recommendations():
         return render_template('mtn_recommendations.html',row=row,results_df=results_df,links=links)
     return 'You must select a trail.'
     
+  
 @app.route('/get_trails')
 def get_trails():
     resort = request.args.get('resort')
-    # print(resort)
     if resort:
         sub_df = df[df['resort'] == resort]
+        sub_df['trail_name'] = sub_df['trail_name'].apply(lambda x: x.split()).apply(lambda x: (x[1:] + ['Upper']) if (x[0] == 'Upper') else x).apply(lambda x: ' '.join(x))
+        sub_df['trail_name'] = sub_df['trail_name'].apply(lambda x: x.split()).apply(lambda x: (x[1:] + ['Lower']) if (x[0] == 'Lower') else x).apply(lambda x: ' '.join(x))
+        sub_df.sort_values(by='trail_name',inplace=True)
         id_name_color = [("","Select a Trail...","white")] + list(zip(list(sub_df.index),list(sub_df['trail_name']),list(sub_df['colors'])))
         data = [{"id": str(x[0]), "name": x[1], "color": x[2]} for x in id_name_color]
         # print(data)
     return jsonify(data)
+    
+@app.route('/trail_map/<resort>')
+def trail_map(resort):
+    resort_image = links[resort][0]
+    return render_template('trail_map.html',resort_image=resort_image)
     
 if  __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080, debug=True, threaded=True)

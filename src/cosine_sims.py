@@ -6,7 +6,7 @@ from sklearn.preprocessing import StandardScaler
 import warnings
 warnings.filterwarnings('ignore')
 
-pkl_file = open('df.pkl', 'rb')
+pkl_file = open('../data/df.pkl', 'rb')
 df = pickle.load(pkl_file)
 pkl_file.close() 
 

@@ -139,7 +139,7 @@ for resort,URL,nums in zip(resorts,URLs,nums):
     dct[resort] = make_df_dicts(URL,nums)
     
     
-output = open('resort_dict.pkl', 'wb')
+output = open('../data/resort_dict.pkl', 'wb')
 pickle.dump(dct, output)
 output.close()
     
