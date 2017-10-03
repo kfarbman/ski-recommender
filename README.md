@@ -4,6 +4,8 @@ Karen Farbman
 
 Galvanize Data Science Immersive - October 2017
 
+[Ski Run Recommender](http://ec2-34-233-11-239.compute-1.amazonaws.com:8080/)
+
 ## Background
 
 As I was prepping for my Professional Ski Instructors of America (PSIA) Level 3 exam at Vail (never having skied at Vail), word on the slopes was that the mogul portion of the ski exam was going to be on Prima and Pronto. From my research on Vail, I knew that Prima and Pronto were black and double black, but I didn't know what to compare them to. With Winter Park as my home mountain, I had skied a huge range of black mogul runs, and they were all vastly different. Someone told me that if I could ski Outhouse at Winter Park, that was a pretty good indicator of how I would do on Prima or Pronto - they had a similar slope and width and were ungroomed. 
