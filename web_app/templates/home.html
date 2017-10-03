@@ -9,6 +9,7 @@ body {
 .main {
   background-color: rgba(255, 255, 255, 0.5);
   margin-top: 100px;
+  padding-bottom: 50px;
 }
 .main h1 {
   font-size: 5em;
@@ -19,6 +20,32 @@ body {
 .main p {
   font-size:2em;
 }
+.buttons {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+
+
+}
+button {
+            width: 10vw;
+            margin: 1vh 0;
+            padding: 1vh 2vw;
+            border: 2px solid cornflowerblue;
+            background-color: rgba(0,0,0,0);
+            font-size: 2vh;
+            font-weight: bold;
+            color: cornflowerblue;
+            margin-left: 20px;
+            width: 200px;
+            height: 75px; 
+        }
+
+        button:hover {
+            background-color: cornflowerblue;
+            color: white;
+        }
+
 </style>
     <div class="main">
 
@@ -26,24 +53,19 @@ body {
         <h1>Ski Run Recommender</h1>
         <h2>Get trail or mountain recommendations</h2>
       </div>
+
+      <div class='buttons'>
+      <form action='/trails', method='POST'>
+        <button type="submit" >Recommend a Trail</button>
+      </form>
+
+      <form action='/mountains', method='POST'>
+        <button type="submit" >Recommend a Mountain </button>
+      </form>
     </div>
 
-<center>
-<table class=table>
-  <tr>
-    <td align="right">
-<form action='/trails', method='POST'>
-  <button type="submit" style="background-color: cornflowerblue; color: white; border-radius: 16px; padding-left: 12px; padding-right: 12px; font-size: 16px; font-weight: bold;"/>Recommend a Trail</div>
-</form>
-    </td>
-    
-    <td>
-<form action='/mountains', method='POST'>
-  <button type="submit" style="background-color: cornflowerblue; color: white; border-radius: 16px; padding-left: 12px; padding-right: 12px; font-size: 16px; font-weight: bold;"/>Recommend a Mountain</div>
-</form>
-    </td>
-  </tr>
-</table>
-</center>
+
+    </div>
+
 
 {% endblock %}
