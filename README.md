@@ -42,7 +42,7 @@ I ended up with 1125 runs from 12 different resorts. The features used for trail
 
 BeautifulSoup, selenium, pandas, numpy, sklearn, matplotlib, flask, html/javascript/css, AWS
 
-![image](web_app/static/images/workflow.png)
+![image](web_app/static/images/workflow2.png)
 
 ## Recommender System
 
