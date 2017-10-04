@@ -21,7 +21,9 @@ As I was prepping for my Professional Ski Instructors of America (PSIA) Level 3 
 
 How awesome would it be to find runs similar to a given run based on their features, even at a mountain you know nothing about? You can find runs at a mountain you're unfamiliar with that are similar to a run you love. Or you can find out what a run you've never skied on is like by finding out which runs it is like at a resort you know.
 
-## Web Application: [Ski Run Recommender](http://ec2-34-233-11-239.compute-1.amazonaws.com:8080/)
+## Web Application 
+
+[Ski Run Recommender](http://ec2-34-233-11-239.compute-1.amazonaws.com:8080/)
 
 ![image](web_app/static/images/home2.png)
 
@@ -56,6 +58,8 @@ BeautifulSoup, selenium, pandas, numpy, sklearn, matplotlib, flask, html/javascr
 ## Recommender System
 
 This recommender takes into account information about the runs. It looks at a run and calculates how similar it is to every other run. The runs are sorted from most similar to least similar and then filtered by resort or difficulty level if desired. So why is this useful for this project? Because you can start with a run you know you like, and it can give you back the ones that are most similar to it.
+
+The similarity metric used is the cosine similarity. For the trail recommendations, the similarity is calculated between the chosen run and all other runs. For the mountain recommendations, the average of the similarities between the chosen run and all of the runs at each mountain is calculated, and the resorts are sorted by highest average similarity.
 
 ## Future Steps
 
