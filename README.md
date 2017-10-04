@@ -6,6 +6,15 @@ Galvanize Data Science Immersive - October 2017
 
 [Ski Run Recommender](http://ec2-34-233-11-239.compute-1.amazonaws.com:8080/)
 
+## Table of Contents
+1. [Background](#background)
+2. [Web Application](#web-application)
+3. [Data Collection and Cleaning](#data-collection-and-cleaning)
+4. [Technologies Used](#technologies-used)
+5. [Recommender System](#recommender-system)
+6. [Future Steps](#future-steps)
+7. [Repo Structure](#repo-structure)
+
 ## Background
 
 As I was prepping for my Professional Ski Instructors of America (PSIA) Level 3 exam at Vail (never having skied at Vail), word on the slopes was that the mogul portion of the ski exam was going to be on Prima and Pronto. From my research on Vail, I knew that Prima and Pronto were black and double black, but I didn't know what to compare them to. With Winter Park as my home mountain, I had skied a huge range of black mogul runs, and they were all vastly different. Someone told me that if I could ski Outhouse at Winter Park, that was a pretty good indicator of how I would do on Prima or Pronto - they had a similar slope and width and were ungroomed. 
@@ -14,7 +23,7 @@ How awesome would it be to find runs similar to a given run based on their featu
 
 ## Web Application: [Ski Run Recommender](http://ec2-34-233-11-239.compute-1.amazonaws.com:8080/)
 
-![image](web_app/static/images/home.png)
+![image](web_app/static/images/home2.png)
 
 From the homepage, you can choose if you want a specific trail recommendation, or if you want a recommendation on which mountain to ski.
 
@@ -25,10 +34,10 @@ Then, you can select a trail that you like from a resort that you know. You have
 This will bring up a page with the original trail, as well as the recommendations and their stats, trail maps, and links to the resorts' trail report for that day.
 
 Trail Recommendations:
-![image](web_app/static/images/recommendations_page.png)
+![image](web_app/static/images/recommendations_page2.png)
 
 Mountain Recommendations:
-![image](web_app/static/images/mtn_rec_page.png)
+![image](web_app/static/images/mtn_rec_page2.png)
 
 Created using Flask and self-hosted on AWS.
 
