@@ -10,11 +10,45 @@
 .main {
   background-color: rgba(255, 255, 255, 0.5);
   margin-top: 100px;
+
 }
+.move-button {
+  display: flex;
+  justify-content: center;
+  margin-top: 7px;
+}
+button {
+            width: 10vw;
+            margin: 1vh 0;
+            padding: 1vh 2vw;
+            border: 2px solid cornflowerblue;
+            background-color: cornflowerblue;
+            color: white;
+            font-size: 2vh;
+            font-weight: bold;
+            margin-left: 20px;
+            width: 150px;
+            height: 40px;
+            margin-top: 3px;
+            margin-left: -0px;
+
+
+        }
+
+        button:hover {
+            background-color: rgba(0,0,0,0);
+            color: cornflowerblue;
+        }
 body {
-  background-image: url('http://www.mycoloradolife.com/Pictures/Skiing/Telluride/Telluride-Ski-Resort-Mountains.JPG');
+  background-image: url('https://hdwallsource.com/img/2014/5/snow-mountain-16540-17078-hd-wallpapers.jpg');
   background-size: 100%
 }
+@media only screen and (max-width: 600px) {
+    body {
+        background-size: auto;
+    }
+}
+
 </style>
 
 <div class="main" style="padding: 20px 25% 20px 25%;">
@@ -124,10 +158,9 @@ body {
     <option value="{{ i }}">{{ i }}</option>
     {% endfor %}
 </select>
-
-<br><br>
-
-<button type="submit" style="background-color: cornflowerblue; color: white; border-radius: 16px; padding-left: 12px; padding-right: 12px; font-size: 16px; font-weight: bold;"/>Recommend</div>
+<div class='move-button'>
+<button type="submit">Recommend</button>
+</div>
 
 </form>
 

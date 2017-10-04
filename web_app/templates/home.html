@@ -2,13 +2,46 @@
 {% block content %}
 
 <style>
-body {
+
+
+
+/*body {
   background-image: url('http://www.mycoloradolife.com/Pictures/Skiing/Telluride/Telluride-Ski-Resort-Mountains.JPG');
   background-size: 100%;
-}
+}*/
+
+
+
+   body{
+     position:fixed;
+     background-image:url('http://www.lifewallpapers.net/data/out/301/6298238-snowy-mountain-wallpaper-hd.jpg');
+     width:100%;
+     background-repeat: no-repeat;
+
+    background-size: cover;
+   }
+
+   @media only screen and (max-width: 600px) {
+       body {
+           background-size: auto;
+       }
+   }
+
+
+
+
+
+
+
+
+
+
+
+
 .main {
   background-color: rgba(255, 255, 255, 0.5);
   margin-top: 100px;
+  padding-bottom: 50px;
 }
 .main h1 {
   font-size: 5em;
@@ -19,31 +52,74 @@ body {
 .main p {
   font-size:2em;
 }
+.buttons {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+}
+
+
+
+
+
+button {
+            width: 10vw;
+            margin: 1vh 0;
+            padding: 1vh 2vw;
+            border: 2px solid cornflowerblue;
+            background-color: cornflowerblue;
+            color: white;
+            font-size: 2vh;
+            font-weight: bold;
+            margin-left: 20px;
+            width: 200px;
+            height: 75px;
+        }
+
+        button:hover {
+            background-color: rgba(0,0,0,0);
+            color: cornflowerblue;
+
+        }
+
+
 </style>
+
+
+
+
+
+<div class="overlay">
+
+</div>
+
+
+
+
+
+
+
+
+
     <div class="main">
 
       <div class="starter-template">
         <h1>Ski Run Recommender</h1>
         <h2>Get trail or mountain recommendations</h2>
       </div>
+
+      <div class='buttons'>
+      <form action='/trails', method='POST'>
+        <button type="submit" >Find Trail Recommendations</button>
+      </form>
+
+      <form action='/mountains', method='POST'>
+        <button type="submit" >Find Mountain Recommendations</button>
+      </form>
     </div>
 
-<center>
-<table class=table>
-  <tr>
-    <td align="right">
-<form action='/trails', method='POST'>
-  <button type="submit" style="background-color: cornflowerblue; color: white; border-radius: 16px; padding-left: 12px; padding-right: 12px; font-size: 16px; font-weight: bold;"/>Find Trail Recommendations</div>
-</form>
-    </td>
-    
-    <td>
-<form action='/mountains', method='POST'>
-  <button type="submit" style="background-color: cornflowerblue; color: white; border-radius: 16px; padding-left: 12px; padding-right: 12px; font-size: 16px; font-weight: bold;"/>Find Mountain Recommendations</div>
-</form>
-    </td>
-  </tr>
-</table>
-</center>
+
+    </div>
+
 
 {% endblock %}
