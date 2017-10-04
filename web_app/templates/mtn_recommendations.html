@@ -6,11 +6,19 @@
 .blue {background-color: cornflowerblue; }
 .black {background-color:rgb(34,34,34); color:rgb(217, 217, 217);}
 .doubleblack {background-color:rgb(34,34,34); color:rgb(217, 217, 217);}
-.table {text-align: center;}
+.table {
+text-align: center;
+display: flex;
+justify-content: center;
+}
+.title {
+  margin-left: 50px;
+}
 </style>
 
-<h2>Your Trail</h2>
+<h2 class='title'>Your Trail</h2>
 <table class=table>
+
   <tr>
   {% for col in row.columns %}
   <th>{{col}}</th>
@@ -27,9 +35,10 @@
   </tr>
 </table>
 
-<h2>Because you like skiing on {{row['Trail Name'].item()}}, you might like skiing at:</h2>
+<h2 class='title'>Because you like skiing on {{row['Trail Name'].item()}}, you might like skiing at:</h2>
 
-<h3>Recommendations</h3>
+<h3 class='title'>Recommendations</h3>
+
 <table class=table>
   <tr>
   {% for col in results_df.columns %}

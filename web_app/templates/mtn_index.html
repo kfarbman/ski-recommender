@@ -12,15 +12,20 @@
   margin-top: 100px;
 
 }
+.move-button {
+  display: flex;
+  justify-content: center;
+  margin-top: 7px;
+}
 button {
             width: 10vw;
             margin: 1vh 0;
             padding: 1vh 2vw;
             border: 2px solid cornflowerblue;
-            background-color: rgba(0,0,0,0);
+            background-color: cornflowerblue;
+            color: white;
             font-size: 2vh;
             font-weight: bold;
-            color: cornflowerblue;
             margin-left: 20px;
             width: 150px;
             height: 40px;
@@ -31,8 +36,8 @@ button {
         }
 
         button:hover {
-            background-color: cornflowerblue;
-            color: white;
+            background-color: rgba(0,0,0,0);
+            color: cornflowerblue;
         }
 body {
   background-image: url('http://www.mycoloradolife.com/Pictures/Skiing/Telluride/Telluride-Ski-Resort-Mountains.JPG');
@@ -147,8 +152,9 @@ body {
     <option value="{{ i }}">{{ i }}</option>
     {% endfor %}
 </select>
-
+<div class='move-button'>
 <button type="submit">Recommend</button>
+</div>
 
 </form>
 

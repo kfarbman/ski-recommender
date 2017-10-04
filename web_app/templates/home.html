@@ -2,10 +2,45 @@
 {% block content %}
 
 <style>
-body {
+
+
+
+/*body {
   background-image: url('http://www.mycoloradolife.com/Pictures/Skiing/Telluride/Telluride-Ski-Resort-Mountains.JPG');
   background-size: 100%;
-}
+}*/
+
+
+
+   body{
+     position:fixed;
+     background-image:url('http://www.lifewallpapers.net/data/out/301/6298238-snowy-mountain-wallpaper-hd.jpg');
+     /*-webkit-animation: scroll infinite linear 5s alternate;
+     top:0;
+     left:0;*/
+     width:100%;
+
+
+    background-size: cover;
+   }
+
+
+
+
+
+   /*@-webkit-keyframes scroll{
+     100%{
+       background-position:-100px 0px;
+     }
+   }*/
+
+
+
+
+
+
+
+
 .main {
   background-color: rgba(255, 255, 255, 0.5);
   margin-top: 100px;
@@ -24,29 +59,53 @@ body {
   display: flex;
   flex-wrap: nowrap;
   justify-content: center;
-
-
 }
+
+
+
+
+
 button {
             width: 10vw;
             margin: 1vh 0;
             padding: 1vh 2vw;
             border: 2px solid cornflowerblue;
-            background-color: rgba(0,0,0,0);
+            background-color: cornflowerblue;
+            border: solid;
+            border-color: rgb(51, 51, 51);
+            color: white;
             font-size: 2vh;
             font-weight: bold;
-            color: cornflowerblue;
             margin-left: 20px;
             width: 200px;
             height: 75px;
         }
 
         button:hover {
-            background-color: cornflowerblue;
-            color: white;
+            background-color: rgba(0,0,0,0);
+            color: cornflowerblue;
+
         }
 
+
 </style>
+
+
+
+
+
+<div class="overlay">
+
+</div>
+
+
+
+
+
+
+
+
+
     <div class="main">
 
       <div class="starter-template">

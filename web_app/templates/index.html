@@ -11,6 +11,10 @@
   background-color: rgba(255, 255, 255, 0.5);
   margin-top: 50px;
 }
+.move-button {
+  display: flex;
+  justify-content: center;
+}
 body {
   background-image: url('http://www.mycoloradolife.com/Pictures/Skiing/Telluride/Telluride-Ski-Resort-Mountains.JPG');
   background-size: 100%
@@ -20,20 +24,18 @@ button {
             margin: 1vh 0;
             padding: 1vh 2vw;
             border: 2px solid cornflowerblue;
-            background-color: rgba(0,0,0,0);
+            background-color: cornflowerblue;
+            color: white;
             font-size: 2vh;
             font-weight: bold;
-            color: cornflowerblue;
-
+            color: white;
             width: 150px;
             height: 40px;
-            display: flex;
-
         }
 
         button:hover {
-            background-color: cornflowerblue;
-            color: white;
+            background-color: rgba(0,0,0,0);
+            color: cornflowerblue;
         }
 </style>
 
@@ -170,11 +172,14 @@ button {
   <input type="checkbox" name="blue" value="blue"> <b>Blue Trails</b><br>
   <input type="checkbox" name="black" value="black"> <b>Black Trails</b><br>
   <input type="checkbox" name="bb" value="bb"> <b>Double Black Trails</b><br>
+  <div class='move-button'>
+  <button type="submit">Recommend</button>
+  </div>
+
 </div>
 
 <br><br>
 
-<button type="submit">Recommend</button>
 </form>
 </form>
 </div>
