@@ -23,10 +23,14 @@ justify-content: center;
   text-align: center;
 }
 
+.title {
+  text-align: center;
+}
+
 
 </style>
 
-<h2>Your Trail</h2>
+<h2 class='title'>Your Trail</h2>
 <table class='table'>
   <tr>
   {% for col in rec_df.columns %}
@@ -42,7 +46,9 @@ justify-content: center;
   {% endfor %}
 </table>
 
-<h2>Recommendations</h2>
+<br>
+
+<h2 class='title'>Recommendations</h2>
 
 <table class='table'>
   <tr>
@@ -62,8 +68,9 @@ justify-content: center;
 </table>
 
 <div class='disclaimer'>
-Disclaimer: Just because a run is in this list, does not mean that you should ski on it! Use your own discretion!
+<i>Disclaimer: Just because a run is in this list, does not mean that you should ski on it! Use your own discretion!</i>
 </div>
+<br>
 <div>
   <h3>
 <a href={{resort_links[1]}}><center>Today's trail report</center></a>

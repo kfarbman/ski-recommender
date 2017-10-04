@@ -8,7 +8,7 @@
 .bb {color: rgba(255, 255, 255, 1); background-color:rgba(0, 0, 0, .6);}
 .white {background-color:rgba(255, 255, 255,1);}
 .main {
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.7);
   margin-top: 50px;
 }
 .move-button {
@@ -26,17 +26,15 @@ body {
 }
 
 button {
-            width: 10vw;
-            margin: 1vh 0;
             padding: 1vh 2vw;
             border: 2px solid cornflowerblue;
             background-color: cornflowerblue;
             color: white;
-            font-size: 2vh;
+            border-radius: 16px; 
+            padding-left: 12px; 
+            padding-right: 12px; 
+            font-size: 16px; 
             font-weight: bold;
-            color: white;
-            width: 150px;
-            height: 40px;
         }
 
         button:hover {
@@ -167,9 +165,15 @@ button {
     {% endfor %}
 </select>
 
-<h4>
-  The highest difficulty I would like recommended is:
-</h4>
+<br>
+<br>
+<div><h4><b>Step 5 (Optional): Choose what difficulty level trails you would like recommended.</b></h4></div>
+<div class="white">
+<h5>
+  <b>The highest difficulty I would like recommended is: </b>
+</h5>
+
+
 <h6>
   <b><i>***Keep an open mind! Trails of the difficulty higher or lower than you typically ski can be just as doable and fun!***</i></b>
 </h6>
@@ -178,9 +182,11 @@ button {
   <input type="checkbox" name="blue" value="blue"> <b>Blue Trails</b><br>
   <input type="checkbox" name="black" value="black"> <b>Black Trails</b><br>
   <input type="checkbox" name="bb" value="bb"> <b>Double Black Trails</b><br>
+</div>
+<br>
   <div class='move-button'>
+    
   <button type="submit">Recommend</button>
-  </div>
 
 </div>
 
