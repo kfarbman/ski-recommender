@@ -4,7 +4,7 @@ Karen Farbman
 
 Galvanize Data Science Immersive - October 2017
 
-[Ski Run Recommender](http://ec2-34-233-11-239.compute-1.amazonaws.com:8080/)
+[SkiRunRecommender.com](skirunrecommender.com)
 
 ## Table of Contents
 1. [Background](#background)
@@ -23,7 +23,7 @@ How awesome would it be to find runs similar to a given run based on their featu
 
 ## Web Application 
 
-[Ski Run Recommender](http://ec2-34-233-11-239.compute-1.amazonaws.com:8080/)
+[SkiRunRecommender.com](skirunrecommender.com)
 
 ![image](web_app/static/images/home2.png)
 
