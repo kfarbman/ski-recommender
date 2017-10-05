@@ -8,8 +8,7 @@
 .doubleblack {background-color:rgb(34,34,34); color:rgb(217, 217, 217);}
 .table {
 text-align: center;
-display: flex;
-justify-content: center;
+
 
 }
 .resort {
@@ -52,7 +51,7 @@ justify-content: center;
 
 <table class='table'>
   <tr>
-  <th></th>
+  <th>#</th>
   {% for col in rec_df.columns %}
   <th>{{col}}</th>
   {% endfor %}
