@@ -4,7 +4,7 @@ Karen Farbman
 
 Galvanize Data Science Immersive - October 2017
 
-[SkiRunRecommender.com](skirunrecommender.com)
+[SkiRunRecommender.com](www.skirunrecommender.com)
 
 ## Table of Contents
 1. [Background](#background)
@@ -23,7 +23,7 @@ How awesome would it be to find runs similar to a given run based on their featu
 
 ## Web Application 
 
-[SkiRunRecommender.com](skirunrecommender.com)
+[SkiRunRecommender.com](www.skirunrecommender.com)
 
 ![image](web_app/static/images/home2.png)
 
