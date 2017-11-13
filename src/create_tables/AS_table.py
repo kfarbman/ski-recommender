@@ -6,7 +6,7 @@ def fix_a_row(row):
     lst = row.split()
     # words = [x for x in lst if (x.strip('.').isalpha() or any(i in x for i in ['#','-',"'",'(']))]
     # stats = [x for x in lst if not (x.strip('.').isalpha() or any(i in x for i in ['#','-',"'",'(']))]
-    if lst[-2] == 'Adv.' or lst[-2] == 'Low' or lst[-2] == 'Advanced' or lst[-2] == 'Exp' or lst[-2] == 'Hike':
+    if lst[-2] == 'Adv.' or lst[-2] == 'Low' or lst[-2] == 'Advanced' or lst[-2] == 'Expert' or lst[-2] == 'Intermediate':
         level = [' '.join(lst[-2:])]
         trail_name = [' '.join(lst[:-10])]
         stats = lst[-10:-2]
@@ -23,7 +23,7 @@ def make_dataframe(filename):
         stuff = f.read()
     stuff_split = stuff.split('\n')
     
-    level_endings = ['Beginner','Novice','Intermediate','Expert','Glade','Bowl','To', 'Advanced','to']
+    level_endings = ['Beginner','Novice','Intermediate','Expert','Glade','Bowl','Hike-To', 'Advanced', 'Glade-Gated', 'Chute/Bowl-Gated', 'Bowl/Glade-Gated', 'Chute/Glade-Gated']
 
     trail_rows = []
     for row in stuff_split:
@@ -57,8 +57,8 @@ def fix_dtype(filename,resort,location):
     for column in columns_to_change:
         df[column] = df[column].apply(lambda x: x.replace(',','')).astype(float)
     df['slope_area_(acres)'] = df['slope_area_(acres)'].astype(float)
-    df['max_grade_(%)'] = df['max_grade_(%)'].astype(float)
-    df['avg_grade_(%)'] = df['avg_grade_(%)'].astype(float)
+    for column in ['max_grade_(%)','avg_grade_(%)']:
+        df[column] = df[column].apply(lambda x: x.replace('%','')).astype(float)
     df['resort'] = resort
     df['location'] = location
     return df

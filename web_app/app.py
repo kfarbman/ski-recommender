@@ -60,7 +60,7 @@ links = {'Loveland': ["../static/images/Loveland.jpg", "http://skiloveland.com/t
            'Taos': ['https://www.skitaos.com/uploaded/trail%20maps/1-01.jpg', 'http://www.skitaos.com/lifts-trails/'],
            'Diamond Peak': ['http://www.diamondpeak.com/uploads/pages/DP_TrailMaponly.png', 'http://www.diamondpeak.com/mountain/conditions'],
            'Winter Park': ['../static/images/WP.jpeg', 'https://www.winterparkresort.com/the-mountain/weather-dashboard#mountain-status'],
-           'Beaver Creek': ['http://www.beavercreek.com/~/media/beaver%20creek/files/maps/bc%20fy17%20winter%20trail%20map.ashx', 'http://www.beavercreek.com/the-mountain/terrain-status.aspx#/TerrainStatus']}
+           'Beaver Creek': ['http://www.mappery.com/maps/Beaver-Creek-Resort-Ski-Trail-Map.jpg', 'http://www.beavercreek.com/the-mountain/terrain-status.aspx#/TerrainStatus']}
 
 def cos_sim_recs(index, n=5, resort=None, color=None):
     trail = X[index].reshape(1,-1)

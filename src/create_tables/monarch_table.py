@@ -1,13 +1,6 @@
 import pandas as pd
 import numpy as np
 
-'''txt files'''
-files = {'AB': 'Arapahoe-Basin-2012-Master-Development-Plan_FINAL.txt', 
-    'Loveland': 'Loveland-Ski-Area-2013-Master-Plan.txt',
-    'Monarch': 'Monarch.txt',
-    'DP': 'DP.txt',
-    'Vail': 'Vail.txt'}
-
 
 def fix_a_row(row):
     lst = row.split()

@@ -1,0 +1,220 @@
+                                              Table IV-3. Terrain Specifications – Existing Conditions
+                                     Top       Bottom     Vertical      Slope      Average       Slope    Average    Max
+            Trail Area/Name       Elevation   Elevation    Rise        Length       Width        Area      Grade    Grade      Ability Level
+                                     (ft)        (ft)       (ft)         (ft)        (ft)       (acres)     (%)      (%)
+Adverse Traverse                   10,441      10,326      115.7         784         147          2.6       15       24     Novice
+Allais Alley                       11,834      10,929      905.2        2,235         85          4.4       45       67     Expert
+Alliekit                           12,435      12,074      361.0         543          80          1.0       91      107     Hike to
+Alta                               10,953      10,773      180.2         551         301          3.8       35       44     Intermediate
+Andy’s Gold                        12,193      10,930     1,262.5       2,983        633         43.3       48       78     Expert
+Apex                               11,736      11,143      593.1        1,177       1,039        28.1       58       67     Expert
+Bail Out                           9,763       9,464       299.4         884          54          1.1       36       55     Expert
+Bail Out 2                         9,456       9,320       136.4        1,217         28          0.8       11       20     Novice
+Bees Run                           12,475      11,726      748.8        1,742        362         14.5       48       71     Expert
+Beginner Park                      11,137      10,900      236.9        2,264        132          6.9       11       17     Novice
+Boomerang Lower                    9,828       9,566       262.1        1,718        111          4.4       15       26     Low Intermediate
+Boomerang Upper                    10,758      9,854       904.3        6,033        108         14.9       15       35     Intermediate
+Bottom 4 Detail                    9,530       9,528        1.5          168         362          1.4       1         1     Beginner
+Bridges                            9,901       9,479       421.4        3,495         79          6.3       12       27     Low Intermediate
+Bushwacker                         11,799      9,778      2,020.8       6,376        210         30.8       34       60     Expert
+Butterfly                          10,571      10,099      472.6        2,285        246         12.9       21       34     Low Intermediate
+Buzz’s Glade                       12,019      11,034      985.0        2,350        837         45.2       47       91     Glade
+Cakewalk                           10,252      10,078      174.4        2,716         71          4.5       6        12     Intermediate
+Camels Garden                      9,854       9,812        42.3         426         130          1.3       10       13     Novice
+Capitol                            12,459      12,142      317.1         487          72          0.8       88      104     Hike to
+Captain Jack                       11,013      10,503      510.5        1,527       1,122        39.3       36       51     Advanced
+Cats Paw                           9,454       9,013       441.3         992         153          3.5       50       61     Expert
+Chongos                            11,401      11,024      376.5         879         185          3.7       48       83     Glade
+
+
+
+   2016 Master Development Plan                                                                                                         IV-7
+                                         Table IV-3. Terrain Specifications – Existing Conditions
+                                Top       Bottom     Vertical      Slope      Average       Slope    Average    Max
+           Trail Area/Name   Elevation   Elevation    Rise        Length       Width        Area      Grade    Grade          Ability Level
+                                (ft)        (ft)       (ft)         (ft)        (ft)       (acres)     (%)      (%)
+Confidence                    11,811      11,418      393.6         925         107          2.3       48       64        Expert
+Coonskin Lower                9,221       8,740       481.3        1,087        155          3.9       50       69        Expert
+Coonskin Middle               9,575       9,407       168.1         562         120          1.6       32       44        Intermediate
+Coonskin Upper                10,527      9,740       786.1        1,961        236          10.6      44       65        Expert
+Couloir Bouvier               12,461      11,984      477.0         699          52          0.8       95      108        Hike to
+Craig’s Couloir               12,416      12,194      221.9         327          44          0.3       94       99        Hike to
+Crystal                       11,780      11,506      274.1         536          53          0.7       60       73        Hike to
+Dew Drop                      11,128      10,511      616.9        2,762        230         14.6       23       40        Intermediate
+Dihedral Chute                12,192      11,773      419.1         719          66          1.1       72       76        Hike to
+Dihedral Face                 12,207      11,542      665.0        1,202        424         11.7       67       77        Hike to
+Double Cabin                  11,100      9,245      1,855.0      15,071        145         50.2       12       30        Low Intermediate
+Dynamo Upper                  12,228      11,720      507.7         980         555          12.5      61       79        Expert
+Dynamo Middle                 11,581      10,924      657.0        2,291        200         10.5       31       76        Expert
+Dynamo Lower                  10,904      10,769      134.6         773         121          2.1       18       52        Advanced
+Dynamo 2 Upper                11,328      10,872      456.9        1,493        133          4.6       32       59        Expert
+Dynamo 2 Lower                10,851      10,803       47.1         165         138          0.5       30       30        Low Intermediate
+East Drain                    10,687      10,064      622.6        2,021         41          1.9       32       47        Glade
+Easy Out                      9,848       9,582       265.7        1,357         29          0.9       20       33        Low Intermediate
+Electra                       12,193      10,986     1,206.9       2,800        118          7.6       49       92        Expert
+Electric Shock                12,622      12,293      328.7         564         205          2.7       73       85        Hike to
+Enchanted Forest              10,637      10,387      249.9         647          38          0.6       42       58        Glade
+Enchanted Forest 1            10,885      10,501      384.3        2,785         78          5.0       14       26        Low Intermediate
+Galloping Goose Upper         11,808      10,533     1,274.9      11,463         60         15.7       11       26        Low Intermediate
+
+
+
+   IV-8                                                                                                                Telluride Ski Resort
+                                              Table IV-3. Terrain Specifications – Existing Conditions
+                                     Top       Bottom     Vertical      Slope      Average       Slope    Average    Max
+         Trail Area/Name          Elevation   Elevation    Rise        Length       Width        Area      Grade    Grade      Ability Level
+                                     (ft)        (ft)       (ft)         (ft)        (ft)       (acres)     (%)      (%)
+Galloping Goose Lower              10,233      9,209        266        10,458         90         21.5       10       26     Low Intermediate
+Genevieve                          11,808      11,398      1,207        1,474        198          6.7       30       86     Hike to
+Giant Steps                        11,728      11,364       329          862         167          3.3       47       57     Expert
+Goat Path                          12,538      12,374       250          572        2,432        31.9       30       44     Hike to
+Gold Hill 1                        12,501      10,985       384         3,614         6           0.5       47       77     Hike to
+Gold Hill 10                       12,873      12,510      1,275         507        1,510        17.6      111      157     Hike to
+Gold Hill 2                        12,665      11,406      1,024        2,229        166          8.5       69       95     Hike to
+Gold Hill 3                        12,727      11,729       410         1,784        170          6.9       68       91     Hike to
+Gold Hill 4                        12,740      11,760       364         1,752        136          5.5       69       85     Hike to
+Gold Hill 5                        12,708      11,839       163         1,721         44          1.7       61       84     Hike to
+Gold Hill 6                        12,616      12,146      1,516         827          75          1.4       70       82     Hike to
+Gold Hill 7                        12,722      12,291       363          756          35          0.6       70       81     Hike to
+Gold Hill 8                        12,755      12,438      1,259         534          51          0.6       78      100     Hike to
+Gold Hill 9                        12,870      12,509       997          545          55          0.7       91      113     Hike to
+Gold Hill Stairs                   12,734      12,543       980         1,643         73          2.8       12       27     Low Intermediate
+Gold Rush                          10,751      10,513       869          568         110          1.4       46       54     Advanced
+Happy Thought Lower                11,304      10,849       470         2,401        146          8.1       19       34     Low Intermediate
+Happy Thought Upper                11,929      11,386       431         1,092        181          4.5       58       79     Expert
+Happy Thought Middle               11,349      11,088       317          726         144          2.4       39       67     Expert
+Hermit                             10,536      10,224       361          932         134          2.9       36       47     Advanced
+Holy Cow!                          10,900      10,329       190         2,322         40          2.1       26       63     Expert
+Hoot Brown Expert Terrain Park     10,394      9,559        238         3,452        163         12.9       25       38     Intermediate
+Humbolt Draw                       10,714      10,087       455         2,570        157          9.2       25       42     Intermediate
+
+
+
+   2016 Master Development Plan                                                                                                         IV-9
+                                         Table IV-3. Terrain Specifications – Existing Conditions
+                                Top       Bottom     Vertical      Slope      Average       Slope    Average    Max
+           Trail Area/Name   Elevation   Elevation    Rise        Length       Width        Area      Grade    Grade          Ability Level
+                                (ft)        (ft)       (ft)         (ft)        (ft)       (acres)     (%)      (%)
+Jackpot                       11,840      11,340       544         1,008        271          6.3       58       73        Hike to
+Jaws Lower                    9,419       9,196        261          427          60          0.6       61       67        Expert
+Jaws Upper                    9,774       9,451        311          910          63          1.3       39       64        Expert
+Jello’s Bowl                  12,130      11,700       571          957         351          7.7       51       72        Hike to
+Joint Point                   11,614      11,362       835          509         141          1.6       57       62        Expert
+Kant-Mak-M Lower              10,294      9,824        627         1,318         63          1.9       39       87        Expert
+Kant-Mak-M Middle             10,931      10,612       500         1,361         47          1.5       25       85        Expert
+Kant-Mak-M Upper              11,891      11,073       223         1,733        117          4.7       54       70        Expert
+La Rosa                       11,790      11,491       323          695         183          2.9       49       86        Hike to
+Lakeview                      12,084      11,403       431         1,355        123          3.8       59       80        Hike to
+Last Chance                   11,444      11,368       252          618          36          0.5       12       17        Novice
+Liberty Bell                  12,190      11,742       469         1,097        560          14.1      45       53        Advanced
+Little Maude                  11,145      11,012       319         1,402        122          3.9       9        25        Low Intermediate
+Little Rose                   12,188      11,011       818         2,982        273          18.7      43       75        Expert
+Log Pile                      11,375      11,041       299         1,094        963          24.2      32       44        Intermediate
+Log Pile Trees                11,310      10,845       681         1,027        296          7.0       51       66        Glade
+Lookout Lower                 10,366      9,783         76         2,147        147          7.2       28       43        Intermediate
+Lookout Upper                 10,985      10,380       448         1,930        129          5.7       33       49        Advanced
+Madison                       11,400      10,776       132         4,692        279          30.1      13       36        Intermediate
+Magnolia                      11,801      10,775      1,177        5,803        268         35.6       18       50        Advanced
+Majestic                      12,286      11,741       333         1,431         92          3.0       42       63        Expert
+Mammoth                       11,862      10,844       465         2,544        214         12.5       44       67        Expert
+Mammoth Ridge                 11,850      11,734       583         1,527         70          2.4       8        29        Low Intermediate
+
+
+
+   IV-10                                                                                                               Telluride Ski Resort
+                                              Table IV-3. Terrain Specifications – Existing Conditions
+                                     Top       Bottom     Vertical      Slope      Average       Slope    Average    Max
+           Trail Area/Name        Elevation   Elevation    Rise        Length       Width        Area      Grade    Grade      Ability Level
+                                     (ft)        (ft)       (ft)         (ft)        (ft)       (acres)     (%)      (%)
+Marmot                             10,522      9,822        605         4,870         74          8.3       15       29     Low Intermediate
+May Girl                           11,251      11,042       624         1,471        334          11.3      14       26     Low Intermediate
+Meadows                            9,540       9,170       1,026        2,810        380         24.5       13       21     Novice
+Milk Run Lower                     9,464       8,739        545         1,614        334         12.4       51       70     Expert
+Milk Run Upper                     10,505      9,778       1,018        1,734        287          11.4      47       57     Expert
+Milk Run Race Finish Lower         9,544       9,479        116          281         176          1.1       24       30     Low Intermediate
+Milk Run Race Finish Upper         9,767       9,555        700          814         128          2.4       27       43     Intermediate
+Millions                           12,238      10,895       209         3,312        208          15.8      45       79     Expert
+Misty Maiden                       10,480      9,530        370         4,764        280          30.6      20       44     Intermediate
+Misty Maiden Intermediate Park     10,030      9,936        724          470         186          2.0       21       26     Low Intermediate
+Mountain Quail                     12,218      11,406       728         2,061        167          7.9       43       72     Hike to
+Nastar                             10,235      9,947         65         1,077        218          5.4       28       34     Low Intermediate
+Nellie                             11,148      10,866       212         3,674         36          3.1       8        14     Novice
+Nice Chute                         11,933      11,567      1,343         671          65          1.0       66       88     Hike to
+North Chute Lower                  10,027      9,874        950          423         133          1.3       39       43     Intermediate
+North Chute Middle                 10,474      10,058        94          857         112          2.2       56       73     Expert
+North Chute Upper                  10,862      10,492       812          609         171          2.4       77       87     Expert
+North Henry’s                      10,808      10,300       288         1,853        175          7.4       29       47     Advanced
+Ophir Loop                         11,190      10,316       282         4,740        106          11.6      19       44     Intermediate
+Palmyra Basin                      12,466      11,412       367         3,169        807          58.7      36       73     Hike to
+Pandora                            10,500      10,111       153          864          48          1.0       51       69     Expert
+Peak-A-Boo                         10,722      9,985        416         3,815        116         10.2       20       38     Intermediate
+Peaks Trail                        9,511       9,410        370         1,487        147          5.0       7        12     Beginner
+
+
+
+   2016 Master Development Plan                                                                                                        IV-11
+                                                Table IV-3. Terrain Specifications – Existing Conditions
+                                       Top       Bottom     Vertical      Slope      Average       Slope    Average    Max
+           Trail Area/Name          Elevation   Elevation    Rise        Length       Width        Area      Grade    Grade          Ability Level
+                                       (ft)        (ft)       (ft)         (ft)        (ft)       (acres)     (%)      (%)
+Pick ‘N’ Gad                         10,379      10,226       508          681         218          3.4       23       29        Low Intermediate
+Plunge Lower                         10,459      9,797        874         1,978        268          12.2      36       65        Expert
+Plunge Upper                         11,668      10,383      1,054        4,041        204         18.9       34       60        Expert
+Polar Queen                          11,190      10,290       388         5,031        154         17.8       18       35        Intermediate
+Power Line                           11,036      10,607       737          867          39          0.8       57       69        Expert
+Prospect Woods                       11,668      11,326       101          985         420          9.5       37       58        Glade
+Review                               11,974      11,491       153          912         416          8.7       64       84        Hike to
+Roy Boy                              13,067      12,489       661          974          81          1.8       77      101        Hike to
+Sandia                               11,504      10,759      1,285        4,952        223         25.3       15       36        Intermediate
+Sandia 1                             11,790      11,613       900          514         215          2.5       37       61        Expert
+See Forever_14 to 15                 12,474      12,247       429         1,252         61          1.8       19       41        Intermediate
+
+See Forever_Happy Thought to Joint Point    11,969      11,723       342         2,108         75          3.6       12       26        Low Intermediate
+
+
+See Forever_Lookout to Top of Coonskin      11,005      10,589       483         1,562        148          5.3       28       33        Low Intermediate
+
+See Forever_Top of 14 to Top of 6    12,260      11,924       578         2,878         49          3.2       12       28        Low Intermediate
+See Forever_Top of 9 to Lookout      11,722      11,008       746         4,015        108          9.9       18       37        Intermediate
+Seniors                              13,208      12,418       177         1,317        111          3.4       76      104        Hike to
+Sheridan Headwall                    10,427      10,260       227          607         194          2.7       29       47        Advanced
+Silver Glade                         11,502      11,188       246          633         110          1.6       57       67        Glade
+Silver Tip                           10,840      10,685       416          472         288          3.1       35       43        Intermediate
+Silver Tip Trees                     10,789      10,636       336          463         290          3.1       35       38        Glade
+Silvercloud                          12,458      11,753       714         1,677        248          9.5       47       60        Expert
+Smuggler                             10,528      10,148       790         1,180        483         13.1       34       45        Intermediate
+South Henry’s                        10,697      10,390       166          811         315          5.9       41       46        Advanced
+
+   IV-12                                                                                                                      Telluride Ski Resort
+                                              Table IV-3. Terrain Specifications – Existing Conditions
+                                     Top       Bottom     Vertical      Slope      Average       Slope    Average    Max
+           Trail Area/Name        Elevation   Elevation    Rise        Length       Width        Area      Grade    Grade      Ability Level
+                                     (ft)        (ft)       (ft)         (ft)        (ft)       (acres)     (%)      (%)
+Spiral Stairs                      11,215      10,553       315         1,346         92          2.8       57       72     Expert
+Stella                             11,469      11,181       155         1,496        151          5.2       20       58     Expert
+Sully’s                            11,681      10,830       153         2,045        160          7.5       46       75     Expert
+Sundance                           10,060      9,635        705         3,407         76          6.0       13       24     Novice
+Sundance 1                         10,900      10,067       381         4,782         95          10.5      18       35     Low Intermediate
+Sunrise                            12,792      12,348       307          692        1,247        19.8       84       92     Hike to
+Sweet Martha                       11,638      11,516       662          585         256          3.4       22       47     Hike to
+Teddy’s Way                        10,374      10,065       288         3,072         15          1.0       10       27     Low Intermediate
+Telluride Terrain Park             9,933       9,692        852          918         205          4.3       27       34     Low Intermediate
+Telluride Trail                    10,557      8,740        425        14,137         4           1.2       13       33     Low Intermediate
+Terrain Park Access                9,946       9,595        833         1,399        351          11.3      26       38     Intermediate
+The Fans                           11,719      11,063       444         1,863        119          5.1       38       74     Hike to
+Tram Shot                          12,910      12,472       122          723        2,038        33.8       78       88     Hike to
+UTE Park                           11,144      10,876       310         2,525         25          1.4       11       15     Novice
+West Drain Lower                   10,758      9,336        241        10,393         20          4.9       14       29     Low Intermediate
+West Drain Upper                   10,482      9,908       1,817        2,631         43          2.6       22       30     Low Intermediate
+Village Bypass                     11,139      10,659       351         2,593        377          22.5      19       25     Novice
+Wildcat                            11,754      11,202       655         1,204        242          6.7       53       86     Expert
+Westlake                           12,034      11,627       438          729         239          4.0       68       86     Hike to
+Woozley’s Way Lower                11,880      11,290       267         1,802        188          7.8       35       50     Advanced
+Woozley’s Way Upper                11,286      10,789      1,422        3,254         97          7.3       15       38     Intermediate
+Zulu Queen                         11,688      11,316       574          778         210          3.7       55       66     Expert
+Total                                                                  328,649                   1,366
+
+
+
+   2016 Master Development Plan                                                                                                        IV-13
+

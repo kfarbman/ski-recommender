@@ -6,14 +6,18 @@ def fix_a_row(row):
     lst = row.split()
     # words = [x for x in lst if (x.strip('.').isalpha() or any(i in x for i in ['#','-',"'",'(']))]
     # stats = [x for x in lst if not (x.strip('.').isalpha() or any(i in x for i in ['#','-',"'",'(']))]
-    if lst[-2] == 'Adv.' or lst[-2] == 'Low' or lst[-2] == 'Advanced' or lst[-2] == 'Exp' or lst[-2] == 'Hike':
+    if lst[-3] == 'Gladed':
+        level = [' '.join(lst[-3:])]
+        trail_name = [' '.join(lst[:-12])]
+        stats = lst[-12:-3]    
+    elif lst[-2] == 'Adv.' or lst[-2] == 'Low' or lst[-2] == 'Gladed':
         level = [' '.join(lst[-2:])]
-        trail_name = [' '.join(lst[:-10])]
-        stats = lst[-10:-2]
+        trail_name = [' '.join(lst[:-11])]
+        stats = lst[-11:-2]
     else:
         level = [lst[-1]]
-        trail_name = [' '.join(lst[:-9])]
-        stats = lst[-9:-1]
+        trail_name = [' '.join(lst[:-10])]
+        stats = lst[-10:-1]
     new_row = trail_name + stats + level
     return new_row
 
@@ -23,7 +27,7 @@ def make_dataframe(filename):
         stuff = f.read()
     stuff_split = stuff.split('\n')
     
-    level_endings = ['Beginner','Novice','Intermediate','Expert','Glade','Bowl','To', 'Advanced','to']
+    level_endings = ['Beginner','Novice','Intermediate','Expert','Advanced', 'Inter']
 
     trail_rows = []
     for row in stuff_split:
@@ -38,8 +42,8 @@ def make_dataframe(filename):
     list_of_lists = []                
     for row in trail_rows:
         list_of_lists.append(fix_a_row(row))
-        
-    colnames = ['trail_name', 'top_elev_(ft)', 'bottom_elev_(ft)', 'vert_rise_(ft)', 'slope_length_(ft)', 'avg_width_(ft)', 'slope_area_(acres)', 'avg_grade_(%)', 'max_grade_(%)', 'ability_level']
+    
+    colnames = ['trail_name', 'top_elev_(ft)', 'bottom_elev_(ft)', 'vert_rise_(ft)', 'plan_length', 'slope_length_(ft)', 'avg_width_(ft)', 'slope_area_(acres)', 'avg_grade_(%)', 'max_grade_(%)', 'ability_level']
 
     df = pd.DataFrame(list_of_lists, columns=colnames)
     return df
@@ -65,9 +69,6 @@ def fix_dtype(filename,resort,location):
 
 
 
-'''
-figure out how to deal with multi lines for Vail
-'''
 
 
 '''

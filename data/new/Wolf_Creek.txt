@@ -1,0 +1,150 @@
+                                                                                                                                Wolf Creek Ski Area 
+ 
+
+                                                Table D­2. Terrain Specifications – Existing Conditions 
+
+                                           Top       Bottom  Vertical  Plan     Slope   Avg.  Slope  Average  Max 
+     Ref         Trail Area/Name           Elev.      Elev.   Rise     Length  Length  Width  Area      Grade  Grade               Ability Level 
+                                           (ft.)      (ft.)   (ft.)     (ft.)    (ft.)  (ft.)  (acres)   (%)    (%) 
+    1­01 l    Kelly Boyce Trail – Lower    10,773      10,698      75       539       544       73         0.9    14    16             Novice 
+1­01 u        Kelly Boyce Trail – Upper    11,201      10,884     316     2,219     2,245      113         5.8    14    18             Novice 
+    1­02 l      Bunny Hop – Lower          10,884      10,686     198     1,585     1,603      115         4.2    13    24             Novice 
+1­02 m          Bunny Hop – Middle         11,194      10,884     310     1,566     1,602      201         7.4    20    38         Intermediate 
+1­02 u          Bunny Hop – Upper          11,353      11,201     152     1,047     1,058      179         4.3    14    18             Novice 
+    1­03              Easy Out             11,028      10,830     198     1,635     1,651       63         2.4    12    18             Novice 
+    1­04 l      Snow Shoe – Lower          10,924      10,838      86       288       303      169         1.2    30    41         Intermediate 
+1­04 u          Snow Shoe – Upper          11,054      10,937     117       378       397       93         0.9    31    40         Intermediate 
+    1­05              Thumper              11,351      10,801     550     2,337     2,410      142         7.8    24    39         Intermediate 
+    1­06                4x4                10,791      10,681     110       707       718       48         0.8    16    24             Novice 
+    1­07 l      Gun Barrel – Lower         11,074      10,737     336     1,192     1,242      126         3.6    28    40         Intermediate 
+1­07 u          Gun Barrel – Upper         11,361      11,090     272       845       898      186         3.8    32    56             Expert 
+    1­08             Charisma              11,287      10,693     595     2,646     2,722      113         7.1    22    36         Intermediate 
+    1­09 l       Turnpike – Lower          11,142      10,952     190     1,620     1,634       54         2.0    12    19         Intermediate 
+1­09 u           Turnpike – Upper          11,364      11,142     223     2,035     2,053       56         2.7    11    16       Low Intermediate 
+    2­01            Divide Trail           11,609      11,353     257     1,887     1,906      130         5.7    14    18             Novice 
+    2­02             Solar Slide           11,447      11,303     144       243       282      143         0.9    59    61             Expert 
+    2­03 l      Blueberry Hill – Left      11,498      11,329     170       320       368      138         1.2    53    65             Expert 
+    2­03 c     Blueberry Hill – Center     11,529      11,342     187       319       372      162         1.4    58    67             Expert 
+    2­03 r     Blueberry Hill – Right      11,559      11,366     193       433       479      147         1.6    44    52       Adv. Intermediate 
+
+
+
+
+                      2012 Master Development Plan                                                                       26­ 
+                                                                                                                         Wolf Creek Ski Area 
+ 
+
+                                           Top       Bottom  Vertical  Plan     Slope   Avg.  Slope  Average  Max 
+     Ref          Trail Area/Name          Elev.      Elev.   Rise     Length  Length  Width  Area      Grade  Grade        Ability Level 
+                                           (ft.)      (ft.)   (ft.)     (ft.)    (ft.)  (ft.)  (acres)   (%)    (%) 
+    2­04              Star Wars            11,542       11,012    530    1,648    1,745    128     5.1    32    50        Adv. Intermediate 
+    2­05         Charisma Crossover        11,457       11,296    160    1,284    1,297     58     1.7    12    21        Low Intermediate 
+    2­06      Bonanza Crossover – Upper    11,562       11,276    286    2,161    2,186     91     4.6    13    25        Low Intermediate 
+    2­07             Quick Silver          11,274       11,053    221     927      956     150     3.3    24    29          Intermediate 
+    2­08 l       Powder Puff – Lower       11,136       10,751    385    2,175    2,213    115     5.8    18    27        Low Intermediate 
+2­08 u           Powder Puff – Upper       11,436       11,151    285    1,207    1,245    183     5.2    24    36        Low Intermediate 
+    2­09                 Kaa               11,043       10,877    167     863      883      91     1.9    19    28          Intermediate 
+    2­10 l      Windjammer – Lower         10,998       10,728    270    1,439    1,472     97     3.3    19    38          Intermediate 
+    2­10u       Windjammer – Upper         11,378       11,114    264    1,019    1,058    150     3.6    26    46          Intermediate 
+    2­11 l        Treasure – Lower         11,087       10,674    413    2,057    2,109    166     8.0    20    40          Intermediate 
+2­11 u            Treasure – Upper         11,352       11,071    281    1,282    1,315    167     5.1    22    33          Intermediate 
+    2­12          Susan's Headwall         10,917       10,801    116     388      406     112     1.0    30    37          Intermediate 
+    3­01               Susan's             10,807       10,669    138     828      840     172     3.3    14    23              Novice 
+    3­02                Nova               10,807       10,673    134    1,045    1,055    121     2.9    13    14             Beginner 
+    4­01            Magic Carpet           10,701       10,688     13     107      108     112     0.3    12    12             Beginner 
+    5­01           D Boyce Lift Line       11,171       10,796    375    1,678    1,728     66     2.6    22    50        Adv. Intermediate 
+    6­01            Bonanza Trail          11,761       11,401    360    2,534    2,571     44     2.6    14    26        Low Intermediate 
+    6­02             Crowes Nest           11,559       11,389    170     894      918     152     3.2    19    42        Adv. Intermediate 
+    6­03            Treasure Falls         11,666       11,361    304    1,220    1,269    369    10.8    25    56              Expert 
+    6­04              Criss Cross          11,282       11,181    102     621      630     237     3.4    16    18          Intermediate 
+    6­05 g       Holy Moses – Glade        11,744       11,357    387     846      935     278     6.0    46    68          Gladed Expert 
+    6­05 l       Holy Moses – Lower        11,034       10,806    228     919      954     131     2.9    25    50        Adv. Intermediate 
+
+
+
+                       2012 Master Development Plan                                                               27­ 
+                                                                                                                         Wolf Creek Ski Area 
+ 
+
+                                           Top       Bottom  Vertical  Plan     Slope   Avg.  Slope  Average  Max 
+     Ref          Trail Area/Name          Elev.      Elev.   Rise     Length  Length  Width  Area      Grade  Grade        Ability Level 
+                                           (ft.)      (ft.)   (ft.)     (ft.)    (ft.)  (ft.)  (acres)   (%)    (%) 
+6­05 m           Holy Moses – Middle       11,322       11,033    289    1,791    1,816     94     3.9    16    25          Intermediate 
+6­05 u           Holy Moses – Upper        11,627       11,304    322     780      850     170     3.3    41    65              Expert 
+    6­06             Alberta Face          11,748       11,318    430    1,002    1,101    400    10.1    43    70              Expert 
+    6­07            Alberta's Trail        11,318       10,992    326    1,963    1,992    154     7.0    17    23          Intermediate 
+    6­08             Rock'n Robin          10,989       10,780    209     811      846     112     2.2    26    49        Adv. Intermediate 
+    6­09              The Nose             11,689       11,491    198     581      620     202     2.9    34    50        Adv. Intermediate 
+    6­10           Muskrat Ramble          11,258       11,046    212    1,320    1,338    129     4.0    16    24          Intermediate 
+    6­11 l       Silver Streak – Lower     10,978       10,735    243    1,164    1,195     90     2.5    21    38          Intermediate 
+6­11 m          Silver Streak – Middle     11,224       10,989    235    1,591    1,610    158     5.8    15    18        Low Intermediate 
+6­11 u           Silver Streak – Upper     11,760       11,224    536    2,328    2,402    117     6.5    23    45        Adv. Intermediate 
+    6­12 l       Tranquility – Lower       10,928       10,692    235    1,438    1,464    117     3.9    16    32        Low Intermediate 
+6­12 u           Tranquility – Upper       11,501       10,984    517    2,635    2,693    187    11.6    20    40          Intermediate 
+    6­13 l       Navajo Trail – Lower      11,133       10,708    425    4,011    4,044     87     8.1    11    24        Low Intermediate 
+    6­13u        Navajo Trail – Upper      11,626       11,132    494    3,179    3,229    114     8.5    16    30          Intermediate 
+    6­14           Snuffy's Hollow         11,493       11,361    132     263      297     311     2.1    50    61              Expert 
+    6­15                 Scat              11,614       11,483    131     291      319     422     3.1    45    50        Adv. Intermediate 
+    6­16             Summer Day            11,413       11,010    403    2,594    2,630    174    10.5    16    28          Intermediate 
+    6­17              Glory Hole           11,443       11,097    345    2,004    2,040    150     7.0    17    27          Intermediate 
+    6­18 g           Patina Glade          11,348       11,011    337    1,878    1,911    337    14.8    18    24         Gladed Adv Inter 
+    6­19                 Legs              10,982       10,696    286    1,519    1,550    103     3.6    19    36          Intermediate 
+    6­20      Bonanza Crossover – Lower    10,984       10,864    121     689      703     241     3.9    18    26        Low Intermediate 
+    6­21          Upper Pitch's Gate       11,267       11,160    108     708      717     509     8.4    15    23         Gladed Adv Inter 
+
+
+
+                       2012 Master Development Plan                                                               28­ 
+                                                                                                                          Wolf Creek Ski Area 
+ 
+
+                                           Top       Bottom  Vertical  Plan     Slope   Avg.  Slope  Average  Max 
+     Ref         Trail Area/Name           Elev.      Elev.   Rise     Length  Length  Width  Area      Grade  Grade         Ability Level 
+                                           (ft.)      (ft.)   (ft.)     (ft.)    (ft.)  (ft.)  (acres)   (%)    (%) 
+    7­01               A­way               10,680       10,399     281     4,066    4,090     52     4.8    7     18       Low Intermediate 
+    7­02            Okey Dokey             10,699       10,519     180     1,904    1,917     38     1.7    9     20       Low Intermediate 
+    7­03              Flim Flam            10,822       10,469     354     1,537    1,582    151     5.5    23    36         Intermediate 
+    7­04      Flim Flam to S'Wonderful     10,689       10,479     210      910      935     159     3.4    23    29         Intermediate 
+    7­05            S'Wonderful            10,535       10,414     121     1,476    1,484    111     3.8    8     16         Intermediate 
+    7­06            Park Avenue            11,486       11,133     353     3,554    3,590     33     2.7    10    24       Low Intermediate 
+    7­07            Pitch's Gate           11,170       10,510     660     2,989    3,082    362    25.6    22    59         Gladed Expert 
+    7­08             Serendipity           11,210       10,481     729     3,552    3,638    551    46.0    21    54        Gladed Adv Inter 
+    7­09 l        Lower Bankshot           10,835       10,478     357     1,505    1,559    702    25.1    24    52        Gladed Adv Inter 
+7­09 u            Upper Bankshot           11,249       10,919     330     1,530    1,571    559    20.2    22    40        Gladed Adv Inter 
+    7­10       Gyro (Alberta Lift Line)    11,442       10,397    1,045    5,079    5,230    289    34.7    21    59         Gladed Expert 
+    7­11         Shazam and Posey          11,324       10,460     865     3,108    3,247    654    48.7    28    59         Gladed Expert 
+    7­12 l       Simpatico – Lower         10,559       10,408     151     3,682    3,689     40     3.4    4     8        Low Intermediate 
+7­12 m          Simpatico – Middle         11,061       10,662     399     1,300    1,366    611    19.2    31    49        Gladed Adv Inter 
+7­12 u           Simpatico – Upper         11,379       11,161     218     1,908    1,930     39     1.7    11    19       Low Intermediate 
+    7­13              Tsunami              11,238       10,487     751     2,955    3,069    475    33.4    25    69         Gladed Expert 
+    7­14            Abracadabra            11,179       10,507     673     2,673    2,777    449    28.6    25    61         Gladed Expert 
+    7­15               Area 54             11,121       10,586     535     2,174    2,250    666    34.4    25    45        Gladed Adv Inter 
+    7­16          Coyote Park Trail        11,161       10,896     266     2,832    2,855     36     2.4    9     24       Low Intermediate 
+    7­17       Lower Sleeping Beauty       10,896       10,559     336     2,529    2,562    215    12.7    13    32       Low Intermediate  
+    W­01      Navajo Trail To Waterfall    11,128       10,958     171     1,339    1,352    732    22.7    13    21             Expert 
+                       Gully 
+
+
+
+                       2012 Master Development Plan                                                                29­ 
+                                                                                                                                   Wolf Creek Ski Area 
+ 
+
+                                            Top       Bottom  Vertical  Plan     Slope   Avg.  Slope  Average  Max 
+    Ref         Trail Area/Name             Elev.      Elev.   Rise     Length  Length  Width  Area      Grade  Grade                 Ability Level 
+                                            (ft.)      (ft.)   (ft.)     (ft.)    (ft.)  (ft.)  (acres)   (%)    (%) 
+    W­02              Sun Rocks             11,007      10,535    472        1,186      1,298    895         26.7    40    78         Gladed Expert 
+    W­03               Big Drop             11,008      10,534    474        1,248      1,357    239          7.4    38    73             Expert 
+    W­04            Waterfall Gully         10,963      10,519    445        1,139      1,258    131          3.8    39    92             Expert 
+    W­05              Snake Rim             10,961      10,634    327         550        643         97       1.4    59    72             Expert 
+    W­06              52° Trees             10,952      10,668    284         459        543     179          2.2    62    79             Expert 
+    W­07                Jaybird             10,940      10,521        419    1,045      1,134    348          9.1    40    61             Expert 
+
+                                   TOTAL                                              147,755              717.3                              
+Source: SE Group 
+
+
+
+
+                       2012 Master Development Plan                                                                         30­ 
+
