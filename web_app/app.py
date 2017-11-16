@@ -50,7 +50,7 @@ X_mtn = ss.fit_transform(X_mtn)
 resort_stats_df = mtn_df[['resort', 'resort_bottom','resort_top','greens','blues','blacks','bbs','lifts','price']].drop_duplicates()
 
 links = {'Loveland': ["../static/images/Loveland.jpg", "http://skiloveland.com/trail-lift-report/"],
-           'Arapahoe Basin': ['http://arapahoebasin.com/ABasin/image-library/inline-landscape/A-BASIN-17-18-Front.jpg', 'http://arapahoebasin.com/ABasin/snow-conditions/terrain.aspx'],
+           'Arapahoe Basin': ['https://www.arapahoebasin.com/uploaded/trail%20maps/A-BASIN-17-18-Front.jpg', 'http://arapahoebasin.com/ABasin/snow-conditions/terrain.aspx'],
            'Copper': ['http://www.coppercolorado.com/sites/copper/files/2017-07/Web-TrailMap-WinterFY17.jpg', 'http://www.coppercolorado.com/the-mountain/trail-lift-info/winter-trail-report'],
            'Eldora': ['http://www.eldora.com/sites/eldora/files/inline-images/map2-web.jpg', 'http://www.eldora.com/the-mountain/lift-trail-report/snow-grooming-alpine'],
            'Alpine Meadows': ['../static/images/AM.jpeg', 'http://squawalpine.com/skiing-riding/weather-conditions-webcams/lift-grooming-status'],
