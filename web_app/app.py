@@ -153,7 +153,8 @@ def mtn_recommendations():
         for rec in recs:
             results_df = results_df.append(resort_stats_df[resort_stats_df['resort'] == rec])
         row = clean_df_for_recs(row)
-        results_df.columns = ['Resort','Bottom Elevation (ft)', 'Top Elevation (ft)', 'Percent Greens', 'Percent Blues', 'Percent Blacks', 'Percent Double  Blacks', 'Number of Lifts', 'Price']
+        results_df.drop('price', axis=1, inplace=True)
+        results_df.columns = ['Resort','Bottom Elevation (ft)', 'Top Elevation (ft)', 'Percent Greens', 'Percent Blues', 'Percent Blacks', 'Percent Double  Blacks', 'Number of Lifts']
         return render_template('mtn_recommendations.html',row=row,results_df=results_df,links=links)
     return 'You must select a trail.'
     
