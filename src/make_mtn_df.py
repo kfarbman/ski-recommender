@@ -95,7 +95,7 @@ class MakeMountainDF:
 
         return df
 
-    def save_mountain_data(self):
+    def save_mountain_data(self, df):
         """
         Save formatted mountain data to Pickle file
         """
