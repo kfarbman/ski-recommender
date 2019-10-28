@@ -19,7 +19,7 @@ class CosineSims:
         Load pickle file containing formatted resort data
         """
 
-        pkl_file = open('../data/df.pkl', 'rb')
+        pkl_file = open('./data/df.pkl', 'rb')
         df = pickle.load(pkl_file)
         pkl_file.close()
 
