@@ -1,21 +1,15 @@
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-from sklearn.linear_model import LogisticRegression
-from sklearn.model_selection import train_test_split
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier, GradientBoostingClassifier
-from sklearn.linear_model import SGDClassifier
 import pickle
 import warnings
+
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+
+from .create_tables import (AS_table, BM_table, WC_table, loveland_table,
+                           steamboat_table)
+
 warnings.filterwarnings('ignore')
 
-import create_tables.loveland_table
-import create_tables.BM_table
-import create_tables.steamboat_table
-import create_tables.AS_table
-import create_tables.WC_table
 
 resorts = {'Telluride': ['../data/new/Telluride.txt', 'CO'],
            'Bald Mountain': ['../data/new/Bald_Mountain.txt', 'CO'],
@@ -23,7 +17,7 @@ resorts = {'Telluride': ['../data/new/Telluride.txt', 'CO'],
            'Aspen Snowmass': ['../data/new/Aspen_Snowmass.txt', 'CO'],
            'Wolf Creek': ['../data/new/Wolf_Creek.txt', 'CO']}
 
-# which resorts work with which script           
+# which resorts work with which script
 loveland_script = ['Telluride']
 BM_script = ['Bald Mountain']
 steamboat_script = ['Steamboat']
@@ -34,52 +28,67 @@ WC_script = ['Wolf Creek']
 d = {}
 for resort in loveland_script:
     filename, location = resorts[resort]
-    d[resort]= create_tables.loveland_table.fix_dtype(filename,resort,location)
+    d[resort] = loveland_table.fix_dtype(
+        filename, resort, location)
 for resort in BM_script:
     filename, location = resorts[resort]
-    d[resort]= create_tables.BM_table.fix_dtype(filename,resort,location)
+    d[resort] = BM_table.fix_dtype(filename, resort, location)
 for resort in steamboat_script:
     filename, location = resorts[resort]
-    d[resort]= create_tables.steamboat_table.fix_dtype(filename,resort,location)
+    d[resort] = steamboat_table.fix_dtype(
+        filename, resort, location)
 for resort in AS_script:
     filename, location = resorts[resort]
-    d[resort]= create_tables.AS_table.fix_dtype(filename,resort,location)
+    d[resort] = AS_table.fix_dtype(filename, resort, location)
 for resort in WC_script:
     filename, location = resorts[resort]
-    d[resort] = create_tables.WC_table.fix_dtype(filename,resort,location)
+    d[resort] = WC_table.fix_dtype(filename, resort, location)
     del d[resort]['plan_length']
 
-    
-columns = ['trail_name', 'top_elev_(ft)', 'bottom_elev_(ft)', 'vert_rise_(ft)', 'slope_length_(ft)', 'avg_width_(ft)', 'slope_area_(acres)', 'avg_grade_(%)', 'max_grade_(%)', 'ability_level','resort','location']   
+
+columns = ['trail_name', 'top_elev_(ft)', 'bottom_elev_(ft)', 'vert_rise_(ft)', 'slope_length_(ft)', 'avg_width_(ft)',
+           'slope_area_(acres)', 'avg_grade_(%)', 'max_grade_(%)', 'ability_level', 'resort', 'location']
 
 whole_table = pd.concat(d.values())
-whole_table = whole_table[columns] # making sure the columns are in the correct order
+# making sure the columns are in the correct order
+whole_table = whole_table[columns]
 CO_resorts = whole_table[whole_table['location'] == 'CO']
-
 
 
 ### from my ipython notebook
 # standardizing the ability levels
-whole_table['ability_level'][whole_table['ability_level'] == 'Advanced Intermediate'] = 'Advanced'
-whole_table['ability_level'][whole_table['ability_level'] == 'Adv. Intermediate'] = 'Advanced'
-whole_table['ability_level'][whole_table['ability_level'] == 'Gladed Adv Inter'] = 'Advanced'
-whole_table['ability_level'][whole_table['ability_level'] == 'Hike To'] = 'Expert'
-whole_table['ability_level'][whole_table['ability_level'] == 'Hike-To'] = 'Expert'
-whole_table['ability_level'][whole_table['ability_level'] == 'Gladed Expert'] = 'Expert'
-whole_table['ability_level'][whole_table['ability_level'] == 'Intermediate Glade'] = 'Intermediate'
-whole_table['ability_level'][whole_table['ability_level'] == 'Exp Bowl'] = 'Expert'
-whole_table['ability_level'][whole_table['ability_level'] == 'Hike to'] = 'Expert'
-whole_table['ability_level'][whole_table['ability_level'] == 'Expert Glade-Gated'] = 'Expert'
-whole_table['ability_level'][whole_table['ability_level'] == 'Chute/Bowl-Gated'] = 'Expert'
-whole_table['ability_level'][whole_table['ability_level'] == 'Bowl/Glade-Gated'] = 'Expert'
-whole_table['ability_level'][whole_table['ability_level'] == 'Chute/Glade-Gated'] = 'Expert'
-
+whole_table['ability_level'][whole_table['ability_level']
+                             == 'Advanced Intermediate'] = 'Advanced'
+whole_table['ability_level'][whole_table['ability_level']
+                             == 'Adv. Intermediate'] = 'Advanced'
+whole_table['ability_level'][whole_table['ability_level']
+                             == 'Gladed Adv Inter'] = 'Advanced'
+whole_table['ability_level'][whole_table['ability_level']
+                             == 'Hike To'] = 'Expert'
+whole_table['ability_level'][whole_table['ability_level']
+                             == 'Hike-To'] = 'Expert'
+whole_table['ability_level'][whole_table['ability_level']
+                             == 'Gladed Expert'] = 'Expert'
+whole_table['ability_level'][whole_table['ability_level']
+                             == 'Intermediate Glade'] = 'Intermediate'
+whole_table['ability_level'][whole_table['ability_level']
+                             == 'Exp Bowl'] = 'Expert'
+whole_table['ability_level'][whole_table['ability_level']
+                             == 'Hike to'] = 'Expert'
+whole_table['ability_level'][whole_table['ability_level']
+                             == 'Expert Glade-Gated'] = 'Expert'
+whole_table['ability_level'][whole_table['ability_level']
+                             == 'Chute/Bowl-Gated'] = 'Expert'
+whole_table['ability_level'][whole_table['ability_level']
+                             == 'Bowl/Glade-Gated'] = 'Expert'
+whole_table['ability_level'][whole_table['ability_level']
+                             == 'Chute/Glade-Gated'] = 'Expert'
 
 
 '''separating resorts back out'''
 telluride = whole_table[whole_table['resort'] == 'Telluride']
 BM = whole_table[whole_table['resort'] == 'Bald Mountain']
-steamboat = whole_table[whole_table['resort'] == 'Steamboat'] 
+steamboat = whole_table[whole_table['resort'] == 'Steamboat']
 AS = whole_table[whole_table['resort'] == 'Aspen Snowmass']
 WC = whole_table[whole_table['resort'] == 'Wolf Creek']
 
@@ -89,9 +98,8 @@ resort_dfs = [telluride, BM, steamboat, AS, WC]
 
 '''fixing trail names'''
 WC['trail_name'] = WC['trail_name'].apply(lambda x: ' '.join(x.split()[1:]))
-WC['trail_name'] = WC['trail_name'].apply(lambda x: ' '.join(x.split()[1:]) if x.split()[0] in ['l','u','m','c','g','r'] else ' '.join(x.split()))
-
-
+WC['trail_name'] = WC['trail_name'].apply(lambda x: ' '.join(x.split()[1:]) if x.split()[
+                                          0] in ['l', 'u', 'm', 'c', 'g', 'r'] else ' '.join(x.split()))
 
 
 '''groomed runs'''
@@ -126,11 +134,13 @@ groomed_WC = ['A­way', 'Bunny Hop – Lower', 'Bunny Hop – Middle', 'Bunny Ho
               'Tranquility – Lower', 'Tranquility – Upper', 'Magic Carpet']
 
 
-grooms = [groomed_t,groomed_BM,groomed_s,groomed_AS,groomed_WC]
+grooms = [groomed_t, groomed_BM, groomed_s, groomed_AS, groomed_WC]
 
 
 '''adding groomed column'''
-def add_groomed_col(df,groomed_lst):
+
+
+def add_groomed_col(df, groomed_lst):
     '''  
     Inputs:
     resort_df from resort_dfs (DataFrame)
@@ -141,29 +151,29 @@ def add_groomed_col(df,groomed_lst):
     df['groomed'] = 0
     df['groomed'][df['trail_name'].isin(groomed_lst)] = 1
     return df
-    
-for resort, groom in zip(resort_dfs,grooms):
-    add_groomed_col(resort,groom)
-    
-    
-    
+
+
+for resort, groom in zip(resort_dfs, grooms):
+    add_groomed_col(resort, groom)
+
+
 '''importing pickled dict from webscrape_trails.py'''
 pkl_file = open('../data/resort_dict2.pkl', 'rb')
 dct = pickle.load(pkl_file)
-pkl_file.close()    
-    
-'''REDEFINING'''    
+pkl_file.close()
+
+'''REDEFINING'''
 resorts = ['Telluride',
- 'Bald Mountain',
- 'Steamboat',
- 'Aspen Snowmass',
- 'Wolf Creek']
-levels = ['green','blue','black','bb']
-resort_dfs = [telluride,BM,steamboat,AS,WC]
-resort_dict = dict(zip(resorts,resort_dfs))
+           'Bald Mountain',
+           'Steamboat',
+           'Aspen Snowmass',
+           'Wolf Creek']
+levels = ['green', 'blue', 'black', 'bb']
+resort_dfs = [telluride, BM, steamboat, AS, WC]
+resort_dict = dict(zip(resorts, resort_dfs))
 
 
-def missing_trails(color_trails,resort):
+def missing_trails(color_trails, resort):
     '''
     Inputs:
     color_trails = trails_by_color[resort][level] (list)
@@ -176,11 +186,12 @@ def missing_trails(color_trails,resort):
         if trail not in list(resort_dict[resort]['trail_name']):
              trail_lst.append(trail)
     return trail_lst
-    
-    
-    
-'''getting a useable list of trails to compare by color'''    
-def get_trails_list(resort,level):
+
+
+'''getting a useable list of trails to compare by color'''
+
+
+def get_trails_list(resort, level):
     '''
     Inputs: 
     resort from resorts (str)
@@ -191,14 +202,18 @@ def get_trails_list(resort,level):
     if dct[resort][level] is None:
         return []
     else:
-        return [word.encode('ascii','ignore').strip().decode('utf-8') for word in dct[resort][level]['Name']]
-    
+        return [word.encode('ascii', 'ignore').strip().decode('utf-8') for word in dct[resort][level]['Name']]
+
+
 trails_by_color = {}
 for resort in resort_dict:
-    trails_by_color[resort] = {level: get_trails_list(resort,level) for level in levels}    
-    
+    trails_by_color[resort] = {level: get_trails_list(
+        resort, level) for level in levels}
 
-'''adding a colors column'''    
+
+'''adding a colors column'''
+
+
 def make_colors(resort):
     '''
     Inputs:
@@ -208,15 +223,16 @@ def make_colors(resort):
     resort_df w/ colors column added (DataFrame)
     '''
     resort_dict[resort]['colors'] = 'color'
-    levels = ['green','blue','black','bb']
+    levels = ['green', 'blue', 'black', 'bb']
     for level in levels:
-        resort_dict[resort]['colors'][resort_dict[resort]['trail_name'].isin(get_trails_list(resort,level))] = level
+        resort_dict[resort]['colors'][resort_dict[resort]
+                                      ['trail_name'].isin(get_trails_list(resort, level))] = level
     return resort_dict[resort]
+
 
 for resort in resort_dict:
     make_colors(resort)
-    
-    
+
 
 '''
 Dictionary of dictionaries {resort: {level: [trails]}}
@@ -224,17 +240,17 @@ For trails that are in the resort_df but have slightly different names from the 
 '''
 trails_to_add = {}
 trails_to_add['Telluride'] = {'green': [],
-                               'blue': [],
-                               'black': [],
-                               'bb': []}
+                              'blue': [],
+                              'black': [],
+                              'bb': []}
 trails_to_add['Bald Mountain'] = {'green': [],
-                                 'blue': [],
-                                 'black': [],
-                                 'bb': []}    
+                                  'blue': [],
+                                  'black': [],
+                                  'bb': []}
 trails_to_add['Steamboat'] = {'green': [],
-                               'blue': [],
-                               'black': [],
-                               'bb': []}
+                              'blue': [],
+                              'black': [],
+                              'bb': []}
 trails_to_add['Aspen Snowmass'] = {'green': [],
                                    'blue': [],
                                    'black': [],
@@ -245,8 +261,9 @@ trails_to_add['Wolf Creek'] = {'green': [],
                                'bb': []}
 
 
-
 '''add trails to colors'''
+
+
 def add_trails_to_add(resort):
     '''
     Inputs:
@@ -254,28 +271,33 @@ def add_trails_to_add(resort):
     Outputs:
     resort_df w/ class column updated w/ trail names that didn't make the list (DataFrame)
     '''
-    levels = ['green','blue','black','bb']
+    levels = ['green', 'blue', 'black', 'bb']
     for level in levels:
-        resort_dict[resort]['colors'][resort_dict[resort]['trail_name'].isin(trails_to_add[resort][level])] = level
+        resort_dict[resort]['colors'][resort_dict[resort]
+                                      ['trail_name'].isin(trails_to_add[resort][level])] = level
     return resort_dict[resort]
+
 
 for resort in resort_dict:
     add_trails_to_add(resort)
-    
-    
+
 
 '''trails to remove, since i don't have data on them other than the master plan'''
 trails_to_remove_t = ['T-bar Road', 'Sani Flush', 'Awesome II', 'Rip Curl', '']
-trails_to_remove_BM = ['High Noon Terrain Park', 'Treeline Terrain Park', 'Shooting Gallery', 'Poma Line']
+trails_to_remove_BM = ['High Noon Terrain Park',
+                       'Treeline Terrain Park', 'Shooting Gallery', 'Poma Line']
 trails_to_remove_s = ["Bruce's Way", 'Bee Road', 'Road Home', 'Cross Cut']
 trails_to_remove_AS = []
 trails_to_remove_WC = ['Meadows', 'Nirvana', 'Village Way - Primrose']
 
 
-trails_to_remove = [trails_to_remove_t,trails_to_remove_BM,trails_to_remove_s,trails_to_remove_AS,trails_to_remove_WC]
+trails_to_remove = [trails_to_remove_t, trails_to_remove_BM,
+                    trails_to_remove_s, trails_to_remove_AS, trails_to_remove_WC]
 
 
 '''Remove Trails'''
+
+
 def remove_trails(resort, trail_lst):
     '''
     Inputs:
@@ -284,17 +306,20 @@ def remove_trails(resort, trail_lst):
     Outputs:
     resort_df with trails removed (DataFrame)
     '''
-    resort_df_new = resort_dict[resort][~resort_dict[resort]['trail_name'].isin(trail_lst)]
+    resort_df_new = resort_dict[resort][~resort_dict[resort]
+                                        ['trail_name'].isin(trail_lst)]
     return resort_df_new
 
-for resort, trail_lst in zip(resort_dict,trails_to_remove):
-    resort_dict[resort] = remove_trails(resort,trail_lst)
+
+for resort, trail_lst in zip(resort_dict, trails_to_remove):
+    resort_dict[resort] = remove_trails(resort, trail_lst)
 
 
 '''put the dfs back together'''
 final_df = pd.concat([resort for resort in resort_dict.values()])
 
-ability_levels = {'Beginner': 1, 'Novice': 2, 'Low Intermediate': 3, 'Intermediate': 4, 'Advanced': 5, 'Expert': 6, 'Glade': 5}
+ability_levels = {'Beginner': 1, 'Novice': 2, 'Low Intermediate': 3,
+                  'Intermediate': 4, 'Advanced': 5, 'Expert': 6, 'Glade': 5}
 colors = {'green': 1, 'blue': 2, 'black': 3, 'bb': 4, 'color': 0}
 
 final_df['ability_nums'] = final_df['ability_level'].map(ability_levels)
@@ -310,8 +335,8 @@ final_df = final_df.reset_index(drop=True)
 # final_df['trail_name'].iloc[908] = 'Whistle Stop Upper'
 # for i, j in zip(range(1116,1125),range(1,10)):
 #     final_df['trail_name'].iloc[i] = final_df['trail_name'].iloc[i] + " " + str(j)
-#     
-# 
+#
+#
 # '''fixing Monarch trail names'''
 # a = list(final_df['trail_name'][final_df['resort'] == 'Monarch'])
 # b = [x.split() for x in a]
@@ -323,7 +348,7 @@ final_df = final_df.reset_index(drop=True)
 # c[47] = 'Great Divide'
 # c[53] = "Geno's Meadow"
 # final_df['trail_name'][final_df['resort'] == 'Monarch'] = c
-# 
+#
 # '''fix trail name'''
 # final_df['trail_name'][final_df['trail_name'] == 'Litter Pierre'] = 'Little Pierre'
 
