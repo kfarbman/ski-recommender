@@ -1,7 +1,8 @@
-from flask import Flask, render_template, request, jsonify
 import pickle
-import pandas as pd
+
 import numpy as np
+import pandas as pd
+from flask import Flask, jsonify, render_template, request
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.preprocessing import StandardScaler
 
