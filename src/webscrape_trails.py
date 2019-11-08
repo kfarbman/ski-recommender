@@ -170,6 +170,10 @@ if __name__ == '__main__':
     df_combined = pd.concat(lst_resort_data)
     df_combined["difficulty"] = df_combined["URL"].str.split("skiruns-", 1, expand=True)[1]
 
+    # Get resort name
+    df_combined["resort_name"] = df_combined["URL"].str.split("united-states-of-america/", 1, expand=True)[1]
+    df_combined["resort_name"] = df_combined["resort_name"].str.split("/", 1, expand=True)[0]
+
 # loveland_greens = [word.encode('ascii','ignore').strip().decode('utf-8') for word in d['Loveland']['green']['Name']]
 # loveland_blues = [word.encode('ascii','ignore').strip().decode('utf-8') for word in d['Loveland']['blue']['Name']]
 # loveland_blacks = [word.encode('ascii','ignore').strip().decode('utf-8') for word in d['Loveland']['black']['Name']]
