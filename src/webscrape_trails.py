@@ -55,35 +55,7 @@ class WebscrapeTrails:
                      self.AS_URL,
                      self.WC_URL]
 
-        # self.LL_nums = [10, 17, 38, 23, 12, 1]
-        # self.AB_nums = [7, 6, 33, 37, 36, 2]  # A basin
-        # self.C_nums = [22, 27, 30, 50, 25, 9]
-        # self.E_nums = [9, 6, 26, 9, 8, 0]
-        # self.AM_nums = [13, 2, 39, 49, 0, 1]
-        # self.V_nums = [29, 29, 59, 104, 7, 1]
-        # self.M_nums = [5, 13, 16, 25, 7, 3]
-        # self.CB_nums = [13, 24, 41, 18, 44, 0]
-        # self.T_nums = [13, 13, 20, 37, 50, 0]
-        # self.DP_nums = [6, 2, 14, 14, 0, 1]
-        # self.WP_nums = [25, 32, 38, 78, 9, 7]  # WP
-        # self.BC_nums = [24, 42, 47, 39, 12, 2]
-
-        # self.nums = [self.LL_nums,
-        #              self.AB_nums,
-        #              self.C_nums,
-        #              self.E_nums,
-        #              self.AM_nums,
-        #              self.V_nums,
-        #              self.M_nums,
-        #              self.CB_nums,
-        #              self.T_nums,
-        #              self.DP_nums,
-        #              self.WP_nums,
-        #              self.BC_nums]
-
         self.browser = webdriver.PhantomJS()
-
-        # self.lift_cols = ['Name', 'Bottom', 'Top', 'Vertical Rise']
 
         self.lst_run_difficulty = ["skiruns-green", "skiruns-blue", "skiruns-black", "skiruns-double-black"]
 
