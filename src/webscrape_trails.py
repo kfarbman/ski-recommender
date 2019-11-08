@@ -160,25 +160,6 @@ class WebscrapeTrails:
                 resort[i] = self.make_run_df(j)
         return resort
 
-    # def create_resort_data_frame(self):
-
-    #     loveland_script = ['Loveland', 'Arapahoe Basin',
-    #                        'Copper', 'Eldora', 'Alpine Meadows']
-    #     vail_script = ['Vail']
-    #     monarch_script = ['Monarch', 'Crested Butte', 'Taos']
-    #     DP_script = ['Diamond Peak']
-    #     WP_script = ['Winter Park']
-    #     BC_script = ['Beaver Creek']
-
-    #     resorts = loveland_script + vail_script + \
-    #         monarch_script + DP_script + WP_script + BC_script
-
-    #     dict_resorts = {}  # {resort: {level: level_df}}
-    #     for resort, URL, num in zip(resorts, self.URLs, self.nums):
-    #         dict_resorts[resort] = self.make_df_dicts(URL, num)
-
-    #     return dict_resorts
-
     def save_resort_data(self, dict_resort):
 
         output = open('../data/resort_dict_DEV.pkl', 'wb')
