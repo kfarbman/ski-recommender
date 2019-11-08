@@ -142,24 +142,6 @@ class WebscrapeTrails:
         df['Length (mi)'] = df['Length (mi)'].astype(float)
         return df
 
-    def make_df_dicts(self, URL, nums):
-        '''
-        Inputs:
-        URL from URLs (str)
-        nums from nums (list)
-        Outputs:
-        dictionary of {level: level_df} (dict)
-        '''
-        resort = {}
-        greens, blues, blacks, bb = self.make_tables(URL, nums)
-        levels = ['green', 'blue', 'black', 'bb']
-        for i, j in zip(levels, [greens, blues, blacks, bb]):
-            if len(j) == 0:
-                resort[i] = None
-            else:
-                resort[i] = self.make_run_df(j)
-        return resort
-
     def save_resort_data(self, dict_resort):
 
         output = open('../data/resort_dict_DEV.pkl', 'wb')
