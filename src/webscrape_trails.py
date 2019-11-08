@@ -86,6 +86,25 @@ class WebscrapeTrails:
 
         self.lst_run_difficulty = ["skiruns-green", "skiruns-blue", "skiruns-black", "skiruns-double-black"]
 
+    def create_resort_urls(self):
+        """
+        Create URLs used to scrape data for each difficulty at each resort
+
+        INPUT
+            None
+        OUTPUT
+            list of resort URLs
+        """
+        
+        lst_resort_urls = []
+
+        for url in self.URLs:
+            for difficulty in self.lst_run_difficulty:
+                str_combined_url = url + difficulty
+                lst_resort_urls.append(str_combined_url)
+        
+        return lst_resort_urls
+
     def make_tables(self, URL):
         '''
         Inputs:
@@ -211,15 +230,12 @@ if __name__ == '__main__':
     ws = WebscrapeTrails()
 
     # Create list of all ski resort URL's
-    lst_urls = []
-    for url in ws.URLs:
-        for difficulty in ws.lst_run_difficulty:
-            str_combined_url = url + difficulty
-            lst_urls.append(str_combined_url)
+
+    lst_resort_urls = ws.create_resort_urls()
 
     lst_resort_data = []
     import pdb; pdb.set_trace()
-    for url in tqdm(lst_urls):
+    for url in tqdm(lst_resort_urls):
         df_resort = ws.make_tables(URL=url)
         df_resort["URL"] = url
         lst_resort_data.append(df_resort)
