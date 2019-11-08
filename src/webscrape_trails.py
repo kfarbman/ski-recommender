@@ -30,6 +30,11 @@ class WebscrapeTrails:
         self.DP_URL = 'https://jollyturns.com/resort/united-states-of-america/diamond-peak/'
         self.WP_URL = 'https://jollyturns.com/resort/united-states-of-america/winter-park-resort/'
         self.BC_URL = 'https://jollyturns.com/resort/united-states-of-america/beaver-creek-resort/'
+        self.TELLURIDE_URL = 'https://jollyturns.com/resort/united-states-of-america/telluride-ski-resort/'
+        self.BM_URL = 'https://jollyturns.com/resort/united-states-of-america/bald-mountain/'
+        self.S_URL = 'https://jollyturns.com/resort/united-states-of-america/steamboat-ski-resort/'
+        self.AS_URL = 'https://jollyturns.com/resort/united-states-of-america/aspen-snowmass/'
+        self.WC_URL = 'https://jollyturns.com/resort/united-states-of-america/wolf-creek-ski-area/'
 
         self.URLs = [self.LL_URL,
                      self.AB_URL,
@@ -42,7 +47,12 @@ class WebscrapeTrails:
                      self.T_URL,
                      self.DP_URL,
                      self.WP_URL,
-                     self.BC_URL]
+                     self.BC_URL,
+                     self.TELLURIDE_URL,
+                     self.BM_URL,
+                     self.S_URL,
+                     self.AS_URL,
+                     self.WC_URL]
 
         # self.LL_nums = [10, 17, 38, 23, 12, 1]
         # self.AB_nums = [7, 6, 33, 37, 36, 2]  # A basin
