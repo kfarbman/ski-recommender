@@ -183,6 +183,17 @@ if __name__ == '__main__':
         if df_distance["metric"].iloc[idx] == "ft":
             df_distance.iloc[idx].at["distance"] = float(df_distance.iloc[idx].at["distance"]) / 5280
 
+    # Combine distance with resort data
+    df_combined = pd.concat([df_combined, df_distance], axis=1)
+
+    # Get average steepness
+    df_combined["Vertical Drop (ft)"] = df_combined["Vertical Drop (ft)"].str.split(" ", 1, expand=True)[0]
+    df_combined["Vertical Drop (ft)"] = df_combined["Vertical Drop (ft)"].map(
+        {"__NA__": "0"}).fillna(df_combined["Vertical Drop (ft)"])
+    
+    df_combined['Average Steepness'] = df_combined['Vertical Drop (ft)'].astype(float)/(5280*df_combined['distance'].astype(float))
+
+
 # loveland_greens = [word.encode('ascii','ignore').strip().decode('utf-8') for word in d['Loveland']['green']['Name']]
 # loveland_blues = [word.encode('ascii','ignore').strip().decode('utf-8') for word in d['Loveland']['blue']['Name']]
 # loveland_blacks = [word.encode('ascii','ignore').strip().decode('utf-8') for word in d['Loveland']['black']['Name']]
