@@ -126,20 +126,20 @@ class WebscrapeTrails:
         '''
         runs_cols = [
             'Name', 'Bottom (ft)', 'Top (ft)', 'Vertical Drop (ft)', 'Length (mi)']
-        df = pd.DataFrame(lst)
-        df.columns = runs_cols
-        for i in range(len(df['Length (mi)'])):
-            if df['Length (mi)'][i][-2:] == 'ft':
-                df['Length (mi)'][i] = round(
-                    float(df['Length (mi)'][i][:-2])/5280, 2)
-            else:
-                df['Length (mi)'][i] = float(df['Length (mi)'][i][:-2])
-        for col in runs_cols[1:-1]:
-            # except some lengths are in feet...
-            df[col] = df[col].apply(lambda x: float(x[:-2]))
+        # df = pd.DataFrame(lst)
+        # df.columns = runs_cols
+        # for i in range(len(df['Length (mi)'])):
+        #     if df['Length (mi)'][i][-2:] == 'ft':
+        #         df['Length (mi)'][i] = round(
+        #             float(df['Length (mi)'][i][:-2])/5280, 2)
+        #     else:
+        #         df['Length (mi)'][i] = float(df['Length (mi)'][i][:-2])
+        # for col in runs_cols[1:-1]:
+            # # except some lengths are in feet...
+            # df[col] = df[col].apply(lambda x: float(x[:-2]))
         df['Average Steepness'] = (
             df['Vertical Drop (ft)']/(5280*df['Length (mi)'])).astype(float)
-        df['Length (mi)'] = df['Length (mi)'].astype(float)
+        # df['Length (mi)'] = df['Length (mi)'].astype(float)
         return df
 
     def save_resort_data(self, dict_resort):
@@ -154,7 +154,6 @@ if __name__ == '__main__':
     ws = WebscrapeTrails()
 
     # Create list of all ski resort URL's
-
     lst_resort_urls = ws.create_resort_urls()
 
     # Request data from all ski resorts
@@ -173,6 +172,16 @@ if __name__ == '__main__':
     # Get resort name
     df_combined["resort_name"] = df_combined["URL"].str.split("united-states-of-america/", 1, expand=True)[1]
     df_combined["resort_name"] = df_combined["resort_name"].str.split("/", 1, expand=True)[0]
+
+    # Format distance values
+    df_distance = df_combined["Length (mi)"].str.split(" ", expand=True)
+    df_distance.columns = ["distance", "metric"]
+    df_distance["distance"] = df_distance["distance"].map({"__NA__": "0"}).fillna(df_distance["distance"])
+
+    # Convert feet to miles
+    for idx in range(len(df_distance)):
+        if df_distance["metric"].iloc[idx] == "ft":
+            df_distance.iloc[idx].at["distance"] = float(df_distance.iloc[idx].at["distance"]) / 5280
 
 # loveland_greens = [word.encode('ascii','ignore').strip().decode('utf-8') for word in d['Loveland']['green']['Name']]
 # loveland_blues = [word.encode('ascii','ignore').strip().decode('utf-8') for word in d['Loveland']['blue']['Name']]
