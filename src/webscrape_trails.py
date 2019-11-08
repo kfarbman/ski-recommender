@@ -17,7 +17,8 @@ class WebscrapeTrails:
 
     def __init__(self):
 
-        self.LL_URL = 'https://jollyturns.com/resort/united-states-of-america/loveland-ski-area/skiruns-green'
+        self.LL_URL = 'https://jollyturns.com/resort/united-states-of-america/loveland-ski-area/'
+        # self.LL_URL = 'https://jollyturns.com/resort/united-states-of-america/loveland-ski-area/skiruns-green'
         self.AB_URL = 'https://jollyturns.com/resort/united-states-of-america/arapahoe-basin/skiruns-green'
         self.C_URL = 'https://jollyturns.com/resort/united-states-of-america/copper-mountain-resort/skiruns-green'
         self.E_URL = 'https://jollyturns.com/resort/united-states-of-america/eldora-mountain-resort/skiruns-green'
@@ -73,6 +74,8 @@ class WebscrapeTrails:
 
         # self.lift_cols = ['Name', 'Bottom', 'Top', 'Vertical Rise']
 
+        self.lst_run_difficulty = ["skiruns-green", "skiruns-blue", "skiruns-black", "skiruns-double-black"]
+
     def make_tables(self, URL, nums):
         '''
         Inputs:
@@ -95,17 +98,25 @@ class WebscrapeTrails:
             cell_lst = [cell.text for cell in cell_lst]
             table_lst.append(cell_lst)
 
-        a, b, c, d, e, f = self.nums
+        df_ski = pd.DataFrame(table_lst)
+        df_ski.columns = ['Name', 'Bottom (ft)', 'Top (ft)', 'Vertical Drop (ft)', 'Length (mi)']
+        
+        # Filter restaurants and chairlifts
+        df_ski = df_ski[df_ski['Length (mi)'].notnull()].reset_index(drop=True)
 
-        # lifts = table_lst[:a]
-        greens = table_lst[a:a+b]
-        blues = table_lst[a+b:a+b+c]
-        blacks = table_lst[a+b+c:a+b+c+d]
-        bb = table_lst[a+b+c+d:a+b+c+d+e]
-        # tp = table_lst[a+b+c+d+e:a+b+c+d+e+f]
-        # restaurants = table_lst[a+b+c+d+e+f:]
+        return df_ski
 
-        return greens, blues, blacks, bb
+        # a, b, c, d, e, f = self.nums
+
+        # # lifts = table_lst[:a]
+        # greens = table_lst[a:a+b]
+        # blues = table_lst[a+b:a+b+c]
+        # blacks = table_lst[a+b+c:a+b+c+d]
+        # bb = table_lst[a+b+c+d:a+b+c+d+e]
+        # # tp = table_lst[a+b+c+d+e:a+b+c+d+e+f]
+        # # restaurants = table_lst[a+b+c+d+e+f:]
+
+        # return greens, blues, blacks, bb
 
     def make_run_df(self, lst):
         '''
@@ -176,6 +187,15 @@ class WebscrapeTrails:
         output.close()
 
 
+if __name__ == '__main__':
+
+    ws = WebscrapeTrails()
+
+    df_loveland = ws.make_tables(ws.LL_URL + ws.lst_run_difficulty[0], nums=ws.URLs[0])
+
+    for url in ws.URLs:
+        for difficulty in ws.lst_run_difficulty:
+            print(i + j)
 # loveland_greens = [word.encode('ascii','ignore').strip().decode('utf-8') for word in d['Loveland']['green']['Name']]
 # loveland_blues = [word.encode('ascii','ignore').strip().decode('utf-8') for word in d['Loveland']['blue']['Name']]
 # loveland_blacks = [word.encode('ascii','ignore').strip().decode('utf-8') for word in d['Loveland']['black']['Name']]
