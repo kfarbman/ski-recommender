@@ -7,6 +7,7 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 from tqdm import tqdm
 
+
 """
 Request trail data from all resorts
 
@@ -199,24 +200,24 @@ class WebscrapeTrails:
                 resort[i] = self.make_run_df(j)
         return resort
 
-    def create_resort_data_frame(self):
+    # def create_resort_data_frame(self):
 
-        loveland_script = ['Loveland', 'Arapahoe Basin',
-                           'Copper', 'Eldora', 'Alpine Meadows']
-        vail_script = ['Vail']
-        monarch_script = ['Monarch', 'Crested Butte', 'Taos']
-        DP_script = ['Diamond Peak']
-        WP_script = ['Winter Park']
-        BC_script = ['Beaver Creek']
+    #     loveland_script = ['Loveland', 'Arapahoe Basin',
+    #                        'Copper', 'Eldora', 'Alpine Meadows']
+    #     vail_script = ['Vail']
+    #     monarch_script = ['Monarch', 'Crested Butte', 'Taos']
+    #     DP_script = ['Diamond Peak']
+    #     WP_script = ['Winter Park']
+    #     BC_script = ['Beaver Creek']
 
-        resorts = loveland_script + vail_script + \
-            monarch_script + DP_script + WP_script + BC_script
+    #     resorts = loveland_script + vail_script + \
+    #         monarch_script + DP_script + WP_script + BC_script
 
-        dict_resorts = {}  # {resort: {level: level_df}}
-        for resort, URL, num in zip(resorts, self.URLs, self.nums):
-            dict_resorts[resort] = self.make_df_dicts(URL, num)
+    #     dict_resorts = {}  # {resort: {level: level_df}}
+    #     for resort, URL, num in zip(resorts, self.URLs, self.nums):
+    #         dict_resorts[resort] = self.make_df_dicts(URL, num)
 
-        return dict_resorts
+    #     return dict_resorts
 
     def save_resort_data(self, dict_resort):
 
@@ -233,6 +234,7 @@ if __name__ == '__main__':
 
     lst_resort_urls = ws.create_resort_urls()
 
+    # Request data from all ski resorts
     lst_resort_data = []
     import pdb; pdb.set_trace()
     for url in tqdm(lst_resort_urls):
@@ -240,6 +242,10 @@ if __name__ == '__main__':
         df_resort["URL"] = url
         lst_resort_data.append(df_resort)
         time.sleep(10)
+
+    # Combine resort data
+    df_combined = pd.concat(lst_resort_data)
+    df_combined["difficulty"] = df_combined["URL"].str.split("skiruns-", 1, expand=True)[1]
 
 # loveland_greens = [word.encode('ascii','ignore').strip().decode('utf-8') for word in d['Loveland']['green']['Name']]
 # loveland_blues = [word.encode('ascii','ignore').strip().decode('utf-8') for word in d['Loveland']['blue']['Name']]
