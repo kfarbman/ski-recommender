@@ -6,84 +6,85 @@ import requests
 from bs4 import BeautifulSoup
 from selenium import webdriver
 
-T_URL = 'https://jollyturns.com/resort/united-states-of-america/telluride-ski-resort/skiruns-green'
-BM_URL = 'https://jollyturns.com/resort/united-states-of-america/bald-mountain/skiruns-green'
-S_URL = 'https://jollyturns.com/resort/united-states-of-america/steamboat-ski-resort/skiruns-green'
-AS_URL = 'https://jollyturns.com/resort/united-states-of-america/aspen-snowmass/skiruns-green'
-WC_URL = 'https://jollyturns.com/resort/united-states-of-america/wolf-creek-ski-area/skiruns-green'
+# TODO: Include in the webscrape_trails script
+T_URL = 'https://jollyturns.com/resort/united-states-of-america/telluride-ski-resort/'
+BM_URL = 'https://jollyturns.com/resort/united-states-of-america/bald-mountain/'
+S_URL = 'https://jollyturns.com/resort/united-states-of-america/steamboat-ski-resort/'
+AS_URL = 'https://jollyturns.com/resort/united-states-of-america/aspen-snowmass/'
+WC_URL = 'https://jollyturns.com/resort/united-states-of-america/wolf-creek-ski-area/'
 
 URLs = [T_URL, BM_URL, S_URL, AS_URL, WC_URL]
 
-T_nums = [16, 15, 38, 26, 52, 3]
-BM_nums = [2, 7, 5, 9, 0, 0]  # A basin
-S_nums = [18, 22, 54, 70, 9, 5]
-AS_nums = [17, 8, 49, 28, 30, 3]
-WC_nums = [7, 8, 36, 41, 35, 0]
+# T_nums = [16, 15, 38, 26, 52, 3]
+# BM_nums = [2, 7, 5, 9, 0, 0]  # A basin
+# S_nums = [18, 22, 54, 70, 9, 5]
+# AS_nums = [17, 8, 49, 28, 30, 3]
+# WC_nums = [7, 8, 36, 41, 35, 0]
 
-nums = [T_nums, BM_nums, S_nums, AS_nums, WC_nums]
+# nums = [T_nums, BM_nums, S_nums, AS_nums, WC_nums]
 
-browser = webdriver.PhantomJS()
+# browser = webdriver.PhantomJS()
 
+# TODO: Deprecate in favor of webscrape_trails script
+# def make_tables(URL, nums):
+#     '''
+#     Inputs:
+#     URL from URLs (str)
+#     nums of trails of each color from nums (list)
+#     Outputs:
+#     4 tables of trails by color (tuple of tables)
+#     '''
+#     browser.get(URL)
+#     time.sleep(3)
 
-def make_tables(URL, nums):
-    '''
-    Inputs:
-    URL from URLs (str)
-    nums of trails of each color from nums (list)
-    Outputs:
-    4 tables of trails by color (tuple of tables)
-    '''
-    browser.get(URL)
-    time.sleep(3)
+#     soup = BeautifulSoup(browser.page_source, 'html.parser')
+#     rows = soup.select('table.table.table-striped tbody tr')
 
-    soup = BeautifulSoup(browser.page_source, 'html.parser')
-    rows = soup.select('table.table.table-striped tbody tr')
+#     table_lst = []
+#     for row in rows:
+#         cell_lst = [cell for cell in row if cell != ' ']
+#         cell_lst = [cell.text for cell in cell_lst]
+#         table_lst.append(cell_lst)
 
-    table_lst = []
-    for row in rows:
-        cell_lst = [cell for cell in row if cell != ' ']
-        cell_lst = [cell.text for cell in cell_lst]
-        table_lst.append(cell_lst)
+#     a, b, c, d, e, f = nums
 
-    a, b, c, d, e, f = nums
-
-    lifts = table_lst[:a]
-    greens = table_lst[a:a+b]
-    blues = table_lst[a+b:a+b+c]
-    blacks = table_lst[a+b+c:a+b+c+d]
-    bb = table_lst[a+b+c+d:a+b+c+d+e]
-    tp = table_lst[a+b+c+d+e:a+b+c+d+e+f]
-    restaurants = table_lst[a+b+c+d+e+f:]
-    return greens, blues, blacks, bb
-
-
-lift_cols = ['Name', 'Bottom', 'Top', 'Vertical Rise']
+#     lifts = table_lst[:a]
+#     greens = table_lst[a:a+b]
+#     blues = table_lst[a+b:a+b+c]
+#     blacks = table_lst[a+b+c:a+b+c+d]
+#     bb = table_lst[a+b+c+d:a+b+c+d+e]
+#     tp = table_lst[a+b+c+d+e:a+b+c+d+e+f]
+#     restaurants = table_lst[a+b+c+d+e+f:]
+#     return greens, blues, blacks, bb
 
 
-def make_run_df(lst):
-    '''
-    Inputs:
-    table from make_tables (table)
-    Outputs:
-    dataframe of trails of that color (DataFrame)
-    '''
-    runs_cols = ['Name', 'Bottom (ft)', 'Top (ft)',
-                 'Vertical Drop (ft)', 'Length (mi)']
-    df = pd.DataFrame(lst)
-    df.columns = runs_cols
-    for i in range(len(df['Length (mi)'])):
-        if df['Length (mi)'][i][-2:] == 'ft':
-            df['Length (mi)'][i] = round(
-                float(df['Length (mi)'][i][:-2])/5280, 2)
-        else:
-            df['Length (mi)'][i] = float(df['Length (mi)'][i][:-2])
-    for col in runs_cols[1:-1]:
-        # except some lengths are in feet...
-        df[col] = df[col].apply(lambda x: float(x[:-2]))
-    df['Average Steepness'] = (
-        df['Vertical Drop (ft)']/(5280*df['Length (mi)'])).astype(float)
-    df['Length (mi)'] = df['Length (mi)'].astype(float)
-    return df
+# lift_cols = ['Name', 'Bottom', 'Top', 'Vertical Rise']
+
+# TODO: Deprecate in favor of webscrape_trails script
+# def make_run_df(lst):
+#     '''
+#     Inputs:
+#     table from make_tables (table)
+#     Outputs:
+#     dataframe of trails of that color (DataFrame)
+#     '''
+#     runs_cols = ['Name', 'Bottom (ft)', 'Top (ft)',
+#                  'Vertical Drop (ft)', 'Length (mi)']
+#     df = pd.DataFrame(lst)
+#     df.columns = runs_cols
+#     for i in range(len(df['Length (mi)'])):
+#         if df['Length (mi)'][i][-2:] == 'ft':
+#             df['Length (mi)'][i] = round(
+#                 float(df['Length (mi)'][i][:-2])/5280, 2)
+#         else:
+#             df['Length (mi)'][i] = float(df['Length (mi)'][i][:-2])
+#     for col in runs_cols[1:-1]:
+#         # except some lengths are in feet...
+#         df[col] = df[col].apply(lambda x: float(x[:-2]))
+#     df['Average Steepness'] = (
+#         df['Vertical Drop (ft)']/(5280*df['Length (mi)'])).astype(float)
+#     df['Length (mi)'] = df['Length (mi)'].astype(float)
+#     return df
 
 # WP_runs = make_tables(WP_URL,WP_nums)
 # AB_runs = make_tables(AB_URL,AB_nums)
@@ -101,24 +102,24 @@ def make_run_df(lst):
 # AB_black_df = make_run_df(AB_blacks)
 # AB_bb_df = make_run_df(AB_bb)
 
-
-def make_df_dicts(URL, nums):
-    '''
-    Inputs:
-    URL from URLs (str)
-    nums from nums (list)
-    Outputs:
-    dictionary of {level: level_df} (dict)
-    '''
-    resort = {}
-    greens, blues, blacks, bb = make_tables(URL, nums)
-    levels = ['green', 'blue', 'black', 'bb']
-    for i, j in zip(levels, [greens, blues, blacks, bb]):
-        if len(j) == 0:
-            resort[i] = None
-        else:
-            resort[i] = make_run_df(j)
-    return resort
+# TODO: Deprecate in favor of webscrape_trails script
+# def make_df_dicts(URL, nums):
+#     '''
+#     Inputs:
+#     URL from URLs (str)
+#     nums from nums (list)
+#     Outputs:
+#     dictionary of {level: level_df} (dict)
+#     '''
+#     resort = {}
+#     greens, blues, blacks, bb = make_tables(URL, nums)
+#     levels = ['green', 'blue', 'black', 'bb']
+#     for i, j in zip(levels, [greens, blues, blacks, bb]):
+#         if len(j) == 0:
+#             resort[i] = None
+#         else:
+#             resort[i] = make_run_df(j)
+#     return resort
 
 
 resorts = ['Telluride', 'Bald Mountain',
