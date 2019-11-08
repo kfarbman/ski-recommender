@@ -117,18 +117,6 @@ class WebscrapeTrails:
 
         return df_ski
 
-        # a, b, c, d, e, f = self.nums
-
-        # # lifts = table_lst[:a]
-        # greens = table_lst[a:a+b]
-        # blues = table_lst[a+b:a+b+c]
-        # blacks = table_lst[a+b+c:a+b+c+d]
-        # bb = table_lst[a+b+c+d:a+b+c+d+e]
-        # # tp = table_lst[a+b+c+d+e:a+b+c+d+e+f]
-        # # restaurants = table_lst[a+b+c+d+e+f:]
-
-        # return greens, blues, blacks, bb
-
     def make_run_df(self, lst):
         '''
         Inputs:
