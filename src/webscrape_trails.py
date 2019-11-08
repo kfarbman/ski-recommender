@@ -5,6 +5,7 @@ import pandas as pd
 import requests
 from bs4 import BeautifulSoup
 from selenium import webdriver
+from tqdm import tqdm
 
 """
 Request trail data from all resorts
@@ -18,18 +19,17 @@ class WebscrapeTrails:
     def __init__(self):
 
         self.LL_URL = 'https://jollyturns.com/resort/united-states-of-america/loveland-ski-area/'
-        # self.LL_URL = 'https://jollyturns.com/resort/united-states-of-america/loveland-ski-area/skiruns-green'
-        self.AB_URL = 'https://jollyturns.com/resort/united-states-of-america/arapahoe-basin/skiruns-green'
-        self.C_URL = 'https://jollyturns.com/resort/united-states-of-america/copper-mountain-resort/skiruns-green'
-        self.E_URL = 'https://jollyturns.com/resort/united-states-of-america/eldora-mountain-resort/skiruns-green'
-        self.AM_URL = 'https://jollyturns.com/resort/united-states-of-america/alpine-meadows/skiruns-green'
-        self.V_URL = 'https://jollyturns.com/resort/united-states-of-america/vail-ski-resort/skiruns-green'
-        self.M_URL = 'https://jollyturns.com/resort/united-states-of-america/monarch-ski-area/skiruns-green'
-        self.CB_URL = 'https://jollyturns.com/resort/united-states-of-america/crested-butte-mountain-resort/skiruns-green'
-        self.T_URL = 'https://jollyturns.com/resort/united-states-of-america/taos-ski-valley/skiruns-green'
-        self.DP_URL = 'https://jollyturns.com/resort/united-states-of-america/diamond-peak/skiruns-green'
-        self.WP_URL = 'https://jollyturns.com/resort/united-states-of-america/winter-park-resort/skiruns-green'
-        self.BC_URL = 'https://jollyturns.com/resort/united-states-of-america/beaver-creek-resort/skiruns-green'
+        self.AB_URL = 'https://jollyturns.com/resort/united-states-of-america/arapahoe-basin/'
+        self.C_URL = 'https://jollyturns.com/resort/united-states-of-america/copper-mountain-resort/'
+        self.E_URL = 'https://jollyturns.com/resort/united-states-of-america/eldora-mountain-resort/'
+        self.AM_URL = 'https://jollyturns.com/resort/united-states-of-america/alpine-meadows/'
+        self.V_URL = 'https://jollyturns.com/resort/united-states-of-america/vail-ski-resort/'
+        self.M_URL = 'https://jollyturns.com/resort/united-states-of-america/monarch-ski-area/'
+        self.CB_URL = 'https://jollyturns.com/resort/united-states-of-america/crested-butte-mountain-resort/'
+        self.T_URL = 'https://jollyturns.com/resort/united-states-of-america/taos-ski-valley/'
+        self.DP_URL = 'https://jollyturns.com/resort/united-states-of-america/diamond-peak/'
+        self.WP_URL = 'https://jollyturns.com/resort/united-states-of-america/winter-park-resort/'
+        self.BC_URL = 'https://jollyturns.com/resort/united-states-of-america/beaver-creek-resort/'
 
         self.URLs = [self.LL_URL,
                      self.AB_URL,
@@ -44,31 +44,31 @@ class WebscrapeTrails:
                      self.WP_URL,
                      self.BC_URL]
 
-        self.LL_nums = [10, 17, 38, 23, 12, 1]
-        self.AB_nums = [7, 6, 33, 37, 36, 2]  # A basin
-        self.C_nums = [22, 27, 30, 50, 25, 9]
-        self.E_nums = [9, 6, 26, 9, 8, 0]
-        self.AM_nums = [13, 2, 39, 49, 0, 1]
-        self.V_nums = [29, 29, 59, 104, 7, 1]
-        self.M_nums = [5, 13, 16, 25, 7, 3]
-        self.CB_nums = [13, 24, 41, 18, 44, 0]
-        self.T_nums = [13, 13, 20, 37, 50, 0]
-        self.DP_nums = [6, 2, 14, 14, 0, 1]
-        self.WP_nums = [25, 32, 38, 78, 9, 7]  # WP
-        self.BC_nums = [24, 42, 47, 39, 12, 2]
+        # self.LL_nums = [10, 17, 38, 23, 12, 1]
+        # self.AB_nums = [7, 6, 33, 37, 36, 2]  # A basin
+        # self.C_nums = [22, 27, 30, 50, 25, 9]
+        # self.E_nums = [9, 6, 26, 9, 8, 0]
+        # self.AM_nums = [13, 2, 39, 49, 0, 1]
+        # self.V_nums = [29, 29, 59, 104, 7, 1]
+        # self.M_nums = [5, 13, 16, 25, 7, 3]
+        # self.CB_nums = [13, 24, 41, 18, 44, 0]
+        # self.T_nums = [13, 13, 20, 37, 50, 0]
+        # self.DP_nums = [6, 2, 14, 14, 0, 1]
+        # self.WP_nums = [25, 32, 38, 78, 9, 7]  # WP
+        # self.BC_nums = [24, 42, 47, 39, 12, 2]
 
-        self.nums = [self.LL_nums,
-                     self.AB_nums,
-                     self.C_nums,
-                     self.E_nums,
-                     self.AM_nums,
-                     self.V_nums,
-                     self.M_nums,
-                     self.CB_nums,
-                     self.T_nums,
-                     self.DP_nums,
-                     self.WP_nums,
-                     self.BC_nums]
+        # self.nums = [self.LL_nums,
+        #              self.AB_nums,
+        #              self.C_nums,
+        #              self.E_nums,
+        #              self.AM_nums,
+        #              self.V_nums,
+        #              self.M_nums,
+        #              self.CB_nums,
+        #              self.T_nums,
+        #              self.DP_nums,
+        #              self.WP_nums,
+        #              self.BC_nums]
 
         self.browser = webdriver.PhantomJS()
 
@@ -76,13 +76,12 @@ class WebscrapeTrails:
 
         self.lst_run_difficulty = ["skiruns-green", "skiruns-blue", "skiruns-black", "skiruns-double-black"]
 
-    def make_tables(self, URL, nums):
+    def make_tables(self, URL):
         '''
         Inputs:
             URL from URLs (str)
-            nums: nums of trails of each color from nums (list)
         Outputs:
-            4 tables of trails by color (tuple of tables)
+            Pandas DataFrame of ski resort information
         '''
 
         self.browser.get(URL)
@@ -191,11 +190,21 @@ if __name__ == '__main__':
 
     ws = WebscrapeTrails()
 
-    df_loveland = ws.make_tables(ws.LL_URL + ws.lst_run_difficulty[0], nums=ws.URLs[0])
-
+    # Create list of all ski resort URL's
+    lst_urls = []
     for url in ws.URLs:
         for difficulty in ws.lst_run_difficulty:
-            print(i + j)
+            str_combined_url = url + difficulty
+            lst_urls.append(str_combined_url)
+
+    lst_resort_data = []
+    # import pdb; pdb.set_trace()
+    for url in tqdm(lst_urls):
+        df_resort = ws.make_tables(URL=url)
+        df_resort["URL"] = url
+        lst_resort_data.append(df_resort)
+        time.sleep(10)
+
 # loveland_greens = [word.encode('ascii','ignore').strip().decode('utf-8') for word in d['Loveland']['green']['Name']]
 # loveland_blues = [word.encode('ascii','ignore').strip().decode('utf-8') for word in d['Loveland']['blue']['Name']]
 # loveland_blacks = [word.encode('ascii','ignore').strip().decode('utf-8') for word in d['Loveland']['black']['Name']]
