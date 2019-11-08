@@ -108,8 +108,18 @@ class WebscrapeTrails:
             table_lst.append(cell_lst)
 
         df_ski = pd.DataFrame(table_lst)
-        df_ski.columns = ['Name', 'Bottom (ft)', 'Top (ft)', 'Vertical Drop (ft)', 'Length (mi)']
-        
+
+        try:
+            df_ski.columns = ['Name', 'Bottom (ft)', 'Top (ft)', 'Vertical Drop (ft)', 'Length (mi)']
+        except ValueError:
+            df_ski = pd.DataFrame({
+                "Name": ["__NA__"],
+                "Bottom (ft)": ["__NA__"],
+                "Top (ft)": ["__NA__"],
+                "Vertical Drop (ft)": ["__NA__"],
+                "Length (mi)": ["__NA__"]
+            })
+
         # Filter restaurants and chairlifts
         df_ski = df_ski[df_ski['Length (mi)'].notnull()].reset_index(drop=True)
 
@@ -208,7 +218,7 @@ if __name__ == '__main__':
             lst_urls.append(str_combined_url)
 
     lst_resort_data = []
-    # import pdb; pdb.set_trace()
+    import pdb; pdb.set_trace()
     for url in tqdm(lst_urls):
         df_resort = ws.make_tables(URL=url)
         df_resort["URL"] = url
