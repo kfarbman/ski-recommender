@@ -117,31 +117,6 @@ class WebscrapeTrails:
 
         return df_ski
 
-    def make_run_df(self, lst):
-        '''
-        Inputs:
-        table from make_tables (table)
-        Outputs:
-        dataframe of trails of that color (DataFrame)
-        '''
-        runs_cols = [
-            'Name', 'Bottom (ft)', 'Top (ft)', 'Vertical Drop (ft)', 'Length (mi)']
-        # df = pd.DataFrame(lst)
-        # df.columns = runs_cols
-        # for i in range(len(df['Length (mi)'])):
-        #     if df['Length (mi)'][i][-2:] == 'ft':
-        #         df['Length (mi)'][i] = round(
-        #             float(df['Length (mi)'][i][:-2])/5280, 2)
-        #     else:
-        #         df['Length (mi)'][i] = float(df['Length (mi)'][i][:-2])
-        # for col in runs_cols[1:-1]:
-            # # except some lengths are in feet...
-            # df[col] = df[col].apply(lambda x: float(x[:-2]))
-        df['Average Steepness'] = (
-            df['Vertical Drop (ft)']/(5280*df['Length (mi)'])).astype(float)
-        # df['Length (mi)'] = df['Length (mi)'].astype(float)
-        return df
-
     def save_resort_data(self, dict_resort):
 
         output = open('../data/resort_dict_DEV.pkl', 'wb')
