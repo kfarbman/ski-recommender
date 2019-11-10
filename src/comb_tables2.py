@@ -57,32 +57,32 @@ warnings.filterwarnings('ignore')
 
 ### from my ipython notebook
 # standardizing the ability levels
-whole_table['ability_level'][whole_table['ability_level']
-                             == 'Advanced Intermediate'] = 'Advanced'
-whole_table['ability_level'][whole_table['ability_level']
-                             == 'Adv. Intermediate'] = 'Advanced'
-whole_table['ability_level'][whole_table['ability_level']
-                             == 'Gladed Adv Inter'] = 'Advanced'
-whole_table['ability_level'][whole_table['ability_level']
-                             == 'Hike To'] = 'Expert'
-whole_table['ability_level'][whole_table['ability_level']
-                             == 'Hike-To'] = 'Expert'
-whole_table['ability_level'][whole_table['ability_level']
-                             == 'Gladed Expert'] = 'Expert'
-whole_table['ability_level'][whole_table['ability_level']
-                             == 'Intermediate Glade'] = 'Intermediate'
-whole_table['ability_level'][whole_table['ability_level']
-                             == 'Exp Bowl'] = 'Expert'
-whole_table['ability_level'][whole_table['ability_level']
-                             == 'Hike to'] = 'Expert'
-whole_table['ability_level'][whole_table['ability_level']
-                             == 'Expert Glade-Gated'] = 'Expert'
-whole_table['ability_level'][whole_table['ability_level']
-                             == 'Chute/Bowl-Gated'] = 'Expert'
-whole_table['ability_level'][whole_table['ability_level']
-                             == 'Bowl/Glade-Gated'] = 'Expert'
-whole_table['ability_level'][whole_table['ability_level']
-                             == 'Chute/Glade-Gated'] = 'Expert'
+# whole_table['ability_level'][whole_table['ability_level']
+#                              == 'Advanced Intermediate'] = 'Advanced'
+# whole_table['ability_level'][whole_table['ability_level']
+#                              == 'Adv. Intermediate'] = 'Advanced'
+# whole_table['ability_level'][whole_table['ability_level']
+#                              == 'Gladed Adv Inter'] = 'Advanced'
+# whole_table['ability_level'][whole_table['ability_level']
+#                              == 'Hike To'] = 'Expert'
+# whole_table['ability_level'][whole_table['ability_level']
+#                              == 'Hike-To'] = 'Expert'
+# whole_table['ability_level'][whole_table['ability_level']
+#                              == 'Gladed Expert'] = 'Expert'
+# whole_table['ability_level'][whole_table['ability_level']
+#                              == 'Intermediate Glade'] = 'Intermediate'
+# whole_table['ability_level'][whole_table['ability_level']
+#                              == 'Exp Bowl'] = 'Expert'
+# whole_table['ability_level'][whole_table['ability_level']
+#                              == 'Hike to'] = 'Expert'
+# whole_table['ability_level'][whole_table['ability_level']
+#                              == 'Expert Glade-Gated'] = 'Expert'
+# whole_table['ability_level'][whole_table['ability_level']
+#                              == 'Chute/Bowl-Gated'] = 'Expert'
+# whole_table['ability_level'][whole_table['ability_level']
+#                              == 'Bowl/Glade-Gated'] = 'Expert'
+# whole_table['ability_level'][whole_table['ability_level']
+#                              == 'Chute/Glade-Gated'] = 'Expert'
 
 
 # '''separating resorts back out'''

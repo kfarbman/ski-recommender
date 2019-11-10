@@ -122,8 +122,17 @@ class CombineTables:
 
         dict_ability_levels = {"Advanced Intermediate": "Advanced",
                                "Adv. Intermediate": "Advanced",
+                               "Gladed Adv Inter": "Advanced",
                                "Hike To": "Expert",
-                               "Exp Bowl": "Expert"}
+                               "Hike to": "Expert",
+                               "Hike-To": "Expert",
+                               "Gladed Expert": "Expert",
+                               "Exp Bowl": "Expert",
+                               "Expert Glade-Gated": "Expert",
+                               "Chute/Bowl-Gated": "Expert",
+                               "Bowl/Glade-Gated": "Expert",
+                               "Chute/Glade-Gated": "Expert",
+                               "Intermediate Glade": "Intermediate"}
 
         df["ability_level"] = df["ability_level"].map(dict_ability_levels)
 
