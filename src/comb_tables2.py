@@ -11,48 +11,48 @@ from .create_tables import (AS_table, BM_table, WC_table, loveland_table,
 warnings.filterwarnings('ignore')
 
 
-resorts = {'Telluride': ['../data/new/Telluride.txt', 'CO'],
-           'Bald Mountain': ['../data/new/Bald_Mountain.txt', 'CO'],
-           'Steamboat': ['../data/new/Steamboat.txt', 'CO'],
-           'Aspen Snowmass': ['../data/new/Aspen_Snowmass.txt', 'CO'],
-           'Wolf Creek': ['../data/new/Wolf_Creek.txt', 'CO']}
+# resorts = {'Telluride': ['../data/new/Telluride.txt', 'CO'],
+#            'Bald Mountain': ['../data/new/Bald_Mountain.txt', 'CO'],
+#            'Steamboat': ['../data/new/Steamboat.txt', 'CO'],
+#            'Aspen Snowmass': ['../data/new/Aspen_Snowmass.txt', 'CO'],
+#            'Wolf Creek': ['../data/new/Wolf_Creek.txt', 'CO']}
 
 # which resorts work with which script
-loveland_script = ['Telluride']
-BM_script = ['Bald Mountain']
-steamboat_script = ['Steamboat']
-AS_script = ['Aspen Snowmass']
-WC_script = ['Wolf Creek']
+# loveland_script = ['Telluride']
+# BM_script = ['Bald Mountain']
+# steamboat_script = ['Steamboat']
+# AS_script = ['Aspen Snowmass']
+# WC_script = ['Wolf Creek']
 
 
-d = {}
-for resort in loveland_script:
-    filename, location = resorts[resort]
-    d[resort] = loveland_table.fix_dtype(
-        filename, resort, location)
-for resort in BM_script:
-    filename, location = resorts[resort]
-    d[resort] = BM_table.fix_dtype(filename, resort, location)
-for resort in steamboat_script:
-    filename, location = resorts[resort]
-    d[resort] = steamboat_table.fix_dtype(
-        filename, resort, location)
-for resort in AS_script:
-    filename, location = resorts[resort]
-    d[resort] = AS_table.fix_dtype(filename, resort, location)
-for resort in WC_script:
-    filename, location = resorts[resort]
-    d[resort] = WC_table.fix_dtype(filename, resort, location)
-    del d[resort]['plan_length']
+# d = {}
+# for resort in loveland_script:
+#     filename, location = resorts[resort]
+#     d[resort] = loveland_table.fix_dtype(
+#         filename, resort, location)
+# for resort in BM_script:
+#     filename, location = resorts[resort]
+#     d[resort] = BM_table.fix_dtype(filename, resort, location)
+# for resort in steamboat_script:
+#     filename, location = resorts[resort]
+#     d[resort] = steamboat_table.fix_dtype(
+#         filename, resort, location)
+# for resort in AS_script:
+#     filename, location = resorts[resort]
+#     d[resort] = AS_table.fix_dtype(filename, resort, location)
+# for resort in WC_script:
+#     filename, location = resorts[resort]
+#     d[resort] = WC_table.fix_dtype(filename, resort, location)
+#     del d[resort]['plan_length']
 
 
-columns = ['trail_name', 'top_elev_(ft)', 'bottom_elev_(ft)', 'vert_rise_(ft)', 'slope_length_(ft)', 'avg_width_(ft)',
-           'slope_area_(acres)', 'avg_grade_(%)', 'max_grade_(%)', 'ability_level', 'resort', 'location']
+# columns = ['trail_name', 'top_elev_(ft)', 'bottom_elev_(ft)', 'vert_rise_(ft)', 'slope_length_(ft)', 'avg_width_(ft)',
+#            'slope_area_(acres)', 'avg_grade_(%)', 'max_grade_(%)', 'ability_level', 'resort', 'location']
 
-whole_table = pd.concat(d.values())
+# whole_table = pd.concat(d.values())
 # making sure the columns are in the correct order
-whole_table = whole_table[columns]
-CO_resorts = whole_table[whole_table['location'] == 'CO']
+# whole_table = whole_table[columns]
+# CO_resorts = whole_table[whole_table['location'] == 'CO']
 
 
 ### from my ipython notebook
@@ -85,19 +85,19 @@ whole_table['ability_level'][whole_table['ability_level']
                              == 'Chute/Glade-Gated'] = 'Expert'
 
 
-'''separating resorts back out'''
-telluride = whole_table[whole_table['resort'] == 'Telluride']
-BM = whole_table[whole_table['resort'] == 'Bald Mountain']
-steamboat = whole_table[whole_table['resort'] == 'Steamboat']
-AS = whole_table[whole_table['resort'] == 'Aspen Snowmass']
-WC = whole_table[whole_table['resort'] == 'Wolf Creek']
+# '''separating resorts back out'''
+# telluride = whole_table[whole_table['resort'] == 'Telluride']
+# BM = whole_table[whole_table['resort'] == 'Bald Mountain']
+# steamboat = whole_table[whole_table['resort'] == 'Steamboat']
+# AS = whole_table[whole_table['resort'] == 'Aspen Snowmass']
+# WC = whole_table[whole_table['resort'] == 'Wolf Creek']
 
 
-resort_dfs = [telluride, BM, steamboat, AS, WC]
+# resort_dfs = [telluride, BM, steamboat, AS, WC]
 
 
 '''fixing trail names'''
-WC['trail_name'] = WC['trail_name'].apply(lambda x: ' '.join(x.split()[1:]))
+# WC['trail_name'] = WC['trail_name'].apply(lambda x: ' '.join(x.split()[1:]))
 WC['trail_name'] = WC['trail_name'].apply(lambda x: ' '.join(x.split()[1:]) if x.split()[
                                           0] in ['l', 'u', 'm', 'c', 'g', 'r'] else ' '.join(x.split()))
 

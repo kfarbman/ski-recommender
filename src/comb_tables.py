@@ -25,7 +25,12 @@ class CombineTables:
                         'Taos': ['../data/Taos.txt', 'NM'],
                         'Diamond Peak': ['../data/DP.txt', 'NV'],
                         'Winter Park': ['../data/WP.csv', 'CO'],
-                        'Beaver Creek': ['../data/Beaver_Creek.txt', 'CO']}
+                        'Beaver Creek': ['../data/Beaver_Creek.txt', 'CO'],
+                        'Telluride': ['../data/new/Telluride.txt', 'CO'],
+                        'Bald Mountain': ['../data/new/Bald_Mountain.txt', 'CO'],
+                        'Steamboat': ['../data/new/Steamboat.txt', 'CO'],
+                        'Aspen Snowmass': ['../data/new/Aspen_Snowmass.txt', 'CO'],
+                        'Wolf Creek': ['../data/new/Wolf_Creek.txt', 'CO']}
 
         # Keys of resorts compatible with each script
         self.BC_script = ['Beaver Creek']
@@ -35,6 +40,13 @@ class CombineTables:
         self.monarch_script = ['Monarch', 'Crested Butte', 'Taos']
         self.vail_script = ['Vail']
         self.WP_script = ['Winter Park']
+
+        # comb_tables2 scripts
+        self.loveland_script = ['Telluride']
+        self.BM_script = ['Bald Mountain']
+        self.steamboat_script = ['Steamboat']
+        self.AS_script = ['Aspen Snowmass']
+        self.WC_script = ['Wolf Creek']
 
     def format_resorts(self):
         """
@@ -50,18 +62,18 @@ class CombineTables:
             filename, location = self.resorts[resort]
             d[resort] = vail_table.fix_dtype(
                 filename, resort, location)
-            del d[resort]['horiz_length']
+            # del d[resort]['horiz_length']
         for resort in self.monarch_script:
             filename, location = self.resorts[resort]
             d[resort] = monarch_table.fix_dtype(
                 filename, resort, location)
-            del d[resort]['plan_length']
+            # del d[resort]['plan_length']
         for resort in self.DP_script:
             filename, location = self.resorts[resort]
             d[resort] = DP_table.fix_dtype(
                 filename, resort, location)
-            d[resort].drop(['plan_length', 'pct_inc',
-                            'plan_area'], axis=1, inplace=True)
+            # d[resort].drop(['plan_length', 'pct_inc',
+            #                 'plan_area'], axis=1, inplace=True)
         for resort in self.WP_script:
             filename, location = self.resorts[resort]
             d[resort] = WP_table.fix_dtype(
@@ -70,6 +82,28 @@ class CombineTables:
             filename, location = self.resorts[resort]
             d[resort] = BC_table.fix_dtype(
                 filename, resort, location)
+
+        # comb_tables2 script
+        for resort in loveland_script:
+            filename, location = resorts[resort]
+            d[resort] = loveland_table.fix_dtype(
+                filename, resort, location)
+        for resort in BM_script:
+            filename, location = resorts[resort]
+            d[resort] = BM_table.fix_dtype(filename, resort, location)
+        for resort in steamboat_script:
+            filename, location = resorts[resort]
+            d[resort] = steamboat_table.fix_dtype(
+                filename, resort, location)
+        for resort in AS_script:
+            filename, location = resorts[resort]
+            d[resort] = AS_table.fix_dtype(filename, resort, location)
+        for resort in WC_script:
+            filename, location = resorts[resort]
+            d[resort] = WC_table.fix_dtype(filename, resort, location)
+            del d[resort]['plan_length']
+
+
 
         columns = ['trail_name', 'top_elev_(ft)', 'bottom_elev_(ft)', 'vert_rise_(ft)', 'slope_length_(ft)', 'avg_width_(ft)',
                    'slope_area_(acres)', 'avg_grade_(%)', 'max_grade_(%)', 'ability_level', 'resort', 'location']
@@ -101,7 +135,9 @@ class CombineTables:
         # whole_table['ability_level'][whole_table['ability_level'] == 'Exp Bowl'] = 'Expert'
 
 
-'''separating resorts back out'''
+"""
+Separate resorts into independent DataFrames
+"""
 loveland = whole_table[whole_table['resort'] == 'Loveland']
 AB = whole_table[whole_table['resort'] == 'Arapahoe Basin']
 copper = whole_table[whole_table['resort'] == 'Copper']
@@ -114,10 +150,16 @@ taos = whole_table[whole_table['resort'] == 'Taos']
 DP = whole_table[whole_table['resort'] == 'Diamond Peak']
 WP = whole_table[whole_table['resort'] == 'Winter Park']
 BC = whole_table[whole_table['resort'] == 'Beaver Creek']
+telluride = whole_table[whole_table['resort'] == 'Telluride']
+BM = whole_table[whole_table['resort'] == 'Bald Mountain']
+steamboat = whole_table[whole_table['resort'] == 'Steamboat']
+AS = whole_table[whole_table['resort'] == 'Aspen Snowmass']
+WC = whole_table[whole_table['resort'] == 'Wolf Creek']
 
 
 resort_dfs = [loveland, AB, copper, eldora,
-              AM, vail, monarch, CB, taos, DP, WP, BC]
+              AM, vail, monarch, CB, taos, DP, WP, BC,
+              telluride, BM, steamboat, AS, WC]
 
 
 '''fixing trail names'''
@@ -143,6 +185,8 @@ copper['trail_name'] = copper['trail_name'].apply(
 
 
 '''groomed runs'''
+# TODO: Sort names of each list of runs
+# TODO: Create dictionary of resort to ski runs?
 groomed_LL = ['Take Off', 'Cat Walk', 'Mambo', 'Home Run', 'Spillway', 'Tempest', 'Tango Road', 'Turtle Creek', "Richard's Run",
               'Fire Bowl', 'North Turtle Creek', 'Drifter', 'Switchback (Lower)', 'Switchback (Upper)', 'Boomerang',
               'Zig-Zag', 'Twist (Lower)', 'Twist (Upper)', 'Creek Trail', 'Lower Creek Trail', 'Perfect Bowl', 'Scrub',
