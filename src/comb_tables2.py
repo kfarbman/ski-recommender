@@ -234,31 +234,31 @@ WC['trail_name'] = WC['trail_name'].apply(lambda x: ' '.join(x.split()[1:]) if x
 #     make_colors(resort)
 
 
-'''
-Dictionary of dictionaries {resort: {level: [trails]}}
-For trails that are in the resort_df but have slightly different names from the webscraping (by color)
-'''
-trails_to_add = {}
-trails_to_add['Telluride'] = {'green': [],
-                              'blue': [],
-                              'black': [],
-                              'bb': []}
-trails_to_add['Bald Mountain'] = {'green': [],
-                                  'blue': [],
-                                  'black': [],
-                                  'bb': []}
-trails_to_add['Steamboat'] = {'green': [],
-                              'blue': [],
-                              'black': [],
-                              'bb': []}
-trails_to_add['Aspen Snowmass'] = {'green': [],
-                                   'blue': [],
-                                   'black': [],
-                                   'bb': []}
-trails_to_add['Wolf Creek'] = {'green': [],
-                               'blue': [],
-                               'black': [],
-                               'bb': []}
+# '''
+# Dictionary of dictionaries {resort: {level: [trails]}}
+# For trails that are in the resort_df but have slightly different names from the webscraping (by color)
+# '''
+# trails_to_add = {}
+# trails_to_add['Telluride'] = {'green': [],
+#                               'blue': [],
+#                               'black': [],
+#                               'bb': []}
+# trails_to_add['Bald Mountain'] = {'green': [],
+#                                   'blue': [],
+#                                   'black': [],
+#                                   'bb': []}
+# trails_to_add['Steamboat'] = {'green': [],
+#                               'blue': [],
+#                               'black': [],
+#                               'bb': []}
+# trails_to_add['Aspen Snowmass'] = {'green': [],
+#                                    'blue': [],
+#                                    'black': [],
+#                                    'bb': []}
+# trails_to_add['Wolf Creek'] = {'green': [],
+#                                'blue': [],
+#                                'black': [],
+#                                'bb': []}
 
 
 '''add trails to colors'''
