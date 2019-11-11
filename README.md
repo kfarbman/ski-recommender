@@ -65,7 +65,8 @@ The similarity metric used is the cosine similarity. For the trail recommendatio
 
 In the future, I'd like to add more trails from more resorts. Ideally, I'd also like to add information on aspect to indicate snow conditions. A potential addition would be daily grooming information instead of static. 
 
-## Repo structure
+## Repo Structure
+
 ```
 ├── data (contains txt/csv files from Master Development Plan pdfs and pickles)
 |     ├── df.pkl (pickle of dataframe used for trail recommendations from comb_tables.py)
@@ -97,3 +98,7 @@ In the future, I'd like to add more trails from more resorts. Ideally, I'd also 
 |     └── app.py (runs web app)
 └── README.md
 ```
+
+## References
+
+* [Install PhantomJS](https://www.vultr.com/docs/how-to-install-phantomjs-on-ubuntu-16-04)
