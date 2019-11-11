@@ -504,26 +504,26 @@ trails_to_add['Beaver Creek'] = {'green': ['Beginner Terrain', 'BC Mtn Expresswa
                                           'Cabin Fever', 'Wapti'],
                                  'black': ['Boarders Loop', 'Goshawk', 'Harrier', 'Centennial', 'Wapiti', 'S. Star'],
                                  'bb': ['Stone Creek Chutes']}
-trails_to_add['Telluride'] = {'green': [],
-                              'blue': [],
-                              'black': [],
-                              'bb': []}
-trails_to_add['Bald Mountain'] = {'green': [],
-                                  'blue': [],
-                                  'black': [],
-                                  'bb': []}
-trails_to_add['Steamboat'] = {'green': [],
-                              'blue': [],
-                              'black': [],
-                              'bb': []}
-trails_to_add['Aspen Snowmass'] = {'green': [],
-                                   'blue': [],
-                                   'black': [],
-                                   'bb': []}
-trails_to_add['Wolf Creek'] = {'green': [],
-                               'blue': [],
-                               'black': [],
-                               'bb': []}
+# trails_to_add['Telluride'] = {'green': [],
+#                               'blue': [],
+#                               'black': [],
+#                               'bb': []}
+# trails_to_add['Bald Mountain'] = {'green': [],
+#                                   'blue': [],
+#                                   'black': [],
+#                                   'bb': []}
+# trails_to_add['Steamboat'] = {'green': [],
+#                               'blue': [],
+#                               'black': [],
+#                               'bb': []}
+# trails_to_add['Aspen Snowmass'] = {'green': [],
+#                                    'blue': [],
+#                                    'black': [],
+#                                    'bb': []}
+# trails_to_add['Wolf Creek'] = {'green': [],
+#                                'blue': [],
+#                                'black': [],
+#                                'bb': []}
 
 
 '''add trails to colors'''
