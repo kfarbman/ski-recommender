@@ -590,8 +590,17 @@ trails_to_remove_v = ['Avanti-Cookshack', 'Chair 2 Lift Line', 'Pickeroon Lower'
                       "Smokey's", 'Timberline Face', 'Minnies Mile Upper Face']
 trails_to_remove_AM = []
 
+# comb_tables2
+trails_to_remove_t = ['T-bar Road', 'Sani Flush', 'Awesome II', 'Rip Curl', '']
+trails_to_remove_BM = ['High Noon Terrain Park',
+                       'Treeline Terrain Park', 'Shooting Gallery', 'Poma Line']
+trails_to_remove_s = ["Bruce's Way", 'Bee Road', 'Road Home', 'Cross Cut']
+trails_to_remove_AS = []
+trails_to_remove_WC = ['Meadows', 'Nirvana', 'Village Way - Primrose']
+
 trails_to_remove = [trails_to_remove_LL, trails_to_remove_AB, trails_to_remove_c, trails_to_remove_e, trails_to_remove_AM, trails_to_remove_v,
-                    trails_to_remove_m, trails_to_remove_CB, trails_to_remove_t, trails_to_remove_DP, trails_to_remove_WP, trails_to_remove_BC]
+                    trails_to_remove_m, trails_to_remove_CB, trails_to_remove_t, trails_to_remove_DP, trails_to_remove_WP, trails_to_remove_BC,
+                    trails_to_remove_t, trails_to_remove_BM, trails_to_remove_s, trails_to_remove_AS, trails_to_remove_WC]
 
 
 '''Remove Trails'''

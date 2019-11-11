@@ -261,58 +261,58 @@ WC['trail_name'] = WC['trail_name'].apply(lambda x: ' '.join(x.split()[1:]) if x
 #                                'bb': []}
 
 
-'''add trails to colors'''
+# '''add trails to colors'''
 
 
-def add_trails_to_add(resort):
-    '''
-    Inputs:
-    resort from resorts (str)
-    Outputs:
-    resort_df w/ class column updated w/ trail names that didn't make the list (DataFrame)
-    '''
-    levels = ['green', 'blue', 'black', 'bb']
-    for level in levels:
-        resort_dict[resort]['colors'][resort_dict[resort]
-                                      ['trail_name'].isin(trails_to_add[resort][level])] = level
-    return resort_dict[resort]
+# def add_trails_to_add(resort):
+#     '''
+#     Inputs:
+#     resort from resorts (str)
+#     Outputs:
+#     resort_df w/ class column updated w/ trail names that didn't make the list (DataFrame)
+#     '''
+#     levels = ['green', 'blue', 'black', 'bb']
+#     for level in levels:
+#         resort_dict[resort]['colors'][resort_dict[resort]
+#                                       ['trail_name'].isin(trails_to_add[resort][level])] = level
+#     return resort_dict[resort]
 
 
-for resort in resort_dict:
-    add_trails_to_add(resort)
+# for resort in resort_dict:
+#     add_trails_to_add(resort)
 
 
-'''trails to remove, since i don't have data on them other than the master plan'''
-trails_to_remove_t = ['T-bar Road', 'Sani Flush', 'Awesome II', 'Rip Curl', '']
-trails_to_remove_BM = ['High Noon Terrain Park',
-                       'Treeline Terrain Park', 'Shooting Gallery', 'Poma Line']
-trails_to_remove_s = ["Bruce's Way", 'Bee Road', 'Road Home', 'Cross Cut']
-trails_to_remove_AS = []
-trails_to_remove_WC = ['Meadows', 'Nirvana', 'Village Way - Primrose']
+# '''trails to remove, since i don't have data on them other than the master plan'''
+# trails_to_remove_t = ['T-bar Road', 'Sani Flush', 'Awesome II', 'Rip Curl', '']
+# trails_to_remove_BM = ['High Noon Terrain Park',
+#                        'Treeline Terrain Park', 'Shooting Gallery', 'Poma Line']
+# trails_to_remove_s = ["Bruce's Way", 'Bee Road', 'Road Home', 'Cross Cut']
+# trails_to_remove_AS = []
+# trails_to_remove_WC = ['Meadows', 'Nirvana', 'Village Way - Primrose']
 
 
-trails_to_remove = [trails_to_remove_t, trails_to_remove_BM,
-                    trails_to_remove_s, trails_to_remove_AS, trails_to_remove_WC]
+# trails_to_remove = [trails_to_remove_t, trails_to_remove_BM,
+#                     trails_to_remove_s, trails_to_remove_AS, trails_to_remove_WC]
 
 
-'''Remove Trails'''
+# '''Remove Trails'''
 
 
-def remove_trails(resort, trail_lst):
-    '''
-    Inputs:
-    resort from resort_dict (str)
-    trail_lst from trails_to_remove (list)
-    Outputs:
-    resort_df with trails removed (DataFrame)
-    '''
-    resort_df_new = resort_dict[resort][~resort_dict[resort]
-                                        ['trail_name'].isin(trail_lst)]
-    return resort_df_new
+# def remove_trails(resort, trail_lst):
+#     '''
+#     Inputs:
+#     resort from resort_dict (str)
+#     trail_lst from trails_to_remove (list)
+#     Outputs:
+#     resort_df with trails removed (DataFrame)
+#     '''
+#     resort_df_new = resort_dict[resort][~resort_dict[resort]
+#                                         ['trail_name'].isin(trail_lst)]
+#     return resort_df_new
 
 
-for resort, trail_lst in zip(resort_dict, trails_to_remove):
-    resort_dict[resort] = remove_trails(resort, trail_lst)
+# for resort, trail_lst in zip(resort_dict, trails_to_remove):
+#     resort_dict[resort] = remove_trails(resort, trail_lst)
 
 
 '''put the dfs back together'''
