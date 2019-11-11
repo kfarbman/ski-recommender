@@ -5,8 +5,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-from .create_tables import (AS_table, BM_table, WC_table, loveland_table,
-                           steamboat_table)
+# from .create_tables import (AS_table, BM_table, WC_table, loveland_table,
+#                            steamboat_table)
 
 warnings.filterwarnings('ignore')
 
