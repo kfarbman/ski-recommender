@@ -315,17 +315,17 @@ WC['trail_name'] = WC['trail_name'].apply(lambda x: ' '.join(x.split()[1:]) if x
 #     resort_dict[resort] = remove_trails(resort, trail_lst)
 
 
-'''put the dfs back together'''
-final_df = pd.concat([resort for resort in resort_dict.values()])
+# '''put the dfs back together'''
+# final_df = pd.concat([resort for resort in resort_dict.values()])
 
-ability_levels = {'Beginner': 1, 'Novice': 2, 'Low Intermediate': 3,
-                  'Intermediate': 4, 'Advanced': 5, 'Expert': 6, 'Glade': 5}
-colors = {'green': 1, 'blue': 2, 'black': 3, 'bb': 4, 'color': 0}
+# ability_levels = {'Beginner': 1, 'Novice': 2, 'Low Intermediate': 3,
+#                   'Intermediate': 4, 'Advanced': 5, 'Expert': 6, 'Glade': 5}
+# colors = {'green': 1, 'blue': 2, 'black': 3, 'bb': 4, 'color': 0}
 
-final_df['ability_nums'] = final_df['ability_level'].map(ability_levels)
-final_df['color_nums'] = final_df['colors'].map(colors)
+# final_df['ability_nums'] = final_df['ability_level'].map(ability_levels)
+# final_df['color_nums'] = final_df['colors'].map(colors)
 
-final_df = final_df.reset_index(drop=True)
+# final_df = final_df.reset_index(drop=True)
 
 # final_df['trail_name'].iloc[424] = 'Teaching Terrain 1'
 # final_df['trail_name'].iloc[425] = 'Teaching Terrain 2'
@@ -353,6 +353,6 @@ final_df = final_df.reset_index(drop=True)
 # final_df['trail_name'][final_df['trail_name'] == 'Litter Pierre'] = 'Little Pierre'
 
 
-output = open('../data/df2.pkl', 'wb')
-pickle.dump(final_df, output)
-output.close()
+# output = open('../data/df2.pkl', 'wb')
+# pickle.dump(final_df, output)
+# output.close()
