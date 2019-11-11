@@ -133,7 +133,8 @@ class CombineTables:
                                "Chute/Glade-Gated": "Expert",
                                "Intermediate Glade": "Intermediate"}
 
-        df["ability_level"] = df["ability_level"].map(dict_ability_levels)
+        # Map values; fill with original value if new value doesn't exist
+        df["ability_level"] = df["ability_level"].map(dict_ability_levels).fillna(df["ability_level"])
 
         return df
 
@@ -669,3 +670,7 @@ if __name__ == '__main__':
     ct = CombineTables()
 
     df_resorts = ct.format_resorts()
+
+    # Standardize ability levels
+
+    df_resorts = ct.standardize_ability_levels(df=df_resorts)
