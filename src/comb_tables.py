@@ -5,8 +5,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-from .create_tables import (BC_table, DP_table, WP_table, loveland_table,
-                            monarch_table, vail_table)
+from .create_tables import (AS_table, BC_table, BM_table, DP_table, WC_table,
+                            WP_table, loveland_table, monarch_table,
+                            steamboat_table, vail_table)
 
 warnings.filterwarnings('ignore')
 
