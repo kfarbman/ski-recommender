@@ -138,6 +138,18 @@ class CombineTables:
 
         return df
 
+    def add_groomed_col(self, df, groomed_lst):
+        '''  
+        Inputs:
+            df: resort_df from resort_dfs (DataFrame)
+            groomed_lst: from grooms (list)
+        Outputs:
+            resort_df w/ groomed column added (DataFrame)
+        '''
+        df['groomed'] = 0
+        df['groomed'][df['trail_name'].isin(groomed_lst)] = 1
+        return df
+
 """
 Separate resorts into independent DataFrames
 """
@@ -302,30 +314,9 @@ groomed_WC = ['A­way', 'Bunny Hop – Lower', 'Bunny Hop – Middle', 'Bunny Ho
               'Legs', 'Coyote Park Trail', 'Muskrat Ramble', 'Navajo Trail – Lower', 'Navajo Trail – Upper', 'Park Avenue', 'Summer Day',
               'Tranquility – Lower', 'Tranquility – Upper', 'Magic Carpet']
 
-# grooms = [groomed_LL, groomed_AB, groomed_c, groomed_e, groomed_AM, groomed_v,
-#           groomed_m, groomed_CB, groomed_t, groomed_DP, groomed_WP, groomed_BC,
-#           groomed_BM, groomed_s, groomed_AS, groomed_WC]
-
-
-'''adding groomed column'''
-
-
-def add_groomed_col(df, groomed_lst):
-    '''  
-    Inputs:
-    resort_df from resort_dfs (DataFrame)
-    groomed_lst from grooms (list)
-    Outputs:
-    resort_df w/ groomed column added (DataFrame)
-    '''
-    df['groomed'] = 0
-    df['groomed'][df['trail_name'].isin(groomed_lst)] = 1
-    return df
-
-# TODO: Migrate to main block
-# for resort, groom in zip(resort_dfs, grooms):
-#     add_groomed_col(resort, groom)
-
+grooms = [groomed_LL, groomed_AB, groomed_c, groomed_e, groomed_AM, groomed_v,
+          groomed_m, groomed_CB, groomed_t, groomed_DP, groomed_WP, groomed_BC,
+          groomed_BM, groomed_s, groomed_AS, groomed_WC]
 
 '''importing pickled dict from webscrape_trails.py'''
 # pkl_file = open('../data/resort_dict.pkl', 'rb')
@@ -351,6 +342,26 @@ resorts = ['Loveland',
            'Steamboat',
            'Aspen Snowmass',
            'Wolf Creek']
+
+# Sorted resorts
+# resorts = ['Alpine Meadows',
+#            'Arapahoe Basin',
+#            'Aspen Snowmass',
+#            'Bald Mountain',
+#            'Beaver Creek',
+#            'Copper',
+#            'Crested Butte',
+#            'Diamond Peak',
+#            'Eldora',
+#            'Loveland',
+#            'Monarch',
+#            'Steamboat',
+#            'Taos',
+#            'Telluride',
+#            'Vail',
+#            'Winter Park',
+#            'Wolf Creek']
+
 levels = ['green', 'blue', 'black', 'bb']
 # resort_dfs = [loveland, AB, copper, eldora,
 #               AM, vail, monarch, CB, taos, DP, WP, BC,
@@ -672,5 +683,17 @@ if __name__ == '__main__':
     df_resorts = ct.format_resorts()
 
     # Standardize ability levels
-
     df_resorts = ct.standardize_ability_levels(df=df_resorts)
+
+    # Fix trail names (remove numbers at beginning)
+
+    # Add groomed column; mark trails as groomed
+    # for resort, groom in zip(resort_dfs, grooms):
+    #     add_groomed_col(resort, groom)
+
+
+    # Missing trails
+
+    # List of trails
+
+    # Color trails
