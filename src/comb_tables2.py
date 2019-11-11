@@ -137,101 +137,101 @@ WC['trail_name'] = WC['trail_name'].apply(lambda x: ' '.join(x.split()[1:]) if x
 # grooms = [groomed_t, groomed_BM, groomed_s, groomed_AS, groomed_WC]
 
 
-'''adding groomed column'''
+# '''adding groomed column'''
 
 
-def add_groomed_col(df, groomed_lst):
-    '''  
-    Inputs:
-    resort_df from resort_dfs (DataFrame)
-    groomed_lst from grooms (list)
-    Outputs:
-    resort_df w/ groomed column added (DataFrame)
-    '''
-    df['groomed'] = 0
-    df['groomed'][df['trail_name'].isin(groomed_lst)] = 1
-    return df
+# def add_groomed_col(df, groomed_lst):
+#     '''  
+#     Inputs:
+#     resort_df from resort_dfs (DataFrame)
+#     groomed_lst from grooms (list)
+#     Outputs:
+#     resort_df w/ groomed column added (DataFrame)
+#     '''
+#     df['groomed'] = 0
+#     df['groomed'][df['trail_name'].isin(groomed_lst)] = 1
+#     return df
 
 
-for resort, groom in zip(resort_dfs, grooms):
-    add_groomed_col(resort, groom)
+# for resort, groom in zip(resort_dfs, grooms):
+#     add_groomed_col(resort, groom)
 
 
-'''importing pickled dict from webscrape_trails.py'''
-pkl_file = open('../data/resort_dict2.pkl', 'rb')
-dct = pickle.load(pkl_file)
-pkl_file.close()
+# '''importing pickled dict from webscrape_trails.py'''
+# pkl_file = open('../data/resort_dict2.pkl', 'rb')
+# dct = pickle.load(pkl_file)
+# pkl_file.close()
 
 '''REDEFINING'''
-resorts = ['Telluride',
-           'Bald Mountain',
-           'Steamboat',
-           'Aspen Snowmass',
-           'Wolf Creek']
-levels = ['green', 'blue', 'black', 'bb']
-resort_dfs = [telluride, BM, steamboat, AS, WC]
-resort_dict = dict(zip(resorts, resort_dfs))
+# resorts = ['Telluride',
+#            'Bald Mountain',
+#            'Steamboat',
+#            'Aspen Snowmass',
+#            'Wolf Creek']
+# levels = ['green', 'blue', 'black', 'bb']
+# resort_dfs = [telluride, BM, steamboat, AS, WC]
+# resort_dict = dict(zip(resorts, resort_dfs))
 
 
-def missing_trails(color_trails, resort):
-    '''
-    Inputs:
-    color_trails = trails_by_color[resort][level] (list)
-    resort from resort_dict (str)
-    Outputs:
-    list of trails by color from webscraping that weren't in the dataframe
-    '''
-    trail_lst = []
-    for trail in color_trails:
-        if trail not in list(resort_dict[resort]['trail_name']):
-             trail_lst.append(trail)
-    return trail_lst
+# def missing_trails(color_trails, resort):
+#     '''
+#     Inputs:
+#     color_trails = trails_by_color[resort][level] (list)
+#     resort from resort_dict (str)
+#     Outputs:
+#     list of trails by color from webscraping that weren't in the dataframe
+#     '''
+#     trail_lst = []
+#     for trail in color_trails:
+#         if trail not in list(resort_dict[resort]['trail_name']):
+#              trail_lst.append(trail)
+#     return trail_lst
 
 
-'''getting a useable list of trails to compare by color'''
+# '''getting a useable list of trails to compare by color'''
 
 
-def get_trails_list(resort, level):
-    '''
-    Inputs: 
-    resort from resorts (str)
-    level from levels (str)
-    Outputs:
-    list of trail names in a useable string format (list)
-    '''
-    if dct[resort][level] is None:
-        return []
-    else:
-        return [word.encode('ascii', 'ignore').strip().decode('utf-8') for word in dct[resort][level]['Name']]
+# def get_trails_list(resort, level):
+#     '''
+#     Inputs: 
+#     resort from resorts (str)
+#     level from levels (str)
+#     Outputs:
+#     list of trail names in a useable string format (list)
+#     '''
+#     if dct[resort][level] is None:
+#         return []
+#     else:
+#         return [word.encode('ascii', 'ignore').strip().decode('utf-8') for word in dct[resort][level]['Name']]
 
 
-trails_by_color = {}
-for resort in resort_dict:
-    trails_by_color[resort] = {level: get_trails_list(
-        resort, level) for level in levels}
+# trails_by_color = {}
+# for resort in resort_dict:
+#     trails_by_color[resort] = {level: get_trails_list(
+#         resort, level) for level in levels}
 
 
-'''adding a colors column'''
+# '''adding a colors column'''
 
 
-def make_colors(resort):
-    '''
-    Inputs:
-    resort_df from resort_dfs (DataFrame)
-    resort from resorts (str)
-    Outputs:
-    resort_df w/ colors column added (DataFrame)
-    '''
-    resort_dict[resort]['colors'] = 'color'
-    levels = ['green', 'blue', 'black', 'bb']
-    for level in levels:
-        resort_dict[resort]['colors'][resort_dict[resort]
-                                      ['trail_name'].isin(get_trails_list(resort, level))] = level
-    return resort_dict[resort]
+# def make_colors(resort):
+#     '''
+#     Inputs:
+#     resort_df from resort_dfs (DataFrame)
+#     resort from resorts (str)
+#     Outputs:
+#     resort_df w/ colors column added (DataFrame)
+#     '''
+#     resort_dict[resort]['colors'] = 'color'
+#     levels = ['green', 'blue', 'black', 'bb']
+#     for level in levels:
+#         resort_dict[resort]['colors'][resort_dict[resort]
+#                                       ['trail_name'].isin(get_trails_list(resort, level))] = level
+#     return resort_dict[resort]
 
 
-for resort in resort_dict:
-    make_colors(resort)
+# for resort in resort_dict:
+#     make_colors(resort)
 
 
 '''

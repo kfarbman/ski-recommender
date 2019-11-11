@@ -325,13 +325,14 @@ def add_groomed_col(df, groomed_lst):
     df['groomed'][df['trail_name'].isin(groomed_lst)] = 1
     return df
 
-
+# TODO: Migrate to main block
 for resort, groom in zip(resort_dfs, grooms):
     add_groomed_col(resort, groom)
 
 
 '''importing pickled dict from webscrape_trails.py'''
 pkl_file = open('../data/resort_dict.pkl', 'rb')
+# pkl_file = open('../data/resort_dict2.pkl', 'rb') # comb_tables2
 dct = pickle.load(pkl_file)
 pkl_file.close()
 
@@ -347,10 +348,16 @@ resorts = ['Loveland',
            'Taos',
            'Diamond Peak',
            'Winter Park',
-           'Beaver Creek']
+           'Beaver Creek',
+           'Telluride',
+           'Bald Mountain',
+           'Steamboat',
+           'Aspen Snowmass',
+           'Wolf Creek']
 levels = ['green', 'blue', 'black', 'bb']
 resort_dfs = [loveland, AB, copper, eldora,
-              AM, vail, monarch, CB, taos, DP, WP, BC]
+              AM, vail, monarch, CB, taos, DP, WP, BC,
+              telluride, BM, steamboat, AS, WC]
 resort_dict = dict(zip(resorts, resort_dfs))
 
 
