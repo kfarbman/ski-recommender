@@ -203,42 +203,39 @@ def fix_trail_names(df):
 
 
 '''groomed runs'''
-# TODO: Sort names of each list of runs
 # TODO: Create dictionary of resort to ski runs?
-groomed_LL = ['Take Off', 'Cat Walk', 'Mambo', 'Home Run', 'Spillway', 'Tempest', 'Tango Road', 'Turtle Creek', "Richard's Run",
-              'Fire Bowl', 'North Turtle Creek', 'Drifter', 'Switchback (Lower)', 'Switchback (Upper)', 'Boomerang',
-              'Zig-Zag', 'Twist (Lower)', 'Twist (Upper)', 'Creek Trail', 'Lower Creek Trail', 'Perfect Bowl', 'Scrub',
-              'Apollo (Upper)', 'Telestar', 'Deuces Wild', 'Forest Meadow', 'Roulette', 'Keno', 'Royal Flush', 'Straight Flush',
-              'Take Off', 'All Smiles', 'Zip Trail', 'Zippity Split', "Chet's Run", 'Awesome', 'Rookie Road', 'Magic Carpet Slope']
+groomed_LL = ['All Smiles','Apollo (Upper)','Awesome','Boomerang','Cat Walk',"Chet's Run",'Creek Trail','Deuces Wild',
+                'Drifter','Fire Bowl','Forest Meadow','Home Run','Keno','Lower Creek Trail','Magic Carpet Slope','Mambo',
+                'North Turtle Creek','Perfect Bowl',"Richard's Run",'Rookie Road','Roulette','Royal Flush','Scrub','Spillway',
+                'Straight Flush','Switchback (Lower)','Switchback (Upper)','Take Off','Take Off','Tango Road','Telestar',
+                'Tempest','Turtle Creek','Twist (Lower)','Twist (Upper)','Zig-Zag','Zip Trail','Zippity Split']
 
-groomed_AB = ['Wrangler Lower', 'Wrangler Middle', 'Wrangler Upper', 'Chisholm', 'Chisholm Trail', 'Sundance',
-              'Molly Hogan Upper', 'High Noon', 'Lenawee Face', 'Humbug', 'Powerline', 'West Wall', 'Grizzly Road',
-              'Lenawee Parks', "Dercum's Gulch", 'Norway Face', 'Cornice Run I', 'Cornice Run II', 'West Gully', 'Knolls',
-              'Falcon', 'Larkspur', 'Independence', 'Columbine', 'Shining Light', 'Molly Hogan 1', 'Molly Hogan 2',
-              "Molly's Magic Carpet", 'Carpet II']
+groomed_AB = ['Carpet II','Chisholm','Chisholm Trail','Columbine','Cornice Run I','Cornice Run II',"Dercum's Gulch",'Falcon',
+                'Grizzly Road','High Noon','Humbug','Independence','Knolls','Larkspur','Lenawee Face','Lenawee Parks',
+                'Molly Hogan 1','Molly Hogan 2','Molly Hogan Upper',"Molly's Magic Carpet",'Norway Face','Powerline',
+                'Shining Light','Sundance','West Gully','West Wall','Wrangler Lower','Wrangler Middle','Wrangler Upper']
 
-groomed_c = ['Lower Easy Road Traverse', 'Upper Easy Road Traverse', 'Upper Leap Frog', 'Bittersweet',
-             'Bouncer', 'Fair Play', 'Foul Play', 'Main Vein', 'Rhapsody', 'Coppertone', 'Easy Road Too', 'Lower High Point',
-             'Middle High Point', 'Upper High Point', 'Woodwinds', 'Woodwinds Traverse', 'Otto Bahn', 'Rattler', 'Ptarmigan',
-             'Green Acres', 'Lower Roundabout', 'Upper Roundabout', 'Middle Roundabout', 'Clear  Cut', 'Lower Sluice', 'Union Park',
-             'Triple Zero', 'Upper Lillie G', "Andy's Encore", 'Collage', 'Oh No', 'Skid Road', 'Upper Skid Road', "Rosi's Run",
-             'I-Way', 'Minor Matter', 'Lower Soliloquy', 'Upper Soliloquy', 'American Flyer', 'The Moz', 'Windsong', 'Lower Carefree',
-             'Upper Carefree', "Lower Easy Feelin'", "Upper Easy Feelin'", 'Hidden Vein', 'Vein Glory', 'Lower Loverly', 'Scooter',
-             'Gem', 'Easy Rider', 'Rugrat', 'The Glide', 'Slingshot', 'Clear Cut', 'Copperopolis']
+groomed_c = ['American Flyer',  "Andy's Encore",'Bittersweet','Bouncer','Clear  Cut','Clear Cut','Collage','Copperopolis',
+                'Coppertone','Easy Rider','Easy Road Too','Fair Play','Foul Play','Gem','Green Acres','Hidden Vein','I-Way',
+                'Lower Carefree',"Lower Easy Feelin'",'Lower Easy Road Traverse','Lower High Point','Lower Loverly','Lower Roundabout',
+                'Lower Sluice','Lower Soliloquy','Main Vein','Middle High Point','Middle Roundabout','Minor Matter','Oh No','Otto Bahn',
+                'Ptarmigan','Rattler','Rhapsody',"Rosi's Run",'Rugrat','Scooter','Skid Road','Slingshot','The Glide','The Moz','Triple Zero',
+                'Union Park','Upper Carefree',"Upper Easy Feelin'",'Upper Easy Road Traverse','Upper High Point','Upper Leap Frog','Upper Lillie G',
+                'Upper Roundabout','Upper Skid Road','Upper Soliloquy','Vein Glory','Windsong','Woodwinds','Woodwinds Traverse']
 
-groomed_e = ['Tenderfoot I', 'Tenderfoot II', 'Ho Hum', 'Easy Way', 'Bunnyfair', 'Fox Tail', 'Snail', 'Quickway', 'Sundance',
-             'Upper Bunny Fair', 'Corkscrew', 'Little Hawk TRV', 'Bonanza', 'Chute', 'Sunkid Slope', 'Middle Jolly Jug',
-             'Lower Jolly Jug', "Mary's Way", 'Summer Road', 'Sunset', 'Challenge', 'Challenge Liftline', 'Crewcut', 'Hornblower',
-             'Hotdog Alley', 'International', 'Klondike', 'Windmill', 'Corona Road', 'La Belle Dame', 'Corona TRV', 'Dream & Scream',
-             "Four O' Clock Trail", 'Lower Ambush', 'Lower Diamond Back', 'Sidewinder', 'Upper Diamond Back', 'Around the Horn',
-             'Corona', 'Muleshoe', 'Pipeline', 'Wayback']
+groomed_e = ['Around the Horn','Bonanza','Bunnyfair','Challenge','Challenge Liftline','Chute','Corkscrew','Corona','Corona Road','Corona TRV',
+                'Crewcut','Dream & Scream','Easy Way',"Four O' Clock Trail",'Fox Tail','Ho Hum','Hornblower','Hotdog Alley','International',
+                'Klondike','La Belle Dame','Little Hawk TRV','Lower Ambush','Lower Diamond Back','Lower Jolly Jug',"Mary's Way",'Middle Jolly Jug',
+                'Muleshoe','Pipeline','Quickway','Sidewinder','Snail','Summer Road','Sundance','Sunkid Slope','Sunset','Tenderfoot I',
+                'Tenderfoot II','Upper Bunny Fair','Upper Diamond Back','Wayback','Windmill']
 
-groomed_AM = ['East Creek', 'Weasel Run', 'Lakeview to Weasel', "Nick’s Run", 'Leisure Lane', 'Outer Limits', 'Shooting Star',
-              'Twilight Zone', 'Meadow Run', 'Charity', 'Dance Floor', 'Rock Garden', "Sandy’s Corner", "Werner’s Schuss",
-              "Bobby’s Run", 'Winter Road', 'Summer Road', 'Maid Marian', "Ray’s Rut", "Reily’s Run", 'Sherwood Run',
-              'Return Road', 'Subway Run', 'Alpine Bowl', "Loop Road", 'Sun Spot', 'Wolverine', 'D-8', 'Teaching Terrain',
-              "Yellow Trail", 'Ladies Slalom', "Scott Ridge Run", "Mountain View", 'Terry’s Return']
+groomed_AM = ['Alpine Bowl', 'Bobby’s Run','Charity','D-8','Dance Floor','East Creek','Ladies Slalom','Lakeview to Weasel','Leisure Lane',
+                'Loop Road','Maid Marian', 'Meadow Run','Mountain View','Nick’s Run','Outer Limits','Ray’s Rut','Reily’s Run',
+                'Return Road','Rock Garden','Sandy’s Corner','Scott Ridge Run','Sherwood Run','Shooting Star','Subway Run',
+                'Summer Road','Sun Spot','Teaching Terrain','Terry’s Return','Twilight Zone','Weasel Run','Werner’s Schuss',
+                'Winter Road','Wolverine','Yellow Trail']
 
+# TODO: Format rest of groomed runs
 groomed_v = ['Boomer', 'Flapjack', 'Gopher Hill', 'Northstar', "Ruder's Route", 'Sourdough', 'Tin Pants', 'Tin Pants Catwalk',
              'Whippersnapper', 'Whiskey Jack', 'Whiskey Jack Catwalk', 'Avanti Lower', 'Avanti Upper', 'Bear Tree', 'Expresso',
              'Hunky Dory', 'Mid-Vail Express', 'Overeasy', 'Ramshorn', 'Swingsville', 'The Meadows', 'Swingsville Ridge', 'Born Free',
