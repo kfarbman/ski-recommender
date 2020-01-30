@@ -72,12 +72,8 @@ def make_dataframe(filename):
     #         trail_rows.append(row + ' Advanced Intermediate') # change THIS or something like it to deal with Vail line splits (in name and ability level)
             
 
-    list_of_lists = []
-
-
-    for row in trail_rows:
-        list_of_lists.append(fix_a_row(row))
-        
+    list_of_lists = [fix_a_row(row) for row in trail_rows]
+     
     colnames = ['trail_name', 'top_elev_(ft)', 'bottom_elev_(ft)', 'vert_rise_(ft)', 'slope_length_(ft)', 'avg_width_(ft)', 'slope_area_(acres)', 'avg_grade_(%)', 'max_grade_(%)', 'ability_level']
 
     df = pd.DataFrame(list_of_lists, columns=colnames)
