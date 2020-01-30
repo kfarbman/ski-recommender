@@ -97,20 +97,6 @@ def preprocess_data(df,resort,location):
     df['location'] = location
     
     return df
-
-
-
-'''
-figure out how to deal with multi lines for Vail
-'''
-
-
-'''
-add columns for 
--grooming
--face
--ski area
-'''
           
 if __name__ == '__main__':
 
