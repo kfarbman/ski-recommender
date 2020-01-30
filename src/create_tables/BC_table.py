@@ -3,10 +3,15 @@ import pandas as pd
 
 
 def fix_a_row(row):
-    # lst = row.split()
-    # words = [x for x in lst if (x.strip('.').isalpha() or any(i in x for i in ['#','-',"'",'(']))]
-    # stats = [x for x in lst if not (x.strip('.').isalpha() or any(i in x for i in ['#','-',"'",'(']))]
+    """
+    Correct values in each row of data
 
+    Input
+        row: list of values
+    
+    Output
+        list of corrected values
+    """
     lst = row
 
     lst_difficulties = ["Adv.", "Advanced", "Exp", "Low", "Hike"]
@@ -31,10 +36,20 @@ def fix_a_row(row):
 
 
 def make_dataframe(filename):
-    with open(filename) as f:
-        stuff = f.read()
+    """
+    Create Pandas DataFrame from text file
+
+    Input
+        filename: file for processing
     
-    lst_stuff_split = stuff.split('\n')
+    Output
+        Pandas DataFrame
+    """
+    
+    with open(filename) as f:
+        resort_data = f.read()
+    
+    lst_resort_data = resort_data.split('\n')
     
     lst_level_endings = ['Advanced',
                          'Beginner',
@@ -47,7 +62,7 @@ def make_dataframe(filename):
 
     trail_rows = []
 
-    for row in lst_stuff_split:
+    for row in lst_resort_data:
         if len(row.split()) > 1 and (row.split()[-1] in lst_level_endings):
             trail_rows.append(row.split())
 
@@ -66,18 +81,21 @@ def make_dataframe(filename):
     colnames = ['trail_name', 'top_elev_(ft)', 'bottom_elev_(ft)', 'vert_rise_(ft)', 'slope_length_(ft)', 'avg_width_(ft)', 'slope_area_(acres)', 'avg_grade_(%)', 'max_grade_(%)', 'ability_level']
 
     df = pd.DataFrame(list_of_lists, columns=colnames)
+    
     return df
     
 
-def fix_dtype(filename,resort,location):
+def preprocess_data(df,resort,location):
     '''
     Inputs:
-    filename: .txt file (str)
-    resort: resort name (str)
-    location: city (str)
-    '''
-    df = make_dataframe(filename)
+        df: Pandas DataFrame
+        resort: resort name (str)
+        location: city (str)
     
+    Output
+        Pandas DataFrame with formatted columns
+    '''
+        
     df['bottom_elev_(ft)'][df['trail_name'] == 'Beginner Terrain'] = '8100'
     
     columns_to_change = ['top_elev_(ft)',
@@ -102,15 +120,10 @@ def fix_dtype(filename,resort,location):
     return df
 
 
+if __name__ == "__main__":
 
-'''
-figure out how to deal with multi lines for Vail
-'''
+    df_resort = make_dataframe("../../data/Beaver_Creek.txt")
 
-
-'''
-add columns for 
--grooming
--face
--ski area
-'''
+    df_resort = preprocess_data(df=df_resort,
+        resort = "Beaver Creek",
+        location = "Vail")
