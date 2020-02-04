@@ -47,17 +47,38 @@ class CombineTables:
         # TODO: Pass key from resorts dict to make_dataframe
         lst_resorts = []
         
+        # Aspen Snowmass
+        df_resort = AS_table.make_dataframe(self.resorts["Aspen Snowmass"][0])
+        df_resort = AS_table.preprocess_data(df=df_resort,
+            resort = "Aspen Snowmass",
+            location = "CO")
+        lst_resorts.append(df_resort)
+        
+        # Bald Mountain
+        df_resort = BM_table.make_dataframe(self.resorts["Bald Mountain"][0])
+        df_resort = BM_table.preprocess_data(df=df_resort,
+            resort = "Bald Mountain",
+            location = "CO")
+        lst_resorts.append(df_resort)
+
+        # Beaver Creek
+        df_resort = BC_table.make_dataframe(self.resorts["Beaver Creek"][0])
+        df_resort = BC_table.preprocess_data(df=df_resort,
+            resort = "Beaver Creek",
+            location = "CO")
+        lst_resorts.append(df_resort)
+
+        # Diamond Peak
+        df_resort = DP_table.make_dataframe(self.resorts["Diamond Peak"][0])
+        df_resort = DP_table.preprocess_data(df=df_resort,
+            resort = "Diamond Peak",
+            location = "CO")
+        lst_resorts.append(df_resort)
+
         # Loveland
         df_resort = loveland_table.make_dataframe(self.resorts["Loveland"][0])
         df_resort = loveland_table.preprocess_data(df=df_resort,
             resort = "Loveland",
-            location = "CO")
-        lst_resorts.append(df_resort)
-        
-        # Vail
-        df_resort = vail_table.make_dataframe(self.resorts["Vail"][0])
-        df_resort = vail_table.preprocess_data(df=df_resort,
-            resort = "Vail",
             location = "CO")
         lst_resorts.append(df_resort)
 
@@ -69,13 +90,20 @@ class CombineTables:
         #         location = "CO")
         #     lst_resorts.append(df_resort)
         
-        # Diamond Peak
-        df_resort = DP_table.make_dataframe(self.resorts["Diamond Peak"][0])
-        df_resort = DP_table.preprocess_data(df=df_resort,
-            resort = "Diamond Peak",
+        # Steamboat
+        df_resort = steamboat_table.make_dataframe(self.resorts["Steamboat"][0])
+        df_resort = steamboat_table.preprocess_data(df=df_resort,
+            resort = "Steamboat",
             location = "CO")
         lst_resorts.append(df_resort)
         
+        # Vail
+        df_resort = vail_table.make_dataframe(self.resorts["Vail"][0])
+        df_resort = vail_table.preprocess_data(df=df_resort,
+            resort = "Vail",
+            location = "CO")
+        lst_resorts.append(df_resort)
+
         # Winter Park
         colnames = ['trail_name', 'top_elev_(ft)', 'bottom_elev_(ft)', 'vert_rise_(ft)', 'horiz_dist', 'slope_length_(ft)', 'avg_grade_(%)', 'plan_acres', 'slope_area_(acres)', 'deg_grade', 'max_grade_(%)', 'avg_width_(ft)', 'ability_level']
         df_resort = pd.read_csv(self.resorts["Winter Park"][0],
@@ -84,35 +112,7 @@ class CombineTables:
         df_resort = WP_table.preprocess_data(df=df_resort,
             resort="Winter Park",
             location="CO")
-        lst_resorts.append(df_resort)
-        
-        # Beaver Creek
-        df_resort = BC_table.make_dataframe(self.resorts["Beaver Creek"][0])
-        df_resort = BC_table.preprocess_data(df=df_resort,
-            resort = "Beaver Creek",
-            location = "CO")
-        lst_resorts.append(df_resort)
-        
-        # Bald Mountain
-        df_resort = BM_table.make_dataframe(self.resorts["Bald Mountain"][0])
-        df_resort = BM_table.preprocess_data(df=df_resort,
-            resort = "Bald Mountain",
-            location = "CO")
-        lst_resorts.append(df_resort)
-        
-        # Steamboat
-        df_resort = steamboat_table.make_dataframe(self.resorts["Steamboat"][0])
-        df_resort = steamboat_table.preprocess_data(df=df_resort,
-            resort = "Steamboat",
-            location = "CO")
-        lst_resorts.append(df_resort)
-        
-        # Aspen Snowmass
-        df_resort = AS_table.make_dataframe(self.resorts["Aspen Snowmass"][0])
-        df_resort = AS_table.preprocess_data(df=df_resort,
-            resort = "Aspen Snowmass",
-            location = "CO")
-        lst_resorts.append(df_resort)
+        lst_resorts.append(df_resort)        
         
         # Wolf Creek
         df_resort = WC_table.make_dataframe(self.resorts["Wolf Creek"][0])
