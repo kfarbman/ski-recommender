@@ -185,6 +185,16 @@ whole_table = pd.DataFrame()
 # trail_names_to_fix = [copper, AM, vail, monarch, CB, taos, DP, eldora]
 trail_names_to_fix = []
 
+
+# resort_dfs = [telluride, BM, steamboat, AS, WC]
+
+
+'''fixing trail names'''
+# WC['trail_name'] = WC['trail_name'].apply(lambda x: ' '.join(x.split()[1:]))
+# WC['trail_name'] = WC['trail_name'].apply(lambda x: ' '.join(x.split()[1:]) if x.split()[
+#                                           0] in ['l', 'u', 'm', 'c', 'g', 'r'] else ' '.join(x.split()))
+
+
 def fix_trail_names(df):
     '''
     Inputs:
@@ -551,7 +561,10 @@ def add_trails_to_add(resort):
 #     add_trails_to_add(resort)
 
 
-'''trails to remove, since i don't have data on them other than the master plan'''
+'''
+Remove trails with no data other than master plan
+'''
+
 trails_to_remove_LL = ['T-bar Road',
                        'Sani Flush', 'Awesome II', 'Rip Curl', '']
 trails_to_remove_AB = ['High Noon Terrain Park',
