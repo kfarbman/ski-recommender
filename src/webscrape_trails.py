@@ -146,6 +146,10 @@ if __name__ == '__main__':
     df_combined = pd.concat(lst_resort_data)
     df_combined["difficulty"] = df_combined["URL"].str.split("skiruns-", 1, expand=True)[1]
 
+    # Format run name
+    df_combined["Name"] = df_combined["Name"].str.replace("\xa0 ", "")
+    df_combined["Name"] = df_combined["Name"].str.rstrip()
+
     # Get resort name
     df_combined["resort_name"] = df_combined["URL"].str.split("united-states-of-america/", 1, expand=True)[1]
     df_combined["resort_name"] = df_combined["resort_name"].str.split("/", 1, expand=True)[0]
