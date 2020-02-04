@@ -1,13 +1,14 @@
 import pickle
 import warnings
+from itertools import chain
 
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
 from create_tables import (AS_table, BC_table, BM_table, DP_table, WC_table,
-                            WP_table, loveland_table, monarch_table,
-                            steamboat_table, vail_table)
+                           WP_table, loveland_table, monarch_table,
+                           steamboat_table, vail_table)
 
 warnings.filterwarnings('ignore')
 
@@ -317,13 +318,9 @@ dict_groomed_runs = {
                 
                 }
 
-
-grooms = [groomed_LL, groomed_AB, groomed_c, groomed_e, groomed_AM, groomed_v,
-          groomed_m, groomed_CB, groomed_t, groomed_DP, groomed_WP, groomed_BC,
-          groomed_BM, groomed_s, groomed_AS, groomed_WC]
+lst_groomed_runs = list(chain(*dict_groomed_runs.values()))
 
 '''importing pickled dict from webscrape_trails.py'''
-# pkl_file = open('../data/resort_dict.pkl', 'rb')
 # # pkl_file = open('../data/resort_dict2.pkl', 'rb') # comb_tables2
 # dct = pickle.load(pkl_file)
 # pkl_file.close()
@@ -357,10 +354,10 @@ levels = ['green', 'blue', 'black', 'bb']
 def missing_trails(color_trails, resort):
     '''
     Inputs:
-    color_trails = trails_by_color[resort][level] (list)
-    resort from resort_dict (str)
+        color_trails = trails_by_color[resort][level] (list)
+        resort from resort_dict (str)
     Outputs:
-    list of trails by color from webscraping that weren't in the dataframe
+        list of trails by color from webscraping that weren't in the dataframe
     '''
     trail_lst = []
     for trail in color_trails:
