@@ -36,23 +36,8 @@ class CombineTables:
                         'Wolf Creek': ['../data/new/Wolf_Creek.txt', 'CO']}
 
         # Keys of resorts compatible with each script
-        self.BC_script = ['Beaver Creek']
-        self.DP_script = ['Diamond Peak']
-        self.loveland_script = ['Loveland']
-        # TODO: Include additional resorts
+        # TODO: Include additional resorts?
         # self.resorts = ['Arapahoe Basin', 'Copper', 'Eldora', 'Alpine Meadows']
-        self.monarch_script = ['Monarch']
-        self.CB_script = ["Crested Butte"]
-        self.taos_script = ["Taos"]
-        self.vail_script = ['Vail']
-        self.WP_script = ['Winter Park']
-
-        # comb_tables2 scripts
-        self.loveland_script = ['Telluride']
-        self.BM_script = ['Bald Mountain']
-        self.steamboat_script = ['Steamboat']
-        self.AS_script = ['Aspen Snowmass']
-        self.WC_script = ['Wolf Creek']
 
     def format_resorts(self):
         """
