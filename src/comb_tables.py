@@ -331,7 +331,37 @@ if __name__ == '__main__':
 
     lst_groomed_runs = list(chain(*dict_groomed_runs.values()))
 
-    df_resorts = combine.add_groomed_col(df=df_resorts, groomed_lst=lst_groomed_runs)
+    df_resorts = combine.add_groomed_col(
+        df=df_resorts,
+        groomed_lst=lst_groomed_runs)
+
+    """
+    Import webscraped data
+    """
+
+    df_webscraped_trails = pd.read_csv("webscrape_trail_data_20200203.csv")
+
+    dict_webscrape_trail_names = {'alpine-meadows': "Alpine Meadows",
+                                  'arapahoe-basin': "Arapahoe Basin",
+                                  'aspen-snowmass': "Aspen Snowmass",
+                                  'bald-mountain': "Bald Mountain",
+                                  'beaver-creek-resort': "Beaver Creek",
+                                  'copper-mountain-resort': "Copper",
+                                  'crested-butte-mountain-resort': "Crested Butte",
+                                  'diamond-peak': "Diamond Peak",
+                                  'eldora-mountain-resort': "Eldora",
+                                  'loveland-ski-area': "Loveland",
+                                  'monarch-ski-area': "Monarch",
+                                  'steamboat-ski-resort': "Steamboat",
+                                  'taos-ski-valley': "Taos",
+                                  'telluride-ski-resort': "Telluride",
+                                  'vail-ski-resort': "Vail",
+                                  'winter-park-resort': "Winter Park",
+                                  'wolf-creek-ski-area': "Wolf Creek"}
+
+    df_webscraped_trails["resort_name"] = df_webscraped_trails["resort_name"].map(
+        dict_webscrape_trail_names).\
+        fillna(df_webscraped_trails["resort_name"])
 
     import pdb; pdb.set_trace()
 
@@ -341,23 +371,23 @@ if __name__ == '__main__':
 # pkl_file.close()
 
 '''REDEFINING'''
-resorts = ['Alpine Meadows',
-           'Arapahoe Basin',
-           'Aspen Snowmass',
-           'Bald Mountain',
-           'Beaver Creek',
-           'Copper',
-           'Crested Butte',
-           'Diamond Peak',
-           'Eldora',
-           'Loveland',
-           'Monarch',
-           'Steamboat',
-           'Taos',
-           'Telluride',
-           'Vail',
-           'Winter Park',
-           'Wolf Creek']
+# resorts = ['Alpine Meadows',
+#            'Arapahoe Basin',
+#            'Aspen Snowmass',
+#            'Bald Mountain',
+#            'Beaver Creek',
+#            'Copper',
+#            'Crested Butte',
+#            'Diamond Peak',
+#            'Eldora',
+#            'Loveland',
+#            'Monarch',
+#            'Steamboat',
+#            'Taos',
+#            'Telluride',
+#            'Vail',
+#            'Winter Park',
+#            'Wolf Creek']
 
 levels = ['green', 'blue', 'black', 'bb']
 # resort_dfs = [loveland, AB, copper, eldora,
