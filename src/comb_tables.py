@@ -89,7 +89,7 @@ class CombineTables:
         #         resort = "Monarch",
         #         location = "CO")
         #     lst_resorts.append(df_resort)
-        
+
         # Steamboat
         df_resort = steamboat_table.make_dataframe(self.resorts["Steamboat"][0])
         df_resort = steamboat_table.preprocess_data(df=df_resort,
@@ -131,6 +131,8 @@ class CombineTables:
         whole_table = whole_table[columns]
         CO_resorts = whole_table[whole_table['location'] == 'CO']
 
+        CO_resorts = CO_resorts.reset_index(drop=True)
+
         return CO_resorts
 
     def standardize_ability_levels(self, df):
@@ -157,6 +159,17 @@ class CombineTables:
 
         return df
 
+    def fix_trail_names(self, df):
+        '''
+        Inputs:
+            df from trail_names_to_fix (DataFrame)
+        Outputs:
+            df w/ trail name fixed - removing number at beginning (DataFrame)
+        '''
+        df['trail_name'] = df['trail_name'].apply(
+            lambda x: ' '.join(x.split()[1:]))
+        return df
+
     def add_groomed_col(self, df, groomed_lst):
         '''  
         Inputs:
@@ -177,38 +190,14 @@ if __name__ == '__main__':
 
     df_resorts = combine.standardize_ability_levels(df=df_resorts)
 
+    df_resorts = combine.fix_trail_names(df=df_resorts)
+
     import pdb; pdb.set_trace()
+
+
 """
-Separate resorts into independent DataFrames
+Fix trail names
 """
-
-whole_table = pd.DataFrame()
-
-# loveland = whole_table[whole_table['resort'] == 'Loveland']
-# AB = whole_table[whole_table['resort'] == 'Arapahoe Basin']
-# copper = whole_table[whole_table['resort'] == 'Copper']
-# eldora = whole_table[whole_table['resort'] == 'Eldora']
-# AM = whole_table[whole_table['resort'] == 'Alpine Meadows']
-# vail = whole_table[whole_table['resort'] == 'Vail']
-# monarch = whole_table[whole_table['resort'] == 'Monarch']
-# CB = whole_table[whole_table['resort'] == 'Crested Butte']
-# taos = whole_table[whole_table['resort'] == 'Taos']
-# DP = whole_table[whole_table['resort'] == 'Diamond Peak']
-# WP = whole_table[whole_table['resort'] == 'Winter Park']
-# BC = whole_table[whole_table['resort'] == 'Beaver Creek']
-# telluride = whole_table[whole_table['resort'] == 'Telluride']
-# BM = whole_table[whole_table['resort'] == 'Bald Mountain']
-# steamboat = whole_table[whole_table['resort'] == 'Steamboat']
-# AS = whole_table[whole_table['resort'] == 'Aspen Snowmass']
-# WC = whole_table[whole_table['resort'] == 'Wolf Creek']
-
-
-# resort_dfs = [loveland, AB, copper, eldora,
-#               AM, vail, monarch, CB, taos, DP, WP, BC,
-#               telluride, BM, steamboat, AS, WC]
-
-
-'''fixing trail names'''
 # trail_names_to_fix = [copper, AM, vail, monarch, CB, taos, DP, eldora]
 trail_names_to_fix = []
 
@@ -220,18 +209,6 @@ trail_names_to_fix = []
 # WC['trail_name'] = WC['trail_name'].apply(lambda x: ' '.join(x.split()[1:]))
 # WC['trail_name'] = WC['trail_name'].apply(lambda x: ' '.join(x.split()[1:]) if x.split()[
 #                                           0] in ['l', 'u', 'm', 'c', 'g', 'r'] else ' '.join(x.split()))
-
-
-def fix_trail_names(df):
-    '''
-    Inputs:
-    df from trail_names_to_fix (DataFrame)
-    Outputs:
-    df w/ trail name fixed - removing number at beginning (DataFrame)
-    '''
-    df['trail_name'] = df['trail_name'].apply(
-        lambda x: ' '.join(x.split()[1:]))
-    return df
 
 
 # for trail in trail_names_to_fix:
