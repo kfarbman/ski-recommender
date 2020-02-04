@@ -192,28 +192,6 @@ if __name__ == '__main__':
 
     df_resorts = combine.fix_trail_names(df=df_resorts)
 
-    # """
-    # Fix trail names
-    # """
-    # # trail_names_to_fix = [copper, AM, vail, monarch, CB, taos, DP, eldora]
-    # trail_names_to_fix = []
-
-
-    # # resort_dfs = [telluride, BM, steamboat, AS, WC]
-
-
-    # '''fixing trail names'''
-    # # WC['trail_name'] = WC['trail_name'].apply(lambda x: ' '.join(x.split()[1:]))
-    # # WC['trail_name'] = WC['trail_name'].apply(lambda x: ' '.join(x.split()[1:]) if x.split()[
-    # #                                           0] in ['l', 'u', 'm', 'c', 'g', 'r'] else ' '.join(x.split()))
-
-
-    # # for trail in trail_names_to_fix:
-    # #     fix_trail_names(trail)
-    # # copper['trail_name'] = copper['trail_name'].apply(
-    # #     lambda x: ' '.join([i for i in x.split() if i[0].isnumeric() == False]))
-
-
     """
     Create dictionary of resorts and groomed ski runs
     """
@@ -341,6 +319,7 @@ if __name__ == '__main__':
 
     df_webscraped_trails = pd.read_csv("webscrape_trail_data_20200203.csv")
 
+    # Rename resorts
     dict_webscrape_trail_names = {'alpine-meadows': "Alpine Meadows",
                                   'arapahoe-basin': "Arapahoe Basin",
                                   'aspen-snowmass': "Aspen Snowmass",
@@ -365,36 +344,6 @@ if __name__ == '__main__':
 
     import pdb; pdb.set_trace()
 
-'''importing pickled dict from webscrape_trails.py'''
-# # pkl_file = open('../data/resort_dict2.pkl', 'rb') # comb_tables2
-# dct = pickle.load(pkl_file)
-# pkl_file.close()
-
-'''REDEFINING'''
-# resorts = ['Alpine Meadows',
-#            'Arapahoe Basin',
-#            'Aspen Snowmass',
-#            'Bald Mountain',
-#            'Beaver Creek',
-#            'Copper',
-#            'Crested Butte',
-#            'Diamond Peak',
-#            'Eldora',
-#            'Loveland',
-#            'Monarch',
-#            'Steamboat',
-#            'Taos',
-#            'Telluride',
-#            'Vail',
-#            'Winter Park',
-#            'Wolf Creek']
-
-levels = ['green', 'blue', 'black', 'bb']
-# resort_dfs = [loveland, AB, copper, eldora,
-#               AM, vail, monarch, CB, taos, DP, WP, BC,
-#               telluride, BM, steamboat, AS, WC]
-# resort_dict = dict(zip(resorts, resort_dfs))
-
 
 def missing_trails(color_trails, resort):
     '''
@@ -410,12 +359,10 @@ def missing_trails(color_trails, resort):
              trail_lst.append(trail)
     return trail_lst
 
-
-'''getting a useable list of trails to compare by color'''
-
-
 def get_trails_list(resort, level):
     '''
+    Compare list of trails by color
+
     Inputs: 
     resort from resorts (str)
     level from levels (str)
@@ -427,18 +374,15 @@ def get_trails_list(resort, level):
     else:
         return [word.encode('ascii', 'ignore').strip().decode('utf-8') for word in dct[resort][level]['Name']]
 
-
 # trails_by_color = {}
 # for resort in resort_dict:
 #     trails_by_color[resort] = {level: get_trails_list(
 #         resort, level) for level in levels}
 
-
-'''adding a colors column'''
-
-
 def make_colors(resort):
     '''
+    Compare color column
+
     Inputs:
     resort_df from resort_dfs (DataFrame)
     resort from resorts (str)
@@ -459,25 +403,29 @@ def make_colors(resort):
 
 '''
 Dictionary of dictionaries {resort: {level: [trails]}}
-For trails that are in the resort_df but have slightly different names from the webscraping (by color)
+For trails that df_resorts, but have slightly different names from the webscraping (by color)
 '''
-trails_to_add = {}
-trails_to_add['Alpine Meadows'] = {'green': ['Meadow Run', 'Subway Run', 'Teaching Terrain'],
+dict_trails_to_add = {}
+dict_trails_to_add['Alpine Meadows'] = {'green': ['Meadow Run', 'Subway Run', 'Teaching Terrain'],
                                    'blue': ['Bobby’s Run', 'Maid Marian', 'Nick’s Run', 'Ray’s Rut', 'Reily’s Run',
                                             'Sandy’s Corner', 'Scotty’s Beam', 'Werner’s Schuss', "Terry’s Return"],
                                    'black': ['Peter’s Peril', 'Hidden Knoll’s', 'Promise Land'],
                                    'bb': []}
-trails_to_add['Loveland'] = {'green': ['Cat Walk', 'Deuces Wild', 'Home Run', 'Zig-Zag', 'Magic Carpet Slope'],
-                             'blue': ['Apollo (Lower)', 'Apollo (Upper)', 'Blackjack (Lower)', 'Blackjack (Upper)', 'North Chutes', 'Switchback (Lower)',
-                                      'Switchback (Upper)', 'Twist (Lower)', 'Twist (Upper)', "Upper Richard's", 'Tempest', "Chet's Run"],
-                             'black': ['Cats Meow', 'Fail Safe Trees I', 'Fail Safe Trees II', 'Sunburst Chutes',
-                                       "Hook 'Em Horns"],
-                             'bb': ['#4 Headwall', 'Upper #4 Headwall', 'Patrol Bowl (Lower)', 'Patrol Bowl (Upper)']}
-trails_to_add['Arapahoe Basin'] = {'green': ['Wrangler Lower', 'Wrangler Middle', 'Wrangler Upper', 'Molly Hogan 1', 'Molly Hogan 2', "Molly's Magic Carpet", 'Molly Hogan Upper', 'Carpet II'],
+
+dict_trails_to_add['Arapahoe Basin'] = {'green': ['Wrangler Lower', 'Wrangler Middle', 'Wrangler Upper', 'Molly Hogan 1', 'Molly Hogan 2', "Molly's Magic Carpet", 'Molly Hogan Upper', 'Carpet II'],
                                    'blue': ['Cornice Run I', 'Cornice Run II', 'T.B. Glade'],
                                    'black': ['Powder Keg Lower', 'Powder Keg Upper'],
                                    'bb': ['13 Cornices Upper', '13 Cornices Lower', 'Roller Coaster', 'West Alley']}
-trails_to_add['Copper'] = {'green': ['Lower Carefree', 'Upper Carefree', "Lower Easy Feelin'", "Upper Easy Feelin'",
+
+dict_trails_to_add['Beaver Creek'] = {'green': ['Beginner Terrain', 'BC Mtn Expressway', 'Easy Come _Easy Go', 'Elkhorn', 'Haymeadow',
+                                           'Holden', 'Leav the Beav', 'Meadows', 'Rubarb', 'Ridge Point', 'Highlands Skiway',
+                                           'Primrose'],
+                                 'blue': ['Creekside', 'Stacker_lower', 'McCoy', 'Paintbrush', 'West Fall Road', 'Camprobber Road',
+                                          'Cabin Fever', 'Wapti'],
+                                 'black': ['Boarders Loop', 'Goshawk', 'Harrier', 'Centennial', 'Wapiti', 'S. Star'],
+                                 'bb': ['Stone Creek Chutes']}
+
+dict_trails_to_add['Copper'] = {'green': ['Lower Carefree', 'Upper Carefree', "Lower Easy Feelin'", "Upper Easy Feelin'",
                                      'Lower High Point', 'Middle High Point', 'Upper High Point', 'Upper Leap Frog',
                                      'Lower Leap Frog', 'Lower Loverly', 'Middle Loverly', 'Upper Loverly', 'Lower Roundabout',
                                      'Middle Roundabout', 'Upper Roundabout', 'See and Ski', 'Lower Soliloquy', 'Upper Soliloquy',
@@ -486,12 +434,49 @@ trails_to_add['Copper'] = {'green': ['Lower Carefree', 'Upper Carefree', "Lower 
                            'blue': ['Copperfields', 'Upper Skid Road'],
                            'black': ["CDL's", 'Allcante', "Ute Overlook", 'Lower Lillie G', 'Upper Lillie G', 'Retreat'],
                            'bb': []}
-trails_to_add['Eldora'] = {'green': ['Upper Bunny Fair', 'Fox Tail', 'Little Hawk TRV', 'Tenderfoot I', 'Tenderfoot II'],
+
+dict_trails_to_add['Crested Butte'] = {'green': ['Big Al’s', 'Bubba’s Shortcut Upper', 'Bubba’s Shortcut Lower', 'Keystone Lower',
+                                            'Twister Lower', 'Peachtree Connector', 'Smith Hill Lower', 'Teaching Terrain',
+                                            'To Base Area', "Rustler’s Gulch", 'Augusta', 'High Tide', 'Topsy', "Splain's Gulch"],
+                                  'blue': ['Gus Way', 'Homeowners', 'Treasury Lower', 'Gallowich', 'Panion’s Run', 'Ruby Chief Lower',
+                                           'Gallowich Upper', 'Keystone Upper', 'Treasury Upper', 'Tulsa', 'Smith Hill Upper',
+                                           'Ruby Chief Upper', 'Bear', 'Meander', 'Paradise Access', 'Little Lizzie'],
+                                  'black': ['Silvanite', 'Twister Upper', 'Twister Connector', 'Keystone Ridge', 'Mach 1', 'Peoria',
+                                            'Horseshoe'],
+                                  'bb': ['Headwall']}
+
+dict_trails_to_add['Diamond Peak'] = {'green': [],
+                                 'blue': [],
+                                 'black': ['FIS', 'O God', 'GS'],
+                                 'bb': []}
+
+dict_trails_to_add['Eldora'] = {'green': ['Upper Bunny Fair', 'Fox Tail', 'Little Hawk TRV', 'Tenderfoot I', 'Tenderfoot II'],
                            'blue': ['Crewcut', 'Corona TRV', "Four O' Clock Trail", 'Middle Jolly Jug',
                                     'Lower Jolly Jug', 'Upper Bunny Fair', 'Quickway', 'Sundance', 'Sunkid Slope'],
                            'black': ['Challenge Liftline', 'Corona Road', 'Klondike', 'Upper Diamond Back'],
                            'bb': ['Upper Jolly Jug', 'Liftline']}
-trails_to_add['Vail'] = {'green': ["Cubs Way", 'Eagles Nest Ridge', 'Flapjack', 'Lionsway Cutoff', 'Lower Lionsway',
+
+dict_trails_to_add['Loveland'] = {'green': ['Cat Walk', 'Deuces Wild', 'Home Run', 'Zig-Zag', 'Magic Carpet Slope'],
+                             'blue': ['Apollo (Lower)', 'Apollo (Upper)', 'Blackjack (Lower)', 'Blackjack (Upper)', 'North Chutes', 'Switchback (Lower)',
+                                      'Switchback (Upper)', 'Twist (Lower)', 'Twist (Upper)', "Upper Richard's", 'Tempest', "Chet's Run"],
+                             'black': ['Cats Meow', 'Fail Safe Trees I', 'Fail Safe Trees II', 'Sunburst Chutes',
+                                       "Hook 'Em Horns"],
+                             'bb': ['#4 Headwall', 'Upper #4 Headwall', 'Patrol Bowl (Lower)', 'Patrol Bowl (Upper)']}
+
+dict_trails_to_add['Monarch'] = {'green': ['K C Cutoff', 'Sky Walker I', 'Sky Walker II', 'D rifter', 'G lade', 'Safari'],
+                            'blue': ['Bee Line', "D oc’s Run", 'G reat D ivide', 'Q uick D raw', 'Snow Burn', 'Lower Hall’s Alley'],
+                            'black': ["B’s Bash", 'D ire Straits', "G eno’s Meadow", "G unbarrel", 'K anonen', 'O utback',
+                                      'Upper X mas Tree', 'Upper Hall’s Alley', 'Frazzle'],
+                            'bb': ['Mirkwood Basin', 'Mirkwood Basin Egress', ]}
+
+dict_trails_to_add['Taos'] = {'green': ['Japanese flag', "Jess's (Lower)", "Jess's (Upper)", "Winkelreid", 'Bambi Glade',
+                                   'Strawberry Hill', 'High Five Pitch', 'Rueggli', 'Zipper 1', 'Zipper 2', 'Zipper 3'],
+                         'blue': ["Maxie's", 'Powderhorn Lower', 'Powderhorn Upper', 'Shalako (Lower)', 'Shalako (Upper)',
+                                  'Topa Papa'],
+                         'black': ['Raspberry Hill'],
+                         'bb': ['Lorelei Trees']}
+
+dict_trails_to_add['Vail'] = {'green': ["Cubs Way", 'Eagles Nest Ridge', 'Flapjack', 'Lionsway Cutoff', 'Lower Lionsway',
                                    'Upper Lionsway', 'Minni Ha Ha', 'Practice Pkwy', 'Timberline Catwalk.', 'Transmontane',
                                    'Windish Way', 'Grand Junction Catwalk', 'Teaching Area', 'Tin Pants Catwalk',
                                    'Whiskey Jack Catwalk'],
@@ -509,31 +494,8 @@ trails_to_add['Vail'] = {'green': ["Cubs Way", 'Eagles Nest Ridge', 'Flapjack', 
                                    "Minnie's MileLower", 'Genghis Khan', 'Outer MongoliaBowl', 'Tea Cup Glades'],
                          'bb': ['Front Side Chutes', 'Mud Slide Chutes', 'Prima Lower', 'Prima Upper', 'Pump House Chutes',
                                 '']}
-trails_to_add['Monarch'] = {'green': ['K C Cutoff', 'Sky Walker I', 'Sky Walker II', 'D rifter', 'G lade', 'Safari'],
-                            'blue': ['Bee Line', "D oc’s Run", 'G reat D ivide', 'Q uick D raw', 'Snow Burn', 'Lower Hall’s Alley'],
-                            'black': ["B’s Bash", 'D ire Straits', "G eno’s Meadow", "G unbarrel", 'K anonen', 'O utback',
-                                      'Upper X mas Tree', 'Upper Hall’s Alley', 'Frazzle'],
-                            'bb': ['Mirkwood Basin', 'Mirkwood Basin Egress', ]}
-trails_to_add['Crested Butte'] = {'green': ['Big Al’s', 'Bubba’s Shortcut Upper', 'Bubba’s Shortcut Lower', 'Keystone Lower',
-                                            'Twister Lower', 'Peachtree Connector', 'Smith Hill Lower', 'Teaching Terrain',
-                                            'To Base Area', "Rustler’s Gulch", 'Augusta', 'High Tide', 'Topsy', "Splain's Gulch"],
-                                  'blue': ['Gus Way', 'Homeowners', 'Treasury Lower', 'Gallowich', 'Panion’s Run', 'Ruby Chief Lower',
-                                           'Gallowich Upper', 'Keystone Upper', 'Treasury Upper', 'Tulsa', 'Smith Hill Upper',
-                                           'Ruby Chief Upper', 'Bear', 'Meander', 'Paradise Access', 'Little Lizzie'],
-                                  'black': ['Silvanite', 'Twister Upper', 'Twister Connector', 'Keystone Ridge', 'Mach 1', 'Peoria',
-                                            'Horseshoe'],
-                                  'bb': ['Headwall']}
-trails_to_add['Taos'] = {'green': ['Japanese flag', "Jess's (Lower)", "Jess's (Upper)", "Winkelreid", 'Bambi Glade',
-                                   'Strawberry Hill', 'High Five Pitch', 'Rueggli', 'Zipper 1', 'Zipper 2', 'Zipper 3'],
-                         'blue': ["Maxie's", 'Powderhorn Lower', 'Powderhorn Upper', 'Shalako (Lower)', 'Shalako (Upper)',
-                                  'Topa Papa'],
-                         'black': ['Raspberry Hill'],
-                         'bb': ['Lorelei Trees']}
-trails_to_add['Diamond Peak'] = {'green': [],
-                                 'blue': [],
-                                 'black': ['FIS', 'O God', 'GS'],
-                                 'bb': []}
-trails_to_add['Winter Park'] = {'green': ['Allen Phipps', "Bill Wilson's Way", 'Upper High Lonesome', 'Lower High Lonesome',
+
+dict_trails_to_add['Winter Park'] = {'green': ['Allen Phipps', "Bill Wilson's Way", 'Upper High Lonesome', 'Lower High Lonesome',
                                           'Hook Up', 'Moose Wallow', 'March Hare', 'Wagon Trail', 'Whistle Stop', 'Sorensen Park'],
                                 'blue': ['Belmar Bowl', 'Upper Cranmer', 'Lower Cranmer', 'Dilly Dally Alley', 'Forget-Me-Not',
                                          'Upper Jabberwocky', 'Low Lonesome Whistle', 'Mary Jane Trail', "Parry's Peak", 'Primrose Glades',
@@ -546,40 +508,11 @@ trails_to_add['Winter Park'] = {'green': ['Allen Phipps', "Bill Wilson's Way", '
                                           'Sleeper Glades', 'Super Gauge Trail (Rock Garden)', 'Mary Jane Face', 'Pioneer Express Trail (Upper)',
                                           'Norwegian', 'Columbine Lower', 'Upper Cheshire Cat', 'Roll Over'],
                                 'bb': []}
-trails_to_add['Beaver Creek'] = {'green': ['Beginner Terrain', 'BC Mtn Expressway', 'Easy Come _Easy Go', 'Elkhorn', 'Haymeadow',
-                                           'Holden', 'Leav the Beav', 'Meadows', 'Rubarb', 'Ridge Point', 'Highlands Skiway',
-                                           'Primrose'],
-                                 'blue': ['Creekside', 'Stacker_lower', 'McCoy', 'Paintbrush', 'West Fall Road', 'Camprobber Road',
-                                          'Cabin Fever', 'Wapti'],
-                                 'black': ['Boarders Loop', 'Goshawk', 'Harrier', 'Centennial', 'Wapiti', 'S. Star'],
-                                 'bb': ['Stone Creek Chutes']}
-# trails_to_add['Telluride'] = {'green': [],
-#                               'blue': [],
-#                               'black': [],
-#                               'bb': []}
-# trails_to_add['Bald Mountain'] = {'green': [],
-#                                   'blue': [],
-#                                   'black': [],
-#                                   'bb': []}
-# trails_to_add['Steamboat'] = {'green': [],
-#                               'blue': [],
-#                               'black': [],
-#                               'bb': []}
-# trails_to_add['Aspen Snowmass'] = {'green': [],
-#                                    'blue': [],
-#                                    'black': [],
-#                                    'bb': []}
-# trails_to_add['Wolf Creek'] = {'green': [],
-#                                'blue': [],
-#                                'black': [],
-#                                'bb': []}
-
-
-'''add trails to colors'''
-
 
 def add_trails_to_add(resort):
     '''
+    Add trails to colors
+
     Inputs:
     resort from resorts (str)
     Outputs:
@@ -595,22 +528,13 @@ def add_trails_to_add(resort):
 # for resort in resort_dict:
 #     add_trails_to_add(resort)
 
-
-'''
-Remove trails with no data other than master plan
-'''
-
 dict_trails_to_remove = {
-    "Alpine Meadows": [],
     "Arapahoe Basin": ['High Noon Terrain Park','Treeline Terrain Park', 'Shooting Gallery', 'Poma Line'],
-    "Aspen Snowmass": [],
     "Beaver Creek": ['Chair 2', 'Half- Barrell Half Pipe', 'Half Hitch', 'Nastar Ski Racing', 'Park101_Flattops',
                        'Utility Corridor', 'Pitchfork', 'Pines Skiway', "Anderson's Alley", 'Homefire', 'Tall Timber',
                        'Ridge Rider'],
     "Copper": ["Bruce's Way", 'Bee Road', 'Road Home', 'Cross Cut'],
     "Crested Butte": ['Gallowitch Bend', 'Silver Queen Connector', 'Aspen Park', "Shep's Chute"],
-    "Diamond Peak": [],
-    "Eldora": [],
     "Loveland": ['T-bar Road','Sani Flush', 'Awesome II', 'Rip Curl', ''],
     "Monarch": ['K2', 'Tumbelina Lift Line'],
     "Taos": ['White Feather (Middle Pitch)', 'Raspberry (Pitch 1)', 'Raspberry (Pitch 2)', 'Raspberry (Pitch 3)',
@@ -630,11 +554,10 @@ dict_trails_to_remove = {
 }
 
 
-'''Remove Trails'''
-
-
 def remove_trails(resort, trail_lst):
     '''
+    Remove trails with no data other than master plan
+
     Inputs:
         resort from resort_dict (str)
         trail_lst from trails_to_remove (list)
