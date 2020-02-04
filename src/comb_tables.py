@@ -61,19 +61,19 @@ class CombineTables:
         # TODO: Pass key from resorts dict to make_dataframe
         lst_resorts = []
         
-        for resort in self.loveland_script:
-            df_resort = loveland_table.make_dataframe("../data/Loveland.txt")
-            df_resort = loveland_table.preprocess_data(df=df_resort,
-                resort = "Loveland",
-                location = "CO")
-            lst_resorts.append(df_resort)
+        # Loveland
+        df_resort = loveland_table.make_dataframe("../data/Loveland.txt")
+        df_resort = loveland_table.preprocess_data(df=df_resort,
+            resort = "Loveland",
+            location = "CO")
+        lst_resorts.append(df_resort)
         
-        for resort in self.vail_script:
-            df_resort = vail_table.make_dataframe("../data/Vail.txt")
-            df_resort = vail_table.preprocess_data(df=df_resort,
-                resort = "Vail",
-                location = "CO")
-            lst_resorts.append(df_resort)
+        # Vail
+        df_resort = vail_table.make_dataframe("../data/Vail.txt")
+        df_resort = vail_table.preprocess_data(df=df_resort,
+            resort = "Vail",
+            location = "CO")
+        lst_resorts.append(df_resort)
 
         # TODO: Debug Monarch script
         # for resort in self.monarch_script:
@@ -83,57 +83,57 @@ class CombineTables:
         #         location = "CO")
         #     lst_resorts.append(df_resort)
         
-        for resort in self.DP_script:
-            df_resort = DP_table.make_dataframe("../data/DP.txt")
-            df_resort = DP_table.preprocess_data(df=df_resort,
-                resort = "Diamond Peak",
-                location = "CO")
-            lst_resorts.append(df_resort)
+        # Diamond Peak
+        df_resort = DP_table.make_dataframe("../data/DP.txt")
+        df_resort = DP_table.preprocess_data(df=df_resort,
+            resort = "Diamond Peak",
+            location = "CO")
+        lst_resorts.append(df_resort)
         
-        for resort in self.WP_script:
-            colnames = ['trail_name', 'top_elev_(ft)', 'bottom_elev_(ft)', 'vert_rise_(ft)', 'horiz_dist', 'slope_length_(ft)', 'avg_grade_(%)', 'plan_acres', 'slope_area_(acres)', 'deg_grade', 'max_grade_(%)', 'avg_width_(ft)', 'ability_level']
-            df_resort = pd.read_csv("../data/WP.csv",
-                header=None,
-                names=colnames)
-            df_resort = WP_table.preprocess_data(df=df_resort,
-                resort="Winter Park",
-                location="CO")
-            lst_resorts.append(df_resort)
+        # Winter Park
+        colnames = ['trail_name', 'top_elev_(ft)', 'bottom_elev_(ft)', 'vert_rise_(ft)', 'horiz_dist', 'slope_length_(ft)', 'avg_grade_(%)', 'plan_acres', 'slope_area_(acres)', 'deg_grade', 'max_grade_(%)', 'avg_width_(ft)', 'ability_level']
+        df_resort = pd.read_csv("../data/WP.csv",
+            header=None,
+            names=colnames)
+        df_resort = WP_table.preprocess_data(df=df_resort,
+            resort="Winter Park",
+            location="CO")
+        lst_resorts.append(df_resort)
         
-        for resort in self.BC_script:
-            df_resort = BC_table.make_dataframe("../data/Beaver_Creek.txt")
-            df_resort = BC_table.preprocess_data(df=df_resort,
-                resort = "Beaver Creek",
-                location = "CO")
-            lst_resorts.append(df_resort)
+        # Beaver Creek
+        df_resort = BC_table.make_dataframe("../data/Beaver_Creek.txt")
+        df_resort = BC_table.preprocess_data(df=df_resort,
+            resort = "Beaver Creek",
+            location = "CO")
+        lst_resorts.append(df_resort)
         
-        for resort in self.BM_script:
-            df_resort = BM_table.make_dataframe("../data/new/Bald_Mountain.txt")
-            df_resort = BM_table.preprocess_data(df=df_resort,
-                resort = "Bald Mountain",
-                location = "CO")
-            lst_resorts.append(df_resort)
+        # Bald Mountain
+        df_resort = BM_table.make_dataframe("../data/new/Bald_Mountain.txt")
+        df_resort = BM_table.preprocess_data(df=df_resort,
+            resort = "Bald Mountain",
+            location = "CO")
+        lst_resorts.append(df_resort)
         
-        for resort in self.steamboat_script:
-            df_resort = steamboat_table.make_dataframe("../data/new/Steamboat.txt")
-            df_resort = steamboat_table.preprocess_data(df=df_resort,
-                resort = "Steamboat",
-                location = "CO")
-            lst_resorts.append(df_resort)
+        # Steamboat
+        df_resort = steamboat_table.make_dataframe("../data/new/Steamboat.txt")
+        df_resort = steamboat_table.preprocess_data(df=df_resort,
+            resort = "Steamboat",
+            location = "CO")
+        lst_resorts.append(df_resort)
         
-        for resort in self.AS_script:
-            df_resort = AS_table.make_dataframe("../data/new/Aspen_Snowmass.txt")
-            df_resort = AS_table.preprocess_data(df=df_resort,
-                resort = "Aspen Snowmass",
-                location = "CO")
-            lst_resorts.append(df_resort)
+        # Aspen Snowmass
+        df_resort = AS_table.make_dataframe("../data/new/Aspen_Snowmass.txt")
+        df_resort = AS_table.preprocess_data(df=df_resort,
+            resort = "Aspen Snowmass",
+            location = "CO")
+        lst_resorts.append(df_resort)
         
-        for resort in self.WC_script:
-            df_resort = WC_table.make_dataframe("../data/new/Wolf_Creek.txt")
-            df_resort = WC_table.preprocess_data(df=df_resort,
-                resort = "Wolf Creek",
-                location = "CO")
-            lst_resorts.append(df_resort)
+        # Wolf Creek
+        df_resort = WC_table.make_dataframe("../data/new/Wolf_Creek.txt")
+        df_resort = WC_table.preprocess_data(df=df_resort,
+            resort = "Wolf Creek",
+            location = "CO")
+        lst_resorts.append(df_resort)
         
         columns = ['trail_name', 'top_elev_(ft)', 'bottom_elev_(ft)', 'vert_rise_(ft)', 'slope_length_(ft)', 'avg_width_(ft)',
                    'slope_area_(acres)', 'avg_grade_(%)', 'max_grade_(%)', 'ability_level', 'resort', 'location']
