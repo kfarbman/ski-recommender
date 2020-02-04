@@ -37,9 +37,12 @@ class CombineTables:
         # Keys of resorts compatible with each script
         self.BC_script = ['Beaver Creek']
         self.DP_script = ['Diamond Peak']
-        self.loveland_script = [
-            'Loveland', 'Arapahoe Basin', 'Copper', 'Eldora', 'Alpine Meadows']
-        self.monarch_script = ['Monarch', 'Crested Butte', 'Taos']
+        self.loveland_script = ['Loveland']
+        # TODO: Include additional resorts
+        # self.resorts = ['Arapahoe Basin', 'Copper', 'Eldora', 'Alpine Meadows']
+        self.monarch_script = ['Monarch']
+        self.CB_script = ["Crested Butte"]
+        self.taos_script = ["Taos"]
         self.vail_script = ['Vail']
         self.WP_script = ['Winter Park']
 
@@ -54,62 +57,91 @@ class CombineTables:
         """
         """
 
-        #TODO:: Create list of resorts; iterate through this.
-        d = {}
+        #TODO: Create list of resort DataFrames
+        # TODO: Pass key from resorts dict to make_dataframe
+        lst_resorts = []
+        
         for resort in self.loveland_script:
-            filename, location = self.resorts[resort]
-            d[resort] = loveland_table.fix_dtype(
-                filename, resort, location)
+            df_resort = loveland_table.make_dataframe("../data/Loveland.txt")
+            df_resort = loveland_table.preprocess_data(df=df_resort,
+                resort = "Loveland",
+                location = "CO")
+            lst_resorts.append(df_resort)
+        
         for resort in self.vail_script:
-            filename, location = self.resorts[resort]
-            d[resort] = vail_table.fix_dtype(
-                filename, resort, location)
-            # del d[resort]['horiz_length']
-        for resort in self.monarch_script:
-            filename, location = self.resorts[resort]
-            d[resort] = monarch_table.fix_dtype(
-                filename, resort, location)
-            # del d[resort]['plan_length']
-        for resort in self.DP_script:
-            filename, location = self.resorts[resort]
-            d[resort] = DP_table.fix_dtype(
-                filename, resort, location)
-            # d[resort].drop(['plan_length', 'pct_inc',
-            #                 'plan_area'], axis=1, inplace=True)
-        for resort in self.WP_script:
-            filename, location = self.resorts[resort]
-            d[resort] = WP_table.fix_dtype(
-                filename, resort, location)
-        for resort in self.BC_script:
-            filename, location = self.resorts[resort]
-            d[resort] = BC_table.fix_dtype(
-                filename, resort, location)
+            df_resort = vail_table.make_dataframe("../data/Vail.txt")
+            df_resort = vail_table.preprocess_data(df=df_resort,
+                resort = "Vail",
+                location = "CO")
+            lst_resorts.append(df_resort)
 
-        # comb_tables2 script
-        for resort in self.loveland_script:
-            filename, location = self.resorts[resort]
-            d[resort] = loveland_table.fix_dtype(
-                filename, resort, location)
+        # TODO: Debug Monarch script
+        # for resort in self.monarch_script:
+        #     df_resort = monarch_table.make_dataframe("../data/Vail.txt")
+        #     df_resort = monarch_table.preprocess_data(df=df_resort,
+        #         resort = "Monarch",
+        #         location = "CO")
+        #     lst_resorts.append(df_resort)
+        
+        for resort in self.DP_script:
+            df_resort = DP_table.make_dataframe("../data/DP.txt")
+            df_resort = DP_table.preprocess_data(df=df_resort,
+                resort = "Diamond Peak",
+                location = "CO")
+            lst_resorts.append(df_resort)
+        
+        for resort in self.WP_script:
+            colnames = ['trail_name', 'top_elev_(ft)', 'bottom_elev_(ft)', 'vert_rise_(ft)', 'horiz_dist', 'slope_length_(ft)', 'avg_grade_(%)', 'plan_acres', 'slope_area_(acres)', 'deg_grade', 'max_grade_(%)', 'avg_width_(ft)', 'ability_level']
+            df_resort = pd.read_csv("../data/WP.csv",
+                header=None,
+                names=colnames)
+            df_resort = WP_table.preprocess_data(df=df_resort,
+                resort="Winter Park",
+                location="CO")
+            lst_resorts.append(df_resort)
+        
+        for resort in self.BC_script:
+            df_resort = BC_table.make_dataframe("../data/Beaver_Creek.txt")
+            df_resort = BC_table.preprocess_data(df=df_resort,
+                resort = "Beaver Creek",
+                location = "CO")
+            lst_resorts.append(df_resort)
+        
         for resort in self.BM_script:
-            filename, location = self.resorts[resort]
-            d[resort] = BM_table.fix_dtype(filename, resort, location)
+            df_resort = BM_table.make_dataframe("../data/new/Bald_Mountain.txt")
+            df_resort = BM_table.preprocess_data(df=df_resort,
+                resort = "Bald Mountain",
+                location = "CO")
+            lst_resorts.append(df_resort)
+        
         for resort in self.steamboat_script:
-            filename, location = self.resorts[resort]
-            d[resort] = steamboat_table.fix_dtype(
-                filename, resort, location)
+            df_resort = steamboat_table.make_dataframe("../data/new/Steamboat.txt")
+            df_resort = steamboat_table.preprocess_data(df=df_resort,
+                resort = "Steamboat",
+                location = "CO")
+            lst_resorts.append(df_resort)
+        
         for resort in self.AS_script:
-            filename, location = self.resorts[resort]
-            d[resort] = AS_table.fix_dtype(filename, resort, location)
+            df_resort = AS_table.make_dataframe("../data/new/Aspen_Snowmass.txt")
+            df_resort = AS_table.preprocess_data(df=df_resort,
+                resort = "Aspen Snowmass",
+                location = "CO")
+            lst_resorts.append(df_resort)
+        
         for resort in self.WC_script:
-            filename, location = self.resorts[resort]
-            d[resort] = WC_table.fix_dtype(filename, resort, location)
-            del d[resort]['plan_length']
+            df_resort = WC_table.make_dataframe("../data/new/Wolf_Creek.txt")
+            df_resort = WC_table.preprocess_data(df=df_resort,
+                resort = "Wolf Creek",
+                location = "CO")
+            lst_resorts.append(df_resort)
         
         columns = ['trail_name', 'top_elev_(ft)', 'bottom_elev_(ft)', 'vert_rise_(ft)', 'slope_length_(ft)', 'avg_width_(ft)',
                    'slope_area_(acres)', 'avg_grade_(%)', 'max_grade_(%)', 'ability_level', 'resort', 'location']
 
-        whole_table = pd.concat(d.values())
-        # making sure the columns are in the correct order
+        # Combine DataFrames
+        whole_table = pd.concat(lst_resorts)
+        
+        # Ensure columns are in the correct order
         whole_table = whole_table[columns]
         CO_resorts = whole_table[whole_table['location'] == 'CO']
 
@@ -151,6 +183,15 @@ class CombineTables:
         df['groomed'][df['trail_name'].isin(groomed_lst)] = 1
         return df
 
+if __name__ == '__main__':
+
+    combine = CombineTables()
+    
+    df_resorts = combine.format_resorts()
+
+    df_resorts = combine.standardize_ability_levels(df=df_resorts)
+
+    import pdb; pdb.set_trace()
 """
 Separate resorts into independent DataFrames
 """
