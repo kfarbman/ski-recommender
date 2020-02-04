@@ -190,7 +190,20 @@ if __name__ == '__main__':
 
     df_resorts = combine.standardize_ability_levels(df=df_resorts)
 
+    # Fix trail names (remove numbers at beginning)
     df_resorts = combine.fix_trail_names(df=df_resorts)
+
+    # TODO: Add groomed column; mark trails as groomed
+    # for resort, groom in zip(resort_dfs, grooms):
+    #     add_groomed_col(resort, groom)
+
+
+    # TODO: Missing trails
+
+    # TODO: List of trails
+
+    # TODO: Color trails
+
 
     """
     Create dictionary of resorts and groomed ski runs
@@ -616,26 +629,3 @@ def remove_trails(resort, trail_lst):
 # output = open('../data/df.pkl', 'wb')
 # pickle.dump(final_df, output)
 # output.close()
-
-
-if __name__ == '__main__':
-
-    ct = CombineTables()
-
-    df_resorts = ct.format_resorts()
-
-    # Standardize ability levels
-    df_resorts = ct.standardize_ability_levels(df=df_resorts)
-
-    # Fix trail names (remove numbers at beginning)
-
-    # Add groomed column; mark trails as groomed
-    # for resort, groom in zip(resort_dfs, grooms):
-    #     add_groomed_col(resort, groom)
-
-
-    # Missing trails
-
-    # List of trails
-
-    # Color trails
