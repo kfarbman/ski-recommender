@@ -55,7 +55,10 @@ class WebscrapeTrails:
                      self.AS_URL,
                      self.WC_URL]
 
-        self.browser = webdriver.PhantomJS()
+        self.browser_options = webdriver.ChromeOptions()
+        self.browser_options.add_argument("headless")
+
+        self.browser = webdriver.Chrome(chrome_options=self.browser_options)
 
         self.lst_run_difficulty = ["skiruns-green", "skiruns-blue", "skiruns-black", "skiruns-double-black"]
 
@@ -134,13 +137,10 @@ if __name__ == '__main__':
     # Request data from all ski resorts
     lst_resort_data = []
 
-    import pdb; pdb.set_trace()
-
     for url in tqdm(lst_resort_urls):
         df_resort = ws.make_tables(URL=url)
         df_resort["URL"] = url
         lst_resort_data.append(df_resort)
-        time.sleep(10)
 
     # Combine resort data
     df_combined = pd.concat(lst_resort_data)
