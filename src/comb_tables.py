@@ -565,24 +565,23 @@ def add_trails_to_add(resort):
 Remove trails with no data other than master plan
 '''
 
-trails_to_remove_LL = ['T-bar Road',
-                       'Sani Flush', 'Awesome II', 'Rip Curl', '']
-trails_to_remove_AB = ['High Noon Terrain Park',
-                       'Treeline Terrain Park', 'Shooting Gallery', 'Poma Line']
-trails_to_remove_c = ["Bruce's Way", 'Bee Road', 'Road Home', 'Cross Cut']
-trails_to_remove_e = []
-trails_to_remove_WP = ['Meadows', 'Nirvana', 'Village Way - Primrose']
-trails_to_remove_m = ['K2', 'Tumbelina Lift Line']
-trails_to_remove_CB = ['Gallowitch Bend',
-                       'Silver Queen Connector', 'Aspen Park', "Shep's Chute"]
-trails_to_remove_t = ['White Feather (Middle Pitch)', 'Raspberry (Pitch 1)', 'Raspberry (Pitch 2)', 'Raspberry (Pitch 3)',
-                      'Raspberry Hill Traverse', 'Top of Lifts 2 and 6', 'Lorelei Egress', 'Hunziker Egress', 'Lift 6 Liftline',
-                      'Avy Road', 'Maidenform']
-trails_to_remove_DP = []
-trails_to_remove_BC = ['Chair 2', 'Half- Barrell Half Pipe', 'Half Hitch', 'Nastar Ski Racing', 'Park101_Flattops',
+dict_trails_to_remove = {
+    "Alpine Meadows": [],
+    "Arapahoe Basin": ['High Noon Terrain Park','Treeline Terrain Park', 'Shooting Gallery', 'Poma Line'],
+    "Aspen Snowmass": [],
+    "Beaver Creek": ['Chair 2', 'Half- Barrell Half Pipe', 'Half Hitch', 'Nastar Ski Racing', 'Park101_Flattops',
                        'Utility Corridor', 'Pitchfork', 'Pines Skiway', "Anderson's Alley", 'Homefire', 'Tall Timber',
-                       'Ridge Rider']
-trails_to_remove_v = ['Avanti-Cookshack', 'Chair 2 Lift Line', 'Pickeroon Lower', 'Pickeroon-Cookshack', 'Ricochet',
+                       'Ridge Rider'],
+    "Copper": ["Bruce's Way", 'Bee Road', 'Road Home', 'Cross Cut'],
+    "Crested Butte": ['Gallowitch Bend', 'Silver Queen Connector', 'Aspen Park', "Shep's Chute"],
+    "Diamond Peak": [],
+    "Eldora": [],
+    "Loveland": ['T-bar Road','Sani Flush', 'Awesome II', 'Rip Curl', ''],
+    "Monarch": ['K2', 'Tumbelina Lift Line'],
+    "Taos": ['White Feather (Middle Pitch)', 'Raspberry (Pitch 1)', 'Raspberry (Pitch 2)', 'Raspberry (Pitch 3)',
+                      'Raspberry Hill Traverse', 'Top of Lifts 2 and 6', 'Lorelei Egress', 'Hunziker Egress', 'Lift 6 Liftline',
+                      'Avy Road', 'Maidenform'],
+    "Vail": ['Avanti-Cookshack', 'Chair 2 Lift Line', 'Pickeroon Lower', 'Pickeroon-Cookshack', 'Ricochet',
                       'Mountain Top Lift Line', 'Ramshorn Glade', 'Swingsville Ridge', 'Apres Trees East', 'Apres Trees West',
                       'Ho Chi Min Trail', 'Ptarmigan Cornice', "Sama's", 'Turkey Yard', 'Aspen Alley', 'Chair 6 Lift Line', 'Follow Me Road',
                       'Mule Skinner', 'Pony Express', 'Faro Glade', 'Old Midway Catwalk', "Minnie's Cutoff", "Minnie's Mile Upper",
@@ -590,20 +589,10 @@ trails_to_remove_v = ['Avanti-Cookshack', 'Chair 2 Lift Line', 'Pickeroon Lower'
                       'Vista Bahn Line Upper', 'Way Over Yonder', 'Gondola Lift Line', 'Simba Face', 'Cascade Way', 'China Wall', 'to Two Elk',
                       'West Wall', 'Upper MongoliaBowl', 'Bwama-Simba Collector', 'Cubs Way Upper', 'Pride Upper Face', 'Black Forest Milling Area',
                       'Nastar', 'Pay-to-Race', 'East Tea Cup', 'Petes Lift Line', 'Berries Catwalk', 'Ch 10 Access', 'Lift Line', "Roger's Glade",
-                      "Smokey's", 'Timberline Face', 'Minnies Mile Upper Face']
-trails_to_remove_AM = []
-
-# comb_tables2
-trails_to_remove_t = ['T-bar Road', 'Sani Flush', 'Awesome II', 'Rip Curl', '']
-trails_to_remove_BM = ['High Noon Terrain Park',
-                       'Treeline Terrain Park', 'Shooting Gallery', 'Poma Line']
-trails_to_remove_s = ["Bruce's Way", 'Bee Road', 'Road Home', 'Cross Cut']
-trails_to_remove_AS = []
-trails_to_remove_WC = ['Meadows', 'Nirvana', 'Village Way - Primrose']
-
-trails_to_remove = [trails_to_remove_LL, trails_to_remove_AB, trails_to_remove_c, trails_to_remove_e, trails_to_remove_AM, trails_to_remove_v,
-                    trails_to_remove_m, trails_to_remove_CB, trails_to_remove_t, trails_to_remove_DP, trails_to_remove_WP, trails_to_remove_BC,
-                    trails_to_remove_t, trails_to_remove_BM, trails_to_remove_s, trails_to_remove_AS, trails_to_remove_WC]
+                      "Smokey's", 'Timberline Face', 'Minnies Mile Upper Face'],
+    "Winter Park": ['Meadows', 'Nirvana', 'Village Way - Primrose'],
+    "Wolf Creek": ['Meadows', 'Nirvana', 'Village Way - Primrose']
+}
 
 
 '''Remove Trails'''
@@ -612,10 +601,10 @@ trails_to_remove = [trails_to_remove_LL, trails_to_remove_AB, trails_to_remove_c
 def remove_trails(resort, trail_lst):
     '''
     Inputs:
-    resort from resort_dict (str)
-    trail_lst from trails_to_remove (list)
+        resort from resort_dict (str)
+        trail_lst from trails_to_remove (list)
     Outputs:
-    resort_df with trails removed (DataFrame)
+        Pandas DataFrame with trails removed
     '''
     resort_df_new = resort_dict[resort][~resort_dict[resort]
                                         ['trail_name'].isin(trail_lst)]
