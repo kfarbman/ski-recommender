@@ -19,8 +19,8 @@ class WebscrapeTrails:
 
     def __init__(self):
 
-        self.ARAPAHOE_BASIN_URL = 'https://jollyturns.com/resort/united-states-of-america/arapahoe-basin/'
         self.ALPINE_MEADOWS_URL = 'https://jollyturns.com/resort/united-states-of-america/alpine-meadows/'
+        self.ARAPAHOE_BASIN_URL = 'https://jollyturns.com/resort/united-states-of-america/arapahoe-basin/'
         self.ASPEN_SNOWMASS_URL = 'https://jollyturns.com/resort/united-states-of-america/aspen-snowmass/'
         self.BALD_MOUNTAIN_URL = 'https://jollyturns.com/resort/united-states-of-america/bald-mountain/'
         self.BEAVER_CREEK_URL = 'https://jollyturns.com/resort/united-states-of-america/beaver-creek-resort/'
@@ -34,8 +34,8 @@ class WebscrapeTrails:
         self.TAOS_URL = 'https://jollyturns.com/resort/united-states-of-america/taos-ski-valley/'
         self.TELLURIDE_URL = 'https://jollyturns.com/resort/united-states-of-america/telluride-ski-resort/'
         self.VAIL_URL = 'https://jollyturns.com/resort/united-states-of-america/vail-ski-resort/'
-        self.WOLF_CREEK_URL = 'https://jollyturns.com/resort/united-states-of-america/wolf-creek-ski-area/'
         self.WINTER_PARK_URL = 'https://jollyturns.com/resort/united-states-of-america/winter-park-resort/'
+        self.WOLF_CREEK_URL = 'https://jollyturns.com/resort/united-states-of-america/wolf-creek-ski-area/'
 
         self.URLs = [
             self.ALPINE_MEADOWS_URL,
