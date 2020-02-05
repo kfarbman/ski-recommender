@@ -19,41 +19,42 @@ class WebscrapeTrails:
 
     def __init__(self):
 
-        self.LL_URL = 'https://jollyturns.com/resort/united-states-of-america/loveland-ski-area/'
-        self.AB_URL = 'https://jollyturns.com/resort/united-states-of-america/arapahoe-basin/'
-        self.C_URL = 'https://jollyturns.com/resort/united-states-of-america/copper-mountain-resort/'
-        self.E_URL = 'https://jollyturns.com/resort/united-states-of-america/eldora-mountain-resort/'
-        self.AM_URL = 'https://jollyturns.com/resort/united-states-of-america/alpine-meadows/'
-        self.V_URL = 'https://jollyturns.com/resort/united-states-of-america/vail-ski-resort/'
-        self.M_URL = 'https://jollyturns.com/resort/united-states-of-america/monarch-ski-area/'
-        self.CB_URL = 'https://jollyturns.com/resort/united-states-of-america/crested-butte-mountain-resort/'
-        self.T_URL = 'https://jollyturns.com/resort/united-states-of-america/taos-ski-valley/'
-        self.DP_URL = 'https://jollyturns.com/resort/united-states-of-america/diamond-peak/'
-        self.WP_URL = 'https://jollyturns.com/resort/united-states-of-america/winter-park-resort/'
-        self.BC_URL = 'https://jollyturns.com/resort/united-states-of-america/beaver-creek-resort/'
+        self.ARAPAHOE_BASIN_URL = 'https://jollyturns.com/resort/united-states-of-america/arapahoe-basin/'
+        self.ALPINE_MEADOWS_URL = 'https://jollyturns.com/resort/united-states-of-america/alpine-meadows/'
+        self.ASPEN_SNOWMASS_URL = 'https://jollyturns.com/resort/united-states-of-america/aspen-snowmass/'
+        self.BALD_MOUNTAIN_URL = 'https://jollyturns.com/resort/united-states-of-america/bald-mountain/'
+        self.BEAVER_CREEK_URL = 'https://jollyturns.com/resort/united-states-of-america/beaver-creek-resort/'
+        self.COPPER_URL = 'https://jollyturns.com/resort/united-states-of-america/copper-mountain-resort/'
+        self.CRESTED_BUTTE_URL = 'https://jollyturns.com/resort/united-states-of-america/crested-butte-mountain-resort/'
+        self.DIAMOND_PEAK_URL = 'https://jollyturns.com/resort/united-states-of-america/diamond-peak/'
+        self.ELDORA_URL = 'https://jollyturns.com/resort/united-states-of-america/eldora-mountain-resort/'
+        self.LOVELAND_URL = 'https://jollyturns.com/resort/united-states-of-america/loveland-ski-area/'
+        self.MONARCH_URL = 'https://jollyturns.com/resort/united-states-of-america/monarch-ski-area/'
+        self.STEAMBOAT_URL = 'https://jollyturns.com/resort/united-states-of-america/steamboat-ski-resort/'
+        self.TAOS_URL = 'https://jollyturns.com/resort/united-states-of-america/taos-ski-valley/'
         self.TELLURIDE_URL = 'https://jollyturns.com/resort/united-states-of-america/telluride-ski-resort/'
-        self.BM_URL = 'https://jollyturns.com/resort/united-states-of-america/bald-mountain/'
-        self.S_URL = 'https://jollyturns.com/resort/united-states-of-america/steamboat-ski-resort/'
-        self.AS_URL = 'https://jollyturns.com/resort/united-states-of-america/aspen-snowmass/'
-        self.WC_URL = 'https://jollyturns.com/resort/united-states-of-america/wolf-creek-ski-area/'
+        self.VAIL_URL = 'https://jollyturns.com/resort/united-states-of-america/vail-ski-resort/'
+        self.WOLF_CREEK_URL = 'https://jollyturns.com/resort/united-states-of-america/wolf-creek-ski-area/'
+        self.WINTER_PARK_URL = 'https://jollyturns.com/resort/united-states-of-america/winter-park-resort/'
 
-        self.URLs = [self.LL_URL,
-                     self.AB_URL,
-                     self.C_URL,
-                     self.E_URL,
-                     self.AM_URL,
-                     self.V_URL,
-                     self.M_URL,
-                     self.CB_URL,
-                     self.T_URL,
-                     self.DP_URL,
-                     self.WP_URL,
-                     self.BC_URL,
-                     self.TELLURIDE_URL,
-                     self.BM_URL,
-                     self.S_URL,
-                     self.AS_URL,
-                     self.WC_URL]
+        self.URLs = [
+            self.ALPINE_MEADOWS_URL,
+            self.ARAPAHOE_BASIN_URL,
+            self.ASPEN_SNOWMASS_URL,
+            self.BALD_MOUNTAIN_URL,
+            self.BEAVER_CREEK_URL,
+            self.COPPER_URL,
+            self.CRESTED_BUTTE_URL,
+            self.DIAMOND_PEAK_URL,
+            self.ELDORA_URL,
+            self.LOVELAND_URL,
+            self.MONARCH_URL,
+            self.STEAMBOAT_URL,
+            self.TAOS_URL,
+            self.TELLURIDE_URL,
+            self.VAIL_URL,
+            self.WINTER_PARK_URL,
+            self.WOLF_CREEK_URL]
 
         self.browser_options = webdriver.ChromeOptions()
         self.browser_options.add_argument("headless")
