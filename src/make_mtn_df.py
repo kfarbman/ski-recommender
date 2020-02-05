@@ -1,6 +1,7 @@
 import pickle
 import time
 import warnings
+from tqdm import tqdm
 
 import numpy as np
 import pandas as pd
@@ -16,7 +17,12 @@ warnings.filterwarnings('ignore')
 class MakeMountainDF:
 
     def __init__(self):
-        self.browser = webdriver.PhantomJS()
+        
+        self.browser_options = webdriver.ChromeOptions()
+        self.browser_options.add_argument("headless")
+
+        self.browser = webdriver.Chrome(chrome_options=self.browser_options)
+        
         self.resort_urls = {'Loveland': 'colorado/loveland',
                             'Arapahoe Basin': 'colorado/arapahoe-basin-ski-area',
                             'Copper': 'colorado/copper-mountain-resort',
@@ -41,33 +47,64 @@ class MakeMountainDF:
 
         return df
 
-    def get_elevs_colors_lifts_price(self, resort):
-        URL = 'http://www.onthesnow.com/' + \
-            self.resort_urls[resort]+'/ski-resort.html'
+    def get_resort_terrain(self, resort):
+        """
+        Request elevation, run colors, chairlifts, and prices from each resort
+        """
+        
+        URL = f'http://www.onthesnow.com/{self.resort_urls[resort]}/ski-resort.html'
+        
+        print(URL)
+        
         self.browser.get(URL)
+
+        time.sleep(5)
+        
         soup = BeautifulSoup(self.browser.page_source, 'html.parser')
-        stuff = soup.select('table.ovv_info tbody tr td')
-        rows = [cell.text for cell in stuff]
-        _, elevs, colors, lifts, price = rows
-        bottom = int(''.join([x for x in elevs.split()[0] if x.isnumeric()]))
-        top = int(''.join([x for x in elevs.split()[2] if x.isnumeric()]))
-        greens = int(''.join([x for x in colors.split()[0] if x.isnumeric()]))
-        blues = int(''.join([x for x in colors.split()[1] if x.isnumeric()]))
-        blacks = int(''.join([x for x in colors.split()[2] if x.isnumeric()]))
-        bbs = int(''.join([x for x in colors.split()[3] if x.isnumeric()]))
-        lifts = int(lifts)
-        price = int(
-            ''.join([x if x.isnumeric() else '0' for x in price.split()[0]]))
-        return [bottom, top, greens, blues, blacks, bbs, lifts, price]
+
+        lst_terrain = soup.select('div#resort_terrain p')
+        lst_terrain = [i.get_text() for i in lst_terrain]
+
+        # terrain types
+        lst_terrain_type = lst_terrain[::2]
+
+        # terrain figures and numbers
+        lst_terrain_figures = lst_terrain[1::2]
+        
+        df_terrain = pd.DataFrame({'type': lst_terrain_type, 'figures': lst_terrain_figures})
+
+        df_terrain["type"] = df_terrain["type"].str.replace(" Runs", "")
+        
+        df_terrain["resort"] = resort
+        
+        # TODO: Get elevation
+        # bottom = int(''.join([x for x in elevs.split()[0] if x.isnumeric()]))
+        # top = int(''.join([x for x in elevs.split()[2] if x.isnumeric()]))
+                
+        # TODO: Get lifts and price
+        # lifts = int(lifts)
+        # price = int(
+        #     ''.join([x if x.isnumeric() else '0' for x in price.split()[0]]))
+        # return [bottom, top, greens, blues, blacks, bbs, lifts, price]
+
+        return df_terrain
 
     def create_data_frame(self):
-        elevs_colors_lifts_price = {}
+        """
+        Run get_resort_terrain
 
-        for resort in self.resort_urls:
-            elevs_colors_lifts_price[resort] = self.get_elevs_colors_lifts_price(
-                resort)
+        Output
+            Pandas DataFrame of terrain data per resort
+        """
+        lst_resorts = []
 
-        return elevs_colors_lifts_price
+        for resort in tqdm(self.resort_urls.keys()):
+            lst_resorts.append(self.get_resort_terrain(resort))
+
+        # Combine list of resort DataFrames
+        df_terrain = pd.concat(lst_resorts).reset_index(drop=True)
+
+        return df_terrain
 
     def format_data_frame(self, df):
         """
@@ -97,10 +134,18 @@ class MakeMountainDF:
 
     def save_mountain_data(self, df):
         """
-        Save formatted mountain data to Pickle file
+        Save formatted mountain data to Parquet file
         """
-        output = open('../data/mtn_df.pkl', 'wb')
-        pickle.dump(df, output)
-        output.close()
+        current_date = str(pd.Timestamp.now().date()).replace("-", "")
 
-# print(df.head())
+        df.to_parquet(f"../data/mtn_df_{current_date}.parquet", index=False)
+        
+        # output = open('../data/mtn_df.pkl', 'wb')
+        # pickle.dump(df, output)
+        # output.close()
+
+if __name__ == '__main__':
+
+    mountain = MakeMountainDF()
+
+    df_mountains = mountain.create_data_frame()
