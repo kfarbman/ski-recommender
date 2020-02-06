@@ -48,7 +48,21 @@ class MakeMountainDF:
                             # 'Taos': 338,
                             'Vail': 507,
                             'Winter Park': 503}
-    
+        
+        # 2020 ticket prices, fetched manually
+        self.dict_resort_prices = {'Alpine Meadows': 169,
+                                   'Arapahoe Basin': 109,
+                                   'Beaver Creek': 209,
+                                   'Copper': 119,
+                                   'Crested Butte': 129,
+                                   'Diamond Peak': 104,
+                                   'Eldora': 140,
+                                   'Loveland': 89,
+                                   'Monarch': 94,
+                                   'Taos': 110,
+                                   'Vail': 209,
+                                   'Winter Park': 139}
+
     def load_pickle_file(self):
         """
         Load pickle file containing formatted resort data
@@ -103,52 +117,15 @@ class MakeMountainDF:
 
         dict_resort_elevation = {}
 
-        dict_resort_elevation["name"] = json_resort["name"]
+        dict_resort_elevation["resort"] = json_resort["name"]
         dict_resort_elevation["lift_count"] = json_resort["lift_count"]
         dict_resort_elevation["run_count"] = json_resort["run_count"]
         
-        # Meters: Multipy by 3.281
+        # Meters: Multipy by 3.281 to get feet
         dict_resort_elevation["top_elevation"] = json_resort["top_elevation"] * 3.281
         dict_resort_elevation["bottom_elevation"] = json_resort["bottom_elevation"] * 3.281
 
         return dict_resort_elevation
-
-    # TODO: Merge resort names with prices
-    # TODO: Create manual list of resorts and daily ticket prices
-    # TODO: Pandas HTML?
-    def get_resort_prices(self):
-        """
-        Request resort prices for each ski resort
-        """
-        URL = f"https://www.onthesnow.com/united-states/lift-tickets.html"
-
-        self.browser.get(URL)
-
-        time.sleep(5)
-        
-        soup = BeautifulSoup(self.browser.page_source, 'html.parser')
-
-        soup.select("div.col_8.resortList.liftList div#contentPos tbody td.rLeft")
-        
-        lst_links = soup.select("div.col_8.resortList.liftList div#contentPos tbody td.rLeft div.name a")
-
-        lst_resorts = [link.get("title") for link in lst_links]
-
-        lst_resorts = [resort.replace("Lift Tickets ", "") for resort in lst_resorts]
-
-        # 2019 ticket prices, fetched manually
-        # dict_ticket_prices = {'Alpine Meadows': 169,
-        #                       'Arapahoe Basin': 109,
-        #                       'Beaver Creek': 209,
-        #                       'Copper': 119,
-        #                       'Crested Butte': 129,
-        #                       'Diamond Peak': 104,
-        #                       'Eldora': 140,
-        #                       'Loveland': 89,
-        #                       'Monarch': 94,
-        #                       'Taos': 110,
-        #                       'Vail': 209,
-        #                       'Winter Park': 139}
 
     def create_data_frame(self):
         """
@@ -211,6 +188,13 @@ if __name__ == '__main__':
 
     df_mountains = mountain.create_data_frame()
 
-    lst_resorts = []
-    for resort in tqdm(mountain.resort_elevation):
-        lst_resorts.append(mountain.get_resort_elevation_and_lifts(resort))
+    lst_resorts = [mountain.get_resort_elevation_and_lifts(resort)
+                   for resort in tqdm(mountain.resort_elevation)]
+        
+    df_elevations = pd.DataFrame(lst_resorts)
+
+    df_elevations["resort"] = df_elevations["resort"].str.replace(" Resort", "")
+    df_elevations["resort"] = df_elevations["resort"].str.replace(" Mountain", "")
+    df_elevations["resort"] = df_elevations["resort"].str.replace(" Ski Area", "")
+
+    
