@@ -63,16 +63,16 @@ class MakeMountainDF:
                                    'Vail': 209,
                                    'Winter Park': 139}
 
-    def load_pickle_file(self):
-        """
-        Load pickle file containing formatted resort data
-        """
+    # def load_pickle_file(self):
+    #     """
+    #     Load pickle file containing formatted resort data
+    #     """
 
-        pkl_file = open('../data/df.pkl', 'rb')
-        df = pickle.load(pkl_file)
-        pkl_file.close()
+    #     pkl_file = open('../data/df.pkl', 'rb')
+    #     df = pickle.load(pkl_file)
+    #     pkl_file.close()
 
-        return df
+    #     return df
 
     def get_resort_terrain(self, resort):
         """
@@ -85,7 +85,7 @@ class MakeMountainDF:
         
         self.browser.get(URL)
 
-        time.sleep(5)
+        # time.sleep(5)
         
         soup = BeautifulSoup(self.browser.page_source, 'html.parser')
 
@@ -127,7 +127,7 @@ class MakeMountainDF:
 
         return dict_resort_elevation
 
-    def create_data_frame(self):
+    def create_mountain_data_frame(self):
         """
         Run get_resort_terrain
 
@@ -143,6 +143,20 @@ class MakeMountainDF:
         df_terrain = pd.concat(lst_resorts).reset_index(drop=True)
 
         return df_terrain
+
+    def create_elevation_data_frame(self):
+        """
+        Run get_resort_elevation_and_lifts
+        Append missing resort data
+        """
+        
+        lst_resorts = [self.get_resort_elevation_and_lifts(resort)
+                   for resort in tqdm(self.resort_elevation)]
+        
+        df_elevations = pd.DataFrame(lst_resorts)
+
+        return df_elevations
+
 
     def format_data_frame(self, df):
         """
@@ -177,24 +191,20 @@ class MakeMountainDF:
         current_date = str(pd.Timestamp.now().date()).replace("-", "")
 
         df.to_parquet(f"../data/mtn_df_{current_date}.parquet", index=False)
-        
-        # output = open('../data/mtn_df.pkl', 'wb')
-        # pickle.dump(df, output)
-        # output.close()
 
 if __name__ == '__main__':
 
     mountain = MakeMountainDF()
 
-    df_mountains = mountain.create_data_frame()
-
-    lst_resorts = [mountain.get_resort_elevation_and_lifts(resort)
-                   for resort in tqdm(mountain.resort_elevation)]
+    df_mountains = mountain.create_mountain_data_frame()
         
-    df_elevations = pd.DataFrame(lst_resorts)
+    df_elevations = mountain.create_elevation_data_frame()
 
     df_elevations["resort"] = df_elevations["resort"].str.replace(" Resort", "")
     df_elevations["resort"] = df_elevations["resort"].str.replace(" Mountain", "")
     df_elevations["resort"] = df_elevations["resort"].str.replace(" Ski Area", "")
 
+    # Combine DataFrames
+    df_combined = pd.merge(df_mountains, df_elevations, on="resort", how="outer")
     
+    df_combined["price"] = df_combined["resort"].map(mountain.dict_resort_prices)
