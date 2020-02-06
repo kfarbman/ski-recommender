@@ -8,8 +8,6 @@ import pandas as pd
 import requests
 from bs4 import BeautifulSoup
 from selenium import webdriver
-from sklearn.metrics.pairwise import cosine_similarity
-from sklearn.preprocessing import StandardScaler
 
 warnings.filterwarnings('ignore')
 
@@ -77,17 +75,66 @@ class MakeMountainDF:
         
         df_terrain["resort"] = resort
         
-        # TODO: Get elevation
-        # bottom = int(''.join([x for x in elevs.split()[0] if x.isnumeric()]))
-        # top = int(''.join([x for x in elevs.split()[2] if x.isnumeric()]))
-                
-        # TODO: Get lifts and price
-        # lifts = int(lifts)
-        # price = int(
-        #     ''.join([x if x.isnumeric() else '0' for x in price.split()[0]]))
-        # return [bottom, top, greens, blues, blacks, bbs, lifts, price]
-
         return df_terrain
+
+    # TODO: Get total chairlifts per resort
+    # TODO: Complete resort elevation data frame
+    def get_resort_elevation(self, resort):
+        """
+        Request elevation, run colors, chairlifts, and prices from each resort
+        """
+        
+        URL = f'http://www.onthesnow.com/{self.resort_urls[resort]}/ski-resort.html'
+        URL = f'http://www.onthesnow.com/Loveland/ski-resort.html'
+        
+        print(URL)
+        
+        self.browser.get(URL)
+
+        time.sleep(5)
+        
+        soup = BeautifulSoup(self.browser.page_source, 'html.parser')
+
+        lst_terrain = soup.select('div#resort_elevation p')
+
+        return lst_terrain
+
+    # TODO: Merge resort names with prices
+    # TODO: Create manual list of resorts and daily ticket prices
+    # TODO: Pandas HTML?
+    def get_resort_prices(self):
+        """
+        Request resort prices for each ski resort
+        """
+        URL = f"https://www.onthesnow.com/united-states/lift-tickets.html"
+
+        self.browser.get(URL)
+
+        time.sleep(5)
+        
+        soup = BeautifulSoup(mountain.browser.page_source, 'html.parser')
+
+        soup.select("div.col_8.resortList.liftList div#contentPos tbody td.rLeft")
+        
+        lst_links = soup.select("div.col_8.resortList.liftList div#contentPos tbody td.rLeft div.name a")
+
+        lst_resorts = [link.get("title") for link in lst_links]
+
+        lst_resorts = [resort.replace("Lift Tickets ", "") for resort in lst_resorts]
+
+        # 2019 ticket prices, fetched manually
+        # dict_ticket_prices = {'Alpine Meadows': 169,
+        #                       'Arapahoe Basin': 109,
+        #                       'Beaver Creek': 209,
+        #                       'Copper': 119,
+        #                       'Crested Butte': 129,
+        #                       'Diamond Peak': 104,
+        #                       'Eldora': 140,
+        #                       'Loveland': 89,
+        #                       'Monarch': 94,
+        #                       'Taos': 110,
+        #                       'Vail': 209,
+        #                       'Winter Park': 139}
 
     def create_data_frame(self):
         """
@@ -148,4 +195,5 @@ if __name__ == '__main__':
 
     mountain = MakeMountainDF()
 
+    import pdb; pdb.set_trace()
     df_mountains = mountain.create_data_frame()
