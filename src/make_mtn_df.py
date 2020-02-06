@@ -21,19 +21,34 @@ class MakeMountainDF:
 
         self.browser = webdriver.Chrome(chrome_options=self.browser_options)
         
-        self.resort_urls = {'Loveland': 'colorado/loveland',
-                            'Arapahoe Basin': 'colorado/arapahoe-basin-ski-area',
-                            'Copper': 'colorado/copper-mountain-resort',
-                            'Eldora': 'colorado/eldora-mountain-resort',
+        self.resort_urls = {
                             'Alpine Meadows': 'california/squaw-valley-usa',
-                            'Vail': 'colorado/vail',
-                            'Monarch': 'colorado/monarch-mountain',
+                            'Arapahoe Basin': 'colorado/arapahoe-basin-ski-area',
+                            'Beaver Creek': 'colorado/beaver-creek',
+                            'Copper': 'colorado/copper-mountain-resort',
                             'Crested Butte': 'colorado/crested-butte-mountain-resort',
-                            'Taos': 'new-mexico/taos-ski-valley',
                             'Diamond Peak': 'nevada/diamond-peak',
-                            'Winter Park': 'colorado/winter-park-resort',
-                            'Beaver Creek': 'colorado/beaver-creek'}
-
+                            'Eldora': 'colorado/eldora-mountain-resort',
+                            'Loveland': 'colorado/loveland',
+                            'Monarch': 'colorado/monarch-mountain',
+                            'Taos': 'new-mexico/taos-ski-valley',
+                            'Vail': 'colorado/vail',
+                            'Winter Park': 'colorado/winter-park-resort'}
+        
+        self.resort_elevation = {
+                            'Alpine Meadows': 522,
+                            'Arapahoe Basin': 513,
+                            'Beaver Creek': 497,
+                            'Copper': 509,
+                            'Crested Butte': 514,
+                            # 'Diamond Peak': 359,
+                            'Eldora': 508,
+                            'Loveland': 515,
+                            'Monarch': 511,
+                            # 'Taos': 338,
+                            'Vail': 507,
+                            'Winter Park': 503}
+    
     def load_pickle_file(self):
         """
         Load pickle file containing formatted resort data
@@ -77,27 +92,26 @@ class MakeMountainDF:
         
         return df_terrain
 
-    # TODO: Get total chairlifts per resort
-    # TODO: Complete resort elevation data frame
-    def get_resort_elevation(self, resort):
+    def get_resort_elevation_and_lifts(self, resort):
         """
-        Request elevation, run colors, chairlifts, and prices from each resort
+        Request elevation, total runs, and total lifts per resort
         """
         
-        URL = f'http://www.onthesnow.com/{self.resort_urls[resort]}/ski-resort.html'
-        URL = f'http://www.onthesnow.com/Loveland/ski-resort.html'
-        
-        print(URL)
-        
-        self.browser.get(URL)
+        URL = f"https://skimap.org/SkiAreas/view/{self.resort_elevation[resort]}.json"
+                
+        json_resort = requests.get(URL).json()
 
-        time.sleep(5)
+        dict_resort_elevation = {}
+
+        dict_resort_elevation["name"] = json_resort["name"]
+        dict_resort_elevation["lift_count"] = json_resort["lift_count"]
+        dict_resort_elevation["run_count"] = json_resort["run_count"]
         
-        soup = BeautifulSoup(self.browser.page_source, 'html.parser')
+        # Meters: Multipy by 3.281
+        dict_resort_elevation["top_elevation"] = json_resort["top_elevation"] * 3.281
+        dict_resort_elevation["bottom_elevation"] = json_resort["bottom_elevation"] * 3.281
 
-        lst_terrain = soup.select('div#resort_elevation p')
-
-        return lst_terrain
+        return dict_resort_elevation
 
     # TODO: Merge resort names with prices
     # TODO: Create manual list of resorts and daily ticket prices
@@ -112,7 +126,7 @@ class MakeMountainDF:
 
         time.sleep(5)
         
-        soup = BeautifulSoup(mountain.browser.page_source, 'html.parser')
+        soup = BeautifulSoup(self.browser.page_source, 'html.parser')
 
         soup.select("div.col_8.resortList.liftList div#contentPos tbody td.rLeft")
         
@@ -195,5 +209,8 @@ if __name__ == '__main__':
 
     mountain = MakeMountainDF()
 
-    import pdb; pdb.set_trace()
     df_mountains = mountain.create_data_frame()
+
+    lst_resorts = []
+    for resort in tqdm(mountain.resort_elevation):
+        lst_resorts.append(mountain.get_resort_elevation_and_lifts(resort))
