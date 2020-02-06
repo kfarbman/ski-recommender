@@ -138,7 +138,7 @@ class MakeMountainDF:
 
         for resort in tqdm(self.resort_urls.keys()):
             lst_resorts.append(self.get_resort_terrain(resort))
-
+        
         # Combine list of resort DataFrames
         df_terrain = pd.concat(lst_resorts).reset_index(drop=True)
 
@@ -153,6 +153,22 @@ class MakeMountainDF:
         lst_resorts = [self.get_resort_elevation_and_lifts(resort)
                    for resort in tqdm(self.resort_elevation)]
         
+        # Create missing values from skimap website
+        dict_diamond_peak = {"resort": "Diamond Peak",
+                            "lift_count": 7,
+                            "run_count": 30,
+                            "top_elevation": 8540,
+                            "bottom_elevation": 6700}
+        
+        dict_taos = {"resort": "Taos",
+                            "lift_count": 14,
+                            "run_count": 110,
+                            "top_elevation": 12481,
+                            "bottom_elevation": 9200}
+
+        lst_resorts.append(dict_diamond_peak)
+        lst_resorts.append(dict_taos)
+
         df_elevations = pd.DataFrame(lst_resorts)
 
         return df_elevations
