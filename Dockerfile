@@ -1,4 +1,4 @@
-FROM python:3.6.8-slim
+FROM python:3.7.6-slim
 
 # Install libraries
 COPY docker_requirements.txt ./
