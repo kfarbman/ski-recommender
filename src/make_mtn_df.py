@@ -173,6 +173,37 @@ class MakeMountainDF:
 
         return df_elevations
 
+    def format_mountain_data_frame_values(self, df):
+        """
+        Pivot DataFrame, and format values
+
+        Input
+            df: Pandas DataFrame
+        
+        Output
+            Formatted Pandas DataFrame
+        """
+
+        df_mountains = df.pivot(index='resort', columns='type', values='figures').reset_index()
+        
+        df_mountains["Advanced"] = df_mountains["Advanced"].str.replace("%", "").astype(int)
+        df_mountains["Beginner"] = df_mountains["Beginner"].str.replace("%", "").astype(int)
+        df_mountains["Expert"] = df_mountains["Expert"].str.replace("%", "").astype(int)
+        df_mountains["Intermediate"] = df_mountains["Intermediate"].str.replace("%", "").astype(int)
+        df_mountains["Longest Run"] = df_mountains["Longest Run"].str.replace(" mi", "").astype(float)
+        df_mountains["Runs"] = df_mountains["Runs"].astype(int)
+        df_mountains["Terrain Parks"] = df_mountains["Terrain Parks"].astype(int)
+        
+        # TODO: Convert Acres to Feet? ; multiply by 43560
+        df_mountains["Skiable Terrain"] = df_mountains["Skiable Terrain"].str.replace(" ac", "").astype(int)
+        df_mountains.drop(["mi Snow Making"], axis=1, inplace=True)
+        
+        df_mountains["Snow Making"].fillna("0 ac", inplace=True)
+        
+        # TODO: Convert Acres to Feet? ; multiply by 43560
+        df_mountains["Snow Making"] = df_mountains["Snow Making"].str.replace(" ac", "").astype(int)
+
+        return df_mountains
 
     def format_data_frame(self, df):
         """
@@ -214,26 +245,8 @@ if __name__ == '__main__':
 
     df_mountains = mountain.create_mountain_data_frame()
 
-    # Format df_mountains
-    df_mountains = df_mountains.pivot(index='resort', columns='type', values='figures').reset_index()
+    df_mountains = mountain.format_mountain_data_frame_values(df=df_mountains)
     
-    df_mountains["Advanced"] = df_mountains["Advanced"].str.replace("%", "").astype(int)
-    df_mountains["Beginner"] = df_mountains["Beginner"].str.replace("%", "").astype(int)
-    df_mountains["Expert"] = df_mountains["Expert"].str.replace("%", "").astype(int)
-    df_mountains["Intermediate"] = df_mountains["Intermediate"].str.replace("%", "").astype(int)
-    df_mountains["Longest Run"] = df_mountains["Longest Run"].str.replace(" mi", "").astype(float)
-    df_mountains["Runs"] = df_mountains["Runs"].astype(int)
-    df_mountains["Terrain Parks"] = df_mountains["Terrain Parks"].astype(int)
-    
-    # TODO: Convert Acres to Feet? ; multiply by 43560
-    df_mountains["Skiable Terrain"] = df_mountains["Skiable Terrain"].str.replace(" ac", "").astype(int)
-    df_mountains.drop(["mi Snow Making"], axis=1, inplace=True)
-    
-    df_mountains["Snow Making"].fillna("0 ac", inplace=True)
-    
-    # TODO: Convert Acres to Feet? ; multiply by 43560
-    df_mountains["Snow Making"] = df_mountains["Snow Making"].str.replace(" ac", "").astype(int)
-
     df_elevations = mountain.create_elevation_data_frame()
 
     df_elevations["resort"] = df_elevations["resort"].str.replace(" Resort", "")
