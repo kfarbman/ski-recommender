@@ -8,45 +8,66 @@ from sklearn.preprocessing import StandardScaler
 
 app = Flask(__name__)
 
-with open('../data/df.pkl','rb') as f:
-    df = pickle.load(f)    
-    
-with open('../data/mtn_df.pkl','rb') as f:
-    mtn_df = pickle.load(f)
-    
-features = ['top_elev_(ft)', 
-            'bottom_elev_(ft)', 
-            'vert_rise_(ft)', 
-            'slope_length_(ft)', 
-            'avg_width_(ft)', 
-            'slope_area_(acres)', 
-            'avg_grade_(%)', 
-            'max_grade_(%)', 
-            'groomed']
-X = df[features].values    
-ss = StandardScaler()
-X = ss.fit_transform(X)
+class SkiRunRecommender:
 
-mtn_features = ['top_elev_(ft)', 
-                'bottom_elev_(ft)', 
-                'vert_rise_(ft)', 
-                'slope_length_(ft)', 
-                'avg_width_(ft)', 
-                'slope_area_(acres)', 
-                'avg_grade_(%)', 
-                'max_grade_(%)', 
-                'groomed',
-                'resort_bottom',
-                'resort_top',
-                'greens',
-                'blues',
-                'blacks',
-                'bbs',
-                'lifts',
-                'price']
+    def __init__(self):
+        pass
+
+        self.trail_features = ['top_elev_(ft)',
+                            'bottom_elev_(ft)',
+                            'vert_rise_(ft)',
+                            'slope_length_(ft)',
+                            'avg_width_(ft)',
+                            'slope_area_(acres)',
+                            'avg_grade_(%)',
+                            'max_grade_(%)',
+                            'groomed']
+        
+        self.mtn_features = ['top_elev_(ft)',
+                            'bottom_elev_(ft)',
+                            'vert_rise_(ft)',
+                            'slope_length_(ft)',
+                            'avg_width_(ft)',
+                            'slope_area_(acres)',
+                            'avg_grade_(%)',
+                            'max_grade_(%)',
+                            'groomed',
+                            'resort_bottom',
+                            'resort_top',
+                            'greens',
+                            'blues',
+                            'blacks',
+                            'bbs',
+                            'lifts',
+                            'price']
+
+    def load_trail_data(self):
+
+        with open('../data/df.pkl','rb') as f:
+            df = pickle.load(f)
+
+        return df
+
+    def load_mountain_data(self):    
+            
+        with open('../data/mtn_df.pkl','rb') as f:
+            mtn_df = pickle.load(f)
+        
+        return mtn_df
+    
+    def transform_features(self, df, features):
+
+        # Transform trail data
+        X = df[features].values
+        ss = StandardScaler()
+        X_transform = ss.fit_transform(X)
+
+        # Transform mountain data
+        # X_mtn = mtn_df[mtn_features].values    
+        # X_mtn = ss.fit_transform(X_mtn)
+        
+        return X_transform
                 
-X_mtn = mtn_df[mtn_features].values    
-X_mtn = ss.fit_transform(X_mtn)
 
 resort_stats_df = mtn_df[['resort', 'resort_bottom','resort_top','greens','blues','blacks','bbs','lifts','price']].drop_duplicates()
 
