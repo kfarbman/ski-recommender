@@ -99,9 +99,9 @@ def preprocess_data(df,resort,location):
 
 if __name__ == '__main__':
 
-    df_resort = make_dataframe("../../data/Monarch.txt")
+    df_resort = make_dataframe("../../data/resorts/Monarch.txt")
 
     df_resort = preprocess_data(df=df_resort,
         resort = "Monarch",
-        location = "Monarch")
+        location = "CO")
           
