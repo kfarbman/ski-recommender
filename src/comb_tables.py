@@ -367,22 +367,6 @@ if __name__ == '__main__':
     
     import pdb; pdb.set_trace()
 
-
-def missing_trails(color_trails, resort):
-    '''
-    Inputs:
-        color_trails = trails_by_color[resort][level] (list)
-        resort from resort_dict (str)
-    Outputs:
-        list of trails by color from webscraping that weren't in the dataframe
-    '''
-    trail_lst = []
-    for trail in color_trails:
-        if trail not in list(resort_dict[resort]['trail_name']):
-             trail_lst.append(trail)
-    return trail_lst
-
-
 '''
 Dictionary of dictionaries {resort: {level: [trails]}}
 For trails that df_resorts, but have slightly different names from the webscraping (by color)
