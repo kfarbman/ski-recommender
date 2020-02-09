@@ -595,30 +595,7 @@ def remove_trails(resort, trail_lst):
 # for resort, trail_lst in zip(resort_dict, trails_to_remove):
 #     resort_dict[resort] = remove_trails(resort, trail_lst)
 
-
-# '''put the dfs back together'''
-# final_df = pd.concat([resort for resort in resort_dict.values()])
-
-# ability_levels = {'Beginner': 1, 'Novice': 2, 'Low Intermediate': 3,
-#                   'Intermediate': 4, 'Advanced': 5, 'Expert': 6, 'Glade': 5}
-# colors = {'green': 1, 'blue': 2, 'black': 3, 'bb': 4, 'color': 0}
-
-# final_df['ability_nums'] = final_df['ability_level'].map(ability_levels)
-# final_df['color_nums'] = final_df['colors'].map(colors)
-
-# final_df = final_df.reset_index(drop=True)
-
-# final_df['trail_name'].iloc[424] = 'Teaching Terrain 1'
-# final_df['trail_name'].iloc[425] = 'Teaching Terrain 2'
-# final_df['trail_name'].iloc[750] = 'Teaching Terrain 1'
-# final_df['trail_name'].iloc[751] = 'Teaching Terrain 2'
-# final_df['trail_name'].iloc[901] = 'Whistle Stop Lower'
-# final_df['trail_name'].iloc[908] = 'Whistle Stop Upper'
-# for i, j in zip(range(1116, 1125), range(1, 10)):
-#     final_df['trail_name'].iloc[i] = final_df['trail_name'].iloc[i] + \
-#         " " + str(j)
-
-
+# TODO: Fix Monarch trail names?
 # '''fixing Monarch trail names'''
 # a = list(final_df['trail_name'][final_df['resort'] == 'Monarch'])
 # b = [x.split() for x in a]
@@ -631,11 +608,8 @@ def remove_trails(resort, trail_lst):
 # c[53] = "Geno's Meadow"
 # final_df['trail_name'][final_df['resort'] == 'Monarch'] = c
 
+# TODO: Fix trail name?
 # '''fix trail name'''
 # final_df['trail_name'][final_df['trail_name']
 #                        == 'Litter Pierre'] = 'Little Pierre'
 
-
-# output = open('../data/df.pkl', 'wb')
-# pickle.dump(final_df, output)
-# output.close()
