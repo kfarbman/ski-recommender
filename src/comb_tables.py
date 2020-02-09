@@ -326,7 +326,7 @@ if __name__ == '__main__':
     Import webscraped data
     """
 
-    df_webscraped_trails = pd.read_csv("webscrape_trail_data_20200203.csv")
+    df_webscraped_trails = pd.read_csv("../data/formatted/webscrape_trail_data_20200203.csv")
 
     # Rename resorts
     dict_webscrape_trail_names = {'alpine-meadows': "Alpine Meadows",
@@ -351,6 +351,11 @@ if __name__ == '__main__':
         dict_webscrape_trail_names).\
         fillna(df_webscraped_trails["resort_name"])
 
+    df_webscraped_trails.rename(columns={"resort_name": "resort", "Name": "trail_name"}, inplace=True)
+    
+    # Merge DataFrames
+    df_merged = pd.merge(df_resorts, df_webscraped_trails, on=["resort", "trail_name"], how="inner")
+    
     import pdb; pdb.set_trace()
 
 
