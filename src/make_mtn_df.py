@@ -1,5 +1,4 @@
 import pickle
-import time
 import warnings
 from tqdm import tqdm
 
@@ -63,29 +62,14 @@ class MakeMountainDF:
                                    'Vail': 209,
                                    'Winter Park': 139}
 
-    # def load_pickle_file(self):
-    #     """
-    #     Load pickle file containing formatted resort data
-    #     """
-
-    #     pkl_file = open('../data/df.pkl', 'rb')
-    #     df = pickle.load(pkl_file)
-    #     pkl_file.close()
-
-    #     return df
-
     def get_resort_terrain(self, resort):
         """
         Request elevation, run colors, chairlifts, and prices from each resort
         """
         
         URL = f'http://www.onthesnow.com/{self.resort_urls[resort]}/ski-resort.html'
-        
-        print(URL)
-        
+                
         self.browser.get(URL)
-
-        # time.sleep(5)
         
         soup = BeautifulSoup(self.browser.page_source, 'html.parser')
 
@@ -122,8 +106,8 @@ class MakeMountainDF:
         dict_resort_elevation["run_count"] = json_resort["run_count"]
         
         # Meters: Multipy by 3.281 to get feet
-        dict_resort_elevation["top_elevation"] = json_resort["top_elevation"] * 3.281
-        dict_resort_elevation["bottom_elevation"] = json_resort["bottom_elevation"] * 3.281
+        dict_resort_elevation["top_elevation"] = int(round(json_resort["top_elevation"] * 3.281))
+        dict_resort_elevation["bottom_elevation"] = int(round(json_resort["bottom_elevation"] * 3.281))
 
         return dict_resort_elevation
 
@@ -213,22 +197,6 @@ class MakeMountainDF:
                     'blues', 'blacks', 'bbs', 'lifts', 'price']
         df = df.reindex(
             columns=[*df.columns.tolist(), *new_cols], fill_value=0)
-        return df
-
-    def format_elev_prices(self, df, elevs_colors_lifts_price):
-
-        for resort in elevs_colors_lifts_price:
-            df['resort_bottom'][df['resort'] ==
-                                resort] = elevs_colors_lifts_price[resort][0]
-            df['resort_top'][df['resort'] ==
-                             resort] = elevs_colors_lifts_price[resort][1]
-            df['greens'][df['resort'] == resort] = elevs_colors_lifts_price[resort][2]
-            df['blues'][df['resort'] == resort] = elevs_colors_lifts_price[resort][3]
-            df['blacks'][df['resort'] == resort] = elevs_colors_lifts_price[resort][4]
-            df['bbs'][df['resort'] == resort] = elevs_colors_lifts_price[resort][5]
-            df['lifts'][df['resort'] == resort] = elevs_colors_lifts_price[resort][6]
-            df['price'][df['resort'] == resort] = elevs_colors_lifts_price[resort][7]
-
         return df
 
     def save_mountain_data(self, df):
