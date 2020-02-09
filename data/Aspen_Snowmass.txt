@@ -1,0 +1,166 @@
+Table IV-2. Terrain Specifications – Existing Conditions
+                              Top     Bottom   Vertical     Slope   Avg.    Slope      Avg.    Max
+         Trail Area/Name     Elev.     Elev.    Rise       Length   Width   Area      Grade   Grade        Ability Level
+                              (ft)     (ft)      (ft)       (ft)     (ft)   (acres)    (%)     (%)
+Creekside                   9,686     8,110    1,576      9,760     163     36.4      16%     47%    Intermediate
+Cascade                     9,609     8,861     748       3,523     127     10.3      22%     38%    Intermediate
+West Fork                    9,350     8,550     800       5,625     90      11.6      14%     32%    Low Intermediate
+Assay Hill                   8,514     8,324     190       1,499     194      6.7      13%     15%    Novice
+Lone Star                    9,810     9,623     187       1,235     131      3.7      15%     29%    Low Intermediate
+Bottoms Up                   9,639     9,364     275       1,017     178      4.2      28%     36%    Intermediate
+Funnel Upper                 9,766     9,363     403       2,781     273     17.4      15%     37%    Intermediate
+Funnel Lower                 9,363     8,460     903       6,359     326     47.6      15%     24%    Novice
+Funnel Bypass                9,616     9,488     128       1,418     59       1.9      9%      15%    Novice
+Funnel Bypass                9,370     9,320     51         537      51       0.6      9%      14%    Novice
+No Name                      9,236     9,001     235       1,452     86       2.9      17%     25%    Novice
+Eddy Out                     9,148     8,661     487       2,586     65       3.8      19%     41%    Intermediate
+Slider                       9,847     8,974     873       5,238     179     21.6      17%     33%    Intermediate
+Bull Run                     11,323    9,926    1,396      6,654     473     72.2      21%     35%    Low Intermediate
+Grey Wolf                    11,310   10,155    1,155      4,904     304     34.2      24%     37%    Intermediate
+Bear Bottom                  11,303    9,932    1,371      6,443     211     31.1      22%     38%    Intermediate
+Gunner’s View                10,987   10,070     917       4,611     180     19.1      20%     34%    Low Intermediate
+Sandy Park                   11,315    9,852    1,462      8,285     201     38.3      18%     44%    Intermediate
+EC Meadows                   9,928     9,804     124       1,517     405     14.1      8%      14%    Beginner
+Naked Lady                   10,438    8,996    1,442      7,155     310     50.9      21%     36%    Intermediate
+Lodge Pole                   10,221    9,720     501       2,126     155      7.6      24%     38%    Intermediate
+Log Deck                     10,471    9,741     729       3,405     182     14.2      22%     39%    Intermediate
+Tom’s Trace                  9,789     9,353     435       1,829     269     11.3      25%     51%    Advanced Intermediate
+Lunkerville                  9,866     8,990     876       4,652     233     24.9      19%     36%    Intermediate
+Adam’s Avenue Lower          9,214     8,638     577       3,726     161     13.7      16%     28%    Low Intermediate
+Adam’s Avenue Middle Upper   9,396     9,330     65         371      48       0.4      18%     20%    Low Intermediate
+Adam’s Avenue Middle Lower   9,280     9,240     40         480      81       0.9      8%      13%    Low Intermediate
+Adam’s Avenue Upper          9,646     9,455     191       1,670     128      4.9      12%     18%    Low Intermediate
+Coffee Pot                  10,391    9,095    1,295      6,446     158     23.3      21%     38%    Intermediate
+Granite                      10,298    9,786     513       2,435     118      6.6      22%     43%    Intermediate
+Green Cabin Lower           10,453    8,942    1,512      7,987     212     39.0      19%     38%    Intermediate
+Green Cabin Upper           11,782   10,264    1,518      6,597     193     29.2      24%     44%    Intermediate
+Reidar’s                     11,774   10,475    1,300      4,390     191     19.3      31%     57%    Expert
+Reidar’s Glade               10,950   10,450     500       1,230     520     11.7      41%     52%    Expert Glade-Gated
+Showcase                     11,791   10,527    1,264      4,129     221     20.9      32%     46%    Advanced Intermediate
+The Edge                     11,797   10,472    1,324      4,488     231     23.8      31%     45%    Advanced Intermediate
+Roberto’s                    11,920   11,427     492       1,483     209      7.1      36%     73%    Chute/Bowl-Gated
+Frog Pond Glade              11,448   10,380    1,068      3,472     990     78.9      33%     50%    Expert Glade-Gated
+Baby Ruth                    11,357   10,738     619       1,462     200      6.7      47%     77%    Chute/Bowl-Gated
+Big Spruce                   11,211   10,430     781       1,875     286     12.3      46%     74%    Chute/Bowl-Gated
+Cassidy’s                   10,817   10,394     424        991      236      5.4      48%     66%    Expert Glade-Gated
+Willy’s                      10,662   10,242     420        968      425      9.4      49%     75%    Bowl/Glade-Gated
+Cookies                     10,996   10,545     451       1,104     305      7.7      45%     58%    Expert Glade-Gated
+Turkey Trot                  10,592    9,802     790       4,928     160     18.1      16%     42%    Intermediate
+Turkey Trot Upper            10,490   10,431     59         718      26       0.4      8%      12%    Intermediate
+Rocky Mtn. High             12,497   11,795     702       3,860     360     31.9      19%     25%    Low Intermediate
+AMF                          11,945   11,369     576       1,720     355     14.0      36%     77%    Chute/Bowl-Gated
+Cirque Headwall             12,344   11,677     667       2,119     922     44.8      33%     58%    Chute/Bowl-Gated
+East Wall                    12,192   11,683     509       1,910     356     15.6      28%     82%    Chute/Bowl-Gated
+High Traverse                12,501   11,812     689       6,273     149     21.5      11%     55%    Chute/Bowl-Gated
+Adios Ridge                  11,644   11,209     435       1,085     460     11.5      44%     54%    Chute/Bowl-Gated
+
+
+
+
+   IV-6          Snowmass
+                                                                                                IV. Existing Facilities
+
+Table IV-2. Terrain Specifications – Existing Conditions
+                             Top     Bottom   Vertical      Slope   Avg.       Slope     Avg.    Max
+        Trail Area/Name     Elev.     Elev.    Rise        Length   Width      Area     Grade   Grade        Ability Level
+                             (ft)      (ft)      (ft)       (ft)     (ft)     (acres)    (%)     (%)
+Ladder Lower                11,224   10,813      411        859      269        5.3      56%     89%    Chute/Bowl-Gated
+Ladder Upper                11,441   11,241      201        414      99         0.9      56%     75%    Chute/Bowl-Gated
+Dikes                       11,669   10,241     1,428      5,923     949       129.1     25%     60%    Bowl/Glade-Gated
+Gowdy’s                     11,842   11,267      575       1,827     308        12.9     34%    108%    Chute/Bowl-Gated
+KT Gully                    11,307   11,104      202        466      175        1.9      50%     77%    Chute/Bowl-Gated
+Rock Island                 11,137   10,675      462        988      493        11.2     54%     88%    Chute/Glade-Gated
+Buck Skin                   10,715   10,149      566       1,723     330        13.1     35%     73%    Expert Glade-Gated
+Sheer Bliss                 11,833    9,674     2,158      8,926     497       101.8     25%     44%    Intermediate
+Camp 3                     10,113    9,690      424       1,489     165        5.6      30%     47%    Advanced Intermediate
+Garrett Gulch               10,775    9,852      923       3,460     116        9.2      28%     48%    Advanced Intermediate
+West Face                   10,928   10,679      249        677      667        10.4     40%     50%    Chute/Bowl-Gated
+Free Fall                   10,617   10,359      258        526      591        7.1      56%     64%    Expert Glade-Gated
+Glissade                    10,205    9,940      264        568      104        1.4      53%     60%    Expert
+Whispering Jesse           10,901    9,900     1,001      3,390     191        14.9     31%     39%    Intermediate
+Trestle                     9,880     9,695      185       1,598     83         3.1      12%     38%    Intermediate
+Timberline                  11,725    9,918     1,807      6,721     204        31.4     28%     40%    Intermediate
+Wineskin                    11,837    9,972     1,865      6,875     162        25.5     28%     47%    Advanced Intermediate
+Dallas Freeway              11,585   10,125     1,461      5,240     179        21.5     29%     42%    Intermediate
+Micks’ Gully                11,821   10,167     1,654      6,263     230        33.1     27%     42%    Intermediate
+Powerline Glades            11,440   10,440     1,000      3,552     676        55.1     29%     43%    Intermediate Glade
+Sneaky’s                    11,837   10,572     1,265      5,931     193        26.2     22%     29%    Low Intermediate
+Sneaky’s Glade              11,513   10,708      805       3,467     332        26.4     24%     31%    Intermediate Glade
+Jack of Hearts             10,719   10,523      197        689      160        2.5      30%     30%    Intermediate
+Powderhorn                  10,565    8,253     2,312      9,081     146        30.4     27%     56%    Expert
+Lower Banzai                9,820     8,895      926       3,865     217        19.2     25%     42%    Intermediate
+Cabin                      9,766     8,933      833       3,414     274        21.5     25%     45%    Intermediate
+Coney Glade                10,096    9,748      348       1,288     466        13.8     28%     39%    Intermediate
+Blue Grouse                 9,667     8,855      812       3,650     299        25.0     23%     44%    Intermediate
+Velvet Falls                9,614     8,857      757       3,348     225        17.3     23%     38%    Intermediate
+Nor Way                     9,201     9,073      127        756      63         1.1      17%     25%    Low Intermediate
+Hal’s Hollow                9,580     8,980      600       2,514     195        11.2     25%     40%    Intermediate
+Scooper                     9,507     9,008      499       2,333     214        11.5     22%     37%    Intermediate
+Dawdler                     9,638     8,714      924       6,685     194        29.7     14%     28%    Novice
+Fanny Hill                  8,899     8,462      437       3,175     251        18.3     14%     17%    Novice
+Lunchline                  10,117    9,428      689       4,784     144        15.9     15%     34%    Low Intermediate
+Moonshine                   10,191    9,416      775       3,436     205        16.2     23%     47%    Advanced Intermediate
+Ute Chute                  10,334    9,710      624       1,846     168        7.1      36%     45%    Advanced Intermediate
+Fast Draw                   10,435   10,036      399       1,103     120        3.0      39%     44%    Intermediate
+Max Park                    10,579    9,858      721       4,145     423        40.3     18%     43%    Intermediate
+Sunnyside                   10,609    9,943      666       2,600     122        7.3      27%     44%    Intermediate
+Banzai Ridge                10,575    9,854      721       3,267     146        11.0     23%     32%    Low Intermediate
+Monks Hood                  9,895     9,544      351       2,002     84         3.8      18%     30%    Low Intermediate
+Promenade                   10,561    9,562      998       2,997     253        17.4     36%     46%    Advanced Intermediate
+Zugspitze                   10,552    9,420     1,133      3,694     181        15.4     32%     47%    Advanced Intermediate
+Slot Upper                  10,603    9,443     1,160      3,534     276        22.4     35%     45%    Advanced Intermediate
+Slot Lower                  9,437     8,228     1,209      5,390     285        35.2     23%     47%    Advanced Intermediate
+Wildcat                     10,484    9,124     1,360      4,959     145        16.5     29%     45%    Intermediate
+Howler Upper                10,009    9,593      416       1,184     84         2.3      38%     47%    Advanced Intermediate
+Howler Lower                9,488     9,450      38         367      52         0.4      10%     17%    Advanced Intermediate
+Bearclaw                    10,046    8,226     1,820      6,546     256        38.5     29%     51%    Advanced Intermediate
+Campground                 10,621    8,223     2,398      8,510     201        39.2     30%     53%    Advanced Intermediate
+
+
+
+
+                                                                            2015 Master Development Plan               IV-7
+Table IV-2. Terrain Specifications – Existing Conditions
+                               Top     Bottom   Vertical    Slope    Avg.    Slope      Avg.    Max
+       Trail Area/Name        Elev.     Elev.    Rise      Length    Width   Area      Grade   Grade        Ability Level
+                               (ft)     (ft)      (ft)       (ft)     (ft)   (acres)    (%)     (%)
+Split Tree                    11,260    9,909    1,351      4,854     659     73.5      29%     58%    Hike-To
+Rio                           11,309    9,976    1,334      4,671     483     51.8      30%     51%    Hike-To
+A-Line                        11,281    9,105    2,176     10,736     302     74.4      21%     48%    Hike-To
+Long Shot                     11,325    8,121    3,204     16,529     286     108.4     20%     47%    Hike-To
+Black Saturday Bowl           10,912   10,343     569       1,952     484     21.7      31%     66%    Chute/Bowl-Gated
+Burns Cliffs                 11,060   10,793     267       551       415      5.3      57%     83%    Chute/Glade-Gated
+Buttermilk                    10,953   10,484     469       1,484     490     16.7      34%     65%    Expert Glade-Gated
+Cirque Cornice              12,219   11,836     383       1,422     570     18.6      28%     44%    Chute/Bowl-Gated
+Coyote Hollow                11,716   10,850     866       3,461     497     39.5      26%     42%    Expert Glade-Gated
+Coyote Knob                  11,865   11,698     168       390       567      5.1      48%     54%    Chute/Bowl-Gated
+East 1 & 2                    11,765   11,299     466       1,515     461     16.0      33%     54%    Chute/Bowl-Gated
+Glade 1                       10,534   10,213     320       632       250      3.6      59%     65%    Expert Glade-Gated
+Glade 2                       10,482   10,197     285       569       190      2.5      58%     62%    Expert Glade-Gated
+Glade 3                       10,412   10,172     240       485       221      2.5      57%     61%    Expert Glade-Gated
+Hanging Valley Headwall       11,888   11,520     368       1,088     217      5.4      37%     83%    Chute/Bowl-Gated
+Hanging Valley Runout         10,273   10,094     179       1,213     308      8.6      15%     22%    Chute/Bowl-Gated
+Little Headwall               12,027   11,863     164       543       564      7.0      32%     58%    Chute/Bowl-Gated
+North Woods                   10,914   10,619     295       975       999     22.4      32%     43%    Chute/Bowl-Gated
+Old Man Basin                 11,403   11,149     255       791       248      4.5      34%     50%    Chute/Bowl-Gated
+Pitch in the Valley           11,129   10,806     323       1,012     317      7.4      34%     56%    Expert Glade-Gated
+Possible                      11,591   11,503     88        339       65       0.5      28%     40%    Chute/Bowl-Gated
+Possible Basin                11,460   11,096     364       745       374      6.4      57%     86%    Chute/Bowl-Gated
+Ptarmigan Draw                12,089   11,772     317       1,292     299      8.9      25%     33%    Chute/Bowl-Gated
+Rayburn’s Chute and Bowl     11,040   10,835     206       598       312      4.3      37%     45%    Chute/Bowl-Gated
+Strawberry Patch             10,944   10,567     377       701       157      2.5      64%     75%    Chute/Bowl-Gated
+Sun Kiss Glades               11,276   10,910     366       916       373      7.9      44%     66%    Chute/Glade-Gated
+Sunspot                       10,731   10,453     278       906       501     10.4      32%     41%    Chute/Glade-Gated
+Union                         10,756   10,295     461       1,211     324      9.0      42%     68%    Bowl/Glade-Gated
+Valley Valley                 11,173   10,801     372       910       284      5.9      45%     58%    Chute/Bowl-Gated
+Wall 1                        11,166   10,307     859       2,282     314     16.4      41%     83%    Chute/Bowl-Gated
+Wall 2                        11,058   10,649     409       736       132      2.2      67%     73%    Chute/Bowl-Gated
+Waters                        10,555   10,155     400       1,201     278      7.7      36%     66%    Expert Glade-Gated
+West 1&2                      11,896   11,527     369       968       165      3.7      42%     73%    Chute/Bowl-Gated
+TOTAL                                                      411,134            2,587
+
+
+
+
+      IV-8         Snowmass
+
