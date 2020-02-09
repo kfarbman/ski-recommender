@@ -475,25 +475,6 @@ dict_trails_to_add['Winter Park'] = {'green': ['Allen Phipps', "Bill Wilson's Wa
                                           'Norwegian', 'Columbine Lower', 'Upper Cheshire Cat', 'Roll Over'],
                                 'bb': []}
 
-def add_trails_to_add(resort):
-    '''
-    Add trails to colors
-
-    Inputs:
-        resort from resorts (str)
-    Outputs:
-        resort_df w/ class column updated w/ trail names that didn't make the list (DataFrame)
-    '''
-    levels = ['green', 'blue', 'black', 'bb']
-    for level in levels:
-        resort_dict[resort]['colors'][resort_dict[resort]
-                                      ['trail_name'].isin(trails_to_add[resort][level])] = level
-    return resort_dict[resort]
-
-
-# for resort in resort_dict:
-#     add_trails_to_add(resort)
-
 dict_trails_to_remove = {
     "Arapahoe Basin": ['High Noon Terrain Park','Treeline Terrain Park', 'Shooting Gallery', 'Poma Line'],
     "Beaver Creek": ['Chair 2', 'Half- Barrell Half Pipe', 'Half Hitch', 'Nastar Ski Racing', 'Park101_Flattops',
