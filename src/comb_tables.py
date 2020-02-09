@@ -382,47 +382,6 @@ def missing_trails(color_trails, resort):
              trail_lst.append(trail)
     return trail_lst
 
-def get_trails_list(resort, level):
-    '''
-    Compare list of trails by color
-
-    Inputs: 
-    resort from resorts (str)
-    level from levels (str)
-    Outputs:
-    list of trail names in a useable string format (list)
-    '''
-    if dct[resort][level] is None:
-        return []
-    else:
-        return [word.encode('ascii', 'ignore').strip().decode('utf-8') for word in dct[resort][level]['Name']]
-
-# trails_by_color = {}
-# for resort in resort_dict:
-#     trails_by_color[resort] = {level: get_trails_list(
-#         resort, level) for level in levels}
-
-def make_colors(resort):
-    '''
-    Compare color column
-
-    Inputs:
-    resort_df from resort_dfs (DataFrame)
-    resort from resorts (str)
-    Outputs:
-    resort_df w/ colors column added (DataFrame)
-    '''
-    resort_dict[resort]['colors'] = 'color'
-    levels = ['green', 'blue', 'black', 'bb']
-    for level in levels:
-        resort_dict[resort]['colors'][resort_dict[resort]
-                                      ['trail_name'].isin(get_trails_list(resort, level))] = level
-    return resort_dict[resort]
-
-
-# for resort in resort_dict:
-#     make_colors(resort)
-
 
 '''
 Dictionary of dictionaries {resort: {level: [trails]}}
