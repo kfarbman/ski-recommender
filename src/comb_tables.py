@@ -356,6 +356,15 @@ if __name__ == '__main__':
     # Merge DataFrames
     df_merged = pd.merge(df_resorts, df_webscraped_trails, on=["resort", "trail_name"], how="inner")
     
+
+    # Add ability numbers and color numbers
+    ability_levels = {'Beginner': 1, 'Novice': 2, 'Low Intermediate': 3,
+                    'Intermediate': 4, 'Advanced': 5, 'Expert': 6, 'Glade': 5}
+    colors = {'green': 1, 'blue': 2, 'black': 3, 'double-black': 4}
+
+    df_merged['ability_nums'] = df_merged['ability_level'].map(ability_levels)
+    df_merged['color_nums'] = df_merged['difficulty'].map(colors)
+    
     import pdb; pdb.set_trace()
 
 
