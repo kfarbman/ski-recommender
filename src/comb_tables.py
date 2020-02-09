@@ -189,16 +189,9 @@ if __name__ == '__main__':
     # Fix trail names (remove numbers at beginning)
     df_resorts = combine.fix_trail_names(df=df_resorts)
 
-    # TODO: Add groomed column; mark trails as groomed
-    # for resort, groom in zip(resort_dfs, grooms):
-    #     add_groomed_col(resort, groom)
-
-
     # TODO: Missing trails
 
     # TODO: List of trails
-
-    # TODO: Color trails
 
 
     """
@@ -364,9 +357,12 @@ if __name__ == '__main__':
 
     df_merged['ability_nums'] = df_merged['ability_level'].map(ability_levels)
     df_merged['color_nums'] = df_merged['difficulty'].map(colors)
-    
+
     import pdb; pdb.set_trace()
 
+    # Save data to Parquet file
+    # df_merged.to_parquet("../data/formatted_resort_data_20200209.parquet", index=False)
+    
 '''
 Dictionary of dictionaries {resort: {level: [trails]}}
 For trails that df_resorts, but have slightly different names from the webscraping (by color)
@@ -501,7 +497,7 @@ dict_trails_to_remove = {
 }
 
 
-def remove_trails(resort, trail_lst):
+def remove_trails(resort_dict, resort, trail_lst):
     '''
     Remove trails with no data other than master plan
 
@@ -520,20 +516,6 @@ def remove_trails(resort, trail_lst):
 #     resort_dict[resort] = remove_trails(resort, trail_lst)
 
 # TODO: Fix Monarch trail names?
-# '''fixing Monarch trail names'''
-# a = list(final_df['trail_name'][final_df['resort'] == 'Monarch'])
-# b = [x.split() for x in a]
-# c = [''.join(x) if len(x[0]) == 1 else ' '.join(x) for x in b]
-# c[19] = 'Quick Draw'
-# c[20] = 'KC Cutoff'
-# c[41] = "Doc's Run"
-# c[42] = 'Dire Straits'
-# c[47] = 'Great Divide'
-# c[53] = "Geno's Meadow"
-# final_df['trail_name'][final_df['resort'] == 'Monarch'] = c
-
-# TODO: Fix trail name?
-# '''fix trail name'''
-# final_df['trail_name'][final_df['trail_name']
-#                        == 'Litter Pierre'] = 'Little Pierre'
+# lst_monarch_trails = ['Quick Draw', 'KC Cutoff', "Doc's Run", 'Dire Straits', 'Great Divide', "Geno's Meadow"]
+# "Litter Pierre"
 
