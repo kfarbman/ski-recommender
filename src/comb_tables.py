@@ -17,27 +17,23 @@ class CombineTables:
 
     def __init__(self):
         self.resorts = {
-                        'Alpine Meadows': ['../data/Alpine_Meadows.txt', 'CA'],
-                        'Arapahoe Basin': ['../data/Arapahoe_Basin.txt', 'CO'],
-                        'Aspen Snowmass': ['../data/new/Aspen_Snowmass.txt', 'CO'],
-                        'Bald Mountain': ['../data/new/Bald_Mountain.txt', 'CO'],
-                        'Beaver Creek': ['../data/Beaver_Creek.txt', 'CO'],
-                        'Copper': ['../data/Copper.txt', 'CO'],
-                        'Crested Butte': ['../data/Crested_Butte.txt', 'CO'],
-                        'Diamond Peak': ['../data/DP.txt', 'NV'],
-                        'Eldora': ['../data/Eldora.txt', 'CO'],
-                        'Loveland': ['../data/Loveland.txt', 'CO'],
-                        'Monarch': ['../data/Monarch.txt', 'CO'],
-                        'Steamboat': ['../data/new/Steamboat.txt', 'CO'],
-                        'Taos': ['../data/Taos.txt', 'NM'],
-                        'Telluride': ['../data/new/Telluride.txt', 'CO'],
-                        'Vail': ['../data/Vail.txt', 'CO'],
-                        'Winter Park': ['../data/WP.csv', 'CO'],
-                        'Wolf Creek': ['../data/new/Wolf_Creek.txt', 'CO']}
-
-        # Keys of resorts compatible with each script
-        # TODO: Include additional resorts?
-        # self.resorts = ['Arapahoe Basin', 'Copper', 'Eldora', 'Alpine Meadows']
+                        'Alpine Meadows': ['../data/resorts/Alpine_Meadows.txt', 'CA'],
+                        'Arapahoe Basin': ['../data/resorts/Arapahoe_Basin.txt', 'CO'],
+                        'Aspen Snowmass': ['../data/resorts/Aspen_Snowmass.txt', 'CO'],
+                        'Bald Mountain': ['../data/resorts/Bald_Mountain.txt', 'CO'],
+                        'Beaver Creek': ['../data/resorts/Beaver_Creek.txt', 'CO'],
+                        'Copper': ['../data/resorts/Copper.txt', 'CO'],
+                        'Crested Butte': ['../data/resorts/Crested_Butte.txt', 'CO'],
+                        'Diamond Peak': ['../data/resorts/DP.txt', 'NV'],
+                        'Eldora': ['../data/resorts/Eldora.txt', 'CO'],
+                        'Loveland': ['../data/resorts/Loveland.txt', 'CO'],
+                        'Monarch': ['../data/resorts/Monarch.txt', 'CO'],
+                        'Steamboat': ['../data/resorts/Steamboat.txt', 'CO'],
+                        'Taos': ['../data/resorts/Taos.txt', 'NM'],
+                        'Telluride': ['../data/resorts/Telluride.txt', 'CO'],
+                        'Vail': ['../data/resorts/Vail.txt', 'CO'],
+                        'Winter Park': ['../data/resorts/WP.csv', 'CO'],
+                        'Wolf Creek': ['../data/resorts/Wolf_Creek.txt', 'CO']}
 
     def format_resorts(self):
         """
@@ -527,9 +523,9 @@ def add_trails_to_add(resort):
     Add trails to colors
 
     Inputs:
-    resort from resorts (str)
+        resort from resorts (str)
     Outputs:
-    resort_df w/ class column updated w/ trail names that didn't make the list (DataFrame)
+        resort_df w/ class column updated w/ trail names that didn't make the list (DataFrame)
     '''
     levels = ['green', 'blue', 'black', 'bb']
     for level in levels:
