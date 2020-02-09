@@ -45,7 +45,7 @@ if __name__ == '__main__':
 
     colnames = ['trail_name', 'top_elev_(ft)', 'bottom_elev_(ft)', 'vert_rise_(ft)', 'horiz_dist', 'slope_length_(ft)', 'avg_grade_(%)', 'plan_acres', 'slope_area_(acres)', 'deg_grade', 'max_grade_(%)', 'avg_width_(ft)', 'ability_level']
 
-    df_resort = pd.read_csv("../../data/WP.csv",
+    df_resort = pd.read_csv("../../data/resorts/WP.csv",
         header=None,
         names=colnames)
 

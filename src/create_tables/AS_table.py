@@ -89,7 +89,7 @@ def preprocess_data(df, resort, location):
 
 if __name__ == '__main__':
 
-    df_resort = make_dataframe("../../data/new/Aspen_Snowmass.txt")
+    df_resort = make_dataframe("../../data/resorts/Aspen_Snowmass.txt")
 
     df_resort = preprocess_data(df=df_resort,
         resort = "Aspen Snowmass",

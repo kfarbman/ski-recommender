@@ -118,7 +118,7 @@ def preprocess_data(df,resort,location):
 
 if __name__ == "__main__":
 
-    df_resort = make_dataframe("../../data/Beaver_Creek.txt")
+    df_resort = make_dataframe("../../data/resorts/Beaver_Creek.txt")
 
     df_resort = preprocess_data(df=df_resort,
         resort = "Beaver Creek",
