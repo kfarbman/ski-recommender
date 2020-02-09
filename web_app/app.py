@@ -67,12 +67,18 @@ class SkiRunRecommender:
         # X_mtn = ss.fit_transform(X_mtn)
         
         return X_transform
-                
 
-resort_stats_df = mtn_df[['resort', 'resort_bottom','resort_top','greens','blues','blacks','bbs','lifts','price']].drop_duplicates()
+    def create_resort_stats_df(self):
 
+        mtn_df = self.load_mountain_data()
+
+        resort_stats_df = mtn_df[['resort', 'resort_bottom','resort_top','greens','blues','blacks','bbs','lifts','price']].drop_duplicates()
+
+        return resort_stats_df
+
+# TODO: Are images of maps showing up properly?
 links = {'Loveland': ["../static/images/Loveland.jpg", "http://skiloveland.com/trail-lift-report/"],
-           'Arapahoe Basin': ['https://www.arapahoebasin.com/uploaded/trail%20maps/A-BASIN-17-18-Front.jpg', 'http://arapahoebasin.com/ABasin/snow-conditions/terrain.aspx'],
+           'Arapahoe Basin': ['https://www.arapahoebasin.com/uploaded/trail%20maps/A-BASIN-17-18-Front.jpg','http://arapahoebasin.com/ABasin/snow-conditions/terrain.aspx'],
            'Copper': ['http://www.coppercolorado.com/sites/copper/files/2017-07/Web-TrailMap-WinterFY17.jpg', 'http://www.coppercolorado.com/the-mountain/trail-lift-info/winter-trail-report'],
            'Eldora': ['http://www.eldora.com/sites/eldora/files/inline-images/map2-web.jpg', 'http://www.eldora.com/the-mountain/lift-trail-report/snow-grooming-alpine'],
            'Alpine Meadows': ['../static/images/AM.jpeg', 'http://squawalpine.com/skiing-riding/weather-conditions-webcams/lift-grooming-status'],
@@ -101,23 +107,45 @@ def cos_sim_recs(index, n=5, resort=None, color=None):
     return total
     
 def mtn_recommender(index, n=5):
+
+    # mtn_df = self.load_mountain_data()
+
+    # X_mtn = self.transform_features(df=mtn_df, features = self.mountain_features)
+
     trail = X_mtn[index].reshape(1,-1)
     cs = cosine_similarity(trail, X_mtn)[0]
     mtn_df['cosine_sim'] = cs
     s = mtn_df.groupby('resort').mean()['cosine_sim'].sort_values()[::-1]
     orig_row = mtn_df.loc[[index]].rename(lambda x: 'original')
     return orig_row, list(s.index[:n])
-    
+
+# TODO: Complete this step in preprocessing, versus within the web app?
 def clean_df_for_recs(df):
+    """
+    Prepare DataFrame for recommendation processing
+
+    INPUT
+        df: Pandas DataFrame
+    
+    OUTPUT
+        Formatted Pandas DataFrame
+    """
     # TODO: Mapped groomed values
-    df['groomed'][df['groomed'] == 1] = 'Groomed'
-    df['groomed'][df['groomed'] == 0] = 'Ungroomed'
+    dict_groomed = {0:"Ungroomed", 1:"Groomed"}
+
+    df["groomed"] = df["groomed"].map(dict_groomed)
+
     # TODO: Keep colors column
     df['color_names'] = df['colors']
-    df['color_names'][df['color_names'] == 'green'] = 'Green'
-    df['color_names'][df['color_names'] == 'blue'] = 'Blue'
-    df['color_names'][df['color_names'] == 'black'] = 'Black'
-    df['color_names'][df['color_names'] == 'bb'] = 'Double Black'
+
+    dict_colors = {
+        "green": "Green",
+        "blue": "Blue",
+        "black":"Black",
+        "bb": "Double Black"}
+    
+    df["color_names"] = df["color_names"].map(dict_colors)
+    
     # TODO: Rename columns inplace
     df = df[['trail_name','resort','location','color_names','groomed','top_elev_(ft)','bottom_elev_(ft)','vert_rise_(ft)','slope_length_(ft)','avg_width_(ft)','slope_area_(acres)','avg_grade_(%)','max_grade_(%)']]
     df.columns = ['Trail Name', 'Resort','Location','Difficulty','Groomed','Top Elev (ft)', 'Bottom Elev (ft)', 'Vert Rise (ft)', 'Slope Length (ft)', 'Avg Width (ft)', 'Slope Area (acres)', 'Avg Grade (%)', 'Max Grade (%)']
@@ -138,14 +166,24 @@ def mountains():
 @app.route('/recommendations', methods=['GET','POST'])
 def recommendations():
     color_lst = None
-    if request.form.get('green'):
-        color_lst = ['green']
-    if request.form.get('blue'):
-        color_lst = ['green','blue']
-    if request.form.get('black'):
-        color_lst = ['green','blue','black']
-    if request.form.get('bb'):
-        color_lst = ['green','blue','black','bb']
+
+    dict_run_requests = {"green": ["green"],
+                         "blue": ["green", "blue"],
+                         "black": ["green", "blue", "black"],
+                         "bb": ["green", "blue", "black", "bb"]}
+
+    request_difficulty = "max_difficulty"
+    color_lst = request.form.get(dict_run_requests[request_difficulty])
+    
+    # if request.form.get('green'):
+    #     color_lst = ['green']
+    # if request.form.get('blue'):
+    #     color_lst = ['green','blue']
+    # if request.form.get('black'):
+    #     color_lst = ['green','blue','black']
+    # if request.form.get('bb'):
+    #     color_lst = ['green','blue','black','bb']
+    
     # CHECKBOX FUNCTIONALITY!!!
     resort = request.form['resort']
     if resort == '':
