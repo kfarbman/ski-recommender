@@ -17,20 +17,20 @@ class CombineTables:
 
     def __init__(self):
         self.resorts = {
-                        'Alpine Meadows': ['../data/resorts/Alpine_Meadows.txt', 'CA'],
-                        'Arapahoe Basin': ['../data/resorts/Arapahoe_Basin.txt', 'CO'],
+                        # 'Alpine Meadows': ['../data/resorts/Alpine_Meadows.txt', 'CA'],
+                        # 'Arapahoe Basin': ['../data/resorts/Arapahoe_Basin.txt', 'CO'],
                         'Aspen Snowmass': ['../data/resorts/Aspen_Snowmass.txt', 'CO'],
                         'Bald Mountain': ['../data/resorts/Bald_Mountain.txt', 'CO'],
                         'Beaver Creek': ['../data/resorts/Beaver_Creek.txt', 'CO'],
-                        'Copper': ['../data/resorts/Copper.txt', 'CO'],
+                        # 'Copper': ['../data/resorts/Copper.txt', 'CO'],
                         'Crested Butte': ['../data/resorts/Crested_Butte.txt', 'CO'],
                         'Diamond Peak': ['../data/resorts/DP.txt', 'NV'],
-                        'Eldora': ['../data/resorts/Eldora.txt', 'CO'],
+                        # 'Eldora': ['../data/resorts/Eldora.txt', 'CO'],
                         'Loveland': ['../data/resorts/Loveland.txt', 'CO'],
                         'Monarch': ['../data/resorts/Monarch.txt', 'CO'],
                         'Steamboat': ['../data/resorts/Steamboat.txt', 'CO'],
-                        'Taos': ['../data/resorts/Taos.txt', 'NM'],
-                        'Telluride': ['../data/resorts/Telluride.txt', 'CO'],
+                        # 'Taos': ['../data/resorts/Taos.txt', 'NM'],
+                        # 'Telluride': ['../data/resorts/Telluride.txt', 'CO'],
                         'Vail': ['../data/resorts/Vail.txt', 'CO'],
                         'Winter Park': ['../data/resorts/WP.csv', 'CO'],
                         'Wolf Creek': ['../data/resorts/Wolf_Creek.txt', 'CO']}
@@ -78,13 +78,12 @@ class CombineTables:
             location = "CO")
         lst_resorts.append(df_resort)
 
-        # TODO: Debug Monarch script
-        # for resort in self.monarch_script:
-        #     df_resort = monarch_table.make_dataframe("../data/Vail.txt")
-        #     df_resort = monarch_table.preprocess_data(df=df_resort,
-        #         resort = "Monarch",
-        #         location = "CO")
-        #     lst_resorts.append(df_resort)
+        # Monarch
+        df_resort = monarch_table.make_dataframe(self.resorts["Monarch"][0])
+        df_resort = monarch_table.preprocess_data(df=df_resort,
+            resort = "Monarch",
+            location = "CO")
+        lst_resorts.append(df_resort)
 
         # Steamboat
         df_resort = steamboat_table.make_dataframe(self.resorts["Steamboat"][0])
