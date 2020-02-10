@@ -3,13 +3,15 @@
 version: 2
 jobs:
   build:
-    docker:
-      - image: circleci/python:3.7.4-stretch
+    # docker:
+    #   - image: circleci/python:3.7.4-stretch
+    docker: true
     parallelism: 1
     working_directory: ~/ski-recommender
 
     steps:
       - checkout
+      - setup_remote_docker
 
       - run:
           name: Build Docker Image
