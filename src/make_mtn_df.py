@@ -102,7 +102,7 @@ class MakeMountainDF:
         dict_resort_elevation = {}
 
         dict_resort_elevation["resort"] = json_resort["name"]
-        dict_resort_elevation["lift_count"] = json_resort["lift_count"]
+        dict_resort_elevation["lifts"] = json_resort["lift_count"]
         dict_resort_elevation["run_count"] = json_resort["run_count"]
         
         # Meters: Multipy by 3.281 to get feet
@@ -139,13 +139,13 @@ class MakeMountainDF:
         
         # Create missing values from skimap website
         dict_diamond_peak = {"resort": "Diamond Peak",
-                            "lift_count": 7,
+                            "lifts": 7,
                             "run_count": 30,
                             "top_elevation": 8540,
                             "bottom_elevation": 6700}
         
         dict_taos = {"resort": "Taos",
-                            "lift_count": 14,
+                            "lifts": 14,
                             "run_count": 110,
                             "top_elevation": 12481,
                             "bottom_elevation": 9200}
@@ -189,15 +189,15 @@ class MakeMountainDF:
 
         return df_mountains
 
-    def format_data_frame(self, df):
-        """
-        Format DataFrame containing elevations, difficulty, and price
-        """
-        new_cols = ['resort_bottom', 'resort_top', 'greens',
-                    'blues', 'blacks', 'bbs', 'lifts', 'price']
-        df = df.reindex(
-            columns=[*df.columns.tolist(), *new_cols], fill_value=0)
-        return df
+    # def format_data_frame(self, df):
+    #     """
+    #     Format DataFrame containing elevations, difficulty, and price
+    #     """
+    #     new_cols = ['resort_bottom', 'resort_top', 'greens',
+    #                 'blues', 'blacks', 'bbs', 'lifts', 'price']
+    #     df = df.reindex(
+    #         columns=[*df.columns.tolist(), *new_cols], fill_value=0)
+    #     return df
 
     def save_mountain_data(self, df):
         """
@@ -225,3 +225,17 @@ if __name__ == '__main__':
     df_combined = pd.merge(df_mountains, df_elevations, on="resort", how="outer")
     
     df_combined["price"] = df_combined["resort"].map(mountain.dict_resort_prices)
+
+    # Subset DataFrame for used columns only
+    df_combined = df_combined[["resort", "bottom_elevation", "top_elevation",
+        "Beginner", "Intermediate", "Advanced", "Expert", "lift_count", "price"]]
+
+    """
+    Load trail and mountain data
+    """
+
+    df_resorts = pd.read_parquet("../data/formatted_resort_data_20200209.parquet")
+
+    # Merge resort and mountain data (WIP)
+    # TODO: Handle missing values
+    df_DEV = pd.merge(df_combined, df_resorts, on = "resort", how="outer")    
