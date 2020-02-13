@@ -19,23 +19,25 @@ class WebscrapeTrails:
 
     def __init__(self):
 
-        self.ALPINE_MEADOWS_URL = 'https://jollyturns.com/resort/united-states-of-america/alpine-meadows/'
-        self.ARAPAHOE_BASIN_URL = 'https://jollyturns.com/resort/united-states-of-america/arapahoe-basin/'
-        self.ASPEN_SNOWMASS_URL = 'https://jollyturns.com/resort/united-states-of-america/aspen-snowmass/'
-        self.BALD_MOUNTAIN_URL = 'https://jollyturns.com/resort/united-states-of-america/bald-mountain/'
-        self.BEAVER_CREEK_URL = 'https://jollyturns.com/resort/united-states-of-america/beaver-creek-resort/'
-        self.COPPER_URL = 'https://jollyturns.com/resort/united-states-of-america/copper-mountain-resort/'
-        self.CRESTED_BUTTE_URL = 'https://jollyturns.com/resort/united-states-of-america/crested-butte-mountain-resort/'
-        self.DIAMOND_PEAK_URL = 'https://jollyturns.com/resort/united-states-of-america/diamond-peak/'
-        self.ELDORA_URL = 'https://jollyturns.com/resort/united-states-of-america/eldora-mountain-resort/'
-        self.LOVELAND_URL = 'https://jollyturns.com/resort/united-states-of-america/loveland-ski-area/'
-        self.MONARCH_URL = 'https://jollyturns.com/resort/united-states-of-america/monarch-ski-area/'
-        self.STEAMBOAT_URL = 'https://jollyturns.com/resort/united-states-of-america/steamboat-ski-resort/'
-        self.TAOS_URL = 'https://jollyturns.com/resort/united-states-of-america/taos-ski-valley/'
-        self.TELLURIDE_URL = 'https://jollyturns.com/resort/united-states-of-america/telluride-ski-resort/'
-        self.VAIL_URL = 'https://jollyturns.com/resort/united-states-of-america/vail-ski-resort/'
-        self.WINTER_PARK_URL = 'https://jollyturns.com/resort/united-states-of-america/winter-park-resort/'
-        self.WOLF_CREEK_URL = 'https://jollyturns.com/resort/united-states-of-america/wolf-creek-ski-area/'
+        self.MAIN_URL = "https://jollyturns.com/resort/united-states-of-america"
+
+        self.ALPINE_MEADOWS_URL = f"{self.MAIN_URL}/alpine-meadows/"
+        self.ARAPAHOE_BASIN_URL = f"{self.MAIN_URL}/arapahoe-basin/"
+        self.ASPEN_SNOWMASS_URL = f"{self.MAIN_URL}/aspen-snowmass/"
+        self.BALD_MOUNTAIN_URL = f"{self.MAIN_URL}/bald-mountain/"
+        self.BEAVER_CREEK_URL = f"{self.MAIN_URL}/beaver-creek-resort/"
+        self.COPPER_URL = f"{self.MAIN_URL}/copper-mountain-resort/"
+        self.CRESTED_BUTTE_URL = f"{self.MAIN_URL}/crested-butte-mountain-resort/"
+        self.DIAMOND_PEAK_URL = f"{self.MAIN_URL}/diamond-peak/"
+        self.ELDORA_URL = f"{self.MAIN_URL}/eldora-mountain-resort/"
+        self.LOVELAND_URL = f"{self.MAIN_URL}/loveland-ski-area/"
+        self.MONARCH_URL = f"{self.MAIN_URL}/monarch-ski-area/"
+        self.STEAMBOAT_URL = f"{self.MAIN_URL}/steamboat-ski-resort/"
+        self.TAOS_URL = f"{self.MAIN_URL}/taos-ski-valley/"
+        self.TELLURIDE_URL = f"{self.MAIN_URL}/telluride-ski-resort/"
+        self.VAIL_URL = f"{self.MAIN_URL}/vail-ski-resort/"
+        self.WINTER_PARK_URL = f"{self.MAIN_URL}/winter-park-resort/"
+        self.WOLF_CREEK_URL = f"{self.MAIN_URL}/wolf-creek-ski-area/"
 
         self.URLs = [
             self.ALPINE_MEADOWS_URL,
@@ -62,6 +64,8 @@ class WebscrapeTrails:
         self.browser = webdriver.Chrome(chrome_options=self.browser_options)
 
         self.lst_run_difficulty = ["skiruns-green", "skiruns-blue", "skiruns-black", "skiruns-double-black"]
+
+        self.blank_value = "__NA__"
 
     def create_resort_urls(self):
         """
@@ -109,11 +113,11 @@ class WebscrapeTrails:
             df_ski.columns = ['Name', 'Bottom (ft)', 'Top (ft)', 'Vertical Drop (ft)', 'Length (mi)']
         except ValueError:
             df_ski = pd.DataFrame({
-                "Name": ["__NA__"],
-                "Bottom (ft)": ["__NA__"],
-                "Top (ft)": ["__NA__"],
-                "Vertical Drop (ft)": ["__NA__"],
-                "Length (mi)": ["__NA__"]
+                "Name": [self.blank_value],
+                "Bottom (ft)": [self.blank_value],
+                "Top (ft)": [self.blank_value],
+                "Vertical Drop (ft)": [self.blank_value],
+                "Length (mi)": [self.blank_value]
             })
 
         # Filter restaurants and chairlifts
