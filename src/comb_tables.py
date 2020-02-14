@@ -2,11 +2,11 @@ import pickle
 import warnings
 from itertools import chain
 
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-from create_tables import (AS_table, BC_table, BM_table, DP_table, WC_table,
+from create_tables import (arapahoe_basin_table, AS_table, BC_table, BM_table, DP_table, WC_table,
                            WP_table, loveland_table, monarch_table,
                            steamboat_table, vail_table)
 
@@ -18,7 +18,7 @@ class CombineTables:
     def __init__(self):
         self.resorts = {
                         # 'Alpine Meadows': ['../data/resorts/Alpine_Meadows.txt', 'CA'],
-                        # 'Arapahoe Basin': ['../data/resorts/Arapahoe_Basin.txt', 'CO'],
+                        'Arapahoe Basin': ['../data/resorts/Arapahoe_Basin.txt', 'CO'],
                         'Aspen Snowmass': ['../data/resorts/Aspen_Snowmass.txt', 'CO'],
                         'Bald Mountain': ['../data/resorts/Bald_Mountain.txt', 'CO'],
                         'Beaver Creek': ['../data/resorts/Beaver_Creek.txt', 'CO'],
@@ -43,6 +43,13 @@ class CombineTables:
         # TODO: Pass key from resorts dict to make_dataframe
         lst_resorts = []
         
+        # Arapahoe Basin
+        df_resort = arapahoe_basin_table.make_dataframe(self.resorts["Arapahoe Basin"][0])
+        df_resort = arapahoe_basin_table.preprocess_data(df=df_resort,
+            resort = "Arapahoe Basin",
+            location = "CO")
+        lst_resorts.append(df_resort)
+
         # Aspen Snowmass
         df_resort = AS_table.make_dataframe(self.resorts["Aspen Snowmass"][0])
         df_resort = AS_table.preprocess_data(df=df_resort,
@@ -318,33 +325,8 @@ if __name__ == '__main__':
     Import webscraped data
     """
 
-    df_webscraped_trails = pd.read_csv("../data/formatted/webscrape_trail_data_20200203.csv")
+    df_webscraped_trails = pd.read_csv("../data/formatted/webscrape_trail_data_20200213.csv")
 
-    # Rename resorts
-    dict_webscrape_trail_names = {'alpine-meadows': "Alpine Meadows",
-                                  'arapahoe-basin': "Arapahoe Basin",
-                                  'aspen-snowmass': "Aspen Snowmass",
-                                  'bald-mountain': "Bald Mountain",
-                                  'beaver-creek-resort': "Beaver Creek",
-                                  'copper-mountain-resort': "Copper",
-                                  'crested-butte-mountain-resort': "Crested Butte",
-                                  'diamond-peak': "Diamond Peak",
-                                  'eldora-mountain-resort': "Eldora",
-                                  'loveland-ski-area': "Loveland",
-                                  'monarch-ski-area': "Monarch",
-                                  'steamboat-ski-resort': "Steamboat",
-                                  'taos-ski-valley': "Taos",
-                                  'telluride-ski-resort': "Telluride",
-                                  'vail-ski-resort': "Vail",
-                                  'winter-park-resort': "Winter Park",
-                                  'wolf-creek-ski-area': "Wolf Creek"}
-
-    df_webscraped_trails["resort_name"] = df_webscraped_trails["resort_name"].map(
-        dict_webscrape_trail_names).\
-        fillna(df_webscraped_trails["resort_name"])
-
-    df_webscraped_trails.rename(columns={"resort_name": "resort", "Name": "trail_name"}, inplace=True)
-    
     # Merge DataFrames
     df_merged = pd.merge(df_resorts, df_webscraped_trails, on=["resort", "trail_name"], how="inner")
     
