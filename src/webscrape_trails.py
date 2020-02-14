@@ -125,6 +125,40 @@ class WebscrapeTrails:
 
         return df_ski
 
+    def rename_resorts(self, df):
+        """
+        Rename resorts for recommendation system
+
+        INPUT
+            df: Pandas DataFrame
+        OUTPUT
+            Pandas DataFrame, with resort_name column altered
+        """
+        
+        dict_webscrape_trail_names = {'alpine-meadows': "Alpine Meadows",
+                            'arapahoe-basin': "Arapahoe Basin",
+                            'aspen-snowmass': "Aspen Snowmass",
+                            'bald-mountain': "Bald Mountain",
+                            'beaver-creek-resort': "Beaver Creek",
+                            'copper-mountain-resort': "Copper",
+                            'crested-butte-mountain-resort': "Crested Butte",
+                            'diamond-peak': "Diamond Peak",
+                            'eldora-mountain-resort': "Eldora",
+                            'loveland-ski-area': "Loveland",
+                            'monarch-ski-area': "Monarch",
+                            'steamboat-ski-resort': "Steamboat",
+                            'taos-ski-valley': "Taos",
+                            'telluride-ski-resort': "Telluride",
+                            'vail-ski-resort': "Vail",
+                            'winter-park-resort': "Winter Park",
+                            'wolf-creek-ski-area': "Wolf Creek"}
+
+        df["resort_name"] = df["resort_name"].map(
+            dict_webscrape_trail_names).\
+            fillna(df["resort_name"])
+        
+        return df
+
     def save_resort_data(self, dict_resort):
 
         output = open('../data/resort_dict_DEV.pkl', 'wb')
@@ -158,6 +192,12 @@ if __name__ == '__main__':
     # Get resort name
     df_combined["resort_name"] = df_combined["URL"].str.split("united-states-of-america/", 1, expand=True)[1]
     df_combined["resort_name"] = df_combined["resort_name"].str.split("/", 1, expand=True)[0]
+
+    # TODO: Validate function
+    df_combined = ws.rename_resorts(df=df_combined)
+
+    # Rename columns
+    df_combined.rename(columns={"resort_name": "resort", "Name": "trail_name"}, inplace=True)
 
     # Format distance values
     df_distance = df_combined["Length (mi)"].str.split(" ", expand=True)
