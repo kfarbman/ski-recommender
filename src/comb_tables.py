@@ -6,7 +6,8 @@ from itertools import chain
 import numpy as np
 import pandas as pd
 
-from create_tables import (arapahoe_basin_table, AS_table, BC_table, BM_table, DP_table, WC_table,
+from create_tables import (alpine_meadows_table, arapahoe_basin_table,
+                           AS_table, BC_table, BM_table, DP_table, WC_table,
                            WP_table, loveland_table, monarch_table,
                            steamboat_table, vail_table)
 
@@ -17,7 +18,7 @@ class CombineTables:
 
     def __init__(self):
         self.resorts = {
-                        # 'Alpine Meadows': ['../data/resorts/Alpine_Meadows.txt', 'CA'],
+                        'Alpine Meadows': ['../data/resorts/Alpine_Meadows.txt', 'CA'],
                         'Arapahoe Basin': ['../data/resorts/Arapahoe_Basin.txt', 'CO'],
                         'Aspen Snowmass': ['../data/resorts/Aspen_Snowmass.txt', 'CO'],
                         'Bald Mountain': ['../data/resorts/Bald_Mountain.txt', 'CO'],
@@ -43,6 +44,13 @@ class CombineTables:
         # TODO: Pass key from resorts dict to make_dataframe
         lst_resorts = []
         
+        # Alpine Meadows
+        df_resort = alpine_meadows_table.make_dataframe(self.resorts["Alpine Meadows"][0])
+        df_resort = alpine_meadows_table.preprocess_data(df=df_resort,
+            resort = "Alpine Meadows",
+            location = "CA")
+        lst_resorts.append(df_resort)
+
         # Arapahoe Basin
         df_resort = arapahoe_basin_table.make_dataframe(self.resorts["Arapahoe Basin"][0])
         df_resort = arapahoe_basin_table.preprocess_data(df=df_resort,
@@ -131,11 +139,8 @@ class CombineTables:
         
         # Ensure columns are in the correct order
         whole_table = whole_table[columns]
-        CO_resorts = whole_table[whole_table['location'] == 'CO']
 
-        CO_resorts = CO_resorts.reset_index(drop=True)
-
-        return CO_resorts
+        return whole_table
 
     def standardize_ability_levels(self, df):
         """
