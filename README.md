@@ -21,6 +21,25 @@ As I was prepping for my Professional Ski Instructors of America (PSIA) Level 3 
 
 How awesome would it be to find runs similar to a given run based on their features, even at a mountain you know nothing about? You can find runs at a mountain you're unfamiliar with that are similar to a run you love. Or you can find out what a run you've never skied on is like by finding out which runs it is like at a resort you know.
 
+## Development
+
+```bash
+docker build -t ski-recommender:dev .
+
+docker run --rm -ti \
+    --name ski-recsys \
+    -v "$PWD":/skirec ski-recommender:dev \
+    "ipython"
+```
+
+## Testing
+
+```bash
+docker run --rm -ti \
+    --name ski-recsys \
+    -v "$PWD":/skirec ski-recommender:dev \
+    pytest tests/
+```
 ## Web Application 
 
 [SkiRunRecommender.com](http://www.skirunrecommender.com)
@@ -80,15 +99,17 @@ The features used for mountain recommendations include all the features for trai
 
 ## Technologies Used
 
-* AWS
-* BeautifulSoup
-* Flask
-* HTML/ JavaScript/ CSS
-* Matplotlib
-* Numpy
-* Pandas
-* Scikit Learn
-* Selenium
+|Software|
+|:----:|
+|AWS|
+|BeautifulSoup|
+|Flask|
+|HTML/ JavaScript/ CSS|
+|Matplotlib|
+|Numpy|
+|Pandas|
+|Scikit Learn|
+|Selenium|
 
 ![image](web_app/static/images/for-karen.png)
 
@@ -100,7 +121,9 @@ The similarity metric used is the cosine similarity. For the trail recommendatio
 
 ## Future Steps
 
-In the future, I'd like to add more trails from more resorts. Ideally, I'd also like to add information on aspect to indicate snow conditions. A potential addition would be daily grooming information instead of static. 
+* Including more trails from more resorts.
+* Additional indication of snow conditions. A potential addition would be daily grooming information instead of static.
+* Fetch resort data from the [OnTheSnow API](). The API is available, but gaining access is temperamental. 
 
 ## Repo Structure
 
