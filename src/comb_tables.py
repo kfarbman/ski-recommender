@@ -10,7 +10,7 @@ from create_tables import (alpine_meadows_table, arapahoe_basin_table,
                            AS_table, BC_table, BM_table,
                            copper_table, DP_table, eldora_table, WC_table,
                            WP_table, loveland_table, monarch_table,
-                           steamboat_table, taos_table, vail_table)
+                           steamboat_table, taos_table, telluride_table, vail_table)
 
 warnings.filterwarnings('ignore')
 
@@ -32,7 +32,7 @@ class CombineTables:
                         'Monarch': ['../data/resorts/Monarch.txt', 'CO'],
                         'Steamboat': ['../data/resorts/Steamboat.txt', 'CO'],
                         'Taos': ['../data/resorts/Taos.txt', 'NM'],
-                        # 'Telluride': ['../data/resorts/Telluride.txt', 'CO'],
+                        'Telluride': ['../data/resorts/Telluride.txt', 'CO'],
                         'Vail': ['../data/resorts/Vail.txt', 'CO'],
                         'Winter Park': ['../data/resorts/WP.csv', 'CO'],
                         'Wolf Creek': ['../data/resorts/Wolf_Creek.txt', 'CO']}
@@ -92,13 +92,14 @@ class CombineTables:
         df_resort = copper_table.preprocess_data(df=df_resort,
             resort = "Copper",
             location = "CO")
+        lst_resorts.append(df_resort)
 
         # Eldora
         df_resort = eldora_table.make_dataframe(self.resorts["Eldora"][0])
-
         df_resort = eldora_table.preprocess_data(df=df_resort,
             resort = "Eldora",
             location = "CO")
+        lst_resorts.append(df_resort)
 
         # Loveland
         df_resort = loveland_table.make_dataframe(self.resorts["Loveland"][0])
@@ -126,7 +127,15 @@ class CombineTables:
         df_resort = taos_table.preprocess_data(df=df_resort,
             resort = "Taos",
             location = "NM")
+        lst_resorts.append(df_resort)
 
+        # Telluride
+        df_resort = telluride_table.make_dataframe(self.resorts["Telluride"][0])
+        df_resort = telluride_table.preprocess_data(df=df_resort,
+            resort="Telluride",
+            location="CO")
+        lst_resorts.append(df_resort)
+        
         # Vail
         df_resort = vail_table.make_dataframe(self.resorts["Vail"][0])
         df_resort = vail_table.preprocess_data(df=df_resort,
