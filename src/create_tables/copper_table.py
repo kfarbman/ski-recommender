@@ -98,7 +98,7 @@ def fix_trail_names(df):
     df['trail_name'] = df['trail_name'].apply(
         lambda x: ' '.join(x.split()[1:]))
 
-    df["trail_name"] = [re.sub(r'\d+','', trail) for trail in df_resort["trail_name"]]
+    df["trail_name"] = [re.sub(r'\d+','', trail) for trail in df["trail_name"]]
     df["trail_name"] = df["trail_name"].str.lstrip()
     
     # Correct specific trails

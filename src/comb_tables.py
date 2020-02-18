@@ -80,17 +80,17 @@ class CombineTables:
             location = "CO")
         lst_resorts.append(df_resort)
 
-        # Diamond Peak
-        df_resort = DP_table.make_dataframe(self.resorts["Diamond Peak"][0])
-        df_resort = DP_table.preprocess_data(df=df_resort,
-            resort = "Diamond Peak",
-            location = "CO")
-        lst_resorts.append(df_resort)
-
         # Copper
         df_resort = copper_table.make_dataframe(self.resorts["Copper"][0])
         df_resort = copper_table.preprocess_data(df=df_resort,
             resort = "Copper",
+            location = "CO")
+        lst_resorts.append(df_resort)
+        
+        # Diamond Peak
+        df_resort = DP_table.make_dataframe(self.resorts["Diamond Peak"][0])
+        df_resort = DP_table.preprocess_data(df=df_resort,
+            resort = "Diamond Peak",
             location = "CO")
         lst_resorts.append(df_resort)
 
@@ -135,7 +135,7 @@ class CombineTables:
             resort="Telluride",
             location="CO")
         lst_resorts.append(df_resort)
-        
+
         # Vail
         df_resort = vail_table.make_dataframe(self.resorts["Vail"][0])
         df_resort = vail_table.preprocess_data(df=df_resort,
