@@ -7,7 +7,8 @@ import numpy as np
 import pandas as pd
 
 from create_tables import (alpine_meadows_table, arapahoe_basin_table,
-                           AS_table, BC_table, BM_table, DP_table, WC_table,
+                           AS_table, BC_table, BM_table,
+                           copper_table, DP_table, WC_table,
                            WP_table, loveland_table, monarch_table,
                            steamboat_table, vail_table)
 
@@ -23,7 +24,7 @@ class CombineTables:
                         'Aspen Snowmass': ['../data/resorts/Aspen_Snowmass.txt', 'CO'],
                         'Bald Mountain': ['../data/resorts/Bald_Mountain.txt', 'CO'],
                         'Beaver Creek': ['../data/resorts/Beaver_Creek.txt', 'CO'],
-                        # 'Copper': ['../data/resorts/Copper.txt', 'CO'],
+                        'Copper': ['../data/resorts/Copper.txt', 'CO'],
                         'Crested Butte': ['../data/resorts/Crested_Butte.txt', 'CO'],
                         'Diamond Peak': ['../data/resorts/DP.txt', 'NV'],
                         # 'Eldora': ['../data/resorts/Eldora.txt', 'CO'],
@@ -85,6 +86,12 @@ class CombineTables:
             resort = "Diamond Peak",
             location = "CO")
         lst_resorts.append(df_resort)
+
+        # Copper
+        df_resort = copper_table.make_dataframe(self.resorts["Copper"][0])
+        df_resort = copper_table.preprocess_data(df=df_resort,
+            resort = "Copper",
+            location = "CO")
 
         # Loveland
         df_resort = loveland_table.make_dataframe(self.resorts["Loveland"][0])
