@@ -1,5 +1,6 @@
 beautifulsoup4==4.7.1
 flask==1.0.3
+ipython
 matplotlib
 numpy>=1.15.0
 pandas==0.24.1
