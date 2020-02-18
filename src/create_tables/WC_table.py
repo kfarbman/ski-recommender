@@ -1,3 +1,5 @@
+import re
+
 import numpy as np
 import pandas as pd
 
@@ -87,9 +89,34 @@ def preprocess_data(df,resort,location):
     df['avg_grade_(%)'] = df['avg_grade_(%)'].astype(float)
     df['resort'] = resort
     df['location'] = location
+
+    df["trail_name"] = fix_trail_names(df=df)
     
     return df
 
+def fix_trail_names(df):
+    '''
+    Inputs:
+        df from trail_names_to_fix (DataFrame)
+    Outputs:
+        df w/ trail name fixed - removing number at beginning (DataFrame)
+    '''
+    df['trail_name'] = df['trail_name'].apply(
+        lambda x: ' '.join(x.split()[1:]))
+
+    df["trail_name"] = [re.sub(r'\d+','', trail) for trail in df["trail_name"]]
+    df["trail_name"] = df["trail_name"].str.lstrip()
+
+    df["new_trail"] = df.trail_name.apply(lambda x: " ".join(x.split()[1:]))
+    df.loc[df["new_trail"] == '', 'new_trail'] = df["trail_name"]
+
+    df["trail_name"] = df["new_trail"]
+
+    df.drop("new_trail", axis=1, inplace=True)
+    
+    df["trail_name"] = df["trail_name"].str.rstrip()
+    
+    return df
 
 if __name__ == '__main__':
 
