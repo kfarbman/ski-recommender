@@ -59,7 +59,10 @@ class WebscrapeTrails:
             self.WOLF_CREEK_URL]
 
         self.browser_options = webdriver.ChromeOptions()
-        self.browser_options.add_argument("headless")
+        self.browser_options.add_argument('--no-sandbox')
+        self.browser_options.add_argument('--window-size=1420,1080')
+        self.browser_options.add_argument('--headless')
+        self.browser_options.add_argument('--disable-gpu')
 
         self.browser = webdriver.Chrome(chrome_options=self.browser_options)
 
@@ -96,7 +99,7 @@ class WebscrapeTrails:
 
         self.browser.get(URL)
 
-        time.sleep(3)
+        time.sleep(1)
 
         soup = BeautifulSoup(self.browser.page_source, 'html.parser')
         rows = soup.select('table.table.table-striped tbody tr')
@@ -182,25 +185,25 @@ if __name__ == '__main__':
         lst_resort_data.append(df_resort)
 
     # Combine resort data
-    df_combined = pd.concat(lst_resort_data)
-    df_combined["difficulty"] = df_combined["URL"].str.split("skiruns-", 1, expand=True)[1]
+    df_resorts = pd.concat(lst_resort_data)
+    df_resorts["difficulty"] = df_resorts["URL"].str.split("skiruns-", 1, expand=True)[1]
 
     # Format run name
-    df_combined["Name"] = df_combined["Name"].str.replace("\xa0 ", "")
-    df_combined["Name"] = df_combined["Name"].str.rstrip()
+    df_resorts["Name"] = df_resorts["Name"].str.replace("\xa0 ", "")
+    df_resorts["Name"] = df_resorts["Name"].str.rstrip()
 
     # Get resort name
-    df_combined["resort_name"] = df_combined["URL"].str.split("united-states-of-america/", 1, expand=True)[1]
-    df_combined["resort_name"] = df_combined["resort_name"].str.split("/", 1, expand=True)[0]
+    df_resorts["resort_name"] = df_resorts["URL"].str.split("united-states-of-america/", 1, expand=True)[1]
+    df_resorts["resort_name"] = df_resorts["resort_name"].str.split("/", 1, expand=True)[0]
 
     # TODO: Validate function
-    df_combined = ws.rename_resorts(df=df_combined)
+    df_resorts = ws.rename_resorts(df=df_resorts)
 
     # Rename columns
-    df_combined.rename(columns={"resort_name": "resort", "Name": "trail_name"}, inplace=True)
+    df_resorts.rename(columns={"resort_name": "resort", "Name": "trail_name"}, inplace=True)
 
     # Format distance values
-    df_distance = df_combined["Length (mi)"].str.split(" ", expand=True)
+    df_distance = df_resorts["Length (mi)"].str.split(" ", expand=True)
     df_distance.columns = ["distance", "metric"]
     df_distance["distance"] = df_distance["distance"].map({"__NA__": "0"}).fillna(df_distance["distance"])
 
@@ -210,11 +213,14 @@ if __name__ == '__main__':
             df_distance.iloc[idx].at["distance"] = float(df_distance.iloc[idx].at["distance"]) / 5280
 
     # Combine distance with resort data
-    df_combined = pd.concat([df_combined, df_distance], axis=1)
+    df_resorts = pd.concat([df_resorts, df_distance], axis=1)
 
     # Get average steepness
-    df_combined["Vertical Drop (ft)"] = df_combined["Vertical Drop (ft)"].str.split(" ", 1, expand=True)[0]
-    df_combined["Vertical Drop (ft)"] = df_combined["Vertical Drop (ft)"].map(
-        {"__NA__": "0"}).fillna(df_combined["Vertical Drop (ft)"])
+    df_resorts["Vertical Drop (ft)"] = df_resorts["Vertical Drop (ft)"].str.split(" ", 1, expand=True)[0]
+    df_resorts["Vertical Drop (ft)"] = df_resorts["Vertical Drop (ft)"].map(
+        {"__NA__": "0"}).fillna(df_resorts["Vertical Drop (ft)"])
     
-    df_combined['Average Steepness'] = df_combined['Vertical Drop (ft)'].astype(float)/(5280*df_combined['distance'].astype(float))
+    df_resorts['Average Steepness'] = df_resorts['Vertical Drop (ft)'].astype(float)/(5280*df_resorts['distance'].astype(float))
+
+    # Drop columns
+    # df_resorts.drop(["URL", "metric"], axis=1, inplace=True)
