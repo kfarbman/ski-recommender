@@ -1,18 +1,18 @@
 import pickle
 import time
 
+"""
+Request trail data from all resorts
+
+
+
+"""
+
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from tqdm import tqdm
-
-
-"""
-Request trail data from all resorts
-
-
-"""
 
 
 class WebscrapeTrails:
@@ -89,7 +89,7 @@ class WebscrapeTrails:
         
         return lst_resort_urls
 
-    def make_tables(self, URL):
+    def get_mountain_data(self, URL):
         '''
         Inputs:
             URL from URLs (str)
@@ -99,7 +99,47 @@ class WebscrapeTrails:
 
         self.browser.get(URL)
 
-        time.sleep(1)
+        time.sleep(2)
+
+        soup = BeautifulSoup(self.browser.page_source, 'html.parser')
+
+        # JollyTurns parsing (runs breakdown)
+        X = soup.select("resort-glance div.row div.col-xs-12 div.row.text-left.statistics.ng-scope span.ng-binding")
+        lst_dev = [x.text for x in X]
+        lst_dev = [x.replace(" ski runs: ", "") for x in lst_dev]
+        df_ski_runs = pd.DataFrame({"Runs": lst_dev[0::2], "total": lst_dev[1::2]})
+        df_ski_runs = df_ski_runs.set_index("Runs").T.reset_index(drop=True)
+
+        # JollyTurns parsing (Chairlifts / total runs)
+        Y = soup.select("resort-glance div.row div.col-xs-12 div.row.text-center a")
+        lst_y = [y.text.lstrip() for y in Y]
+        df_lifts = pd.DataFrame({"Lifts": lst_y[0]}, index=[0])
+        
+        # JollyTurns parsing (Elevations)
+        Z = soup.select("resort-glance div.row div.col-xs-12 table tr td")
+        lst_z = [z.text for z in Z if "Lift" not in z.text]
+        lst_z = [z.replace(" \xa0", "") for z in lst_z]
+        lst_z = [z.replace(" ft", "") for z in lst_z]
+        lst_z = [z.replace(":", "") for z in lst_z]
+
+        df_elevations = pd.DataFrame({"Elevation": lst_z[0::2], "Total": lst_z[1::2]})
+        df_elevations = df_elevations.set_index("Elevation").T.reset_index(drop=True)
+        
+        df_ski = pd.concat([df_ski_runs, df_lifts, df_elevations], axis=1)
+
+        return df_ski
+
+    def make_tables(self, URL):
+        '''
+        Inputs:
+            URL from URLs (str)
+        Outputs:
+            Pandas DataFrame of ski resort information
+        '''       
+        
+        self.browser.get(URL)
+
+        time.sleep(2)
 
         soup = BeautifulSoup(self.browser.page_source, 'html.parser')
         rows = soup.select('table.table.table-striped tbody tr')
@@ -115,6 +155,7 @@ class WebscrapeTrails:
         try:
             df_ski.columns = ['Name', 'Bottom (ft)', 'Top (ft)', 'Vertical Drop (ft)', 'Length (mi)']
         except ValueError:
+            print(URL)
             df_ski = pd.DataFrame({
                 "Name": [self.blank_value],
                 "Bottom (ft)": [self.blank_value],
@@ -176,17 +217,29 @@ if __name__ == '__main__':
     # Create list of all ski resort URL's
     lst_resort_urls = ws.create_resort_urls()
 
-    # Request data from all ski resorts
-    lst_resort_data = []
+    # Request trail data from all ski resorts
+    lst_trail_data = []
 
     for url in tqdm(lst_resort_urls):
         df_resort = ws.make_tables(URL=url)
         df_resort["URL"] = url
-        lst_resort_data.append(df_resort)
+        lst_trail_data.append(df_resort)
 
-    # Combine resort data
-    df_resorts = pd.concat(lst_resort_data)
+    # Combine trail data
+    df_resorts = pd.concat(lst_trail_data)
     df_resorts["difficulty"] = df_resorts["URL"].str.split("skiruns-", 1, expand=True)[1]
+
+    # Request mountain data from all resorts
+    lst_mountain_data = []
+    for url in tqdm(ws.URLs):
+        df_resort = ws.get_mountain_data(URL=url)
+        df_resort["URL"] = url
+        lst_mountain_data.append(df_resort)
+    
+    # Combine mountain data
+    df_mountain = pd.concat(lst_mountain_data).reset_index(drop=True)
+
+    import pdb; pdb.set_trace()
 
     # Format run name
     df_resorts["Name"] = df_resorts["Name"].str.replace("\xa0 ", "")
@@ -201,16 +254,20 @@ if __name__ == '__main__':
 
     # Rename columns
     df_resorts.rename(columns={"resort_name": "resort", "Name": "trail_name"}, inplace=True)
-
+    
+    # import pdb; pdb.set_trace()
+    
+    # TODO: Make this process simpler; process along index
     # Format distance values
     df_distance = df_resorts["Length (mi)"].str.split(" ", expand=True)
     df_distance.columns = ["distance", "metric"]
     df_distance["distance"] = df_distance["distance"].map({"__NA__": "0"}).fillna(df_distance["distance"])
 
-    # Convert feet to miles
+    # Convert miles to feet
+    # df_distance.loc[df_distance["metric"] == "ft", "distance"] = df_distance["distance"].astype(float) / 5280
     for idx in range(len(df_distance)):
-        if df_distance["metric"].iloc[idx] == "ft":
-            df_distance.iloc[idx].at["distance"] = float(df_distance.iloc[idx].at["distance"]) / 5280
+        if df_distance["metric"].iloc[idx] == "mi":
+            df_distance.iloc[idx].at["distance"] = float(df_distance.iloc[idx].at["distance"]) * 5280
 
     # Combine distance with resort data
     df_resorts = pd.concat([df_resorts, df_distance], axis=1)
@@ -220,7 +277,51 @@ if __name__ == '__main__':
     df_resorts["Vertical Drop (ft)"] = df_resorts["Vertical Drop (ft)"].map(
         {"__NA__": "0"}).fillna(df_resorts["Vertical Drop (ft)"])
     
-    df_resorts['Average Steepness'] = df_resorts['Vertical Drop (ft)'].astype(float)/(5280*df_resorts['distance'].astype(float))
+    # Average Steepness = (Vert Drop (feet) / 5280) / distance (miles))
+    # df_resorts['Average Steepness'] = df_resorts['Vertical Drop (ft)'].astype(float)/(5280*df_resorts['distance'].astype(float))
+    df_resorts['Average Steepness'] = (df_resorts['Vertical Drop (ft)'].astype(float) / 5280) / df_resorts['distance'].astype(float)
 
+    # Remove blank rows
+    df_resorts = df_resorts[df_resorts["trail_name"] != "__NA__"].reset_index(drop=True)
+
+    # Correct column values
+    df_resorts["Bottom (ft)"] = df_resorts["Bottom (ft)"].str.replace(" ft", "")
+    df_resorts["Bottom (ft)"] = df_resorts["Bottom (ft)"].astype(float)
+    df_resorts["Top (ft)"] = df_resorts["Top (ft)"].str.replace(" ft", "")
+    df_resorts["Top (ft)"] = df_resorts["Top (ft)"].astype(float)
+    # df_resorts["Length (mi)"] = df_resorts["Length (mi)"].str.replace(" mi", "")
+    
     # Drop columns
-    # df_resorts.drop(["URL", "metric"], axis=1, inplace=True)
+    df_resorts.drop(["URL", "metric", "Length (mi)"], axis=1, inplace=True)
+
+    # Rename columns
+
+    # ['Vertical Drop (ft)']
+    ['vert_rise_(ft)', 'slope_length_(ft)', 'avg_width_(ft)',
+                   'slope_area_(acres)', 'avg_grade_(%)', 'max_grade_(%)', 'ability_level', 'resort', 'location']
+
+# [
+#  'Vertical Drop (ft)',
+#  'Difficulty',
+#  'Resort',
+#  'Slope Length (ft)',
+#  'Average Steepness']
+
+#     df_resorts.rename(columns={
+#         "Bottom (ft)": "Bottom Elev (ft)",
+#         "difficulty": "Difficulty",
+#         "distance": "Slope Length (ft)",
+#         "resort": "Resort",
+#         "trail_name": "Trail Name",
+#         "Top (ft)": "Top Elev (ft)"
+#         }, inplace=True)
+
+    # df.columns = [
+
+    #     'Location',
+    #     'Groomed',
+    #     'Vert Rise (ft)',
+    #     'Avg Width (ft)',
+    #     'Slope Area (acres)',
+    #     'Avg Grade (%)',
+    #     'Max Grade (%)']
