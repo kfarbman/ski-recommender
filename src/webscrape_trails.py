@@ -179,6 +179,9 @@ class WebscrapeTrails:
             Pandas DataFrame, with resort_name column altered
         """
         
+        df["resort_name"] = df["URL"].str.split("united-states-of-america/", 1, expand=True)[1]
+        df["resort_name"] = df["resort_name"].str.split("/", 1, expand=True)[0]
+        
         dict_webscrape_trail_names = {'alpine-meadows': "Alpine Meadows",
                             'arapahoe-basin': "Arapahoe Basin",
                             'aspen-snowmass': "Aspen Snowmass",
@@ -239,19 +242,17 @@ if __name__ == '__main__':
     # Combine mountain data
     df_mountain = pd.concat(lst_mountain_data).reset_index(drop=True)
 
-    import pdb; pdb.set_trace()
-
     # Format run name
     df_resorts["Name"] = df_resorts["Name"].str.replace("\xa0 ", "")
     df_resorts["Name"] = df_resorts["Name"].str.rstrip()
 
-    # Get resort name
-    df_resorts["resort_name"] = df_resorts["URL"].str.split("united-states-of-america/", 1, expand=True)[1]
-    df_resorts["resort_name"] = df_resorts["resort_name"].str.split("/", 1, expand=True)[0]
-
-    # TODO: Validate function
+    # Get resort name for trails
     df_resorts = ws.rename_resorts(df=df_resorts)
-
+    
+    # Get resort name for mountains
+    df_mountains = ws.rename_resorts(df=df_mountains)
+    import pdb; pdb.set_trace()
+    
     # Rename columns
     df_resorts.rename(columns={"resort_name": "resort", "Name": "trail_name"}, inplace=True)
     
