@@ -19,6 +19,9 @@ from selenium import webdriver
 
 warnings.filterwarnings('ignore')
 
+from webscrape_trails import WebscrapeTrails
+import time
+
 
 class MakeMountainDF:
 
@@ -78,55 +81,6 @@ class MakeMountainDF:
                                    'Vail': 209,
                                    'Winter Park': 139}
 
-    # def get_resort_terrain(self, resort):
-    #     """
-    #     Request elevation, run colors, chairlifts, and prices from each resort
-    #     """
-        
-    #     URL = f'http://www.onthesnow.com/{self.resort_urls[resort]}/ski-resort.html'
-                
-    #     self.browser.get(URL)
-        
-    #     soup = BeautifulSoup(self.browser.page_source, 'html.parser')
-
-    #     lst_terrain = soup.select('div#resort_terrain p')
-    #     lst_terrain = [i.get_text() for i in lst_terrain]
-
-    #     # terrain types
-    #     lst_terrain_type = lst_terrain[::2]
-
-    #     # terrain figures and numbers
-    #     lst_terrain_figures = lst_terrain[1::2]
-        
-    #     df_terrain = pd.DataFrame({'type': lst_terrain_type, 'figures': lst_terrain_figures})
-
-    #     df_terrain["type"] = df_terrain["type"].str.replace(" Runs", "")
-        
-    #     df_terrain["resort"] = resort
-        
-    #     return df_terrain
-
-    # def get_resort_elevation_and_lifts(self, resort):
-    #     """
-    #     Request elevation, total runs, and total lifts per resort
-    #     """
-        
-    #     URL = f"https://skimap.org/SkiAreas/view/{self.resort_elevation[resort]}.json"
-                
-    #     json_resort = requests.get(URL).json()
-
-    #     dict_resort_elevation = {}
-
-    #     dict_resort_elevation["resort"] = json_resort["name"]
-    #     dict_resort_elevation["lifts"] = json_resort["lift_count"]
-    #     dict_resort_elevation["run_count"] = json_resort["run_count"]
-        
-    #     # Meters: Multipy by 3.281 to get feet
-    #     dict_resort_elevation["top_elevation"] = int(round(json_resort["top_elevation"] * 3.281))
-    #     dict_resort_elevation["bottom_elevation"] = int(round(json_resort["bottom_elevation"] * 3.281))
-
-    #     return dict_resort_elevation
-
     # def create_mountain_data_frame(self):
     #     """
     #     Run get_resort_terrain
@@ -143,35 +97,46 @@ class MakeMountainDF:
     #     df_terrain = pd.concat(lst_resorts).reset_index(drop=True)
 
     #     return df_terrain
+    
+    def get_mountain_data(self, URL):
+        '''
+        Inputs:
+            URL from URLs (str)
+        Outputs:
+            Pandas DataFrame of ski resort information
+        '''
 
-    # def create_elevation_data_frame(self):
-    #     """
-    #     Run get_resort_elevation_and_lifts
-    #     Append missing resort data
-    #     """
+        self.browser.get(URL)
+
+        time.sleep(2)
+
+        soup = BeautifulSoup(self.browser.page_source, 'html.parser')
+
+        # JollyTurns parsing (runs breakdown)
+        X = soup.select("resort-glance div.row div.col-xs-12 div.row.text-left.statistics.ng-scope span.ng-binding")
+        lst_dev = [x.text for x in X]
+        lst_dev = [x.replace(" ski runs: ", "") for x in lst_dev]
+        df_ski_runs = pd.DataFrame({"Runs": lst_dev[0::2], "total": lst_dev[1::2]})
+        df_ski_runs = df_ski_runs.set_index("Runs").T.reset_index(drop=True)
+
+        # JollyTurns parsing (Chairlifts / total runs)
+        Y = soup.select("resort-glance div.row div.col-xs-12 div.row.text-center a")
+        lst_y = [y.text.lstrip() for y in Y]
+        df_lifts = pd.DataFrame({"Lifts": lst_y[0]}, index=[0])
         
-    #     lst_resorts = [self.get_resort_elevation_and_lifts(resort)
-    #                for resort in tqdm(self.resort_elevation)]
+        # JollyTurns parsing (Elevations)
+        Z = soup.select("resort-glance div.row div.col-xs-12 table tr td")
+        lst_z = [z.text for z in Z if "Lift" not in z.text]
+        lst_z = [z.replace(" \xa0", "") for z in lst_z]
+        lst_z = [z.replace(" ft", "") for z in lst_z]
+        lst_z = [z.replace(":", "") for z in lst_z]
+
+        df_elevations = pd.DataFrame({"Elevation": lst_z[0::2], "Total": lst_z[1::2]})
+        df_elevations = df_elevations.set_index("Elevation").T.reset_index(drop=True)
         
-    #     # Create missing values from skimap website
-    #     dict_diamond_peak = {"resort": "Diamond Peak",
-    #                         "lifts": 7,
-    #                         "run_count": 30,
-    #                         "top_elevation": 8540,
-    #                         "bottom_elevation": 6700}
-        
-    #     dict_taos = {"resort": "Taos",
-    #                         "lifts": 14,
-    #                         "run_count": 110,
-    #                         "top_elevation": 12481,
-    #                         "bottom_elevation": 9200}
+        df_ski = pd.concat([df_ski_runs, df_lifts, df_elevations], axis=1)
 
-    #     lst_resorts.append(dict_diamond_peak)
-    #     lst_resorts.append(dict_taos)
-
-    #     df_elevations = pd.DataFrame(lst_resorts)
-
-    #     return df_elevations
+        return df_ski
 
     def format_mountain_data_frame_values(self, df):
         """
@@ -205,16 +170,6 @@ class MakeMountainDF:
 
         return df_mountains
 
-    # def format_data_frame(self, df):
-    #     """
-    #     Format DataFrame containing elevations, difficulty, and price
-    #     """
-    #     new_cols = ['resort_bottom', 'resort_top', 'greens',
-    #                 'blues', 'blacks', 'bbs', 'lifts', 'price']
-    #     df = df.reindex(
-    #         columns=[*df.columns.tolist(), *new_cols], fill_value=0)
-    #     return df
-
     def save_mountain_data(self, df):
         """
         Save formatted mountain data to Parquet file
@@ -227,31 +182,17 @@ if __name__ == '__main__':
 
     mountain = MakeMountainDF()
 
-    df_mountains = mountain.create_mountain_data_frame()
+    ws = WebscrapeTrails()
 
-    df_mountains = mountain.format_mountain_data_frame_values(df=df_mountains)
+    # Request mountain data from all resorts
+    lst_mountain_data = []
+    for url in tqdm(ws.URLs):
+        df_resort = mountain.get_mountain_data(URL=url)
+        df_resort["URL"] = url
+        lst_mountain_data.append(df_resort)
     
-    df_elevations = mountain.create_elevation_data_frame()
+    # Combine mountain data
+    df_mountain = pd.concat(lst_mountain_data).reset_index(drop=True)
 
-    df_elevations["resort"] = df_elevations["resort"].str.replace(" Resort", "")
-    df_elevations["resort"] = df_elevations["resort"].str.replace(" Mountain", "")
-    df_elevations["resort"] = df_elevations["resort"].str.replace(" Ski Area", "")
-
-    # Combine DataFrames
-    df_combined = pd.merge(df_mountains, df_elevations, on="resort", how="outer")
-    
-    df_combined["price"] = df_combined["resort"].map(mountain.dict_resort_prices)
-
-    # Subset DataFrame for used columns only
-    df_combined = df_combined[["resort", "bottom_elevation", "top_elevation",
-        "Beginner", "Intermediate", "Advanced", "Expert", "lift_count", "price"]]
-
-    """
-    Load trail and mountain data
-    """
-
-    df_resorts = pd.read_parquet("../data/formatted_resort_data_20200209.parquet")
-
-    # Merge resort and mountain data (WIP)
-    # TODO: Handle missing values
-    df_DEV = pd.merge(df_combined, df_resorts, on = "resort", how="outer")    
+    df_mountain = ws.rename_resorts(df=df_mountain)
+   
