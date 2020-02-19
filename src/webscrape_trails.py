@@ -250,7 +250,7 @@ if __name__ == '__main__':
     df_resorts = ws.rename_resorts(df=df_resorts)
     
     # Get resort name for mountains
-    df_mountains = ws.rename_resorts(df=df_mountains)
+    df_mountain = ws.rename_resorts(df=df_mountain)
     import pdb; pdb.set_trace()
     
     # Rename columns
