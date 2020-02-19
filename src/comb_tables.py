@@ -6,11 +6,11 @@ from itertools import chain
 import numpy as np
 import pandas as pd
 
-from create_tables import (alpine_meadows_table, arapahoe_basin_table,
-                           AS_table, BC_table, BM_table,
-                           copper_table, DP_table, eldora_table, WC_table,
-                           WP_table, loveland_table, monarch_table,
-                           steamboat_table, taos_table, telluride_table, vail_table)
+# from create_tables import (alpine_meadows_table, arapahoe_basin_table,
+#                            AS_table, BC_table, BM_table,
+#                            copper_table, DP_table, eldora_table, WC_table,
+#                            WP_table, loveland_table, monarch_table,
+#                            steamboat_table, taos_table, telluride_table, vail_table)
 
 warnings.filterwarnings('ignore')
 
@@ -37,139 +37,139 @@ class CombineTables:
                         'Winter Park': ['../data/resorts/WP.csv', 'CO'],
                         'Wolf Creek': ['../data/resorts/Wolf_Creek.txt', 'CO']}
 
-    def format_resorts(self):
-        """
-        """
+    # def format_resorts(self):
+    #     """
+    #     """
 
-        #TODO: Create list of resort DataFrames
-        # TODO: Pass key from resorts dict to make_dataframe
-        lst_resorts = []
+    #     #TODO: Create list of resort DataFrames
+    #     # TODO: Pass key from resorts dict to make_dataframe
+    #     lst_resorts = []
         
-        # Alpine Meadows
-        df_resort = alpine_meadows_table.make_dataframe(self.resorts["Alpine Meadows"][0])
-        df_resort = alpine_meadows_table.preprocess_data(df=df_resort,
-            resort = "Alpine Meadows",
-            location = "CA")
-        lst_resorts.append(df_resort)
+    #     # Alpine Meadows
+    #     df_resort = alpine_meadows_table.make_dataframe(self.resorts["Alpine Meadows"][0])
+    #     df_resort = alpine_meadows_table.preprocess_data(df=df_resort,
+    #         resort = "Alpine Meadows",
+    #         location = "CA")
+    #     lst_resorts.append(df_resort)
 
-        # Arapahoe Basin
-        df_resort = arapahoe_basin_table.make_dataframe(self.resorts["Arapahoe Basin"][0])
-        df_resort = arapahoe_basin_table.preprocess_data(df=df_resort,
-            resort = "Arapahoe Basin",
-            location = "CO")
-        lst_resorts.append(df_resort)
+    #     # Arapahoe Basin
+    #     df_resort = arapahoe_basin_table.make_dataframe(self.resorts["Arapahoe Basin"][0])
+    #     df_resort = arapahoe_basin_table.preprocess_data(df=df_resort,
+    #         resort = "Arapahoe Basin",
+    #         location = "CO")
+    #     lst_resorts.append(df_resort)
 
-        # Aspen Snowmass
-        df_resort = AS_table.make_dataframe(self.resorts["Aspen Snowmass"][0])
-        df_resort = AS_table.preprocess_data(df=df_resort,
-            resort = "Aspen Snowmass",
-            location = "CO")
-        lst_resorts.append(df_resort)
+    #     # Aspen Snowmass
+    #     df_resort = AS_table.make_dataframe(self.resorts["Aspen Snowmass"][0])
+    #     df_resort = AS_table.preprocess_data(df=df_resort,
+    #         resort = "Aspen Snowmass",
+    #         location = "CO")
+    #     lst_resorts.append(df_resort)
         
-        # Bald Mountain
-        df_resort = BM_table.make_dataframe(self.resorts["Bald Mountain"][0])
-        df_resort = BM_table.preprocess_data(df=df_resort,
-            resort = "Bald Mountain",
-            location = "CO")
-        lst_resorts.append(df_resort)
+    #     # Bald Mountain
+    #     df_resort = BM_table.make_dataframe(self.resorts["Bald Mountain"][0])
+    #     df_resort = BM_table.preprocess_data(df=df_resort,
+    #         resort = "Bald Mountain",
+    #         location = "CO")
+    #     lst_resorts.append(df_resort)
 
-        # Beaver Creek
-        df_resort = BC_table.make_dataframe(self.resorts["Beaver Creek"][0])
-        df_resort = BC_table.preprocess_data(df=df_resort,
-            resort = "Beaver Creek",
-            location = "CO")
-        lst_resorts.append(df_resort)
+    #     # Beaver Creek
+    #     df_resort = BC_table.make_dataframe(self.resorts["Beaver Creek"][0])
+    #     df_resort = BC_table.preprocess_data(df=df_resort,
+    #         resort = "Beaver Creek",
+    #         location = "CO")
+    #     lst_resorts.append(df_resort)
 
-        # Copper
-        df_resort = copper_table.make_dataframe(self.resorts["Copper"][0])
-        df_resort = copper_table.preprocess_data(df=df_resort,
-            resort = "Copper",
-            location = "CO")
-        lst_resorts.append(df_resort)
+    #     # Copper
+    #     df_resort = copper_table.make_dataframe(self.resorts["Copper"][0])
+    #     df_resort = copper_table.preprocess_data(df=df_resort,
+    #         resort = "Copper",
+    #         location = "CO")
+    #     lst_resorts.append(df_resort)
+
+    #     # Diamond Peak
+    #     df_resort = DP_table.make_dataframe(self.resorts["Diamond Peak"][0])
+    #     df_resort = DP_table.preprocess_data(df=df_resort,
+    #         resort = "Diamond Peak",
+    #         location = "CO")
+    #     lst_resorts.append(df_resort)
+
+    #     # Eldora
+    #     df_resort = eldora_table.make_dataframe(self.resorts["Eldora"][0])
+    #     df_resort = eldora_table.preprocess_data(df=df_resort,
+    #         resort = "Eldora",
+    #         location = "CO")
+    #     lst_resorts.append(df_resort)
+
+    #     # Loveland
+    #     df_resort = loveland_table.make_dataframe(self.resorts["Loveland"][0])
+    #     df_resort = loveland_table.preprocess_data(df=df_resort,
+    #         resort = "Loveland",
+    #         location = "CO")
+    #     lst_resorts.append(df_resort)
+
+    #     # Monarch
+    #     df_resort = monarch_table.make_dataframe(self.resorts["Monarch"][0])
+    #     df_resort = monarch_table.preprocess_data(df=df_resort,
+    #         resort = "Monarch",
+    #         location = "CO")
+    #     lst_resorts.append(df_resort)
+
+    #     # Steamboat
+    #     df_resort = steamboat_table.make_dataframe(self.resorts["Steamboat"][0])
+    #     df_resort = steamboat_table.preprocess_data(df=df_resort,
+    #         resort = "Steamboat",
+    #         location = "CO")
+    #     lst_resorts.append(df_resort)
         
-        # Diamond Peak
-        df_resort = DP_table.make_dataframe(self.resorts["Diamond Peak"][0])
-        df_resort = DP_table.preprocess_data(df=df_resort,
-            resort = "Diamond Peak",
-            location = "CO")
-        lst_resorts.append(df_resort)
+    #     # Taos
+    #     df_resort = taos_table.make_dataframe(self.resorts["Taos"][0])
+    #     df_resort = taos_table.preprocess_data(df=df_resort,
+    #         resort = "Taos",
+    #         location = "NM")
+    #     lst_resorts.append(df_resort)
 
-        # Eldora
-        df_resort = eldora_table.make_dataframe(self.resorts["Eldora"][0])
-        df_resort = eldora_table.preprocess_data(df=df_resort,
-            resort = "Eldora",
-            location = "CO")
-        lst_resorts.append(df_resort)
+    #     # Telluride
+    #     df_resort = telluride_table.make_dataframe(self.resorts["Telluride"][0])
+    #     df_resort = telluride_table.preprocess_data(df=df_resort,
+    #         resort="Telluride",
+    #         location="CO")
+    #     lst_resorts.append(df_resort)
 
-        # Loveland
-        df_resort = loveland_table.make_dataframe(self.resorts["Loveland"][0])
-        df_resort = loveland_table.preprocess_data(df=df_resort,
-            resort = "Loveland",
-            location = "CO")
-        lst_resorts.append(df_resort)
+    #     # Vail
+    #     df_resort = vail_table.make_dataframe(self.resorts["Vail"][0])
+    #     df_resort = vail_table.preprocess_data(df=df_resort,
+    #         resort = "Vail",
+    #         location = "CO")
+    #     lst_resorts.append(df_resort)
 
-        # Monarch
-        df_resort = monarch_table.make_dataframe(self.resorts["Monarch"][0])
-        df_resort = monarch_table.preprocess_data(df=df_resort,
-            resort = "Monarch",
-            location = "CO")
-        lst_resorts.append(df_resort)
-
-        # Steamboat
-        df_resort = steamboat_table.make_dataframe(self.resorts["Steamboat"][0])
-        df_resort = steamboat_table.preprocess_data(df=df_resort,
-            resort = "Steamboat",
-            location = "CO")
-        lst_resorts.append(df_resort)
+    #     # Winter Park
+    #     colnames = ['trail_name', 'top_elev_(ft)', 'bottom_elev_(ft)', 'vert_rise_(ft)', 'horiz_dist', 'slope_length_(ft)', 'avg_grade_(%)', 'plan_acres', 'slope_area_(acres)', 'deg_grade', 'max_grade_(%)', 'avg_width_(ft)', 'ability_level']
+    #     df_resort = pd.read_csv(self.resorts["Winter Park"][0],
+    #         header=None,
+    #         names=colnames)
+    #     df_resort = WP_table.preprocess_data(df=df_resort,
+    #         resort="Winter Park",
+    #         location="CO")
+    #     lst_resorts.append(df_resort)        
         
-        # Taos
-        df_resort = taos_table.make_dataframe(self.resorts["Taos"][0])
-        df_resort = taos_table.preprocess_data(df=df_resort,
-            resort = "Taos",
-            location = "NM")
-        lst_resorts.append(df_resort)
-
-        # Telluride
-        df_resort = telluride_table.make_dataframe(self.resorts["Telluride"][0])
-        df_resort = telluride_table.preprocess_data(df=df_resort,
-            resort="Telluride",
-            location="CO")
-        lst_resorts.append(df_resort)
-
-        # Vail
-        df_resort = vail_table.make_dataframe(self.resorts["Vail"][0])
-        df_resort = vail_table.preprocess_data(df=df_resort,
-            resort = "Vail",
-            location = "CO")
-        lst_resorts.append(df_resort)
-
-        # Winter Park
-        colnames = ['trail_name', 'top_elev_(ft)', 'bottom_elev_(ft)', 'vert_rise_(ft)', 'horiz_dist', 'slope_length_(ft)', 'avg_grade_(%)', 'plan_acres', 'slope_area_(acres)', 'deg_grade', 'max_grade_(%)', 'avg_width_(ft)', 'ability_level']
-        df_resort = pd.read_csv(self.resorts["Winter Park"][0],
-            header=None,
-            names=colnames)
-        df_resort = WP_table.preprocess_data(df=df_resort,
-            resort="Winter Park",
-            location="CO")
-        lst_resorts.append(df_resort)        
+    #     # Wolf Creek
+    #     df_resort = WC_table.make_dataframe(self.resorts["Wolf Creek"][0])
+    #     df_resort = WC_table.preprocess_data(df=df_resort,
+    #         resort = "Wolf Creek",
+    #         location = "CO")
+    #     lst_resorts.append(df_resort)
         
-        # Wolf Creek
-        df_resort = WC_table.make_dataframe(self.resorts["Wolf Creek"][0])
-        df_resort = WC_table.preprocess_data(df=df_resort,
-            resort = "Wolf Creek",
-            location = "CO")
-        lst_resorts.append(df_resort)
-        
-        columns = ['trail_name', 'top_elev_(ft)', 'bottom_elev_(ft)', 'vert_rise_(ft)', 'slope_length_(ft)', 'avg_width_(ft)',
-                   'slope_area_(acres)', 'avg_grade_(%)', 'max_grade_(%)', 'ability_level', 'resort', 'location']
+    #     columns = ['trail_name', 'top_elev_(ft)', 'bottom_elev_(ft)', 'vert_rise_(ft)', 'slope_length_(ft)', 'avg_width_(ft)',
+    #                'slope_area_(acres)', 'avg_grade_(%)', 'max_grade_(%)', 'ability_level', 'resort', 'location']
 
-        # Combine DataFrames
-        whole_table = pd.concat(lst_resorts)
+    #     # Combine DataFrames
+    #     whole_table = pd.concat(lst_resorts)
         
-        # Ensure columns are in the correct order
-        whole_table = whole_table[columns]
+    #     # Ensure columns are in the correct order
+    #     whole_table = whole_table[columns]
 
-        return whole_table
+    #     return whole_table
 
     def standardize_ability_levels(self, df):
         """
@@ -195,16 +195,16 @@ class CombineTables:
 
         return df
 
-    def fix_trail_names(self, df):
-        '''
-        Inputs:
-            df from trail_names_to_fix (DataFrame)
-        Outputs:
-            df w/ trail name fixed - removing number at beginning (DataFrame)
-        '''
-        df['trail_name'] = df['trail_name'].apply(
-            lambda x: ' '.join(x.split()[1:]))
-        return df
+    # def fix_trail_names(self, df):
+    #     '''
+    #     Inputs:
+    #         df from trail_names_to_fix (DataFrame)
+    #     Outputs:
+    #         df w/ trail name fixed - removing number at beginning (DataFrame)
+    #     '''
+    #     df['trail_name'] = df['trail_name'].apply(
+    #         lambda x: ' '.join(x.split()[1:]))
+    #     return df
 
     def add_groomed_col(self, df, groomed_lst):
         '''  
@@ -224,10 +224,13 @@ if __name__ == '__main__':
     
     df_resorts = combine.format_resorts()
 
+    # TODO: Check output in CSV; make sure all values are what's expected
+    # TODO: Change column names before export (optimal for Flask app)
     df_resorts = combine.standardize_ability_levels(df=df_resorts)
 
+    # import pdb; pdb.set_trace()
     # Fix trail names (remove numbers at beginning)
-    df_resorts = combine.fix_trail_names(df=df_resorts)
+    # df_resorts = combine.fix_trail_names(df=df_resorts)
 
     # TODO: Missing trails
 
