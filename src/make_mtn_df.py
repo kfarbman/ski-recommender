@@ -195,4 +195,12 @@ if __name__ == '__main__':
     df_mountain = pd.concat(lst_mountain_data).reset_index(drop=True)
 
     df_mountain = ws.rename_resorts(df=df_mountain)
-   
+
+    # Fill prices
+    df_mountain["price"] = df_mountain["resort_name"].map(mountain.dict_resort_prices)
+
+    # Convert column data types
+
+    lst_columns = ["Top", "Base", "Lifts", "Vertical rise", "black","blue", "double black", "green", "terrain park"]
+
+    df_mountain[lst_columns] = df_mountain[lst_columns].astype(float)
