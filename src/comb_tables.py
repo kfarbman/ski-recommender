@@ -149,30 +149,6 @@ class CombineTables:
 						
 						}
 
-	# def standardize_ability_levels(self, df):
-	#     """
-	#     Standardize ability levels across all resorts
-	#     """
-
-	#     dict_ability_levels = {"Advanced Intermediate": "Advanced",
-	#                            "Adv. Intermediate": "Advanced",
-	#                            "Gladed Adv Inter": "Advanced",
-	#                            "Hike To": "Expert",
-	#                            "Hike to": "Expert",
-	#                            "Hike-To": "Expert",
-	#                            "Gladed Expert": "Expert",
-	#                            "Exp Bowl": "Expert",
-	#                            "Expert Glade-Gated": "Expert",
-	#                            "Chute/Bowl-Gated": "Expert",
-	#                            "Bowl/Glade-Gated": "Expert",
-	#                            "Chute/Glade-Gated": "Expert",
-	#                            "Intermediate Glade": "Intermediate"}
-
-	#     # Map values; fill with original value if new value doesn't exist
-	#     df["ability_level"] = df["ability_level"].map(dict_ability_levels).fillna(df["ability_level"])
-
-	#     return df
-
 	def add_groomed_col(self, df):
 		'''
 		Add groomed column to trail data
@@ -203,38 +179,10 @@ if __name__ == '__main__':
 	# TODO: Change column names before export (optimal for Flask app)
 	# df_resorts = combine.standardize_ability_levels(df=df_resorts)
 
-	# import pdb; pdb.set_trace()
-	# Fix trail names (remove numbers at beginning)
-	# df_resorts = combine.fix_trail_names(df=df_resorts)
-
-	# TODO: Missing trails
-
-	# TODO: List of trails
-
-
-	"""
-	Create dictionary of resorts and groomed ski runs
-	"""
-
-	"""
-	Import webscraped data
-	"""
-
-	df_webscraped_trails = pd.read_csv("../data/formatted/webscrape_trail_data_20200213.csv")
-
-	# Merge DataFrames
-	df_merged = pd.merge(df_resorts, df_webscraped_trails, on=["resort", "trail_name"], how="inner")
-	
-
-	# Add ability numbers and color numbers
-	ability_levels = {'Beginner': 1, 'Novice': 2, 'Low Intermediate': 3,
-					'Intermediate': 4, 'Advanced': 5, 'Expert': 6, 'Glade': 5}
+	# Map Difficulty to numbers
+	# TODO: Make this simpler
+	# TODO: Remove ability_nums/ re-engineer into different feature
 	colors = {'green': 1, 'blue': 2, 'black': 3, 'double-black': 4}
+	df_resorts['color_nums'] = df_resorts['Difficulty'].map(colors)
+	df_resorts['ability_nums'] = df_resorts['color_nums']
 
-	df_merged['ability_nums'] = df_merged['ability_level'].map(ability_levels)
-	df_merged['color_nums'] = df_merged['difficulty'].map(colors)
-
-	import pdb; pdb.set_trace()
-
-	# Save data to Parquet file
-	# df_merged.to_parquet("../data/formatted_resort_data_20200209.parquet", index=False)
