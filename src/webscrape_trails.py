@@ -30,6 +30,7 @@ class WebscrapeTrails:
         self.CRESTED_BUTTE_URL = f"{self.MAIN_URL}/crested-butte-mountain-resort/"
         self.DIAMOND_PEAK_URL = f"{self.MAIN_URL}/diamond-peak/"
         self.ELDORA_URL = f"{self.MAIN_URL}/eldora-mountain-resort/"
+        self.JACKSON_HOLE_URL = f"{self.MAIN_URL}/jackson-hole/"
         self.LOVELAND_URL = f"{self.MAIN_URL}/loveland-ski-area/"
         self.MONARCH_URL = f"{self.MAIN_URL}/monarch-ski-area/"
         self.STEAMBOAT_URL = f"{self.MAIN_URL}/steamboat-ski-resort/"
@@ -49,6 +50,7 @@ class WebscrapeTrails:
             self.CRESTED_BUTTE_URL,
             self.DIAMOND_PEAK_URL,
             self.ELDORA_URL,
+            self.JACKSON_HOLE_URL,
             self.LOVELAND_URL,
             self.MONARCH_URL,
             self.STEAMBOAT_URL,
@@ -191,6 +193,7 @@ class WebscrapeTrails:
                             'crested-butte-mountain-resort': "Crested Butte",
                             'diamond-peak': "Diamond Peak",
                             'eldora-mountain-resort': "Eldora",
+                            'jackson-hole': "Jackson Hole",
                             'loveland-ski-area': "Loveland",
                             'monarch-ski-area': "Monarch",
                             'steamboat-ski-resort': "Steamboat",
@@ -241,10 +244,12 @@ if __name__ == '__main__':
     
     # Combine mountain data
     df_mountain = pd.concat(lst_mountain_data).reset_index(drop=True)
-
+    import pdb; pdb.set_trace()
+    
     # Format run name
     df_resorts["Name"] = df_resorts["Name"].str.replace("\xa0 ", "")
     df_resorts["Name"] = df_resorts["Name"].str.rstrip()
+    df_resorts["Name"] = df_resorts["Name"].str.lstrip()
 
     # Get resort name for trails
     df_resorts = ws.rename_resorts(df=df_resorts)
