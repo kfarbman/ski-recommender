@@ -172,17 +172,6 @@ class CombineTables:
 
 	#     return df
 
-	# def fix_trail_names(self, df):
-	#     '''
-	#     Inputs:
-	#         df from trail_names_to_fix (DataFrame)
-	#     Outputs:
-	#         df w/ trail name fixed - removing number at beginning (DataFrame)
-	#     '''
-	#     df['trail_name'] = df['trail_name'].apply(
-	#         lambda x: ' '.join(x.split()[1:]))
-	#     return df
-
 	def add_groomed_col(self, df):
 		'''
 		Add groomed column to trail data
