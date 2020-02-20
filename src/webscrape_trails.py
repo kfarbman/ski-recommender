@@ -180,54 +180,48 @@ if __name__ == '__main__':
     # Create list of all ski resort URL's
     lst_resort_urls = ws.create_resort_urls()
 
-    # Request trail data from all ski resorts
-    lst_trail_data = []
+    # # Request trail data from all ski resorts
+    # lst_trail_data = []
 
-    for url in tqdm(lst_resort_urls):
-        df_resort = ws.make_tables(URL=url)
-        df_resort["URL"] = url
-        lst_trail_data.append(df_resort)
+    # for url in tqdm(lst_resort_urls):
+    #     df_resort = ws.make_tables(URL=url)
+    #     df_resort["URL"] = url
+    #     lst_trail_data.append(df_resort)
 
-    # Combine trail data
-    df_resorts = pd.concat(lst_trail_data)
+    # # Combine trail data
+    # df_resorts = pd.concat(lst_trail_data)
+
+    df_resorts = pd.read_csv("../data/trail_data_DEV_20200220.csv")
+
+    # Remove blank resorts
+    df_resorts = df_resorts[df_resorts.Name != "__NA__"].reset_index(drop=True)
+
     df_resorts["difficulty"] = df_resorts["URL"].str.split("skiruns-", 1, expand=True)[1]
 
     import pdb; pdb.set_trace()
     
     # Format run name
-    # TODO: Simplify strip
-    df_resorts["Name"] = df_resorts["Name"].str.replace("\xa0 ", "")
-    df_resorts["Name"] = df_resorts["Name"].str.strip()
+    df_resorts["Name"] = df_resorts["Name"].str.replace("\xa0 ", "").str.strip()
 
     # Get resort name for trails
     df_resorts = ws.rename_resorts(df=df_resorts)
-    
-    import pdb; pdb.set_trace()
-    
+        
     # Rename columns
     df_resorts.rename(columns={"resort_name": "resort", "Name": "trail_name"}, inplace=True)
+        
+    # Format run distance values
+    df_resorts["Length (ft)"] = df_resorts["Length (mi)"].str.split(" ", expand=True)[0]
+    df_resorts["Length (ft)"] = df_resorts["Length (ft)"].astype(float)
     
-    # import pdb; pdb.set_trace()
-    
-    # TODO: Make this process simpler; process along index
-    # Format distance values
-    df_distance = df_resorts["Length (mi)"].str.split(" ", expand=True)
-    df_distance.columns = ["distance", "metric"]
-    df_distance["distance"] = df_distance["distance"].map({"__NA__": "0"}).fillna(df_distance["distance"])
+    # Convert run distance from miles to feet
+    df_resorts.loc[df_resorts["Length (ft)"] < 1, "Length (ft)"] = df_resorts["Length (ft)"] * 5280
 
-    # Convert miles to feet
-    # df_distance.loc[df_distance["metric"] == "ft", "distance"] = df_distance["distance"].astype(float) / 5280
-    for idx in range(len(df_distance)):
-        if df_distance["metric"].iloc[idx] == "mi":
-            df_distance.iloc[idx].at["distance"] = float(df_distance.iloc[idx].at["distance"]) * 5280
-
-    # Combine distance with resort data
-    df_resorts = pd.concat([df_resorts, df_distance], axis=1)
+    import pdb; pdb.set_trace()
 
     # Get average steepness
     df_resorts["Vertical Drop (ft)"] = df_resorts["Vertical Drop (ft)"].str.split(" ", 1, expand=True)[0]
-    df_resorts["Vertical Drop (ft)"] = df_resorts["Vertical Drop (ft)"].map(
-        {"__NA__": "0"}).fillna(df_resorts["Vertical Drop (ft)"])
+    df_resorts["Vertical Drop (ft)"] = df_resorts["Vertical Drop (ft)"].astype(float)
+    df_resorts["Vertical Drop (ft)"].fillna(0, inplace=True)
     
     # Average Steepness = (Vert Drop (feet) / 5280) / distance (miles))
     # df_resorts['Average Steepness'] = df_resorts['Vertical Drop (ft)'].astype(float)/(5280*df_resorts['distance'].astype(float))
