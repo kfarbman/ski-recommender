@@ -18,24 +18,25 @@ warnings.filterwarnings('ignore')
 class CombineTables:
 
 	def __init__(self):
-		# self.resorts = {
-		#                 'Alpine Meadows': ['../data/resorts/Alpine_Meadows.txt', 'CA'],
-		#                 'Arapahoe Basin': ['../data/resorts/Arapahoe_Basin.txt', 'CO'],
-		#                 'Aspen Snowmass': ['../data/resorts/Aspen_Snowmass.txt', 'CO'],
-		#                 'Bald Mountain': ['../data/resorts/Bald_Mountain.txt', 'CO'],
-		#                 'Beaver Creek': ['../data/resorts/Beaver_Creek.txt', 'CO'],
-		#                 'Copper': ['../data/resorts/Copper.txt', 'CO'],
-		#                 'Crested Butte': ['../data/resorts/Crested_Butte.txt', 'CO'],
-		#                 'Diamond Peak': ['../data/resorts/DP.txt', 'NV'],
-		#                 'Eldora': ['../data/resorts/Eldora.txt', 'CO'],
-		#                 'Loveland': ['../data/resorts/Loveland.txt', 'CO'],
-		#                 'Monarch': ['../data/resorts/Monarch.txt', 'CO'],
-		#                 'Steamboat': ['../data/resorts/Steamboat.txt', 'CO'],
-		#                 'Taos': ['../data/resorts/Taos.txt', 'NM'],
-		#                 'Telluride': ['../data/resorts/Telluride.txt', 'CO'],
-		#                 'Vail': ['../data/resorts/Vail.txt', 'CO'],
-		#                 'Winter Park': ['../data/resorts/WP.csv', 'CO'],
-		#                 'Wolf Creek': ['../data/resorts/Wolf_Creek.txt', 'CO']}
+		self.resort_locations = {
+			'Alpine Meadows': 'CA',
+			'Arapahoe Basin': 'CO',
+			'Aspen Snowmass': 'CO',
+			'Bald Mountain':  'CO',
+			'Beaver Creek': 'CO',
+			'Copper': 'CO',
+			'Crested Butte': 'CO',
+			'Diamond Peak': 'NV',
+			'Eldora': 'CO',
+			'Jackson Hole': 'WY',
+			'Loveland': 'CO',
+			'Monarch': 'CO',
+			'Steamboat': 'CO',
+			'Taos': 'NM',
+			'Telluride': 'CO',
+			'Vail': 'CO',
+			'Winter Park': 'CO',
+			'Wolf Creek': 'CO'}
 
 		self.dict_groomed_runs = {
 		
