@@ -382,12 +382,3 @@ if __name__ == '__main__':
 
 	# Save data to Parquet file
 	# df_merged.to_parquet("../data/formatted_resort_data_20200209.parquet", index=False)
-
-
-# for resort, trail_lst in zip(resort_dict, trails_to_remove):
-#     resort_dict[resort] = remove_trails(resort, trail_lst)
-
-# TODO: Fix Monarch trail names?
-# lst_monarch_trails = ['Quick Draw', 'KC Cutoff', "Doc's Run", 'Dire Straits', 'Great Divide', "Geno's Meadow"]
-# "Litter Pierre"
-
