@@ -382,47 +382,6 @@ if __name__ == '__main__':
 
 	# Save data to Parquet file
 	# df_merged.to_parquet("../data/formatted_resort_data_20200209.parquet", index=False)
-	
-
-dict_trails_to_remove = {
-	"Arapahoe Basin": ['High Noon Terrain Park','Treeline Terrain Park', 'Shooting Gallery', 'Poma Line'],
-	"Beaver Creek": ['Chair 2', 'Half- Barrell Half Pipe', 'Half Hitch', 'Nastar Ski Racing', 'Park101_Flattops',
-					   'Utility Corridor', 'Pitchfork', 'Pines Skiway', "Anderson's Alley", 'Homefire', 'Tall Timber',
-					   'Ridge Rider'],
-	"Copper": ["Bruce's Way", 'Bee Road', 'Road Home', 'Cross Cut'],
-	"Crested Butte": ['Gallowitch Bend', 'Silver Queen Connector', 'Aspen Park', "Shep's Chute"],
-	"Loveland": ['T-bar Road','Sani Flush', 'Awesome II', 'Rip Curl', ''],
-	"Monarch": ['K2', 'Tumbelina Lift Line'],
-	"Taos": ['White Feather (Middle Pitch)', 'Raspberry (Pitch 1)', 'Raspberry (Pitch 2)', 'Raspberry (Pitch 3)',
-					  'Raspberry Hill Traverse', 'Top of Lifts 2 and 6', 'Lorelei Egress', 'Hunziker Egress', 'Lift 6 Liftline',
-					  'Avy Road', 'Maidenform'],
-	"Vail": ['Avanti-Cookshack', 'Chair 2 Lift Line', 'Pickeroon Lower', 'Pickeroon-Cookshack', 'Ricochet',
-					  'Mountain Top Lift Line', 'Ramshorn Glade', 'Swingsville Ridge', 'Apres Trees East', 'Apres Trees West',
-					  'Ho Chi Min Trail', 'Ptarmigan Cornice', "Sama's", 'Turkey Yard', 'Aspen Alley', 'Chair 6 Lift Line', 'Follow Me Road',
-					  'Mule Skinner', 'Pony Express', 'Faro Glade', 'Old Midway Catwalk', "Minnie's Cutoff", "Minnie's Mile Upper",
-					  "Minnie's Mile Upper Face", 'Hairbag Alley Lower', 'International', 'Mid-Vail Milling Area', 'Villages Catwalk',
-					  'Vista Bahn Line Upper', 'Way Over Yonder', 'Gondola Lift Line', 'Simba Face', 'Cascade Way', 'China Wall', 'to Two Elk',
-					  'West Wall', 'Upper MongoliaBowl', 'Bwama-Simba Collector', 'Cubs Way Upper', 'Pride Upper Face', 'Black Forest Milling Area',
-					  'Nastar', 'Pay-to-Race', 'East Tea Cup', 'Petes Lift Line', 'Berries Catwalk', 'Ch 10 Access', 'Lift Line', "Roger's Glade",
-					  "Smokey's", 'Timberline Face', 'Minnies Mile Upper Face'],
-	"Winter Park": ['Meadows', 'Nirvana', 'Village Way - Primrose'],
-	"Wolf Creek": ['Meadows', 'Nirvana', 'Village Way - Primrose']
-}
-
-
-def remove_trails(resort_dict, resort, trail_lst):
-	'''
-	Remove trails with no data other than master plan
-
-	Inputs:
-		resort from resort_dict (str)
-		trail_lst from trails_to_remove (list)
-	Outputs:
-		Pandas DataFrame with trails removed
-	'''
-	resort_df_new = resort_dict[resort][~resort_dict[resort]
-										['trail_name'].isin(trail_lst)]
-	return resort_df_new
 
 
 # for resort, trail_lst in zip(resort_dict, trails_to_remove):
