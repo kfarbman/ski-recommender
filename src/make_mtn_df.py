@@ -70,16 +70,22 @@ class MakeMountainDF:
         # 2020 ticket prices, fetched manually
         self.dict_resort_prices = {'Alpine Meadows': 169,
                                    'Arapahoe Basin': 109,
+                                   'Aspen Snowmass': 179,
+                                   'Bald Mountain': 145,
                                    'Beaver Creek': 209,
                                    'Copper': 119,
                                    'Crested Butte': 129,
                                    'Diamond Peak': 104,
                                    'Eldora': 140,
+                                   'Jackson Hole': 165,
                                    'Loveland': 89,
                                    'Monarch': 94,
+                                   'Steamboat': 199,
                                    'Taos': 110,
+                                   'Telluride': 149,
                                    'Vail': 209,
-                                   'Winter Park': 139}
+                                   'Winter Park': 139,
+                                   'Wolf Creek': 76}
 
     # def create_mountain_data_frame(self):
     #     """
@@ -151,7 +157,7 @@ class MakeMountainDF:
 
         lst_columns = ["Top", "Base", "Lifts", "Vertical rise", "black","blue", "double black", "green", "terrain park"]
 
-        df[lst_columns] = df[lst_columns].astype(float)
+        df[lst_columns] = df[lst_columns].astype("int")
 
         return df
 
@@ -184,7 +190,9 @@ if __name__ == '__main__':
     # Fill prices
     df_mountain["price"] = df_mountain["resort_name"].map(mountain.dict_resort_prices)
 
-    # Convert column data types
+    # Fill missing values
+    df_mountain.fillna(0, inplace=True)
 
+    # Convert column data types
     df_mountain = mountain.format_mountain_data_frame_values(df=df_mountain)
     
