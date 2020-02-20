@@ -112,7 +112,7 @@ class WebscrapeTrails:
         df_ski = pd.DataFrame(table_lst)
 
         try:
-            df_ski.columns = ['Name', 'Bottom (ft)', 'Top (ft)', 'Vertical Drop (ft)', 'Length (mi)']
+            df_ski.columns = ['Trail Name', 'Bottom Elev (ft)', 'Top Elev (ft)', 'Vertical Drop (ft)', 'Length (mi)']
         except ValueError:
             print(URL)
             df_ski = pd.DataFrame({
@@ -138,8 +138,8 @@ class WebscrapeTrails:
             Pandas DataFrame, with resort_name column altered
         """
         
-        df["resort_name"] = df["URL"].str.split("united-states-of-america/", 1, expand=True)[1]
-        df["resort_name"] = df["resort_name"].str.split("/", 1, expand=True)[0]
+        df["Resort"] = df["URL"].str.split("united-states-of-america/", 1, expand=True)[1]
+        df["Resort"] = df["Resort"].str.split("/", 1, expand=True)[0]
         
         dict_webscrape_trail_names = {'alpine-meadows': "Alpine Meadows",
                             'arapahoe-basin': "Arapahoe Basin",
@@ -160,9 +160,9 @@ class WebscrapeTrails:
                             'winter-park-resort': "Winter Park",
                             'wolf-creek-ski-area': "Wolf Creek"}
 
-        df["resort_name"] = df["resort_name"].map(
+        df["Resort"] = df["Resort"].map(
             dict_webscrape_trail_names).\
-            fillna(df["resort_name"])
+            fillna(df["Resort"])
         
         return df
 
@@ -198,8 +198,8 @@ if __name__ == '__main__':
 
     df_resorts["Difficulty"] = df_resorts["URL"].str.split("skiruns-", 1, expand=True)[1]
     
-    # Format run name
-    df_resorts["Name"] = df_resorts["Name"].str.replace("\xa0 ", "").str.strip()
+    # Format trail name
+    df_resorts["Trail Name"] = df_resorts["Trail Name"].str.replace("\xa0 ", "").str.strip()
 
     # Get resort name for trails
     df_resorts = ws.rename_resorts(df=df_resorts)
@@ -230,15 +230,7 @@ if __name__ == '__main__':
     df_resorts.drop(["URL", "Length (mi)"], axis=1, inplace=True)
 
     # import pdb; pdb.set_trace()
-    
-    # Rename columns
-    df_resorts.rename(columns={
-        "resort_name": "Resort",
-        "Name": "Trail Name",
-        "Bottom (ft)": "Bottom Elev (ft)",
-        "Top (ft)": "Top Elev (ft)"
-        }, inplace=True)
-        
+            
     # ['vert_rise_(ft)',
     # 'slope_length_(ft)',
     # 'avg_width_(ft)',
