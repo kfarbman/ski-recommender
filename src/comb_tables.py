@@ -2,15 +2,8 @@ import pickle
 import warnings
 from itertools import chain
 
-# import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-
-# from create_tables import (alpine_meadows_table, arapahoe_basin_table,
-#                            AS_table, BC_table, BM_table,
-#                            copper_table, DP_table, eldora_table, WC_table,
-#                            WP_table, loveland_table, monarch_table,
-#                            steamboat_table, taos_table, telluride_table, vail_table)
 
 warnings.filterwarnings('ignore')
 
@@ -185,4 +178,3 @@ if __name__ == '__main__':
 	colors = {'green': 1, 'blue': 2, 'black': 3, 'double-black': 4}
 	df_resorts['color_nums'] = df_resorts['Difficulty'].map(colors)
 	df_resorts['ability_nums'] = df_resorts['color_nums']
-
