@@ -117,8 +117,8 @@ class WebscrapeTrails:
             print(URL)
             df_ski = pd.DataFrame({
                 "Name": [self.blank_value],
-                "Bottom (ft)": [self.blank_value],
-                "Top (ft)": [self.blank_value],
+                "Bottom Elev (ft)": [self.blank_value],
+                "Top Elev (ft)": [self.blank_value],
                 "Vertical Drop (ft)": [self.blank_value],
                 "Length (mi)": [self.blank_value]
             })
@@ -223,8 +223,8 @@ if __name__ == '__main__':
     df_resorts['Average Steepness'] = df_resorts['Vertical Drop (ft)'] / df_resorts['Slope Length (ft)']
 
     # Correct column values
-    df_resorts["Bottom (ft)"] = df_resorts["Bottom (ft)"].str.replace(" ft", "").astype(float)
-    df_resorts["Top (ft)"] = df_resorts["Top (ft)"].str.replace(" ft", "").astype(float)
+    df_resorts["Bottom Elev (ft)"] = df_resorts["Bottom Elev (ft)"].str.replace(" ft", "").astype(float)
+    df_resorts["Top Elev (ft)"] = df_resorts["Top Elev (ft)"].str.replace(" ft", "").astype(float)
     
     # Drop columns
     df_resorts.drop(["URL", "Length (mi)"], axis=1, inplace=True)
