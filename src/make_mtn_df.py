@@ -1,26 +1,25 @@
 """
-Webscrape mountain statistics from OnTheSnow and SkiMap
+Webscrape mountain statistics from JollyTurns
 
 1. Request all mountain data
 2. Format/ preprocess data
-3. Combine mountain and elevation data
-4. Save data to Parquet file
+3. Save data to CSV
 """
 
 import pickle
+import time
 import warnings
-from tqdm import tqdm
 
 import numpy as np
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup
 from selenium import webdriver
-
-warnings.filterwarnings('ignore')
+from tqdm import tqdm
 
 from webscrape_trails import WebscrapeTrails
-import time
+
+warnings.filterwarnings('ignore')
 
 
 class MakeMountainDF:
@@ -146,4 +145,9 @@ if __name__ == '__main__':
 
     # Convert column data types
     df_mountain = mountain.format_mountain_data_frame_values(df=df_mountain)
-    
+
+    # Drop columns
+    df_mountain.drop("URL", axis=1, inplace=True)
+
+    # Save data
+    df_mountain.to_csv("../data/formatted/mountain_data_20200220.csv", index=False, header=True)
