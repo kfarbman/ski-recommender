@@ -35,38 +35,6 @@ class MakeMountainDF:
 
         self.browser = webdriver.Chrome(chrome_options=self.browser_options)
         
-        # self.resort_urls = {
-        #                     'Alpine Meadows': 'california/squaw-valley-usa',
-        #                     'Arapahoe Basin': 'colorado/arapahoe-basin-ski-area',
-        #                     # TODO: Aspen Snowmass
-        #                     # TODO: Bald Mountain
-        #                     'Beaver Creek': 'colorado/beaver-creek',
-        #                     'Copper': 'colorado/copper-mountain-resort',
-        #                     'Crested Butte': 'colorado/crested-butte-mountain-resort',
-        #                     'Diamond Peak': 'nevada/diamond-peak',
-        #                     'Eldora': 'colorado/eldora-mountain-resort',
-        #                     'Loveland': 'colorado/loveland',
-        #                     'Monarch': 'colorado/monarch-mountain',
-        #                     # TODO: Steamboat
-        #                     'Taos': 'new-mexico/taos-ski-valley',
-        #                     # TODO: Telluride
-        #                     'Vail': 'colorado/vail',
-        #                     'Winter Park': 'colorado/winter-park-resort'}
-        
-        # self.resort_elevation = {
-        #                     'Alpine Meadows': 522,
-        #                     'Arapahoe Basin': 513,
-        #                     'Beaver Creek': 497,
-        #                     'Copper': 509,
-        #                     'Crested Butte': 514,
-        #                     # 'Diamond Peak': 359,
-        #                     'Eldora': 508,
-        #                     'Loveland': 515,
-        #                     'Monarch': 511,
-        #                     # 'Taos': 338,
-        #                     'Vail': 507,
-        #                     'Winter Park': 503}
-        
         # 2020 ticket prices, fetched manually
         self.dict_resort_prices = {'Alpine Meadows': 169,
                                    'Arapahoe Basin': 109,
@@ -86,23 +54,6 @@ class MakeMountainDF:
                                    'Vail': 209,
                                    'Winter Park': 139,
                                    'Wolf Creek': 76}
-
-    # def create_mountain_data_frame(self):
-    #     """
-    #     Run get_resort_terrain
-
-    #     Output
-    #         Pandas DataFrame of terrain data per resort
-    #     """
-    #     lst_resorts = []
-
-    #     for resort in tqdm(self.resort_urls.keys()):
-    #         lst_resorts.append(self.get_resort_terrain(resort))
-        
-    #     # Combine list of resort DataFrames
-    #     df_terrain = pd.concat(lst_resorts).reset_index(drop=True)
-
-    #     return df_terrain
     
     def get_mountain_data(self, URL):
         '''
