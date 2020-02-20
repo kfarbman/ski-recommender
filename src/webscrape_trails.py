@@ -197,8 +197,6 @@ if __name__ == '__main__':
     df_resorts = df_resorts[df_resorts.Name != "__NA__"].reset_index(drop=True)
 
     df_resorts["difficulty"] = df_resorts["URL"].str.split("skiruns-", 1, expand=True)[1]
-
-    import pdb; pdb.set_trace()
     
     # Format run name
     df_resorts["Name"] = df_resorts["Name"].str.replace("\xa0 ", "").str.strip()
@@ -216,30 +214,26 @@ if __name__ == '__main__':
     # Convert run distance from miles to feet
     df_resorts.loc[df_resorts["Length (ft)"] < 1, "Length (ft)"] = df_resorts["Length (ft)"] * 5280
 
-    import pdb; pdb.set_trace()
-
     # Get average steepness
     df_resorts["Vertical Drop (ft)"] = df_resorts["Vertical Drop (ft)"].str.split(" ", 1, expand=True)[0]
     df_resorts["Vertical Drop (ft)"] = df_resorts["Vertical Drop (ft)"].astype(float)
     df_resorts["Vertical Drop (ft)"].fillna(0, inplace=True)
     
+    # TODO: Validate Average Stepness calculation
     # Average Steepness = (Vert Drop (feet) / 5280) / distance (miles))
     # df_resorts['Average Steepness'] = df_resorts['Vertical Drop (ft)'].astype(float)/(5280*df_resorts['distance'].astype(float))
-    df_resorts['Average Steepness'] = (df_resorts['Vertical Drop (ft)'].astype(float) / 5280) / df_resorts['distance'].astype(float)
-
-    # Remove blank rows
-    df_resorts = df_resorts[df_resorts["trail_name"] != "__NA__"].reset_index(drop=True)
+    # df_resorts['Average Steepness'] = (df_resorts['Vertical Drop (ft)'] / 5280) / df_resorts['distance'].astype(float)
+    df_resorts['Average Steepness'] = df_resorts['Vertical Drop (ft)'] / df_resorts['Length (ft)']
 
     # Correct column values
-    df_resorts["Bottom (ft)"] = df_resorts["Bottom (ft)"].str.replace(" ft", "")
-    df_resorts["Bottom (ft)"] = df_resorts["Bottom (ft)"].astype(float)
-    df_resorts["Top (ft)"] = df_resorts["Top (ft)"].str.replace(" ft", "")
-    df_resorts["Top (ft)"] = df_resorts["Top (ft)"].astype(float)
-    # df_resorts["Length (mi)"] = df_resorts["Length (mi)"].str.replace(" mi", "")
+    df_resorts["Bottom (ft)"] = df_resorts["Bottom (ft)"].str.replace(" ft", "").astype(float)
+    df_resorts["Top (ft)"] = df_resorts["Top (ft)"].str.replace(" ft", "").astype(float)
     
     # Drop columns
-    df_resorts.drop(["URL", "metric", "Length (mi)"], axis=1, inplace=True)
+    df_resorts.drop(["URL", "Length (mi)"], axis=1, inplace=True)
 
+    import pdb; pdb.set_trace()
+    
     # Rename columns
 
     # ['Vertical Drop (ft)']
