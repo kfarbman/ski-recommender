@@ -119,6 +119,11 @@ class SkiRunRecommender:
         """
         Cosine similarity recommendations
         """
+
+        df = self.load_trail_data()
+
+        X = self.transform_features(df=df, features=self.trail_features)
+        
         trail = X[index].reshape(1,-1)
         cs = cosine_similarity(trail, X)
         rec_index = np.argsort(cs)[0][::-1][1:]
@@ -151,20 +156,39 @@ class SkiRunRecommender:
         df["groomed"] = df["groomed"].map(dict_groomed)
 
         # Keep colors column
-        df['color_names'] = df['colors']
+        # df['color_names'] = df['colors']
 
-        dict_colors = {
-            "green": "Green",
-            "blue": "Blue",
-            "black":"Black",
-            "bb": "Double Black"}
+        # dict_colors = {
+        #     "green": "Green",
+        #     "blue": "Blue",
+        #     "black":"Black",
+        #     "double-black": "Double Black"}
         
         # Map color names
-        df["color_names"] = df["color_names"].map(dict_colors)
+        # df["color_names"] = df["color_names"].map(dict_colors)
         
         # TODO: Rename columns inplace
         df = df[['trail_name','resort','location','color_names','groomed','top_elev_(ft)','bottom_elev_(ft)','vert_rise_(ft)','slope_length_(ft)','avg_width_(ft)','slope_area_(acres)','avg_grade_(%)','max_grade_(%)']]
         df.columns = ['Trail Name', 'Resort','Location','Difficulty','Groomed','Top Elev (ft)', 'Bottom Elev (ft)', 'Vert Rise (ft)', 'Slope Length (ft)', 'Avg Width (ft)', 'Slope Area (acres)', 'Avg Grade (%)', 'Max Grade (%)']
+        
+        # Current trail data columns
+        # ['Trail Name',
+        # 'Bottom Elev (ft)',
+        # 'Top Elev (ft)',
+        # 'Vertical Drop (ft)',
+        # 'Difficulty',
+        # 'Resort',
+        # 'Slope Length (ft)',
+        # 'Average Steepness']
+
+        # Missing Trail columns (non-API)
+        # Location
+        # Groomed
+        # Vert Rise
+        # Avg. Width
+        # Slope Area
+        # Avg Grade
+        # Max Grade
         return df
     
 @app.route('/', methods =['GET','POST'])    
