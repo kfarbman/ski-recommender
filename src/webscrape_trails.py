@@ -116,7 +116,7 @@ class WebscrapeTrails:
         except ValueError:
             print(URL)
             df_ski = pd.DataFrame({
-                "Name": [self.blank_value],
+                "Trail Name": [self.blank_value],
                 "Bottom Elev (ft)": [self.blank_value],
                 "Top Elev (ft)": [self.blank_value],
                 "Vertical Drop (ft)": [self.blank_value],
@@ -190,17 +190,24 @@ if __name__ == '__main__':
 
     # # Combine trail data
     # df_resorts = pd.concat(lst_trail_data)
-
-    df_resorts = pd.read_csv("../data/trail_data_DEV_20200220.csv")
+    # import pdb; pdb.set_trace()
+    df_resorts = pd.read_csv("../data/trail_data_DEV_20200220_v2.csv")
 
     # Remove blank resorts
-    df_resorts = df_resorts[df_resorts.Name != "__NA__"].reset_index(drop=True)
+    df_resorts = df_resorts[df_resorts["Trail Name"].notnull()].reset_index(drop=True)
 
     df_resorts["Difficulty"] = df_resorts["URL"].str.split("skiruns-", 1, expand=True)[1]
     
+    dict_colors = {
+        "green": "Green",
+        "blue": "Blue",
+        "black":"Black",
+        "double-black": "Double Black"}
+    
+    df_resorts["Difficulty"] = df_resorts["Difficulty"].map(dict_colors)
+
     # Format trail name
-    # TODO: Rename to Trail Name
-    df_resorts["Name"] = df_resorts["Name"].str.replace("\xa0 ", "").str.strip()
+    df_resorts["Trail Name"] = df_resorts["Trail Name"].str.replace("\xa0 ", "").str.strip()
 
     # Get resort name for trails
     df_resorts = ws.rename_resorts(df=df_resorts)
@@ -224,14 +231,14 @@ if __name__ == '__main__':
     df_resorts['Average Steepness'] = df_resorts['Vertical Drop (ft)'] / df_resorts['Slope Length (ft)']
 
     # Correct column values
-    # TODO: Rename Bottom and Top
-    df_resorts["Bottom (ft)"] = df_resorts["Bottom (ft)"].str.replace(" ft", "").astype(float)
-    df_resorts["Top (ft)"] = df_resorts["Top (ft)"].str.replace(" ft", "").astype(float)
+    df_resorts["Bottom Elev (ft)"] = df_resorts["Bottom Elev (ft)"].str.replace(" ft", "").astype(float)
+    df_resorts["Top Elev (ft)"] = df_resorts["Top Elev (ft)"].str.replace(" ft", "").astype(float)
     
     # Drop columns
     df_resorts.drop(["URL", "Length (mi)"], axis=1, inplace=True)
 
     # import pdb; pdb.set_trace()
+    # df_resorts.to_csv("../data/formatted/trail_data_20200220.csv", index=False, header=True)
             
     # ['vert_rise_(ft)',
     # 'slope_length_(ft)',
@@ -243,3 +250,19 @@ if __name__ == '__main__':
     # 'resort',
     # 'location']
 
+    """
+    WEB APP - TRAIL COLUMNS
+    """
+    lst_trail_columns = ["Trail Name",
+    "Resort",
+    "Location",
+    "Difficulty",
+    "Groomed",
+    "Top Elev (ft)",
+    "Bottom Elev (ft)",
+    "Vert Rise (ft)",
+    "Slope Length (ft)",
+    "Avg Width (ft)",
+    "Slope Area (acres)",
+    "Avg Grade (%)",
+    "Max Grade (%)"]
