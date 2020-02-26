@@ -151,9 +151,9 @@ class SkiRunRecommender:
             Formatted Pandas DataFrame
         """
         # Map groomed values
-        dict_groomed = {0:"Ungroomed", 1:"Groomed"}
+        # dict_groomed = {0:"Ungroomed", 1:"Groomed"}
 
-        df["groomed"] = df["groomed"].map(dict_groomed)
+        # df["groomed"] = df["groomed"].map(dict_groomed)
 
         # Keep colors column
         # df['color_names'] = df['colors']

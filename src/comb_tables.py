@@ -153,8 +153,8 @@ class CombineTables:
 		'''
 		lst_groomed_runs = list(chain(*self.dict_groomed_runs.values()))
 
-		df['groomed'] = 0
-		df['groomed'][df['Name'].isin(lst_groomed_runs)] = 1
+		df['Groomed'] = "Ungroomed"
+		df['Groomed'][df['Name'].isin(lst_groomed_runs)] = "Groomed"
 		return df
 
 if __name__ == '__main__':
