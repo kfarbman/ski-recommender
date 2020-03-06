@@ -46,19 +46,28 @@ class SkiRunRecommender:
                             'Lifts',
                             'Price']
 
+        # ASPEN_SNOWMASS
+        # BALD_MOUNTAIN
+        # JACKSON_HOLE
+        # STEAMBOAT
+        # TAOS
+        # TELLURIDE
+        # WOLF_CREEK
+
         # TODO: Are images of maps showing up properly?
-        self.links = {'Loveland': ["../static/images/Loveland.jpg", "http://skiloveland.com/trail-lift-report/"],
-                'Arapahoe Basin': ['https://www.arapahoebasin.com/uploaded/trail%20maps/A-BASIN-17-18-Front.jpg','http://arapahoebasin.com/ABasin/snow-conditions/terrain.aspx'],
-                'Copper': ['http://www.coppercolorado.com/sites/copper/files/2017-07/Web-TrailMap-WinterFY17.jpg', 'http://www.coppercolorado.com/the-mountain/trail-lift-info/winter-trail-report'],
-                'Eldora': ['http://www.eldora.com/sites/eldora/files/inline-images/map2-web.jpg', 'http://www.eldora.com/the-mountain/lift-trail-report/snow-grooming-alpine'],
+        self.links = {
                 'Alpine Meadows': ['../static/images/AM.jpeg', 'http://squawalpine.com/skiing-riding/weather-conditions-webcams/lift-grooming-status'],
-                'Vail': ['https://i.pinimg.com/originals/91/22/4b/91224b89f5b358f4fbe329ca0a0741dd.jpg', 'http://www.vail.com/mountain/current-conditions/whats-open-today.aspx#/GA4'],
-                'Monarch': ['http://15098-presscdn-0-99.pagely.netdna-cdn.com/wp-content/uploads/2015/06/wall-map.jpg', 'http://www.skimonarch.com/daily-snow-report/'],
+                'Arapahoe Basin': ['https://www.arapahoebasin.com/uploaded/trail%20maps/A-BASIN-17-18-Front.jpg','http://arapahoebasin.com/ABasin/snow-conditions/terrain.aspx'],
+                'Beaver Creek': ['http://www.mappery.com/maps/Beaver-Creek-Resort-Ski-Trail-Map.jpg', 'http://www.beavercreek.com/the-mountain/terrain-status.aspx#/TerrainStatus'],
+                'Copper': ['http://www.coppercolorado.com/sites/copper/files/2017-07/Web-TrailMap-WinterFY17.jpg', 'http://www.coppercolorado.com/the-mountain/trail-lift-info/winter-trail-report'],
                 'Crested Butte': ['../static/images/CB.jpeg', 'http://www.skicb.com/the-mountain/grooming-lift-status'],
-                'Taos': ['https://www.skitaos.com/uploaded/trail%20maps/1-01.jpg', 'http://www.skitaos.com/lifts-trails/'],
                 'Diamond Peak': ['http://www.diamondpeak.com/uploads/pages/DP_TrailMaponly.png', 'http://www.diamondpeak.com/mountain/conditions'],
-                'Winter Park': ['../static/images/WP.jpeg', 'https://www.winterparkresort.com/the-mountain/weather-dashboard#mountain-status'],
-                'Beaver Creek': ['http://www.mappery.com/maps/Beaver-Creek-Resort-Ski-Trail-Map.jpg', 'http://www.beavercreek.com/the-mountain/terrain-status.aspx#/TerrainStatus']}
+                'Eldora': ['http://www.eldora.com/sites/eldora/files/inline-images/map2-web.jpg', 'http://www.eldora.com/the-mountain/lift-trail-report/snow-grooming-alpine'],
+                'Loveland': ["../static/images/Loveland.jpg", "http://skiloveland.com/trail-lift-report/"],
+                'Monarch': ['http://15098-presscdn-0-99.pagely.netdna-cdn.com/wp-content/uploads/2015/06/wall-map.jpg', 'http://www.skimonarch.com/daily-snow-report/'],
+                'Taos': ['https://www.skitaos.com/uploaded/trail%20maps/1-01.jpg', 'http://www.skitaos.com/lifts-trails/'],
+                'Vail': ['https://i.pinimg.com/originals/91/22/4b/91224b89f5b358f4fbe329ca0a0741dd.jpg', 'http://www.vail.com/mountain/current-conditions/whats-open-today.aspx#/GA4'],
+                'Winter Park': ['../static/images/WP.jpeg', 'https://www.winterparkresort.com/the-mountain/weather-dashboard#mountain-status']}
     
 
     def load_trail_data(self):

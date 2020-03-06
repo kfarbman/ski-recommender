@@ -11,6 +11,8 @@ from recsys import SkiRunRecommender
 app = Flask(__name__)
 
 recsys = SkiRunRecommender()
+df_trails = recsys.load_trail_data()
+df_mountains = recsys.load_mountain_data()
     
 @app.route('/', methods =['GET','POST'])    
 def index():
@@ -19,21 +21,23 @@ def index():
 # TODO: Correct df input
 @app.route('/trails', methods=['GET','POST'])
 def trails():
-    return render_template('index.html',df=recsys.load_trail_data())
+    # df_trails = recsys.load_trail_data()
+    return render_template('index.html',df=df_trails)
     
 # TODO: Correct df input
 @app.route('/mountains', methods=['GET','POST'])
 def mountains():
-    return render_template('mtn_index.html',df=recsys.load_mountain_data())
+    # df_mountains = recsys.load_mountain_data()
+    return render_template('mtn_index.html',df=df_mountains)
 
 @app.route('/recommendations', methods=['GET','POST'])
 def recommendations():
     color_lst = None
 
-    dict_run_requests = {"Green": ["Green"],
-                        "Blue": ["Green", "Blue"],
-                        "Black": ["Green", "Blue", "Black"],
-                        "Double Black": ["Green", "Blue", "Black", "Double Black"]}
+    dict_run_requests = {"green": ["Green"],
+                        "blue": ["Green", "Blue"],
+                        "black": ["Green", "Blue", "Black"],
+                        "double-black": ["Green", "Blue", "Black", "Double Black"]}
 
     request_difficulty = "max_difficulty"
     color_lst = request.form.get(dict_run_requests[request_difficulty])
@@ -79,7 +83,7 @@ def mtn_recommendations():
         results_df = pd.DataFrame(columns=['resort', 'resort_bottom','resort_top','greens','blues','blacks','bbs','lifts','price'])
         for rec in recs:
             results_df = results_df.append(resort_stats_df[resort_stats_df['resort'] == rec])
-        row = self.clean_df_for_recs(row)
+        row = recsys.clean_df_for_recs(row)
         results_df.drop('Price', axis=1, inplace=True)
         results_df.columns = ['Resort','Bottom Elevation (ft)', 'Top Elevation (ft)', 'Percent Greens', 'Percent Blues', 'Percent Blacks', 'Percent Double  Blacks', 'Number of Lifts']
         return render_template('mtn_recommendations.html',row=row,results_df=results_df,links=links)
@@ -87,14 +91,14 @@ def mtn_recommendations():
 
 @app.route('/get_trails')
 def get_trails():
-    resort = request.args.get('Resort')
+    resort = request.args.get('resort')
     if resort:
         df = recsys.load_trail_data()
         sub_df = df[df['Resort'] == resort]
-        sub_df['trail_name'] = sub_df['trail_name'].apply(lambda x: x.split()).apply(lambda x: (x[1:] + ['Upper']) if (x[0] == 'Upper') else x).apply(lambda x: ' '.join(x))
-        sub_df['trail_name'] = sub_df['trail_name'].apply(lambda x: x.split()).apply(lambda x: (x[1:] + ['Lower']) if (x[0] == 'Lower') else x).apply(lambda x: ' '.join(x))
-        sub_df.sort_values(by='trail_name',inplace=True)
-        id_name_color = [("","Select a Trail...","white")] + list(zip(list(sub_df.index),list(sub_df['trail_name']),list(sub_df['colors'])))
+        sub_df['Trail Name'] = sub_df['Trail Name'].apply(lambda x: x.split()).apply(lambda x: (x[1:] + ['Upper']) if (x[0] == 'Upper') else x).apply(lambda x: ' '.join(x))
+        sub_df['Trail Name'] = sub_df['Trail Name'].apply(lambda x: x.split()).apply(lambda x: (x[1:] + ['Lower']) if (x[0] == 'Lower') else x).apply(lambda x: ' '.join(x))
+        sub_df.sort_values(by='Trail Name',inplace=True)
+        id_name_color = [("","Select a Trail...","white")] + list(zip(list(sub_df.index),list(sub_df['Trail Name']),list(sub_df['Difficulty'])))
         data = [{"id": str(x[0]), "name": x[1], "color": x[2]} for x in id_name_color]
         # print(data)
     return jsonify(data)

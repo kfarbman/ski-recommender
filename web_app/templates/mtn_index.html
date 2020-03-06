@@ -58,7 +58,7 @@ body {
   <div><h4><b>Step 1: Choose a resort that you have skied at.</b></h4></div>
 <select name="resort" id="select_resort" class="selectpicker form-control">
     <option selected="selected" value = ''>Select a resort with your favorite trail...</option>
-    {% for resort in df['resort'].unique()|sort %}
+    {% for resort in df['Resort'].unique()|sort %}
     <option value="{{ resort }}">{{ resort }}</option>
     {% endfor %}
 </select>

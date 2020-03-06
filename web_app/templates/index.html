@@ -57,7 +57,7 @@ button {
 
 <select name="resort" id="select_resort" class="selectpicker form-control">
     <option selected="selected" value = ''>Select a resort with your favorite trail...</option>
-    {% for resort in df['resort'].unique()|sort %}
+    {% for resort in df['Resort'].unique()|sort %}
     <option value="{{ resort }}">{{ resort }}</option>
     {% endfor %}
 </select>
@@ -150,7 +150,7 @@ button {
 <select name="dest_resort" id="select_resort_dest" class="selectpicker form-control">
     <option selected="selected" value = ''>Where are you skiing today?</option>
     <option value=''>Anywhere</option>
-    {% for dest_resort in df['resort'].unique()|sort %}
+    {% for dest_resort in df['Resort'].unique()|sort %}
     <option value="{{ dest_resort }}">{{ dest_resort }}</option>
     {% endfor %}
 </select>
