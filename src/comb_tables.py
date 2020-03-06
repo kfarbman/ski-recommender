@@ -154,27 +154,24 @@ class CombineTables:
 		lst_groomed_runs = list(chain(*self.dict_groomed_runs.values()))
 
 		df['Groomed'] = "Ungroomed"
-		df['Groomed'][df['Name'].isin(lst_groomed_runs)] = "Groomed"
+		df['Groomed'][df['Trail Name'].isin(lst_groomed_runs)] = "Groomed"
 		return df
 
 if __name__ == '__main__':
 
 	combine = CombineTables()
 
-	df_resorts = pd.read_csv("../data/formatted_trails_DEV_20200220.csv")
-
-	df_resorts = combine.add_groomed_col(df=df_resorts)
+	df_trails = pd.read_csv("../data/trail_data_20200306.csv")
+	df_mountains = pd.read_parquet("../data/mountain_data_20200306.parquet")
 	
-	import pdb; pdb.set_trace()
-	# df_resorts = combine.format_resorts()
+	df_trails = combine.add_groomed_col(df=df_trails)
+	
+	df_merged = pd.merge(df_trails, df_mountains, on="Resort", how="inner")
 
 	# TODO: Check output in CSV; make sure all values are what's expected
-	# TODO: Change column names before export (optimal for Flask app)
-	# df_resorts = combine.standardize_ability_levels(df=df_resorts)
 
 	# Map Difficulty to numbers
-	# TODO: Make this simpler
 	# TODO: Remove ability_nums/ re-engineer into different feature
-	colors = {'green': 1, 'blue': 2, 'black': 3, 'double-black': 4}
-	df_resorts['color_nums'] = df_resorts['Difficulty'].map(colors)
-	df_resorts['ability_nums'] = df_resorts['color_nums']
+	# colors = {'Green': 1, 'Blue': 2, 'Black': 3, 'Double Black': 4}
+	# df_trails['color_nums'] = df_trails['Difficulty'].map(colors)
+
