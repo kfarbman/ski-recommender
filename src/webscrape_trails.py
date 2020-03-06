@@ -114,7 +114,7 @@ class WebscrapeTrails:
         try:
             df_ski.columns = ['Trail Name', 'Bottom Elev (ft)', 'Top Elev (ft)', 'Vertical Drop (ft)', 'Length (mi)']
         except ValueError:
-            print(URL)
+            print(f"Unable to process {URL}")
             df_ski = pd.DataFrame({
                 "Trail Name": [self.blank_value],
                 "Bottom Elev (ft)": [self.blank_value],
@@ -180,21 +180,23 @@ if __name__ == '__main__':
     # Create list of all ski resort URL's
     lst_resort_urls = ws.create_resort_urls()
 
-    # # Request trail data from all ski resorts
-    # lst_trail_data = []
+    # Request trail data from all ski resorts
+    # TODO: Request resorts in parallel?
+    lst_trail_data = []
 
-    # for url in tqdm(lst_resort_urls):
-    #     df_resort = ws.make_tables(URL=url)
-    #     df_resort["URL"] = url
-    #     lst_trail_data.append(df_resort)
+    for url in tqdm(lst_resort_urls):
+        df_resort = ws.make_tables(URL=url)
+        df_resort["URL"] = url
+        lst_trail_data.append(df_resort)
 
-    # # Combine trail data
-    # df_resorts = pd.concat(lst_trail_data)
+    # Combine trail data
+    df_resorts = pd.concat(lst_trail_data)
     # import pdb; pdb.set_trace()
-    df_resorts = pd.read_csv("../data/trail_data_DEV_20200220_v2.csv")
+    # df_resorts = pd.read_csv("../data/trail_data_DEV_20200220_v2.csv")
 
     # Remove blank resorts
     df_resorts = df_resorts[df_resorts["Trail Name"].notnull()].reset_index(drop=True)
+    df_resorts = df_resorts[df_resorts["Trail Name"] != ws.blank_value].reset_index(drop=True)
 
     df_resorts["Difficulty"] = df_resorts["URL"].str.split("skiruns-", 1, expand=True)[1]
     
@@ -253,15 +255,16 @@ if __name__ == '__main__':
     """
     WEB APP - TRAIL COLUMNS
     """
-    lst_trail_columns = ["Trail Name",
-    "Resort",
+    lst_trail_columns = [
+    # "Trail Name",
+    # "Resort",
     "Location",
-    "Difficulty",
+    # "Difficulty",
     "Groomed",
-    "Top Elev (ft)",
-    "Bottom Elev (ft)",
+    # "Top Elev (ft)",
+    # "Bottom Elev (ft)",
     "Vert Rise (ft)",
-    "Slope Length (ft)",
+    # "Slope Length (ft)",
     "Avg Width (ft)",
     "Slope Area (acres)",
     "Avg Grade (%)",
