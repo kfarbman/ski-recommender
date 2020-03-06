@@ -66,17 +66,21 @@ class SkiRunRecommender:
 
     def load_trail_data(self):
 
-        with open('../data/df.pkl','rb') as f:
-            df = pickle.load(f)
+        # with open('../data/df.pkl','rb') as f:
+        #     df = pickle.load(f)
 
-        return df
+        df_trails = pd.read_csv("../data/trail_data_20200306.csv")
+
+        return df_trails
 
     def load_mountain_data(self):    
             
-        with open('../data/mtn_df.pkl','rb') as f:
-            mtn_df = pickle.load(f)
+        # with open('../data/mtn_df.pkl','rb') as f:
+        #     mtn_df = pickle.load(f)
+
+        df_mountain = pd.read_parquet("../data/mountain_data_20200306.parquet")
         
-        return mtn_df
+        return df_mountain
     
     def transform_features(self, df, features):
 
