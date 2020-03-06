@@ -1,12 +1,8 @@
-# import pickle
-
 import numpy as np
 import pandas as pd
-# from flask import Flask, jsonify, render_template, request
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.preprocessing import StandardScaler
 
-# app = Flask(__name__)
 
 class SkiRunRecommender:
     
@@ -133,9 +129,7 @@ class SkiRunRecommender:
 
         trail = X_mtn[index].reshape(1,-1)
         
-        cs = cosine_similarity(trail, X_mtn)[0]
-        
-        df_mountain['cosine_sim'] = cs
+        df_mountain['cosine_sim'] = cosine_similarity(trail, X_mtn)[0]
         
         df_sorted_recs = df_mountain.groupby('Resort').mean()['cosine_sim'].sort_values()[::-1]
         
