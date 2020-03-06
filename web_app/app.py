@@ -12,33 +12,42 @@ class SkiRunRecommender:
     
     def __init__(self):
 
-        self.trail_features = ['top_elev_(ft)',
-                            'bottom_elev_(ft)',
-                            'vert_rise_(ft)',
-                            'slope_length_(ft)',
-                            'avg_width_(ft)',
-                            'slope_area_(acres)',
-                            'avg_grade_(%)',
-                            'max_grade_(%)',
-                            'groomed']
+        self.trail_features = [
+                            'Trail Name',
+                            'Top Elev (ft)',
+                            'Bottom Elev (ft)',
+                            "Vertical Drop (ft)",
+                            "Difficulty",
+                            "Resort",
+                            # 'vert_rise_(ft)',
+                            'Slope Length (ft)',
+                            "Average Steepness",
+                            # 'avg_width_(ft)',
+                            # 'slope_area_(acres)',
+                            # 'avg_grade_(%)',
+                            # 'max_grade_(%)',
+                            'Groomed']
         
-        self.mtn_features = ['top_elev_(ft)',
-                            'bottom_elev_(ft)',
-                            'vert_rise_(ft)',
-                            'slope_length_(ft)',
-                            'avg_width_(ft)',
-                            'slope_area_(acres)',
-                            'avg_grade_(%)',
-                            'max_grade_(%)',
-                            'groomed',
-                            'resort_bottom',
-                            'resort_top',
-                            'greens',
-                            'blues',
-                            'blacks',
-                            'bbs',
-                            'lifts',
-                            'price']
+        self.mtn_features = [
+                            # 'Top Elev (ft)',
+                            # 'Bottom Elev (ft)',
+                            # 'Slope Length (ft)',
+                            # 'avg_width_(ft)',
+                            # 'slope_area_(acres)',
+                            # 'avg_grade_(%)',
+                            # 'max_grade_(%)',
+                            'Groomed',
+                            'Base', # Base of mountain
+                            'Top', # Top of mountain
+                            'Vertical Rise (ft)',
+                            'Green',
+                            'Blue',
+                            'Black',
+                            'Double Black',
+                            'Terrain Park',
+                            'Resort',
+                            'Lifts',
+                            'Price']
 
         # TODO: Are images of maps showing up properly?
         self.links = {'Loveland': ["../static/images/Loveland.jpg", "http://skiloveland.com/trail-lift-report/"],
@@ -152,7 +161,7 @@ class SkiRunRecommender:
         """
         
         # TODO: Rename columns inplace
-        df = df[['trail_name','resort','location','color_names','groomed','top_elev_(ft)','bottom_elev_(ft)','vert_rise_(ft)','slope_length_(ft)','avg_width_(ft)','slope_area_(acres)','avg_grade_(%)','max_grade_(%)']]
+        df = df[['trail_name','resort','location','color_names','Groomed','Top Elev (ft)','Bottom Elev (ft)','vert_rise_(ft)','Slope Length (ft)','avg_width_(ft)','slope_area_(acres)','avg_grade_(%)','max_grade_(%)']]
         df.columns = ['Trail Name', 'Resort','Location','Difficulty','Groomed','Top Elev (ft)', 'Bottom Elev (ft)', 'Vert Rise (ft)', 'Slope Length (ft)', 'Avg Width (ft)', 'Slope Area (acres)', 'Avg Grade (%)', 'Max Grade (%)']
         
         # TODO: Current trail data columns
