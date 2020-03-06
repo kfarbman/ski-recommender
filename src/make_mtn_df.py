@@ -138,7 +138,10 @@ if __name__ == '__main__':
     df_mountain = ws.rename_resorts(df=df_mountain)
 
     # Fill prices
-    df_mountain["price"] = df_mountain["resort_name"].map(mountain.dict_resort_prices)
+    df_mountain["Price"] = df_mountain["Resort"].map(mountain.dict_resort_prices)
+
+    # Drop columns
+    df_mountain.drop("URL", axis=1, inplace=True)
 
     # Fill missing values
     df_mountain.fillna(0, inplace=True)
@@ -146,8 +149,22 @@ if __name__ == '__main__':
     # Convert column data types
     df_mountain = mountain.format_mountain_data_frame_values(df=df_mountain)
 
-    # Drop columns
-    df_mountain.drop("URL", axis=1, inplace=True)
+    df_mountain["Total Runs"] = df_mountain[["black", "blue", "double black", "green", "terrain park"]].sum(axis=1)
+
+    # Convert to percentage of total runs per resort
+    df_mountain[["green", "blue", "black", "double black", "terrain park"]] = df_mountain[
+        ["green", "blue", "black", "double black", "terrain park"]].div(
+        df_mountain["Total Runs"], axis=0).round(2)
+
+    # Rename columns
+    df_mountain.rename(columns={
+        "Vertical rise": "Vertical Rise (ft)",
+        "black": "Black",
+        "blue": "Blue",
+        "double black": "Double Black",
+        "green": "Green",
+        "terrain park": "Terrain Park"
+        }, inplace=True)
 
     # Save data
-    df_mountain.to_csv("../data/formatted/mountain_data_20200220.csv", index=False, header=True)
+    # df_mountain.to_csv("../data/formatted/mountain_data_20200220.csv", index=False, header=True)
