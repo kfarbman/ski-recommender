@@ -117,7 +117,7 @@ class MakeMountainDF:
         """
         current_date = str(pd.Timestamp.now().date()).replace("-", "")
 
-        df.to_parquet(f"../data/mtn_df_{current_date}.parquet", index=False)
+        df.to_parquet(f"../data/mountain_data_{current_date}.parquet", index=False)
 
 if __name__ == '__main__':
 
