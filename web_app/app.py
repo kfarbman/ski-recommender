@@ -150,28 +150,12 @@ class SkiRunRecommender:
         OUTPUT
             Formatted Pandas DataFrame
         """
-        # Map groomed values
-        # dict_groomed = {0:"Ungroomed", 1:"Groomed"}
-
-        # df["groomed"] = df["groomed"].map(dict_groomed)
-
-        # Keep colors column
-        # df['color_names'] = df['colors']
-
-        # dict_colors = {
-        #     "green": "Green",
-        #     "blue": "Blue",
-        #     "black":"Black",
-        #     "double-black": "Double Black"}
-        
-        # Map color names
-        # df["color_names"] = df["color_names"].map(dict_colors)
         
         # TODO: Rename columns inplace
         df = df[['trail_name','resort','location','color_names','groomed','top_elev_(ft)','bottom_elev_(ft)','vert_rise_(ft)','slope_length_(ft)','avg_width_(ft)','slope_area_(acres)','avg_grade_(%)','max_grade_(%)']]
         df.columns = ['Trail Name', 'Resort','Location','Difficulty','Groomed','Top Elev (ft)', 'Bottom Elev (ft)', 'Vert Rise (ft)', 'Slope Length (ft)', 'Avg Width (ft)', 'Slope Area (acres)', 'Avg Grade (%)', 'Max Grade (%)']
         
-        # Current trail data columns
+        # TODO: Current trail data columns
         # ['Trail Name',
         # 'Bottom Elev (ft)',
         # 'Top Elev (ft)',
@@ -181,7 +165,7 @@ class SkiRunRecommender:
         # 'Slope Length (ft)',
         # 'Average Steepness']
 
-        # Missing Trail columns (non-API)
+        # TODO: Missing Trail columns (non-API)
         # Location
         # Groomed
         # Vert Rise
