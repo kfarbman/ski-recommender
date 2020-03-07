@@ -80,13 +80,16 @@ def mtn_recommendations():
         index = int(trail)
         num_recs = int(request.form['num_recs'])
         row, recs = recsys.mountain_recommendations(index,num_recs)
-        results_df = pd.DataFrame(columns=['resort', 'resort_bottom','resort_top','greens','blues','blacks','bbs','lifts','price'])
-        for rec in recs:
-            results_df = results_df.append(resort_stats_df[resort_stats_df['resort'] == rec])
-        row = recsys.clean_df_for_recs(row)
+        # results_df = pd.DataFrame(columns=['resort', 'resort_bottom','resort_top','greens','blues','blacks','bbs','lifts','price'])
+
+        results_df = df_mountains[df_mountains["Resort"].isin(recs)]
+        # for rec in recs:
+        #     results_df = results_df.append(df_mountains[df_mountains['Resort'] == rec])
+        # TODO: Why would cleaning throw the error?
+        # row = recsys.clean_df_for_recs(row)
         results_df.drop('Price', axis=1, inplace=True)
-        results_df.columns = ['Resort','Bottom Elevation (ft)', 'Top Elevation (ft)', 'Percent Greens', 'Percent Blues', 'Percent Blacks', 'Percent Double  Blacks', 'Number of Lifts']
-        return render_template('mtn_recommendations.html',row=row,results_df=results_df,links=links)
+        # results_df.columns = ['Resort','Bottom Elevation (ft)', 'Top Elevation (ft)', 'Percent Greens', 'Percent Blues', 'Percent Blacks', 'Percent Double  Blacks', 'Number of Lifts']
+        return render_template('mtn_recommendations.html',row=row,results_df=results_df,links=recsys.links)
     return 'You must select a trail.'
 
 @app.route('/get_trails')
