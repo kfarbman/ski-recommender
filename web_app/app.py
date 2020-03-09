@@ -34,25 +34,25 @@ def mountains():
 def recommendations():
     color_lst = None
 
-    dict_run_requests = {"green": ["Green"],
-                        "blue": ["Green", "Blue"],
-                        "black": ["Green", "Blue", "Black"],
-                        "double-black": ["Green", "Blue", "Black", "Double Black"]}
+    # dict_run_requests = {"green": ["Green"],
+    #                     "blue": ["Green", "Blue"],
+    #                     "black": ["Green", "Blue", "Black"],
+    #                     "double-black": ["Green", "Blue", "Black", "Double Black"]}
 
-    request_difficulty = "max_difficulty"
-    color_lst = request.form.get(dict_run_requests[request_difficulty])
+    # request_difficulty = "max_difficulty"
+    # color_lst = request.form.get(dict_run_requests[request_difficulty])
 
-    # if request.form.get('green'):
-    #     color_lst = ['green']
-    # if request.form.get('blue'):
-    #     color_lst = ['green','blue']
-    # if request.form.get('black'):
-    #     color_lst = ['green','blue','black']
-    # if request.form.get('bb'):
-    #     color_lst = ['green','blue','black','bb']
+    if request.form.get('green'):
+        color_lst = ['green']
+    if request.form.get('blue'):
+        color_lst = ['green','blue']
+    if request.form.get('black'):
+        color_lst = ['green','blue','black']
+    if request.form.get('bb'):
+        color_lst = ['green','blue','black','bb']
     
     # CHECKBOX FUNCTIONALITY!!!
-    resort = request.form['Resort']
+    resort = request.form['resort']
     if resort == '':
         return 'You must select a trail from your favorite resort.'
     trail = request.form['trail']
@@ -79,7 +79,11 @@ def mtn_recommendations():
     if trail != '':
         index = int(trail)
         num_recs = int(request.form['num_recs'])
+
+        # BUG: Out of bounds issue due to trying to request from trails, not mountains
+        # TODO: Remove run duplicates?
         row, recs = recsys.mountain_recommendations(index,num_recs)
+        # row = recsys.trail_recommendations(index, n=num_recs, resort=None, color=None)
         # results_df = pd.DataFrame(columns=['resort', 'resort_bottom','resort_top','greens','blues','blacks','bbs','lifts','price'])
 
         results_df = df_mountains[df_mountains["Resort"].isin(recs)]
@@ -87,6 +91,7 @@ def mtn_recommendations():
         #     results_df = results_df.append(df_mountains[df_mountains['Resort'] == rec])
         # TODO: Why would cleaning throw the error?
         # row = recsys.clean_df_for_recs(row)
+        row = row[recsys.mtn_features]
         results_df.drop('Price', axis=1, inplace=True)
         # results_df.columns = ['Resort','Bottom Elevation (ft)', 'Top Elevation (ft)', 'Percent Greens', 'Percent Blues', 'Percent Blacks', 'Percent Double  Blacks', 'Number of Lifts']
         return render_template('mtn_recommendations.html',row=row,results_df=results_df,links=recsys.links)
@@ -98,8 +103,8 @@ def get_trails():
     if resort:
         df = recsys.load_trail_data()
         sub_df = df[df['Resort'] == resort]
-        sub_df['Trail Name'] = sub_df['Trail Name'].apply(lambda x: x.split()).apply(lambda x: (x[1:] + ['Upper']) if (x[0] == 'Upper') else x).apply(lambda x: ' '.join(x))
-        sub_df['Trail Name'] = sub_df['Trail Name'].apply(lambda x: x.split()).apply(lambda x: (x[1:] + ['Lower']) if (x[0] == 'Lower') else x).apply(lambda x: ' '.join(x))
+        # sub_df['Trail Name'] = sub_df['Trail Name'].apply(lambda x: x.split()).apply(lambda x: (x[1:] + ['Upper']) if (x[0] == 'Upper') else x).apply(lambda x: ' '.join(x))
+        # sub_df['Trail Name'] = sub_df['Trail Name'].apply(lambda x: x.split()).apply(lambda x: (x[1:] + ['Lower']) if (x[0] == 'Lower') else x).apply(lambda x: ' '.join(x))
         sub_df.sort_values(by='Trail Name',inplace=True)
         id_name_color = [("","Select a Trail...","white")] + list(zip(list(sub_df.index),list(sub_df['Trail Name']),list(sub_df['Difficulty'])))
         data = [{"id": str(x[0]), "name": x[1], "color": x[2]} for x in id_name_color]
