@@ -34,22 +34,19 @@ def mountains():
 def recommendations():
     color_lst = None
 
-    # dict_run_requests = {"green": ["Green"],
-    #                     "blue": ["Green", "Blue"],
-    #                     "black": ["Green", "Blue", "Black"],
-    #                     "double-black": ["Green", "Blue", "Black", "Double Black"]}
-
-    # request_difficulty = "max_difficulty"
-    # color_lst = request.form.get(dict_run_requests[request_difficulty])
+    dict_run_requests = {"green": ["Green"],
+                        "blue": ["Green", "Blue"],
+                        "black": ["Green", "Blue", "Black"],
+                        "double-black": ["Green", "Blue", "Black", "Double Black"]}
 
     if request.form.get('green'):
-        color_lst = ['green']
+        color_lst = dict_run_requests["green"]
     if request.form.get('blue'):
-        color_lst = ['green','blue']
+        color_lst = dict_run_requests["blue"]
     if request.form.get('black'):
-        color_lst = ['green','blue','black']
+        color_lst = dict_run_requests["black"]
     if request.form.get('bb'):
-        color_lst = ['green','blue','black','bb']
+        color_lst = dict_run_requests["double-black"]
     
     # CHECKBOX FUNCTIONALITY!!!
     resort = request.form['resort']
