@@ -86,13 +86,6 @@ class SkiRunRecommender:
                             'Lifts',
                             'Price']
 
-        # COPPER
-        # TAOS
-        # STEAMBOAT
-        # WINTER PARK
-        # WOLF CREEK
-
-        # TODO: Are images of maps showing up properly?
         """
         Ski Resort Links
 
@@ -104,19 +97,19 @@ class SkiRunRecommender:
                 'Aspen Snowmass': ['https://www.aspensnowmass.com/-/media/aspensnowmass/trail-maps/1920/2019-snowmass-website-map.ashx','https://www.aspensnowmass.com/our-mountains/aspen-mountain/snow-and-grooming-report'],
                 'Bald Mountain': ['https://d26zlhfpekbdmm.cloudfront.net/files/images/maps/SV_Winter_TrailMap_23.1x17_2019_20_WEB.jpg','https://www.sunvalley.com/mountain-snow-report'],
                 'Beaver Creek': ['https://www.beavercreek.com/-/media/beaver-creek/products/brochure/the-mountain/about-the-mountain/trail-map/BC_WinterTrailMap_2019-20', 'https://www.beavercreek.com/the-mountain/mountain-conditions/snow-and-weather-report.aspx'],
-                'Copper': ['https://cms.coppercolorado.com/sites/copper/files/2019-11/coppermtn_frontside_2019-2020_v2.pdf', 'https://www.coppercolorado.com/the-mountain/conditions-weather/snow-report'],
+                'Copper': ['../static/images/copper_trail_map.png', 'https://www.coppercolorado.com/the-mountain/conditions-weather/snow-report'],
                 'Crested Butte': ['../static/images/crested_butte_trail_map.png', 'https://www.skicb.com/the-mountain/mountain-conditions/lift-and-terrain-status.aspx'],
                 'Diamond Peak': ['https://www.diamondpeak.com/uploads/pages/DP_trailmappage_1819_fullsize.jpg', 'https://www.diamondpeak.com/mountain/conditions'],
                 'Eldora': ['https://cms.eldora.com/sites/eldora/files/inline-images/ELDO%202018-19%20Mtn%20Map.jpg', 'http://www.eldora.com/the-mountain/lift-trail-report/snow-grooming-alpine'],
                 'Jackson Hole': ['https://www.jacksonhole.com/images/maps/2056-WinterTrailMap.FINAL2019.201.jpg', 'https://www.jacksonhole.com/maps/mountain-winter.html'],
                 'Loveland': ["https://secureservercdn.net/166.62.108.43/fb0.327.myftpupload.com/wp-content/uploads/2018/08/Loveland-Ski-Resort-Trail-Map-Web-1024x535.jpg", "http://skiloveland.com/trail-lift-report/"],
                 'Monarch': ['https://i0.wp.com/www.skimonarch.com/wp-content/uploads/2019/11/trail-map-web-1.png?ssl=1', 'https://www.skimonarch.com/conditions/'],
-                'Steamboat': ['https://www.steamboat.com/~/media/Steamboat/Maps/PDFS/SteamboatWinterTrailMap201920web.pdf', 'https://www.steamboat.com/the-mountain/mountain-report#/'],
-                'Taos': ['https://www.skitaos.com/sites/default/files/2020-01/taos%20__%20trail%20map%20__%20sept%202019.pdf', 'https://www.skitaos.com/ski-ride/lifts-trails'],
+                'Steamboat': ['../static/images/steamboat_trail_map.png', 'https://www.steamboat.com/the-mountain/mountain-report#/'],
+                'Taos': ['../static/images/taos_trail_map.png', 'https://www.skitaos.com/ski-ride/lifts-trails'],
                 'Telluride': ['https://www.tellurideskiresort.com/uploaded/maps/Trail-Map-Legend-Logo_TELSKI_1819_2000.jpg', 'https://www.tellurideskiresort.com/the-mountain/snow-report/'],
                 'Vail': ['../static/images/vail_trail_map.png', 'http://www.vail.com/mountain/current-conditions/whats-open-today.aspx#/GA4'],
-                'Winter Park': ['https://www.winterparkresort.com/~/media/Winter-Park/Downloads-PDFs/Maps-PDFs/WPR-Trailmap-winter.pdf', 'https://www.winterparkresort.com/the-mountain/mountain-report#/'],
-                'Wolf Creek': ["https://wolfcreekski.com/wp-content/uploads/2019/12/TrailMapOnly_2019-2020.pdf" , "https://wolfcreekski.com/grooming-report-page/"]}
+                'Winter Park': ['../static/images/winter_park_trail_map.png', 'https://www.winterparkresort.com/the-mountain/mountain-report#/'],
+                'Wolf Creek': ["../static/images/wolf_creek_trail_map.png" , "https://wolfcreekski.com/grooming-report-page/"]}
     
 
     def load_trail_data(self):
@@ -151,22 +144,22 @@ class SkiRunRecommender:
         
         return X_transform
 
-    def create_resort_stats_df(self):
+    # def create_resort_stats_df(self):
 
-        mtn_df = self.load_mountain_data()
+    #     mtn_df = self.load_mountain_data()
 
-        # [
-        # 'Lifts',
-        # 'Vertical Rise (ft)',
-        # 'Terrain Park',
-        # 'Resort',
-        # 'Price',
-        # 'Total Runs'
-        # ]
+    #     # [
+    #     # 'Lifts',
+    #     # 'Vertical Rise (ft)',
+    #     # 'Terrain Park',
+    #     # 'Resort',
+    #     # 'Price',
+    #     # 'Total Runs'
+    #     # ]
 
-        resort_stats_df = mtn_df[['Resort', 'Base','Top','Green','Blue','Black','Double Black','Lifts','Price']].drop_duplicates()
+    #     resort_stats_df = mtn_df[['Resort', 'Base','Top','Green','Blue','Black','Double Black','Lifts','Price']].drop_duplicates()
 
-        return resort_stats_df
+    #     return resort_stats_df
 
     # TODO: Simplify syntax
     # TODO: Add dummied features for additional data
