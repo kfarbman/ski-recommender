@@ -24,6 +24,23 @@ class SkiRunRecommender:
                             # 'max_grade_(%)',
                             # 'Groomed'
                             ]
+
+        self.new_trail_features = [
+                            'Trail Name',
+                            'Top Elev (ft)',
+                            'Bottom Elev (ft)',
+                            "Vertical Drop (ft)",
+                            "Difficulty",
+                            # "Resort",
+                            # 'vert_rise_(ft)',
+                            'Slope Length (ft)',
+                            "Average Steepness",
+                            # 'avg_width_(ft)',
+                            # 'slope_area_(acres)',
+                            # 'avg_grade_(%)',
+                            # 'max_grade_(%)',
+                            # 'Groomed'
+                            ]
         
         self.mtn_features = [
                             # 'Top Elev (ft)',
@@ -34,6 +51,7 @@ class SkiRunRecommender:
                             # 'avg_grade_(%)',
                             # 'max_grade_(%)',
                             # 'Groomed',
+                            # 'Difficulty',
                             'Base', # Base of mountain
                             'Top', # Top of mountain
                             'Vertical Rise (ft)',
@@ -43,6 +61,28 @@ class SkiRunRecommender:
                             'Double Black',
                             'Terrain Park',
                             # 'Resort',
+                            'Lifts',
+                            'Price']
+        
+        self.new_features = [
+                            # 'Top Elev (ft)',
+                            # 'Bottom Elev (ft)',
+                            # 'Slope Length (ft)',
+                            # 'avg_width_(ft)',
+                            # 'slope_area_(acres)',
+                            # 'avg_grade_(%)',
+                            # 'max_grade_(%)',
+                            # 'Groomed',
+                            # 'Difficulty',
+                            'Base', # Base of mountain
+                            'Top', # Top of mountain
+                            'Vertical Rise (ft)',
+                            'Green',
+                            'Blue',
+                            'Black',
+                            'Double Black',
+                            'Terrain Park',
+                            'Resort',
                             'Lifts',
                             'Price']
 
@@ -58,14 +98,19 @@ class SkiRunRecommender:
         self.links = {
                 'Alpine Meadows': ['../static/images/AM.jpeg', 'http://squawalpine.com/skiing-riding/weather-conditions-webcams/lift-grooming-status'],
                 'Arapahoe Basin': ['https://www.arapahoebasin.com/uploaded/trail%20maps/A-BASIN-17-18-Front.jpg','http://arapahoebasin.com/ABasin/snow-conditions/terrain.aspx'],
+                'Aspen Snowmass': ['https://www.arapahoebasin.com/uploaded/trail%20maps/A-BASIN-17-18-Front.jpg','http://arapahoebasin.com/ABasin/snow-conditions/terrain.aspx'],
+                'Bald Mountain': ['https://www.arapahoebasin.com/uploaded/trail%20maps/A-BASIN-17-18-Front.jpg','http://arapahoebasin.com/ABasin/snow-conditions/terrain.aspx'],
                 'Beaver Creek': ['http://www.mappery.com/maps/Beaver-Creek-Resort-Ski-Trail-Map.jpg', 'http://www.beavercreek.com/the-mountain/terrain-status.aspx#/TerrainStatus'],
                 'Copper': ['http://www.coppercolorado.com/sites/copper/files/2017-07/Web-TrailMap-WinterFY17.jpg', 'http://www.coppercolorado.com/the-mountain/trail-lift-info/winter-trail-report'],
                 'Crested Butte': ['../static/images/CB.jpeg', 'http://www.skicb.com/the-mountain/grooming-lift-status'],
                 'Diamond Peak': ['http://www.diamondpeak.com/uploads/pages/DP_TrailMaponly.png', 'http://www.diamondpeak.com/mountain/conditions'],
-                'Eldora': ['http://www.eldora.com/sites/eldora/files/inline-images/map2-web.jpg', 'http://www.eldora.com/the-mountain/lift-trail-report/snow-grooming-alpine'],
+                'Eldora': ['https://cms.eldora.com/sites/eldora/files/inline-images/ELDO%202018-19%20Mtn%20Map.jpg', 'http://www.eldora.com/the-mountain/lift-trail-report/snow-grooming-alpine'],
+                'Jackson Hole': ['https://cms.eldora.com/sites/eldora/files/inline-images/ELDO%202018-19%20Mtn%20Map.jpg', 'http://www.eldora.com/the-mountain/lift-trail-report/snow-grooming-alpine'],
                 'Loveland': ["../static/images/Loveland.jpg", "http://skiloveland.com/trail-lift-report/"],
                 'Monarch': ['http://15098-presscdn-0-99.pagely.netdna-cdn.com/wp-content/uploads/2015/06/wall-map.jpg', 'http://www.skimonarch.com/daily-snow-report/'],
+                'Steamboat': ['http://15098-presscdn-0-99.pagely.netdna-cdn.com/wp-content/uploads/2015/06/wall-map.jpg', 'http://www.skimonarch.com/daily-snow-report/'],
                 'Taos': ['https://www.skitaos.com/uploaded/trail%20maps/1-01.jpg', 'http://www.skitaos.com/lifts-trails/'],
+                'Telluride': ['https://www.skitaos.com/uploaded/trail%20maps/1-01.jpg', 'http://www.skitaos.com/lifts-trails/'],
                 'Vail': ['https://i.pinimg.com/originals/91/22/4b/91224b89f5b358f4fbe329ca0a0741dd.jpg', 'http://www.vail.com/mountain/current-conditions/whats-open-today.aspx#/GA4'],
                 'Winter Park': ['../static/images/WP.jpeg', 'https://www.winterparkresort.com/the-mountain/weather-dashboard#mountain-status']}
     
@@ -84,7 +129,8 @@ class SkiRunRecommender:
         # with open('../data/mtn_df.pkl','rb') as f:
         #     mtn_df = pickle.load(f)
 
-        df_mountain = pd.read_parquet("../data/mountain_data_20200306.parquet")
+        df_mountain = pd.read_csv("../data/combined_data_20200306.csv")
+        # df_mountain = pd.read_parquet("../data/mountain_data_20200306.parquet")
         
         return df_mountain
     
