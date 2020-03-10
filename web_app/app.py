@@ -1,10 +1,5 @@
-import pickle
-
-import numpy as np
 import pandas as pd
 from flask import Flask, jsonify, render_template, request
-from sklearn.metrics.pairwise import cosine_similarity
-from sklearn.preprocessing import StandardScaler
 
 from recsys import SkiRunRecommender
 
@@ -113,4 +108,3 @@ def trail_map(resort):
     
 if  __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080, debug=True, threaded=True)
-    
