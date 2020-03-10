@@ -35,9 +35,9 @@ def recommendations():
     color_lst = None
 
     dict_run_requests = {"green": ["Green"],
-                        "blue": ["Green", "Blue"],
-                        "black": ["Green", "Blue", "Black"],
-                        "double-black": ["Green", "Blue", "Black", "Double Black"]}
+                         "blue": ["Green", "Blue"],
+                         "black": ["Green", "Blue", "Black"],
+                         "double-black": ["Green", "Blue", "Black", "Double Black"]}
 
     if request.form.get('green'):
         color_lst = dict_run_requests["green"]
@@ -47,7 +47,7 @@ def recommendations():
         color_lst = dict_run_requests["black"]
     if request.form.get('bb'):
         color_lst = dict_run_requests["double-black"]
-    
+
     # CHECKBOX FUNCTIONALITY!!!
     resort = request.form['resort']
     if resort == '':
@@ -57,13 +57,13 @@ def recommendations():
         index = int(trail)
         dest_resort = request.form['dest_resort']
         num_recs = int(request.form['num_recs'])
-        rec_df = recsys.trail_recommendations(index,num_recs,dest_resort,color_lst)
-        # rec_df = recsys.clean_df_for_recs(rec_df)
+        rec_df = recsys.trail_recommendations(
+            index, num_recs, dest_resort, color_lst)
         if dest_resort == '':
             resort_links = recsys.links[resort]
         else:
             resort_links = recsys.links[dest_resort]
-        return render_template('recommendations.html',rec_df=rec_df,resort_links=resort_links)
+        return render_template('recommendations.html', rec_df=rec_df, resort_links=resort_links)
     return 'You must select a trail.'
     
 # TODO: Correct inputs
@@ -86,10 +86,7 @@ def mtn_recommendations():
         df_mountains = recsys.load_mountain_data()
 
         results_df = df_mountains[df_mountains["Resort"].isin(recs)]
-        # for rec in recs:
-        #     results_df = results_df.append(df_mountains[df_mountains['Resort'] == rec])
-        # TODO: Why would cleaning throw the error?
-        # row = recsys.clean_df_for_recs(row)
+
         row = row[recsys.new_trail_features]
         # results_df.drop('Price', axis=1, inplace=True)
         results_df = results_df[recsys.new_features]
@@ -98,18 +95,20 @@ def mtn_recommendations():
         return render_template('mtn_recommendations.html',row=row,results_df=results_df,links=recsys.links)
     return 'You must select a trail.'
 
+
 @app.route('/get_trails')
 def get_trails():
     resort = request.args.get('resort')
     if resort:
         df = recsys.load_trail_data()
         sub_df = df[df['Resort'] == resort]
-        # sub_df['Trail Name'] = sub_df['Trail Name'].apply(lambda x: x.split()).apply(lambda x: (x[1:] + ['Upper']) if (x[0] == 'Upper') else x).apply(lambda x: ' '.join(x))
-        # sub_df['Trail Name'] = sub_df['Trail Name'].apply(lambda x: x.split()).apply(lambda x: (x[1:] + ['Lower']) if (x[0] == 'Lower') else x).apply(lambda x: ' '.join(x))
-        sub_df.sort_values(by='Trail Name',inplace=True)
-        id_name_color = [("","Select a Trail...","white")] + list(zip(list(sub_df.index),list(sub_df['Trail Name']),list(sub_df['Difficulty'])))
-        data = [{"id": str(x[0]), "name": x[1], "color": x[2]} for x in id_name_color]
-        # print(data)
+        sub_df.sort_values(by='Trail Name', inplace=True)
+        id_name_color = [("", "Select a Trail...", "white")] + list(zip(list(sub_df.index),
+                                                                        list(
+                                                                            sub_df['Trail Name']),
+                                                                        list(sub_df['Difficulty'])))
+        data = [{"id": str(x[0]), "name": x[1], "color": x[2]}
+                for x in id_name_color]
     return jsonify(data)
 
 @app.route('/trail_map/<resort>')
@@ -120,4 +119,3 @@ def trail_map(resort):
 if  __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080, debug=True, threaded=True)
     
-    # recsys = SkiRunRecommender()

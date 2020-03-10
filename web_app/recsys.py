@@ -116,7 +116,7 @@ class SkiRunRecommender:
         """
         Load resort trail data
         """
-        df_trails = pd.read_csv("../data/trail_data_20200306.csv")
+        df_trails = pd.read_csv("./data/trail_data_20200306.csv")
 
         return df_trails
 
@@ -125,7 +125,7 @@ class SkiRunRecommender:
         Load resort mountain data
         """
 
-        df_mountain = pd.read_csv("../data/combined_data_20200306.csv")
+        df_mountain = pd.read_csv("./data/combined_data_20200306.csv")
         # df_mountain = pd.read_parquet("../data/mountain_data_20200306.parquet")
         
         return df_mountain
