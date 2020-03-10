@@ -63,7 +63,7 @@ class WebscrapeTrails:
         self.browser_options.add_argument('--headless')
         self.browser_options.add_argument('--disable-gpu')
 
-        self.browser = webdriver.Chrome(chrome_options=self.browser_options)
+        self.browser = webdriver.Chrome(options=self.browser_options)
 
         self.lst_run_difficulty = ["skiruns-green", "skiruns-blue", "skiruns-black", "skiruns-double-black"]
 
@@ -126,6 +126,9 @@ class WebscrapeTrails:
         # Filter restaurants and chairlifts
         df_ski = df_ski[df_ski['Length (mi)'].notnull()].reset_index(drop=True)
 
+        # Add URL
+        df_ski["URL"] = URL
+
         return df_ski
 
     def rename_resorts(self, df):
@@ -186,7 +189,6 @@ if __name__ == '__main__':
 
     for url in tqdm(lst_resort_urls):
         df_resort = ws.make_tables(URL=url)
-        df_resort["URL"] = url
         lst_trail_data.append(df_resort)
 
     # Combine trail data
