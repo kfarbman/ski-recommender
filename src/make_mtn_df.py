@@ -17,7 +17,7 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 from tqdm import tqdm
 
-from webscrape_trails import WebscrapeTrails
+from src.webscrape_trails import WebscrapeTrails
 
 warnings.filterwarnings('ignore')
 
@@ -32,7 +32,7 @@ class MakeMountainDF:
         self.browser_options.add_argument('--headless')
         self.browser_options.add_argument('--disable-gpu')
 
-        self.browser = webdriver.Chrome(chrome_options=self.browser_options)
+        self.browser = webdriver.Chrome(options=self.browser_options)
         
         # 2020 ticket prices, fetched manually
         self.dict_resort_prices = {'Alpine Meadows': 169,
@@ -91,6 +91,7 @@ class MakeMountainDF:
         df_elevations = df_elevations.set_index("Elevation").T.reset_index(drop=True)
         
         df_ski = pd.concat([df_ski_runs, df_lifts, df_elevations], axis=1)
+        df_ski["URL"] = URL
 
         return df_ski
 
@@ -127,9 +128,8 @@ if __name__ == '__main__':
 
     # Request mountain data from all resorts
     lst_mountain_data = []
-    for url in tqdm(ws.URLs):
+    for url in tqdm(ws.URLs[0:3]):
         df_resort = mountain.get_mountain_data(URL=url)
-        df_resort["URL"] = url
         lst_mountain_data.append(df_resort)
     
     # Combine mountain data
