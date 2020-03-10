@@ -11,23 +11,19 @@ from recsys import SkiRunRecommender
 app = Flask(__name__)
 
 recsys = SkiRunRecommender()
-df_trails = recsys.load_trail_data()
-df_mountains = recsys.load_mountain_data()
     
 @app.route('/', methods =['GET','POST'])    
 def index():
     return render_template('home.html')
 
-# TODO: Correct df input
 @app.route('/trails', methods=['GET','POST'])
 def trails():
-    # df_trails = recsys.load_trail_data()
+    df_trails = recsys.load_trail_data()
     return render_template('index.html',df=df_trails)
-    
-# TODO: Correct df input
+
 @app.route('/mountains', methods=['GET','POST'])
 def mountains():
-    # df_mountains = recsys.load_mountain_data()
+    df_mountains = recsys.load_mountain_data()
     return render_template('mtn_index.html',df=df_mountains)
 
 @app.route('/recommendations', methods=['GET','POST'])
@@ -94,7 +90,6 @@ def mtn_recommendations():
         # results_df.columns = ['Resort','Bottom Elevation (ft)', 'Top Elevation (ft)', 'Percent Greens', 'Percent Blues', 'Percent Blacks', 'Percent Double  Blacks', 'Number of Lifts']
         return render_template('mtn_recommendations.html',row=row,results_df=results_df,links=recsys.links)
     return 'You must select a trail.'
-
 
 @app.route('/get_trails')
 def get_trails():
