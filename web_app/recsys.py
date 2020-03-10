@@ -113,18 +113,17 @@ class SkiRunRecommender:
     
 
     def load_trail_data(self):
-
-        # with open('../data/df.pkl','rb') as f:
-        #     df = pickle.load(f)
-
+        """
+        Load resort trail data
+        """
         df_trails = pd.read_csv("../data/trail_data_20200306.csv")
 
         return df_trails
 
-    def load_mountain_data(self):    
-            
-        # with open('../data/mtn_df.pkl','rb') as f:
-        #     mtn_df = pickle.load(f)
+    def load_mountain_data(self):
+        """
+        Load resort mountain data
+        """
 
         df_mountain = pd.read_csv("../data/combined_data_20200306.csv")
         # df_mountain = pd.read_parquet("../data/mountain_data_20200306.parquet")
@@ -132,34 +131,23 @@ class SkiRunRecommender:
         return df_mountain
     
     def transform_features(self, df, features):
+        """
+        Transform features for cosine similarity matrix
+
+        INPUT
+            df: Pandas DataFrame, trail or mountain data
+            features: list of trail or mountain features
+
+        OUTPUT
+            Matrix of transformed values
+        """
 
         # Transform trail data
         X = df[features].values
         ss = StandardScaler()
         X_transform = ss.fit_transform(X)
-
-        # Transform mountain data
-        # X_mtn = mtn_df[mtn_features].values    
-        # X_mtn = ss.fit_transform(X_mtn)
         
         return X_transform
-
-    # def create_resort_stats_df(self):
-
-    #     mtn_df = self.load_mountain_data()
-
-    #     # [
-    #     # 'Lifts',
-    #     # 'Vertical Rise (ft)',
-    #     # 'Terrain Park',
-    #     # 'Resort',
-    #     # 'Price',
-    #     # 'Total Runs'
-    #     # ]
-
-    #     resort_stats_df = mtn_df[['Resort', 'Base','Top','Green','Blue','Black','Double Black','Lifts','Price']].drop_duplicates()
-
-    #     return resort_stats_df
 
     # TODO: Simplify syntax
     # TODO: Add dummied features for additional data
@@ -221,42 +209,6 @@ class SkiRunRecommender:
         orig_row = df.loc[[index]].rename(lambda x: 'original')
         total = pd.concat((orig_row,rec_df))
         return total
-    
-    # # TODO: Complete this step in preprocessing, versus within the web app?
-    # def clean_df_for_recs(self, df):
-    #     """
-    #     Prepare DataFrame for recommendation processing
-
-    #     INPUT
-    #         df: Pandas DataFrame
-        
-    #     OUTPUT
-    #         Formatted Pandas DataFrame
-    #     """
-        
-    #     # TODO: Rename columns inplace
-    #     df = df[['trail_name','resort','location','color_names','Groomed','Top Elev (ft)','Bottom Elev (ft)','vert_rise_(ft)','Slope Length (ft)','avg_width_(ft)','slope_area_(acres)','avg_grade_(%)','max_grade_(%)']]
-    #     df.columns = ['Trail Name', 'Resort','Location','Difficulty','Groomed','Top Elev (ft)', 'Bottom Elev (ft)', 'Vert Rise (ft)', 'Slope Length (ft)', 'Avg Width (ft)', 'Slope Area (acres)', 'Avg Grade (%)', 'Max Grade (%)']
-        
-    #     # TODO: Current trail data columns
-    #     # ['Trail Name',
-    #     # 'Bottom Elev (ft)',
-    #     # 'Top Elev (ft)',
-    #     # 'Vertical Drop (ft)',
-    #     # 'Difficulty',
-    #     # 'Resort',
-    #     # 'Slope Length (ft)',
-    #     # 'Average Steepness']
-
-    #     # TODO: Missing Trail columns (non-API)
-    #     # Location
-    #     # Groomed
-    #     # Vert Rise
-    #     # Avg. Width
-    #     # Slope Area
-    #     # Avg Grade
-    #     # Max Grade
-    #     return df
     
 if  __name__ == '__main__':
     
