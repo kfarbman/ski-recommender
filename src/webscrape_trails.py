@@ -69,25 +69,6 @@ class WebscrapeTrails:
 
         self.blank_value = "__NA__"
 
-    # def create_resort_urls(self):
-    #     """
-    #     Create URLs used to scrape data for each difficulty at each resort
-
-    #     INPUT
-    #         None
-    #     OUTPUT
-    #         list of resort URLs
-    #     """
-        
-    #     lst_resort_urls = []
-
-    #     for url in self.URLs:
-    #         for difficulty in self.lst_run_difficulty:
-    #             str_combined_url = url + difficulty
-    #             lst_resort_urls.append(str_combined_url)
-        
-    #     return lst_resort_urls
-
     def make_tables(self, URL):
         '''
         Inputs:
@@ -149,16 +130,9 @@ class WebscrapeTrails:
 
             # Remove rows which are not trail names
             df_combined = df_combined[~df_combined["Trail Name"].isin(lst_cols)].reset_index(drop=True)
-            
-            # Correct column values with mapping
-            # Replace None with NaN
-            # Correct column names
 
             # Remove Lifts, Restaurants, and Terrain Park
             df_combined = df_combined[~df_combined["Difficulty"].isin(["Lifts", "Restaurants", "terrain park"])].reset_index(drop=True)
-
-            # # Filter restaurants and chairlifts
-            # df_ski = df_ski[df_ski['Length (mi)'].notnull()].reset_index(drop=True)
 
             # Add URL
             df_combined["URL"] = URL
@@ -214,10 +188,6 @@ if __name__ == '__main__':
 
     ws = WebscrapeTrails()
 
-    # Create list of all ski resort URL's
-    # lst_resort_urls = ws.create_resort_urls()
-    # lst_resort_urls = [i for i in lst_resort_urls if "vail" in i]
-
     # Request trail data from all ski resorts
     # TODO: Request resorts in parallel?
     lst_trail_data = []
@@ -226,20 +196,14 @@ if __name__ == '__main__':
         print(f"Requesting {url}")
         df_resort = ws.make_tables(URL=url)
         lst_trail_data.append(df_resort)
-        # df_resort = None
 
     # Combine trail data
     df_resorts = pd.concat(lst_trail_data)
-    import pdb; pdb.set_trace()
-    # import pdb; pdb.set_trace()
-    # df_resorts = pd.read_csv("../data/trail_data_DEV_20200220_v2.csv")
 
     # Remove blank resorts
     df_resorts = df_resorts[df_resorts["Trail Name"].notnull()].reset_index(drop=True)
     df_resorts = df_resorts[df_resorts["Trail Name"] != ws.blank_value].reset_index(drop=True)
 
-    df_resorts["Difficulty"] = df_resorts["URL"].str.split("skiruns-", 1, expand=True)[1]
-    
     dict_colors = {
         "green": "Green",
         "blue": "Blue",
@@ -248,36 +212,29 @@ if __name__ == '__main__':
     
     df_resorts["Difficulty"] = df_resorts["Difficulty"].map(dict_colors)
 
-    # Format trail name
-    df_resorts["Trail Name"] = df_resorts["Trail Name"].str.replace("\xa0 ", "").str.strip()
-
     # Get resort name for trails
     df_resorts = ws.rename_resorts(df=df_resorts)
 
-    # Format run distance values
-    df_resorts["Slope Length (ft)"] = df_resorts["Length (mi)"].str.split(" ", expand=True)[0]
-    df_resorts["Slope Length (ft)"] = df_resorts["Slope Length (ft)"].astype(float)
-    
-    # Convert run distance from miles to feet
-    df_resorts.loc[df_resorts["Slope Length (ft)"] < 1, "Slope Length (ft)"] = df_resorts["Slope Length (ft)"] * 5280
+    # Format trail values
+    lst_formatted_cols = ["Bottom Elev (ft)", "Top Elev (ft)", "Vertical Drop (ft)", "Length (mi)"]
+    df_resorts[lst_formatted_cols] = df_resorts[lst_formatted_cols].astype("float64")
 
-    # Get average steepness
-    df_resorts["Vertical Drop (ft)"] = df_resorts["Vertical Drop (ft)"].str.split(" ", 1, expand=True)[0]
-    df_resorts["Vertical Drop (ft)"] = df_resorts["Vertical Drop (ft)"].astype(float)
-    df_resorts["Vertical Drop (ft)"].fillna(0, inplace=True)
-    
+    # Convert run distance from miles to feet
+    df_resorts.loc[df_resorts["Length (mi)"] < 1, "Length (mi)"] = df_resorts["Length (mi)"] * 5280
+
+    # Rename Length column
+    df_resorts.rename(columns={"Length (mi)":"Slope Length (ft)"}, inplace=True)
+
+    # Calculate average steepness
     # TODO: Validate Average Stepness calculation
     # Average Steepness = (Vert Drop (feet) / 5280) / distance (miles))
     # df_resorts['Average Steepness'] = df_resorts['Vertical Drop (ft)'].astype(float)/(5280*df_resorts['distance'].astype(float))
     # df_resorts['Average Steepness'] = (df_resorts['Vertical Drop (ft)'] / 5280) / df_resorts['distance'].astype(float)
     df_resorts['Average Steepness'] = df_resorts['Vertical Drop (ft)'] / df_resorts['Slope Length (ft)']
-
-    # Correct column values
-    df_resorts["Bottom Elev (ft)"] = df_resorts["Bottom Elev (ft)"].str.replace(" ft", "").astype(float)
-    df_resorts["Top Elev (ft)"] = df_resorts["Top Elev (ft)"].str.replace(" ft", "").astype(float)
     
+    # TODO: Rename Length (mi) to Slope Length (ft)
     # Drop columns
-    df_resorts.drop(["URL", "Length (mi)"], axis=1, inplace=True)
+    df_resorts.drop(["URL"], axis=1, inplace=True)
 
     # import pdb; pdb.set_trace()
     # df_resorts.to_csv("../data/formatted/trail_data_20200220.csv", index=False, header=True)
@@ -295,17 +252,17 @@ if __name__ == '__main__':
     """
     WEB APP - TRAIL COLUMNS
     """
-    lst_trail_columns = [
-    # "Trail Name",
-    # "Resort",
-    "Location",
-    # "Difficulty",
-    "Groomed",
-    # "Top Elev (ft)",
-    # "Bottom Elev (ft)",
-    "Vert Rise (ft)",
-    # "Slope Length (ft)",
-    "Avg Width (ft)",
-    "Slope Area (acres)",
-    "Avg Grade (%)",
-    "Max Grade (%)"]
+    # lst_trail_columns = [
+    # # "Trail Name",
+    # # "Resort",
+    # "Location",
+    # # "Difficulty",
+    # "Groomed",
+    # # "Top Elev (ft)",
+    # # "Bottom Elev (ft)",
+    # "Vert Rise (ft)",
+    # # "Slope Length (ft)",
+    # "Avg Width (ft)",
+    # "Slope Area (acres)",
+    # "Avg Grade (%)",
+    # "Max Grade (%)"]
