@@ -23,13 +23,16 @@ def mountains():
 
 @app.route('/recommendations', methods=['GET','POST'])
 def recommendations():
-    color_lst = None
-
+    
     dict_run_requests = {"green": ["Green"],
                          "blue": ["Green", "Blue"],
                          "black": ["Green", "Blue", "Black"],
                          "double-black": ["Green", "Blue", "Black", "Double Black"]}
-
+    
+    # Default recommendations: runs of all difficulty
+    color_lst = dict_run_requests["double-black"]
+    
+    # Filter based on max run difficulty requested
     if request.form.get('green'):
         color_lst = dict_run_requests["green"]
     if request.form.get('blue'):
@@ -37,8 +40,6 @@ def recommendations():
     if request.form.get('black'):
         color_lst = dict_run_requests["black"]
     if request.form.get('bb'):
-        color_lst = dict_run_requests["double-black"]
-    else:
         color_lst = dict_run_requests["double-black"]
 
     # CHECKBOX FUNCTIONALITY!!!
@@ -51,7 +52,7 @@ def recommendations():
         dest_resort = request.form['dest_resort']
         num_recs = int(request.form['num_recs'])
         rec_df = recsys.trail_recommendations(
-            index, num_recs, dest_resort, color_lst)
+            index, num_recs, dest_resort, color=color_lst)
         if dest_resort == '':
             resort_links = recsys.links[resort]
         else:
