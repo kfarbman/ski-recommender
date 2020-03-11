@@ -69,24 +69,24 @@ class WebscrapeTrails:
 
         self.blank_value = "__NA__"
 
-    def create_resort_urls(self):
-        """
-        Create URLs used to scrape data for each difficulty at each resort
+    # def create_resort_urls(self):
+    #     """
+    #     Create URLs used to scrape data for each difficulty at each resort
 
-        INPUT
-            None
-        OUTPUT
-            list of resort URLs
-        """
+    #     INPUT
+    #         None
+    #     OUTPUT
+    #         list of resort URLs
+    #     """
         
-        lst_resort_urls = []
+    #     lst_resort_urls = []
 
-        for url in self.URLs:
-            for difficulty in self.lst_run_difficulty:
-                str_combined_url = url + difficulty
-                lst_resort_urls.append(str_combined_url)
+    #     for url in self.URLs:
+    #         for difficulty in self.lst_run_difficulty:
+    #             str_combined_url = url + difficulty
+    #             lst_resort_urls.append(str_combined_url)
         
-        return lst_resort_urls
+    #     return lst_resort_urls
 
     def make_tables(self, URL):
         '''
@@ -101,35 +101,69 @@ class WebscrapeTrails:
         time.sleep(3)
 
         soup = BeautifulSoup(self.browser.page_source, 'html.parser')
-        rows = soup.select('table.table.table-striped tbody tr')
 
-        table_lst = []
-        for row in rows:
-            cell_lst = [cell for cell in row if cell != ' ']
-            cell_lst = [cell.text for cell in cell_lst]
-            table_lst.append(cell_lst)
+        X_web_trail = soup.select('table.table-striped tr')
 
-        df_ski = pd.DataFrame(table_lst)
-
-        try:
-            df_ski.columns = ['Trail Name', 'Bottom Elev (ft)', 'Top Elev (ft)', 'Vertical Drop (ft)', 'Length (mi)']
-        except ValueError:
-            print(f"Unable to process {URL}")
-            df_ski = pd.DataFrame({
+        if not X_web_trail:
+            print(f"No runs for {URL}")
+            df_combined = pd.DataFrame({
                 "Trail Name": [self.blank_value],
                 "Bottom Elev (ft)": [self.blank_value],
                 "Top Elev (ft)": [self.blank_value],
                 "Vertical Drop (ft)": [self.blank_value],
-                "Length (mi)": [self.blank_value]
+                "Length (mi)": [self.blank_value],
+                "URL": [URL]
             })
+        else:
+            lst_rows = [x.text.strip() for x in X_web_trail]
+            lst_rows = [i.replace("  ", "|") for i in lst_rows]
+            lst_rows = [i.replace(" ft", "|") for i in lst_rows]
+            lst_rows = [i.replace(" mi", "|") for i in lst_rows]
 
-        # Filter restaurants and chairlifts
-        df_ski = df_ski[df_ski['Length (mi)'].notnull()].reset_index(drop=True)
+            lst_cols = ['Name Bottom Top Vertical rise',
+                        'Name Bottom Top Vertical drop Length',
+                        'Name Elevation']
 
-        # Add URL
-        df_ski["URL"] = URL
+            # Indices where headers start, separating runs by difficulty
+            idx_headers = [i for i,j in enumerate(lst_rows) if j in lst_cols]
 
-        return df_ski
+            df_trails = pd.DataFrame(lst_rows)
+            
+            df_trails = df_trails[0].str.split("|", expand=True)
+            df_trails.columns = ["Trail Name", "Bottom Elev (ft)", "Top Elev (ft)", "Vertical Drop (ft)", "Length (mi)", "Blank"]
+
+            df_trails.drop("Blank", axis=1, inplace=True)
+
+            lst_difficulty = soup.select("h4")
+            lst_difficulty = [l.text.strip() for l in lst_difficulty]
+            lst_difficulty = [i.replace("Ski runs: ", "") for i in lst_difficulty]
+
+            df_difficulties = pd.DataFrame(lst_difficulty, index=idx_headers)
+            
+            df_combined = pd.merge(df_trails, df_difficulties,
+                left_index=True, right_index=True, how="outer")
+
+            df_combined.rename(columns={0:"Difficulty"}, inplace=True)
+
+            df_combined["Difficulty"].fillna(method="ffill", inplace=True)
+
+            # Remove rows which are not trail names
+            df_combined = df_combined[~df_combined["Trail Name"].isin(lst_cols)].reset_index(drop=True)
+            
+            # Correct column values with mapping
+            # Replace None with NaN
+            # Correct column names
+
+            # Remove Lifts, Restaurants, and Terrain Park
+            df_combined = df_combined[~df_combined["Difficulty"].isin(["Lifts", "Restaurants", "terrain park"])].reset_index(drop=True)
+
+            # # Filter restaurants and chairlifts
+            # df_ski = df_ski[df_ski['Length (mi)'].notnull()].reset_index(drop=True)
+
+            # Add URL
+            df_combined["URL"] = URL
+
+        return df_combined
 
     def rename_resorts(self, df):
         """
@@ -181,18 +215,22 @@ if __name__ == '__main__':
     ws = WebscrapeTrails()
 
     # Create list of all ski resort URL's
-    lst_resort_urls = ws.create_resort_urls()
+    # lst_resort_urls = ws.create_resort_urls()
+    # lst_resort_urls = [i for i in lst_resort_urls if "vail" in i]
 
     # Request trail data from all ski resorts
     # TODO: Request resorts in parallel?
     lst_trail_data = []
 
-    for url in tqdm(lst_resort_urls):
+    for url in tqdm(ws.URLs):
+        print(f"Requesting {url}")
         df_resort = ws.make_tables(URL=url)
         lst_trail_data.append(df_resort)
+        # df_resort = None
 
     # Combine trail data
     df_resorts = pd.concat(lst_trail_data)
+    import pdb; pdb.set_trace()
     # import pdb; pdb.set_trace()
     # df_resorts = pd.read_csv("../data/trail_data_DEV_20200220_v2.csv")
 
