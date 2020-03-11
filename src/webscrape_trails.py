@@ -177,11 +177,14 @@ class WebscrapeTrails:
         
         return df
 
-    def save_resort_data(self, dict_resort):
+    def save_trail_data(self, df):
+        """
+        Save trail data to Parquet file
+        """
 
-        output = open('../data/resort_dict_DEV.pkl', 'wb')
-        pickle.dump(dict_resort, output)
-        output.close()
+        current_date = str(pd.Timestamp.now().date()).replace("-", "")
+
+        df.to_parquet(f"../data/trail_data_{current_date}.parquet", index=False)
 
 
 if __name__ == '__main__':
@@ -236,7 +239,7 @@ if __name__ == '__main__':
     # Drop columns
     df_resorts.drop(["URL"], axis=1, inplace=True)
 
-    # df_resorts.to_csv("../data/formatted/trail_data_20200220.csv", index=False, header=True)
+    # ws.save_trail_data(df=df_resorts)
             
     # ['vert_rise_(ft)',
     # 'slope_length_(ft)',
