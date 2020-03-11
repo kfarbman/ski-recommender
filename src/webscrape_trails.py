@@ -190,6 +190,7 @@ if __name__ == '__main__':
 
     # Request trail data from all ski resorts
     # TODO: Request resorts in parallel?
+
     lst_trail_data = []
 
     for url in tqdm(ws.URLs):
@@ -208,7 +209,7 @@ if __name__ == '__main__':
         "green": "Green",
         "blue": "Blue",
         "black":"Black",
-        "double-black": "Double Black"}
+        "double black": "Double Black"}
     
     df_resorts["Difficulty"] = df_resorts["Difficulty"].map(dict_colors)
 
@@ -232,11 +233,9 @@ if __name__ == '__main__':
     # df_resorts['Average Steepness'] = (df_resorts['Vertical Drop (ft)'] / 5280) / df_resorts['distance'].astype(float)
     df_resorts['Average Steepness'] = df_resorts['Vertical Drop (ft)'] / df_resorts['Slope Length (ft)']
     
-    # TODO: Rename Length (mi) to Slope Length (ft)
     # Drop columns
     df_resorts.drop(["URL"], axis=1, inplace=True)
 
-    # import pdb; pdb.set_trace()
     # df_resorts.to_csv("../data/formatted/trail_data_20200220.csv", index=False, header=True)
             
     # ['vert_rise_(ft)',
