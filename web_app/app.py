@@ -38,6 +38,8 @@ def recommendations():
         color_lst = dict_run_requests["black"]
     if request.form.get('bb'):
         color_lst = dict_run_requests["double-black"]
+    else:
+        color_lst = dict_run_requests["double-black"]
 
     # CHECKBOX FUNCTIONALITY!!!
     resort = request.form['resort']
