@@ -1,4 +1,7 @@
-FROM python:3.7.6
+FROM python:3.7.6-slim
+
+RUN apt-get -y update && \
+    apt-get install -y gnupg wget curl
 
 # Install Google Chrome
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
@@ -10,6 +13,7 @@ RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key
 RUN apt-get install -yqq unzip && \
     wget -O /tmp/chromedriver.zip http://chromedriver.storage.googleapis.com/`curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE`/chromedriver_linux64.zip && \
     unzip /tmp/chromedriver.zip chromedriver -d /usr/local/bin/
+    # rm /tmp/chromedriver.zip
 
 # set display port to avoid crash
 ENV DISPLAY=:99

@@ -4,7 +4,7 @@ ipython
 matplotlib
 numpy>=1.15.0
 pandas==0.24.1
-pytest==3.8.0
+pytest_cov==2.8.1
 requests==2.22.0
 scikit-learn==0.20.2
 selenium<=3.8.0
