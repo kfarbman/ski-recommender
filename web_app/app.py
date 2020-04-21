@@ -79,7 +79,11 @@ def mtn_recommendations():
 
         df_mountains = recsys.load_mountain_data()
 
+        # Filter DataFrame for mountains in recs
         results_df = df_mountains[df_mountains["Resort"].isin(recs)]
+
+        # Sort mountain recommendations based on cosine similarity
+        results_df = results_df.set_index("Resort").loc[recs].reset_index()
 
         row = row[recsys.new_trail_features]
         # results_df.drop('Price', axis=1, inplace=True)
