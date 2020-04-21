@@ -2,8 +2,9 @@
 Request trail data from all resorts
 """
 
-import pickle
+import os
 import time
+from datetime import date
 
 import pandas as pd
 import requests
@@ -15,6 +16,8 @@ from tqdm import tqdm
 class WebscrapeTrails:
 
     def __init__(self):
+
+        self.CURRENT_DIRECTORY = os.getcwd()
 
         self.MAIN_URL = "https://jollyturns.com/resort/united-states-of-america"
 
@@ -182,9 +185,9 @@ class WebscrapeTrails:
         Save trail data to Parquet file
         """
 
-        current_date = str(pd.Timestamp.now().date()).replace("-", "")
+        current_date = date.today().strftime("%Y%m%d")
 
-        df.to_parquet(f"../data/trail_data_{current_date}.parquet", index=False)
+        df.to_parquet(f"{self.CURRENT_DIRECTORY}/data/trail_data_{current_date}.parquet", index=False)
 
 
 if __name__ == '__main__':

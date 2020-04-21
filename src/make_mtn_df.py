@@ -6,9 +6,10 @@ Webscrape mountain statistics from JollyTurns
 3. Save data to CSV
 """
 
-import pickle
+import os
 import time
 import warnings
+from datetime import date
 
 import numpy as np
 import pandas as pd
@@ -25,6 +26,8 @@ warnings.filterwarnings('ignore')
 class MakeMountainDF:
 
     def __init__(self):
+
+        self.CURRENT_DIRECTORY = os.getcwd()
         
         self.browser_options = webdriver.ChromeOptions()
         self.browser_options.add_argument('--no-sandbox')
@@ -116,9 +119,10 @@ class MakeMountainDF:
         """
         Save formatted mountain data to Parquet file
         """
-        current_date = str(pd.Timestamp.now().date()).replace("-", "")
 
-        df.to_parquet(f"../data/mountain_data_{current_date}.parquet", index=False)
+        current_date = date.today().strftime("%Y%m%d")
+
+        df.to_parquet(f"{self.CURRENT_DIRECTORY}/data/mountain_data_{current_date}.parquet", index=False)
 
 if __name__ == '__main__':
 
@@ -128,7 +132,7 @@ if __name__ == '__main__':
 
     # Request mountain data from all resorts
     lst_mountain_data = []
-    for url in tqdm(ws.URLs[0:3]):
+    for url in tqdm(ws.URLs):
         df_resort = mountain.get_mountain_data(URL=url)
         lst_mountain_data.append(df_resort)
     
@@ -167,4 +171,4 @@ if __name__ == '__main__':
         }, inplace=True)
 
     # Save data
-    # df_mountain.to_csv("../data/formatted/mountain_data_20200220.csv", index=False, header=True)
+    # mountain.save_mountain_data(df=df_mountain)
