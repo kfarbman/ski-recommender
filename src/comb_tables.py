@@ -161,12 +161,15 @@ if __name__ == '__main__':
 
 	combine = CombineTables()
 
-	df_trails = pd.read_csv("../data/trail_data_20200311.csv")
-	df_mountains = pd.read_parquet("../data/mountain_data_20200306.parquet")
+	df_trails = pd.read_parquet("./data/trail_data_20200421.parquet")
+	df_mountains = pd.read_parquet("./data/mountain_data_20200421.parquet")
 	
 	df_trails = combine.add_groomed_col(df=df_trails)
 	
 	df_merged = pd.merge(df_trails, df_mountains, on="Resort", how="inner")
+
+	# Save combined data
+	# df_merged.to_csv("./data/combined_data_20200421.csv", index=False, header=True)
 
 	# TODO: Check output in CSV; make sure all values are what's expected
 
