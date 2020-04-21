@@ -79,6 +79,28 @@ class SkiRunRecommender:
         
         return df_mountain
 
+    def dummy_features(self, df):
+        """
+        Dummy features for trail and mountain recommendations
+
+        INPUT
+            df: Pandas DataFrame with features to be dummied
+        
+        OUTPUT
+            Pandas DataFrame with dummied values
+        """
+        
+        # Remove unused value in cosine similarity calculation
+        X_dummied = df.drop("Trail Name", axis=1)
+
+        # Dummy and combine categorical data
+        X_dummied = pd.concat([X_dummied, pd.get_dummies(X_dummied[self.DUMMY_FEATURES])], axis=1)
+
+        # Drop original features, retain dummy features for calculations
+        X_dummied.drop(self.DUMMY_FEATURES, axis=1, inplace=True)
+
+        return X_dummied
+
     def transform_features(self, df, features):
         """
         Transform features for cosine similarity matrix
@@ -98,8 +120,6 @@ class SkiRunRecommender:
         
         return X_transform
 
-    # TODO: Simplify syntax
-    # TODO: Add dummied features for additional data
     def mountain_recommendations(self, index, n=5):
         """
         Create mountain recommendations
@@ -115,14 +135,8 @@ class SkiRunRecommender:
 
         df_mountain = self.load_mountain_data()
 
-        # Remove unused value in cosine similarity calculation
-        X_mtn = df_mountain.drop("Trail Name", axis=1)
-
-        # Dummy and combine categorical data
-        X_mtn = pd.concat([X_mtn, pd.get_dummies(X_mtn[self.DUMMY_FEATURES])], axis=1)
-
-        # Drop original features, retain dummy features for calculations
-        X_mtn.drop(self.DUMMY_FEATURES, axis=1, inplace=True)
+        # Dummy features
+        X_mtn = self.dummy_features(df=df_mountain)
 
         # Scale features
         X_mtn = self.transform_features(df=X_mtn, features=list(X_mtn.columns))
@@ -137,28 +151,24 @@ class SkiRunRecommender:
         
         return orig_row, list(df_sorted_recs.index[:n])
 
-    # TODO: Simplify syntax
     def trail_recommendations(self, index, n=5, resort=None, color=None):
         """
-        Cosine similarity recommendations
+        Cosine similarity recommendations for trails
 
         INPUT
-            index
-            n: number of recommendations
+            index: DataFrame index of trail provided for comparison
+            n: number of trail recommendations
             resort: resort of interest
             color: list of difficulty tiers
+
+        OUTPUT
+            Pandas DataFrame, original trail and recommended trails
         """
 
         df = self.load_trail_data()
 
-        # Remove unused value in cosine similarity calculation
-        X = df.drop("Trail Name", axis=1)
-
-        # Dummy and combine categorical data
-        X = pd.concat([X, pd.get_dummies(X[self.DUMMY_FEATURES])], axis=1)
-
-        # Drop original features, retain dummy features for calculations
-        X.drop(self.DUMMY_FEATURES, axis=1, inplace=True)
+        # Dummy features
+        X = self.dummy_features(df=df)
 
         # Scale features
         X = self.transform_features(df=X, features=list(X.columns))
