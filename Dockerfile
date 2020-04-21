@@ -22,5 +22,6 @@ ENV DISPLAY=:99
 COPY docker_requirements.txt ./
 RUN pip install --no-cache-dir -r docker_requirements.txt
 
+WORKDIR /recsys
 # Copy files to image
 COPY . .
