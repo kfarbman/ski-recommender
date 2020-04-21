@@ -12,7 +12,7 @@ class TestCombineTables(unittest.TestCase):
         self.combine = CombineTables()
 
     def test_add_groomed_col(self):
-        df_trails = pd.read_csv("./data/trail_data_20200306.csv")
+        df_trails = pd.read_csv("./data/combined_data_20200421.csv")
         
         df_trails = self.combine.add_groomed_col(df=df_trails)
 

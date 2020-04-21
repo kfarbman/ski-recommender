@@ -10,17 +10,7 @@ class TestWebscrapeTrails(unittest.TestCase):
     def __init__(self, *args, **kwargs):
         super(TestWebscrapeTrails, self).__init__(*args, **kwargs)
         self.webscrape = WebscrapeTrails()
-    
-    def test_create_resort_urls(self):
-        """
-        Test if resort URL's are in list format
-        """
         
-        lst_resort_urls = self.webscrape.create_resort_urls()
-
-        self.assertIsInstance(lst_resort_urls, list)
-        self.assertEqual(len(lst_resort_urls), 72)
-    
     def test_make_tables(self):
         """
         Test if webscraped trail data is in DataFrame format
@@ -30,8 +20,6 @@ class TestWebscrapeTrails(unittest.TestCase):
         TEST_URL = "https://jollyturns.com/resort/united-states-of-america/beaver-creek-resort/skiruns-green"
         
         df_trails = self.webscrape.make_tables(URL=TEST_URL)
-
-        df_trails.to_csv("DEV.csv", header=True, index=False)
 
         self.assertIsInstance(df_trails, pd.core.frame.DataFrame)
 
@@ -56,5 +44,5 @@ class TestWebscrapeTrails(unittest.TestCase):
         
         self.assertIsInstance(df_trails, pd.core.frame.DataFrame)
 
-        self.assertTrue("Resort" in df_trails.columns)
+        self.assertTrue("Resort" in list(df_trails.columns))
         self.assertTrue(all(df_trails["Resort"] == "Beaver Creek"))
