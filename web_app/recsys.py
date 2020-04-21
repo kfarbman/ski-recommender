@@ -8,30 +8,15 @@ class SkiRunRecommender:
     
     def __init__(self):
 
-        self.trail_features = [
-                            # 'Trail Name',
-                            'Top Elev (ft)',
-                            'Bottom Elev (ft)',
-                            "Vertical Drop (ft)",
-                            # "Difficulty",
-                            # "Resort",
-                            # 'vert_rise_(ft)',
-                            'Slope Length (ft)',
-                            "Average Steepness",
-                            # 'avg_width_(ft)',
-                            # 'slope_area_(acres)',
-                            # 'avg_grade_(%)',
-                            # 'max_grade_(%)',
-                            # 'Groomed'
-                            ]
+        self.DUMMY_FEATURES = ['Difficulty', 'Groomed', 'Resort']
 
-        self.new_trail_features = [
+        self.MODEL_FEATURES = [
                             'Trail Name',
                             'Top Elev (ft)',
                             'Bottom Elev (ft)',
                             "Vertical Drop (ft)",
                             "Difficulty",
-                            # "Resort",
+                            "Resort",
                             # 'vert_rise_(ft)',
                             'Slope Length (ft)',
                             "Average Steepness",
@@ -39,52 +24,15 @@ class SkiRunRecommender:
                             # 'slope_area_(acres)',
                             # 'avg_grade_(%)',
                             # 'max_grade_(%)',
-                            # 'Groomed'
+                            'Groomed',
+                            'Green',
+                            'Blue',
+                            'Black',
+                            'Double Black',
+                            'Terrain Park',
+                            'Lifts',
+                            'Price'
                             ]
-        
-        self.mtn_features = [
-                            # 'Top Elev (ft)',
-                            # 'Bottom Elev (ft)',
-                            # 'Slope Length (ft)',
-                            # 'avg_width_(ft)',
-                            # 'slope_area_(acres)',
-                            # 'avg_grade_(%)',
-                            # 'max_grade_(%)',
-                            # 'Groomed',
-                            # 'Difficulty',
-                            'Base', # Base of mountain
-                            'Top', # Top of mountain
-                            'Vertical Rise (ft)',
-                            'Green',
-                            'Blue',
-                            'Black',
-                            'Double Black',
-                            'Terrain Park',
-                            # 'Resort',
-                            'Lifts',
-                            'Price']
-        
-        self.new_features = [
-                            # 'Top Elev (ft)',
-                            # 'Bottom Elev (ft)',
-                            # 'Slope Length (ft)',
-                            # 'avg_width_(ft)',
-                            # 'slope_area_(acres)',
-                            # 'avg_grade_(%)',
-                            # 'max_grade_(%)',
-                            # 'Groomed',
-                            # 'Difficulty',
-                            'Base', # Base of mountain
-                            'Top', # Top of mountain
-                            'Vertical Rise (ft)',
-                            'Green',
-                            'Blue',
-                            'Black',
-                            'Double Black',
-                            'Terrain Park',
-                            'Resort',
-                            'Lifts',
-                            'Price']
 
         """
         Ski Resort Links
@@ -116,7 +64,9 @@ class SkiRunRecommender:
         """
         Load resort trail data
         """
-        df_trails = pd.read_csv("../data/trail_data_20200311.csv")
+
+        df_trails = pd.read_csv("./data/combined_data_20200421.csv",
+            usecols=self.MODEL_FEATURES)
 
         return df_trails
 
@@ -125,11 +75,10 @@ class SkiRunRecommender:
         Load resort mountain data
         """
 
-        df_mountain = pd.read_csv("../data/combined_data_20200311.csv")
-        # df_mountain = pd.read_parquet("../data/mountain_data_20200306.parquet")
+        df_mountain = pd.read_csv("./data/combined_data_20200421.csv")
         
         return df_mountain
-    
+
     def transform_features(self, df, features):
         """
         Transform features for cosine similarity matrix
@@ -166,7 +115,17 @@ class SkiRunRecommender:
 
         df_mountain = self.load_mountain_data()
 
-        X_mtn = self.transform_features(df=df_mountain, features = self.mtn_features)
+        # Remove unused value in cosine similarity calculation
+        X_mtn = df_mountain.drop("Trail Name", axis=1)
+
+        # Dummy and combine categorical data
+        X_mtn = pd.concat([X_mtn, pd.get_dummies(X_mtn[self.DUMMY_FEATURES])], axis=1)
+
+        # Drop original features, retain dummy features for calculations
+        X_mtn.drop(self.DUMMY_FEATURES, axis=1, inplace=True)
+
+        # Scale features
+        X_mtn = self.transform_features(df=X_mtn, features=list(X_mtn.columns))
 
         trail = X_mtn[index].reshape(1,-1)
         
@@ -179,7 +138,6 @@ class SkiRunRecommender:
         return orig_row, list(df_sorted_recs.index[:n])
 
     # TODO: Simplify syntax
-    # TODO: Add dummied features for additional data
     def trail_recommendations(self, index, n=5, resort=None, color=None):
         """
         Cosine similarity recommendations
@@ -193,21 +151,50 @@ class SkiRunRecommender:
 
         df = self.load_trail_data()
 
-        X = self.transform_features(df=df, features=self.trail_features)
+        # Remove unused value in cosine similarity calculation
+        X = df.drop("Trail Name", axis=1)
+
+        # Dummy and combine categorical data
+        X = pd.concat([X, pd.get_dummies(X[self.DUMMY_FEATURES])], axis=1)
+
+        # Drop original features, retain dummy features for calculations
+        X.drop(self.DUMMY_FEATURES, axis=1, inplace=True)
+
+        # Scale features
+        X = self.transform_features(df=X, features=list(X.columns))
         
+        # Select trail for comparison
         trail = X[index].reshape(1,-1)
+
+        # Create cosine similarity matrix
         cs = cosine_similarity(trail, X)
+
+        # Sort recommendations by highest values
         rec_index = np.argsort(cs)[0][::-1][1:]
+
+        # Order data by index in DataFrame
         ordered_df = df.loc[rec_index]
+
+        # TODO: Filter before calculation for faster computation
+        # Filter runs by resort and difficulty
         if resort:
             ordered_df = ordered_df[ordered_df['Resort'] == resort]
         if color:
             ordered_df = ordered_df[ordered_df['Difficulty'].isin(color)]
-        rec_df = ordered_df.head(n)
-        rec_df = rec_df.reset_index(drop=True)
+        
+        # Select top N recommended trails
+        rec_df = ordered_df.head(n).reset_index(drop=True)
+        # rec_df = rec_df.reset_index(drop=True)
+
+        # Change index values
         rec_df.index = rec_df.index+1
+
+        # Find original run in DataFrame
         orig_row = df.loc[[index]].rename(lambda x: 'original')
+
+        # Combine original run and recommendations
         total = pd.concat((orig_row,rec_df))
+        
         return total
     
 if  __name__ == '__main__':
@@ -216,4 +203,4 @@ if  __name__ == '__main__':
 
     df_trails = recsys.load_trail_data()
 
-    X_transform = recsys.transform_features(df=df_trails, features=recsys.trail_features)
+    X_transform = recsys.transform_features(df=df_trails, features=recsys.MODEL_FEATURES)

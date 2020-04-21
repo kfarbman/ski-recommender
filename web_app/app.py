@@ -85,9 +85,9 @@ def mtn_recommendations():
         # Sort mountain recommendations based on cosine similarity
         results_df = results_df.set_index("Resort").loc[recs].reset_index()
 
-        row = row[recsys.new_trail_features]
+        row = row[recsys.MODEL_FEATURES]
         # results_df.drop('Price', axis=1, inplace=True)
-        results_df = results_df[recsys.new_features]
+        results_df = results_df[recsys.MODEL_FEATURES]
         results_df.drop_duplicates("Resort", keep="first", inplace=True)
         # results_df.columns = ['Resort','Bottom Elevation (ft)', 'Top Elevation (ft)', 'Percent Greens', 'Percent Blues', 'Percent Blacks', 'Percent Double  Blacks', 'Number of Lifts']
         return render_template('mtn_recommendations.html',row=row,results_df=results_df,links=recsys.links)
