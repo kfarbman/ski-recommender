@@ -233,41 +233,10 @@ if __name__ == '__main__':
     df_resorts.rename(columns={"Length (mi)":"Slope Length (ft)"}, inplace=True)
 
     # Calculate average steepness
-    # TODO: Validate Average Stepness calculation
-    # Average Steepness = (Vert Drop (feet) / 5280) / distance (miles))
-    # df_resorts['Average Steepness'] = df_resorts['Vertical Drop (ft)'].astype(float)/(5280*df_resorts['distance'].astype(float))
-    # df_resorts['Average Steepness'] = (df_resorts['Vertical Drop (ft)'] / 5280) / df_resorts['distance'].astype(float)
     df_resorts['Average Steepness'] = df_resorts['Vertical Drop (ft)'] / df_resorts['Slope Length (ft)']
     
     # Drop columns
     df_resorts.drop(["URL"], axis=1, inplace=True)
 
+    # Save trail data
     # ws.save_trail_data(df=df_resorts)
-            
-    # ['vert_rise_(ft)',
-    # 'slope_length_(ft)',
-    # 'avg_width_(ft)',
-    # 'slope_area_(acres)',
-    # 'avg_grade_(%)',
-    # 'max_grade_(%)',
-    # 'ability_level',
-    # 'resort',
-    # 'location']
-
-    """
-    WEB APP - TRAIL COLUMNS
-    """
-    # lst_trail_columns = [
-    # # "Trail Name",
-    # # "Resort",
-    # "Location",
-    # # "Difficulty",
-    # "Groomed",
-    # # "Top Elev (ft)",
-    # # "Bottom Elev (ft)",
-    # "Vert Rise (ft)",
-    # # "Slope Length (ft)",
-    # "Avg Width (ft)",
-    # "Slope Area (acres)",
-    # "Avg Grade (%)",
-    # "Max Grade (%)"]
