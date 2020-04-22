@@ -3,28 +3,21 @@ import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.preprocessing import StandardScaler
 
-
 class SkiRunRecommender:
     
     def __init__(self):
 
-        self.DUMMY_FEATURES = ['Difficulty', 'Groomed', 'Resort']
+        self.DUMMY_FEATURES = ['Difficulty', 'Groomed', 'Location', 'Resort']
 
         self.MODEL_FEATURES = [
                             'Trail Name',
+                            'Resort',
+                            'Location',
+                            'Difficulty',
+                            'Groomed',
                             'Top Elev (ft)',
                             'Bottom Elev (ft)',
-                            "Vertical Drop (ft)",
-                            "Difficulty",
-                            "Resort",
-                            # 'vert_rise_(ft)',
                             'Slope Length (ft)',
-                            "Average Steepness",
-                            # 'avg_width_(ft)',
-                            # 'slope_area_(acres)',
-                            # 'avg_grade_(%)',
-                            # 'max_grade_(%)',
-                            'Groomed',
                             'Green',
                             'Blue',
                             'Black',
@@ -59,25 +52,15 @@ class SkiRunRecommender:
                 'Winter Park': ['../static/images/winter_park_trail_map.png', 'https://www.winterparkresort.com/the-mountain/mountain-report#/'],
                 'Wolf Creek': ["../static/images/wolf_creek_trail_map.png" , "https://wolfcreekski.com/grooming-report-page/"]}
     
-
-    def load_trail_data(self):
+    def load_resort_data(self):
         """
-        Load resort trail data
+        Load combined trail and mountain data
         """
-
-        df_trails = pd.read_csv("./data/combined_data_20200421.csv",
-            usecols=self.MODEL_FEATURES)
-
-        return df_trails
-
-    def load_mountain_data(self):
-        """
-        Load resort mountain data
-        """
-
-        df_mountain = pd.read_csv("./data/combined_data_20200421.csv")
         
-        return df_mountain
+        df_resorts = pd.read_csv("./data/combined_data_20200421.csv",
+            usecols=self.MODEL_FEATURES)
+        
+        return df_resorts
 
     def dummy_features(self, df):
         """
@@ -133,7 +116,7 @@ class SkiRunRecommender:
             list: list of mountain indices to show user in web app
         """
 
-        df_mountain = self.load_mountain_data()
+        df_mountain = self.load_resort_data()
 
         # Dummy features
         X_mtn = self.dummy_features(df=df_mountain)
@@ -165,7 +148,7 @@ class SkiRunRecommender:
             Pandas DataFrame, original trail and recommended trails
         """
 
-        df = self.load_trail_data()
+        df = self.load_resort_data()
 
         # Dummy features
         X = self.dummy_features(df=df)
@@ -204,6 +187,8 @@ class SkiRunRecommender:
 
         # Combine original run and recommendations
         total = pd.concat((orig_row,rec_df))
+
+        total = total[self.MODEL_FEATURES]
         
         return total
     
@@ -211,6 +196,6 @@ if  __name__ == '__main__':
     
     recsys = SkiRunRecommender()
 
-    df_trails = recsys.load_trail_data()
+    df_trails = recsys.load_resort_data()
 
     X_transform = recsys.transform_features(df=df_trails, features=recsys.MODEL_FEATURES)
