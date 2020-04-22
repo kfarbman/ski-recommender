@@ -11,23 +11,88 @@ class TestSkiRunRecommender(unittest.TestCase):
         super(TestSkiRunRecommender, self).__init__(*args, **kwargs)
         self.recsys = SkiRunRecommender()
 
-    def test_load_trail_data(self):
+    def test_load_resort_data(self):
         """
-        Test loaded trail data being in DataFrame structure
+        Test loaded data being in DataFrame structure
         """
 
-        df_trails = self.recsys.load_trail_data()
+        df_trails = self.recsys.load_resort_data()
 
         self.assertIsInstance(df_trails, pd.core.frame.DataFrame)
 
-    def test_load_mountain_data(self):
+    def test_dummy_features(self):
         """
-        Test loaded mountain data being in DataFrame structure
+        Test if columns are dummied correctly
         """
 
-        df_mountains = self.recsys.load_mountain_data()
+        LST_DUMMIED_COLUMNS = ['Bottom Elev (ft)',
+                                'Top Elev (ft)',
+                                'Slope Length (ft)',
+                                'Lifts',
+                                'Black',
+                                'Blue',
+                                'Double Black',
+                                'Green',
+                                'Terrain Park',
+                                'Price',
+                                'Difficulty_Black',
+                                'Difficulty_Blue',
+                                'Difficulty_Double Black',
+                                'Difficulty_Green',
+                                'Groomed_Groomed',
+                                'Groomed_Ungroomed',
+                                'Location_CA',
+                                'Location_CO',
+                                'Location_NM',
+                                'Location_NV',
+                                'Location_WY',
+                                'Resort_Alpine Meadows',
+                                'Resort_Arapahoe Basin',
+                                'Resort_Aspen Snowmass',
+                                'Resort_Bald Mountain',
+                                'Resort_Beaver Creek',
+                                'Resort_Copper',
+                                'Resort_Crested Butte',
+                                'Resort_Diamond Peak',
+                                'Resort_Eldora',
+                                'Resort_Jackson Hole',
+                                'Resort_Loveland',
+                                'Resort_Monarch',
+                                'Resort_Steamboat',
+                                'Resort_Taos',
+                                'Resort_Telluride',
+                                'Resort_Vail',
+                                'Resort_Winter Park',
+                                'Resort_Wolf Creek']
 
-        self.assertIsInstance(df_mountains, pd.core.frame.DataFrame)
+        df_dummy = self.recsys.load_resort_data()
+
+        df_dummy = self.recsys.dummy_features(df=df_dummy)
+
+        # Test if data is in DataFrame format
+        self.assertIsInstance(df_dummy, pd.core.frame.DataFrame)
+
+        # Test if original features were removed
+        self.assertTrue(all([col not in df_dummy.columns for col in self.recsys.DUMMY_FEATURES]))
+
+        # Test if all columns are in DataFrame
+        self.assertTrue(all([col in df_dummy.columns for col in LST_DUMMIED_COLUMNS]))
+
+    def test_transform_features(self):
+        """
+        Test transforming features into matrix
+        """
+
+        df_transform = pd.read_csv("./tests/test_transform_features_20200421.csv")
+
+        X_transform = self.recsys.transform_features(df=df_transform, features=list(df_transform.columns))
+
+        # Test if standard deviation is 1
+        self.assertAlmostEqual(round(np.std(X_transform)), 1, places=2)
+
+        # Test if mean is 0
+        self.assertAlmostEqual(np.mean(X_transform), 0, places=2)
+
 
     def test_mountain_recommendations(self):
         """
