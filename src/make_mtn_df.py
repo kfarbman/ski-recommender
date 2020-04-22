@@ -72,25 +72,25 @@ class MakeMountainDF:
         soup = BeautifulSoup(self.browser.page_source, 'html.parser')
 
         # JollyTurns parsing (runs breakdown)
-        X = soup.select("resort-glance div.row div.col-xs-12 div.row.text-left.statistics.ng-scope span.ng-binding")
-        lst_dev = [x.text for x in X]
-        lst_dev = [x.replace(" ski runs: ", "") for x in lst_dev]
-        df_ski_runs = pd.DataFrame({"Runs": lst_dev[0::2], "total": lst_dev[1::2]})
+        X_runs = soup.select("resort-glance div.row div.col-xs-12 div.row.text-left.statistics.ng-scope span.ng-binding")
+        lst_runs = [run.text for run in X_runs]
+        lst_runs = [run.replace(" ski runs: ", "") for run in lst_runs]
+        df_ski_runs = pd.DataFrame({"Runs": lst_runs[0::2], "total": lst_runs[1::2]})
         df_ski_runs = df_ski_runs.set_index("Runs").T.reset_index(drop=True)
 
         # JollyTurns parsing (Chairlifts / total runs)
-        Y = soup.select("resort-glance div.row div.col-xs-12 div.row.text-center a")
-        lst_y = [y.text.lstrip() for y in Y]
-        df_lifts = pd.DataFrame({"Lifts": lst_y[0]}, index=[0])
+        X_lifts = soup.select("resort-glance div.row div.col-xs-12 div.row.text-center a")
+        lst_lifts = [lift.text.lstrip() for lift in X_lifts]
+        df_lifts = pd.DataFrame({"Lifts": lst_lifts[0]}, index=[0])
         
         # JollyTurns parsing (Elevations)
-        Z = soup.select("resort-glance div.row div.col-xs-12 table tr td")
-        lst_z = [z.text for z in Z if "Lift" not in z.text]
-        lst_z = [z.replace(" \xa0", "") for z in lst_z]
-        lst_z = [z.replace(" ft", "") for z in lst_z]
-        lst_z = [z.replace(":", "") for z in lst_z]
+        X_elevations = soup.select("resort-glance div.row div.col-xs-12 table tr td")
+        lst_elevations = [elevation.text for elevation in X_elevations if "Lift" not in elevation.text]
+        lst_elevations = [elevation.replace(" \xa0", "") for elevation in lst_elevations]
+        lst_elevations = [elevation.replace(" ft", "") for elevation in lst_elevations]
+        lst_elevations = [elevation.replace(":", "") for elevation in lst_elevations]
 
-        df_elevations = pd.DataFrame({"Elevation": lst_z[0::2], "Total": lst_z[1::2]})
+        df_elevations = pd.DataFrame({"Elevation": lst_elevations[0::2], "Total": lst_elevations[1::2]})
         df_elevations = df_elevations.set_index("Elevation").T.reset_index(drop=True)
         
         df_ski = pd.concat([df_ski_runs, df_lifts, df_elevations], axis=1)
