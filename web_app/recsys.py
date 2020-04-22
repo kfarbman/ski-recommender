@@ -132,7 +132,9 @@ class SkiRunRecommender:
         
         orig_row = df_mountain.loc[[index]].rename(lambda x: 'original')
         
-        return orig_row, list(df_sorted_recs.index[:n])
+        # Exclude record used for recommendations at index 0
+        # Include additional record with N + 1
+        return orig_row, list(df_sorted_recs.index[1:n+1])
 
     def trail_recommendations(self, index, n=5, resort=None, color=None):
         """
