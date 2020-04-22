@@ -99,8 +99,8 @@ def mtn_recommendations():
         results_df = results_df[recsys.MODEL_FEATURES]
         results_df.drop_duplicates("Resort", keep="first", inplace=True)
 
-        # Remove trail name before posting to web page
-        results_df.drop('Trail Name', axis=1, inplace=True)
+        # Remove trail columns before posting to web page
+        results_df.drop(['Trail Name', 'Difficulty', 'Groomed', 'Slope Length (ft)'], axis=1, inplace=True)
 
         return render_template('mtn_recommendations.html',row=row,results_df=results_df,links=recsys.links)
     return 'You must select a trail.'
