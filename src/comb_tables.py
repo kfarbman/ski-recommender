@@ -168,13 +168,7 @@ if __name__ == '__main__':
 	
 	df_merged = pd.merge(df_trails, df_mountains, on="Resort", how="inner")
 
+	df_merged["Location"] = df_merged["Resort"].map(combine.resort_locations).fillna("__NA__")
+
 	# Save combined data
 	# df_merged.to_csv("./data/combined_data_20200421.csv", index=False, header=True)
-
-	# TODO: Check output in CSV; make sure all values are what's expected
-
-	# Map Difficulty to numbers
-	# TODO: Remove ability_nums/ re-engineer into different feature
-	# colors = {'Green': 1, 'Blue': 2, 'Black': 3, 'Double Black': 4}
-	# df_trails['color_nums'] = df_trails['Difficulty'].map(colors)
-
