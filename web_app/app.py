@@ -13,17 +13,25 @@ def index():
 
 @app.route('/trails', methods=['GET','POST'])
 def trails():
-    df_trails = recsys.load_trail_data()
+    """
+    Load data for trail recommendations
+    """
+    df_trails = recsys.load_resort_data()
     return render_template('index.html',df=df_trails)
 
 @app.route('/mountains', methods=['GET','POST'])
 def mountains():
-    df_mountains = recsys.load_mountain_data()
+    """
+    Load data for mountain recommendations
+    """    
+    df_mountains = recsys.load_resort_data()
     return render_template('mtn_index.html',df=df_mountains)
 
 @app.route('/recommendations', methods=['GET','POST'])
 def recommendations():
-    
+    """
+    Get and post trail recommendations to web page
+    """
     dict_run_requests = {"green": ["Green"],
                          "blue": ["Green", "Blue"],
                          "black": ["Green", "Blue", "Black"],
@@ -42,7 +50,7 @@ def recommendations():
     if request.form.get('bb'):
         color_lst = dict_run_requests["double-black"]
 
-    # CHECKBOX FUNCTIONALITY!!!
+    # Checkbox functionality
     resort = request.form['resort']
     if resort == '':
         return 'You must select a trail from your favorite resort.'
@@ -60,9 +68,11 @@ def recommendations():
         return render_template('recommendations.html', rec_df=rec_df, resort_links=resort_links)
     return 'You must select a trail.'
     
-# TODO: Correct inputs
 @app.route('/mtn_recommendations', methods=['GET','POST'])
 def mtn_recommendations():
+    """
+    Get and post mountain recommendations to web page
+    """
     resort = request.form['resort']
     if resort == '':
         return 'You must select a trail from your favorite resort.'
@@ -71,13 +81,10 @@ def mtn_recommendations():
         index = int(trail)
         num_recs = int(request.form['num_recs'])
 
-        # BUG: Out of bounds issue due to trying to request from trails, not mountains
-        # TODO: Remove run duplicates?
+        # Calculate mountain recommendations
         row, recs = recsys.mountain_recommendations(index,num_recs)
-        # row = recsys.trail_recommendations(index, n=num_recs, resort=None, color=None)
-        # results_df = pd.DataFrame(columns=['resort', 'resort_bottom','resort_top','greens','blues','blacks','bbs','lifts','price'])
 
-        df_mountains = recsys.load_mountain_data()
+        df_mountains = recsys.load_resort_data()
 
         # Filter DataFrame for mountains in recs
         results_df = df_mountains[df_mountains["Resort"].isin(recs)]
@@ -85,11 +92,16 @@ def mtn_recommendations():
         # Sort mountain recommendations based on cosine similarity
         results_df = results_df.set_index("Resort").loc[recs].reset_index()
 
+        # Get features of original row used for recommendations
         row = row[recsys.MODEL_FEATURES]
-        # results_df.drop('Price', axis=1, inplace=True)
+
+        # Create DataFrame of recommendations
         results_df = results_df[recsys.MODEL_FEATURES]
         results_df.drop_duplicates("Resort", keep="first", inplace=True)
-        # results_df.columns = ['Resort','Bottom Elevation (ft)', 'Top Elevation (ft)', 'Percent Greens', 'Percent Blues', 'Percent Blacks', 'Percent Double  Blacks', 'Number of Lifts']
+
+        # Remove trail name before posting to web page
+        results_df.drop('Trail Name', axis=1, inplace=True)
+
         return render_template('mtn_recommendations.html',row=row,results_df=results_df,links=recsys.links)
     return 'You must select a trail.'
 
@@ -97,7 +109,7 @@ def mtn_recommendations():
 def get_trails():
     resort = request.args.get('resort')
     if resort:
-        df = recsys.load_trail_data()
+        df = recsys.load_resort_data()
         sub_df = df[df['Resort'] == resort]
         sub_df.sort_values(by='Trail Name', inplace=True)
         id_name_color = [("", "Select a Trail...", "white")] + list(zip(list(sub_df.index),
