@@ -177,7 +177,6 @@ class SkiRunRecommender:
         
         # Select top N recommended trails
         rec_df = ordered_df.head(n).reset_index(drop=True)
-        # rec_df = rec_df.reset_index(drop=True)
 
         # Change index values
         rec_df.index = rec_df.index+1
@@ -198,4 +197,6 @@ if  __name__ == '__main__':
 
     df_trails = recsys.load_resort_data()
 
-    X_transform = recsys.transform_features(df=df_trails, features=recsys.MODEL_FEATURES)
+    X_dummied = recsys.dummy_features(df=df_trails)
+
+    X_transform = recsys.transform_features(df=X_dummied, features=list(X_dummied.columns))
