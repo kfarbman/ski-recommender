@@ -162,7 +162,7 @@ if __name__ == '__main__':
 	combine = CombineTables()
 
 	df_trails = pd.read_parquet("./data/trail_data_20200421.parquet")
-	df_mountains = pd.read_parquet("./data/mountain_data_20200421.parquet")
+	df_mountains = pd.read_parquet("./data/mountain_data_20200423.parquet")
 	
 	df_trails = combine.add_groomed_col(df=df_trails)
 	
@@ -171,4 +171,4 @@ if __name__ == '__main__':
 	df_merged["Location"] = df_merged["Resort"].map(combine.resort_locations).fillna("__NA__")
 
 	# Save combined data
-	# df_merged.to_csv("./data/combined_data_20200421.csv", index=False, header=True)
+	# df_merged.to_csv("./data/combined_data_20200423.csv", index=False, header=True)

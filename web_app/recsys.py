@@ -18,11 +18,11 @@ class SkiRunRecommender:
                             'Top Elev (ft)',
                             'Bottom Elev (ft)',
                             'Slope Length (ft)',
-                            'Green',
-                            'Blue',
-                            'Black',
-                            'Double Black',
-                            'Terrain Park',
+                            'Percent Greens',
+                            'Percent Blues',
+                            'Percent Blacks',
+                            'Percent Double Blacks',
+                            'Percent Terrain Parks',
                             'Lifts',
                             'Price'
                             ]
@@ -57,7 +57,7 @@ class SkiRunRecommender:
         Load combined trail and mountain data
         """
         
-        df_resorts = pd.read_csv("./data/combined_data_20200421.csv",
+        df_resorts = pd.read_csv("./data/combined_data_20200423.csv",
             usecols=self.MODEL_FEATURES)
         
         return df_resorts
