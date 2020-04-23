@@ -222,21 +222,24 @@ if __name__ == '__main__':
     # Get resort name for trails
     df_resorts = ws.rename_resorts(df=df_resorts)
 
+    # Drop columns
+    df_resorts.drop(["URL"], axis=1, inplace=True)
+
     # Format trail values
     lst_formatted_cols = ["Bottom Elev (ft)", "Top Elev (ft)", "Vertical Drop (ft)", "Length (mi)"]
     df_resorts[lst_formatted_cols] = df_resorts[lst_formatted_cols].astype("float64")
 
     # Convert run distance from miles to feet
     df_resorts.loc[df_resorts["Length (mi)"] < 1, "Length (mi)"] = df_resorts["Length (mi)"] * 5280
+    
+    # Format trail values as integers
+    df_resorts[lst_formatted_cols] = df_resorts[lst_formatted_cols].astype(int)
 
     # Rename Length column
     df_resorts.rename(columns={"Length (mi)":"Slope Length (ft)"}, inplace=True)
 
     # Calculate average steepness
-    df_resorts['Average Steepness'] = df_resorts['Vertical Drop (ft)'] / df_resorts['Slope Length (ft)']
-    
-    # Drop columns
-    df_resorts.drop(["URL"], axis=1, inplace=True)
+    df_resorts['Average Steepness'] = (df_resorts['Vertical Drop (ft)'] / df_resorts['Slope Length (ft)']).round(2)
 
     # Save trail data
     # ws.save_trail_data(df=df_resorts)
