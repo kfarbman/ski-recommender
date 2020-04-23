@@ -161,7 +161,7 @@ if __name__ == '__main__':
 
 	combine = CombineTables()
 
-	df_trails = pd.read_parquet("./data/trail_data_20200421.parquet")
+	df_trails = pd.read_parquet("./data/trail_data_20200423.parquet")
 	df_mountains = pd.read_parquet("./data/mountain_data_20200423.parquet")
 	
 	df_trails = combine.add_groomed_col(df=df_trails)
