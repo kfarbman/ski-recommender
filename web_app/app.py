@@ -110,12 +110,20 @@ def get_trails():
     resort = request.args.get('resort')
     if resort:
         df = recsys.load_resort_data()
+
+        # Filter trails by resort
         sub_df = df[df['Resort'] == resort]
+
+        # Sort trails by name
         sub_df.sort_values(by='Trail Name', inplace=True)
+
+        # Request trail index, trail name, and trail difficulty
+        # (ID, TRAIL NAME, DIFFICULTY)
         id_name_color = [("", "Select a Trail...", "white")] + list(zip(list(sub_df.index),
                                                                         list(
                                                                             sub_df['Trail Name']),
                                                                         list(sub_df['Difficulty'])))
+        # Convert tuple to dictionary
         data = [{"id": str(x[0]), "name": x[1], "color": x[2]}
                 for x in id_name_color]
     return jsonify(data)
