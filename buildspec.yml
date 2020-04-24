@@ -1,0 +1,29 @@
+version: 0.2
+
+env:
+  parameter-store:
+     AWS_ACCOUNT_ID: "/ski-recommender/production/awsAccountID"
+     AWS_REGION: "/ski-recommender/production/awsRegion"
+     AWS_ACCESS_KEY_ID: "/ski-recommender/production/awsAccessKeyID"
+     AWS_SECRET_ACCESS_KEY: "/ski-recommender/production/awsSecretAccessKey"
+     ECR_REPO_NAME: "/ski-recommender/production/ecrRepoName"
+     ECR_IMAGE_TAG: "/ski-recommender/production/ecrImageTag"
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - $(aws ecr get-login --region $AWS_REGION)
+      - GIT_COMMIT_ID=$(git log --format="%H" -n 1 | head -c 7)
+  build:
+    commands:
+      - echo Build started on `date`
+      - docker build -t $ECR_REPO_NAME:$ECR_IMAGE_TAG .
+      - docker run -t $ECR_REPO_NAME:$ECR_IMAGE_TAG pytest --cov=src tests/
+      - docker tag $ECR_REPO_NAME:$ECR_IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPO_NAME:$ECR_IMAGE_TAG
+      - docker tag $ECR_REPO_NAME:$ECR_IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPO_NAME:$GIT_COMMIT_ID      
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker image...
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPO_NAME:$ECR_IMAGE_TAG
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPO_NAME:$GIT_COMMIT_ID
