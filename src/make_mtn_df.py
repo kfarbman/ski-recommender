@@ -79,7 +79,7 @@ class MakeMountainDF:
         df_ski_runs = df_ski_runs.set_index("Runs").T.reset_index(drop=True)
 
         # JollyTurns parsing (Chairlifts / total runs)
-        X_lifts = soup.select("resort-glance div.row div.col-xs-12 div.row.text-center a")
+        X_lifts = soup.select("div.content-in-circle")
         lst_lifts = [lift.text.lstrip() for lift in X_lifts]
         df_lifts = pd.DataFrame({"Lifts": lst_lifts[0]}, index=[0])
         
