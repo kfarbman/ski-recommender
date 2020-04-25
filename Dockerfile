@@ -13,7 +13,6 @@ RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key
 RUN apt-get install -yqq unzip && \
     wget -O /tmp/chromedriver.zip http://chromedriver.storage.googleapis.com/`curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE`/chromedriver_linux64.zip && \
     unzip /tmp/chromedriver.zip chromedriver -d /usr/local/bin/
-    # rm /tmp/chromedriver.zip
 
 # set display port to avoid crash
 ENV DISPLAY=:99
@@ -22,6 +21,8 @@ ENV DISPLAY=:99
 COPY docker_requirements.txt ./
 RUN pip install --no-cache-dir -r docker_requirements.txt
 
+# Create working directory
 WORKDIR /recsys
+
 # Copy files to image
 COPY . .
