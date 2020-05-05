@@ -26,35 +26,25 @@ How awesome would it be to find runs similar to a given run based on their featu
 ### Build Docker Image
 
 ```bash
-docker build -t skirec:dev .
+make build
 ```
 
 ### Mount Image to Repo
 
 ```bash
-docker run --rm -ti \
-    --name ski-recsys \
-    -v "$PWD":/recsys skirec:dev \
-    ipython
+make develop
 ```
 
-### Run Web App
+### Run Web App (Development)
 
 ```bash
-docker run --rm -ti \
-    --name ski-recsys \
-    -p 8080:8080 \
-    -v "$PWD":/recsys skirec:dev \
-    python web_app/app.py
+make web_app_dev
 ```
 
 ## Testing
 
 ```bash
-docker run --rm -ti \
-    --name ski-recsys \
-    -v "$PWD":/recsys skirec:dev \
-    pytest --cov=src tests/
+make test
 ```
 
 ## Web Application 
@@ -154,3 +144,9 @@ The similarity metric used is the cosine similarity. For the trail recommendatio
 ## References
 
 * [AWS - CodeBuild Sample](https://docs.aws.amazon.com/codebuild/latest/userguide/sample-ecr.html)
+
+* [AWS - ECS CloudFormation Template Snippet](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/quickref-ecs.html#quickref-ecs-example-1.yaml)
+
+* [GitHub - CloudFormation: Create Public VPC](https://github.com/nathanpeck/aws-cloudformation-fargate/blob/master/fargate-networking-stacks/public-vpc.yml)
+
+* [GitHub - CloudFormation: Create Fargate Service](https://github.com/nathanpeck/aws-cloudformation-fargate/blob/master/service-stacks/public-subnet-public-loadbalancer.yml)
