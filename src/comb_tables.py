@@ -11,6 +11,13 @@ warnings.filterwarnings('ignore')
 class CombineTables:
 
 	def __init__(self):
+		
+		# Load trail data
+		self.df_trails = pd.read_parquet("./data/trail_data_20200423.parquet")
+		
+		# Load mountain data
+		self.df_mountains = pd.read_parquet("./data/mountain_data_20200423.parquet")
+		
 		self.resort_locations = {
 			'Alpine Meadows': 'CA',
 			'Arapahoe Basin': 'CO',
@@ -142,33 +149,60 @@ class CombineTables:
 						
 						}
 
-	def add_groomed_col(self, df):
+	def map_resort_location(self):
+		"""
+		Map state to resort name
+
+		INPUT
+			None
+		
+		OUTPUT
+			df_mountains DataFrame with 'Location' column
+		"""
+		self.df_mountains["Location"] = self.df_mountains["Resort"].map(self.resort_locations).fillna("__NA__")
+
+	def add_groomed_col(self):
 		'''
 		Add groomed column to trail data
 
 		Inputs:
-			df: resort_df from resort_dfs (DataFrame)
+			None
 		Outputs:
-			resort_df w/ groomed column added (DataFrame)
+			df_trails DataFrame with "Groomed" column
 		'''
 		lst_groomed_runs = list(chain(*self.dict_groomed_runs.values()))
 
-		df['Groomed'] = "Ungroomed"
-		df['Groomed'][df['Trail Name'].isin(lst_groomed_runs)] = "Groomed"
-		return df
+		self.df_trails['Groomed'] = "Ungroomed"
+		self.df_trails['Groomed'][self.df_trails['Trail Name'].isin(lst_groomed_runs)] = "Groomed"
+
+	def merge_data_frames(self):
+		"""
+		Merge trail and mountain DataFrames into single DataFrame
+
+		INPUT
+			None
+
+		OUTPUT
+			Merged DataFrame
+		"""
+
+		df_merged = pd.merge(self.df_trails, self.df_mountains, on="Resort", how="inner")
+
+		return df_merged
+
 
 if __name__ == '__main__':
 
 	combine = CombineTables()
 
-	df_trails = pd.read_parquet("./data/trail_data_20200423.parquet")
-	df_mountains = pd.read_parquet("./data/mountain_data_20200423.parquet")
-	
-	df_trails = combine.add_groomed_col(df=df_trails)
-	
-	df_merged = pd.merge(df_trails, df_mountains, on="Resort", how="inner")
+	# Add Location column to mountain data
+	combine.map_resort_location()
 
-	df_merged["Location"] = df_merged["Resort"].map(combine.resort_locations).fillna("__NA__")
+	# Add groomed column to trail data	
+	combine.add_groomed_col()
+
+	# Merge trail and mountain data
+	df_merged = combine.merge_data_frames()
 
 	# Save combined data
 	# df_merged.to_csv("./data/combined_data_20200423.csv", index=False, header=True)
