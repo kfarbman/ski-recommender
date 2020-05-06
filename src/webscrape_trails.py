@@ -88,61 +88,52 @@ class WebscrapeTrails:
 
         X_web_trail = soup.select('table.table-striped tr')
 
-        if not X_web_trail:
-            print(f"No runs for {URL}")
-            df_combined = pd.DataFrame({
-                "Trail Name": [self.blank_value],
-                "Bottom Elev (ft)": [self.blank_value],
-                "Top Elev (ft)": [self.blank_value],
-                "Vertical Drop (ft)": [self.blank_value],
-                "Length (mi)": [self.blank_value],
-                "URL": [URL]
-            })
-        else:
-            lst_rows = [x.text.strip() for x in X_web_trail]
-            lst_rows = [i.replace("  ", "|") for i in lst_rows]
-            lst_rows = [i.replace(" ft", "|") for i in lst_rows]
-            lst_rows = [i.replace(" mi", "|") for i in lst_rows]
+        lst_rows = [x.text.strip() for x in X_web_trail]
+        lst_rows = [i.replace("  ", "|") for i in lst_rows]
+        lst_rows = [i.replace(" ft", "|") for i in lst_rows]
+        lst_rows = [i.replace(" mi", "|") for i in lst_rows]
 
-            lst_cols = ['Name Bottom Top Vertical rise',
-                        'Name Bottom Top Vertical drop Length',
-                        'Name Elevation']
+        lst_cols = ['Name Bottom Top Vertical rise',
+                    'Name Bottom Top Vertical drop Length',
+                    'Name Elevation']
 
-            # Indices where headers start, separating runs by difficulty
-            idx_headers = [i for i,j in enumerate(lst_rows) if j in lst_cols]
+        # Indices where headers start, separating runs by difficulty
+        idx_headers = [i for i,j in enumerate(lst_rows) if j in lst_cols]
 
-            df_trails = pd.DataFrame(lst_rows)
-            
-            df_trails = df_trails[0].str.split("|", expand=True)
-            df_trails.columns = ["Trail Name", "Bottom Elev (ft)", "Top Elev (ft)", "Vertical Drop (ft)", "Length (mi)", "Blank"]
+        # Create DataFrame from rows
+        df_trails = pd.DataFrame(lst_rows, columns=["trail_data"])
+        
+        # Expand DataFrame values into separate columns
+        df_trails = df_trails["trail_data"].str.split("|", expand=True)
+        df_trails.columns = ["Trail Name", "Bottom Elev (ft)", "Top Elev (ft)", "Vertical Drop (ft)", "Length (mi)", "Blank"]
 
-            df_trails.drop("Blank", axis=1, inplace=True)
+        df_trails.drop("Blank", axis=1, inplace=True)
 
-            lst_difficulty = soup.select("h4")
-            lst_difficulty = [l.text.strip() for l in lst_difficulty]
-            lst_difficulty = [i.replace("Ski runs: ", "") for i in lst_difficulty]
+        lst_difficulty = soup.select("h4")
+        lst_difficulty = [l.text.strip() for l in lst_difficulty]
+        lst_difficulty = [i.replace("Ski runs: ", "") for i in lst_difficulty]
 
-            df_difficulties = pd.DataFrame(lst_difficulty, index=idx_headers)
-            
-            df_combined = pd.merge(df_trails, df_difficulties,
-                left_index=True, right_index=True, how="outer")
+        df_difficulties = pd.DataFrame(lst_difficulty, index=idx_headers)
+        
+        df_combined = pd.merge(df_trails, df_difficulties,
+            left_index=True, right_index=True, how="outer")
 
-            df_combined.rename(columns={0:"Difficulty"}, inplace=True)
+        df_combined.rename(columns={0:"Difficulty"}, inplace=True)
 
-            df_combined["Difficulty"].fillna(method="ffill", inplace=True)
+        df_combined["Difficulty"].fillna(method="ffill", inplace=True)
 
-            # Remove rows which are not trail names
-            df_combined = df_combined[~df_combined["Trail Name"].isin(lst_cols)].reset_index(drop=True)
+        # Remove rows which are not trail names
+        df_combined = df_combined[~df_combined["Trail Name"].isin(lst_cols)].reset_index(drop=True)
 
-            # Remove runs with no name and trails with __NA__ value
-            df_combined = df_combined[df_combined["Trail Name"].notnull()].reset_index(drop=True)
-            df_combined = df_combined[df_combined["Trail Name"] != self.blank_value].reset_index(drop=True)
+        # Remove runs with no name and trails with __NA__ value
+        df_combined = df_combined[df_combined["Trail Name"].notnull()].reset_index(drop=True)
+        df_combined = df_combined[df_combined["Trail Name"] != self.blank_value].reset_index(drop=True)
 
-            # Remove Lifts, Restaurants, and Terrain Park
-            df_combined = df_combined[~df_combined["Difficulty"].isin(["Lifts", "Restaurants", "terrain park"])].reset_index(drop=True)
+        # Remove Lifts, Restaurants, and Terrain Park
+        df_combined = df_combined[~df_combined["Difficulty"].isin(["Lifts", "Restaurants", "terrain park"])].reset_index(drop=True)
 
-            # Add URL
-            df_combined["URL"] = URL
+        # Add URL
+        df_combined["URL"] = URL
 
         return df_combined
 
