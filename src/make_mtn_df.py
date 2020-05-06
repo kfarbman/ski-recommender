@@ -67,7 +67,7 @@ class MakeMountainDF:
 
         self.browser.get(URL)
 
-        time.sleep(2)
+        time.sleep(3)
 
         soup = BeautifulSoup(self.browser.page_source, 'html.parser')
 
@@ -93,7 +93,9 @@ class MakeMountainDF:
         df_elevations = pd.DataFrame({"Elevation": lst_elevations[0::2], "Total": lst_elevations[1::2]})
         df_elevations = df_elevations.set_index("Elevation").T.reset_index(drop=True)
         
+        # Combine total runs, total lifts, and elevation data
         df_ski = pd.concat([df_ski_runs, df_lifts, df_elevations], axis=1)
+        
         df_ski["URL"] = URL
 
         return df_ski
@@ -110,6 +112,8 @@ class MakeMountainDF:
         """
 
         lst_columns = ["Top", "Base", "Lifts", "Vertical rise", "black","blue", "double black", "green", "terrain park"]
+
+        df[lst_columns] = df[lst_columns].fillna(0)
 
         df[lst_columns] = df[lst_columns].astype("int")
 
@@ -129,12 +133,11 @@ if __name__ == '__main__':
     mountain = MakeMountainDF()
 
     ws = WebscrapeTrails()
+    
+    ws.URLs = ws.URLs[0:3]
 
     # Request mountain data from all resorts
-    lst_mountain_data = []
-    for url in tqdm(ws.URLs):
-        df_resort = mountain.get_mountain_data(URL=url)
-        lst_mountain_data.append(df_resort)
+    lst_mountain_data = [mountain.get_mountain_data(URL=url) for url in tqdm(ws.URLs)]
     
     # Combine mountain data
     df_mountain = pd.concat(lst_mountain_data).reset_index(drop=True)
@@ -144,20 +147,13 @@ if __name__ == '__main__':
     # Fill prices
     df_mountain["Price"] = df_mountain["Resort"].map(mountain.dict_resort_prices)
 
-    # Drop columns
-    df_mountain.drop("URL", axis=1, inplace=True)
-
-    # Fill missing values
-    df_mountain.fillna(0, inplace=True)
-
     # Convert column data types
     df_mountain = mountain.format_mountain_data_frame_values(df=df_mountain)
 
-    df_mountain["Total Runs"] = df_mountain[["black", "blue", "double black", "green", "terrain park"]].sum(axis=1)
-
-    # Convert to percentage of total runs per resort
-    df_mountain[["green", "blue", "black", "double black", "terrain park"]] = df_mountain[
-        ["green", "blue", "black", "double black", "terrain park"]].div(
+    # Convert total runs to percentage of total runs per resort
+    lst_run_types = ["black", "blue", "double black", "green", "terrain park"]
+    df_mountain["Total Runs"] = df_mountain[lst_run_types].sum(axis=1)
+    df_mountain[lst_run_types] = df_mountain[lst_run_types].div(
         df_mountain["Total Runs"], axis=0).mul(100).round().astype(int)
 
     # Rename columns
