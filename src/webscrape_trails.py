@@ -134,6 +134,10 @@ class WebscrapeTrails:
             # Remove rows which are not trail names
             df_combined = df_combined[~df_combined["Trail Name"].isin(lst_cols)].reset_index(drop=True)
 
+            # Remove runs with no name and trails with __NA__ value
+            df_combined = df_combined[df_combined["Trail Name"].notnull()].reset_index(drop=True)
+            df_combined = df_combined[df_combined["Trail Name"] != self.blank_value].reset_index(drop=True)
+
             # Remove Lifts, Restaurants, and Terrain Park
             df_combined = df_combined[~df_combined["Difficulty"].isin(["Lifts", "Restaurants", "terrain park"])].reset_index(drop=True)
 
@@ -177,6 +181,12 @@ class WebscrapeTrails:
         df["Resort"] = df["Resort"].map(
             dict_webscrape_trail_names).\
             fillna(df["Resort"])
+
+        # Drop URL column
+        df.drop("URL", axis=1, inplace=True)
+
+        # Reset index
+        df = df.reset_index(drop=True)
         
         return df
 
@@ -196,34 +206,16 @@ if __name__ == '__main__':
 
     # Request trail data from all ski resorts
     # TODO: Request resorts in parallel?
-
-    lst_trail_data = []
-
-    for url in tqdm(ws.URLs):
-        print(f"Requesting {url}")
-        df_resort = ws.make_tables(URL=url)
-        lst_trail_data.append(df_resort)
+    lst_trail_data = [ws.make_tables(URL=url) for url in tqdm(ws.URLs)]
 
     # Combine trail data
     df_resorts = pd.concat(lst_trail_data)
-
-    # Remove blank resorts
-    df_resorts = df_resorts[df_resorts["Trail Name"].notnull()].reset_index(drop=True)
-    df_resorts = df_resorts[df_resorts["Trail Name"] != ws.blank_value].reset_index(drop=True)
-
-    dict_colors = {
-        "green": "Green",
-        "blue": "Blue",
-        "black":"Black",
-        "double black": "Double Black"}
     
-    df_resorts["Difficulty"] = df_resorts["Difficulty"].map(dict_colors)
+    # Capitalize trail difficulty
+    df_resorts["Difficulty"] = df_resorts["Difficulty"].str.title()
 
     # Get resort name for trails
     df_resorts = ws.rename_resorts(df=df_resorts)
-
-    # Drop columns
-    df_resorts.drop(["URL"], axis=1, inplace=True)
 
     # Format trail values
     lst_formatted_cols = ["Bottom Elev (ft)", "Top Elev (ft)", "Vertical Drop (ft)", "Length (mi)"]
