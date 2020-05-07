@@ -21,7 +21,10 @@ develop:
 test: build
 	docker run --rm \
 		-t ${DOCKER_IMAGE}:${DOCKER_TAG} \
-		pytest --cov=src --cov=web_app tests/
+		pytest --cov-report term:skip-covered \
+			--cov=src \
+			--cov=web_app \
+			tests/
 
 # Run web app (Development)
 web_app_dev:
