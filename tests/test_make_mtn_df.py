@@ -16,7 +16,7 @@ class TestMakeMountainDF(unittest.TestCase):
         Test if webscraped data is in the DataFrame format
         """
 
-        TEST_URL = "https://jollyturns.com/resort/united-states-of-america/beaver-creek-resort/"
+        TEST_URL = "https://jollyturns.com/resort/united-states-of-america/aspen-snowmass/"
 
         df_ski = self.mountain.get_mountain_data(URL=TEST_URL)
 

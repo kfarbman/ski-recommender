@@ -62,7 +62,6 @@ class WebscrapeTrails:
 
         self.browser_options = webdriver.ChromeOptions()
         self.browser_options.add_argument('--no-sandbox')
-        self.browser_options.add_argument('--window-size=1420,1080')
         self.browser_options.add_argument('--headless')
         self.browser_options.add_argument('--disable-gpu')
 
@@ -82,7 +81,7 @@ class WebscrapeTrails:
         
         self.browser.get(URL)
 
-        time.sleep(3)
+        time.sleep(8)
 
         soup = BeautifulSoup(self.browser.page_source, 'html.parser')
 
@@ -101,7 +100,7 @@ class WebscrapeTrails:
         idx_headers = [i for i,j in enumerate(lst_rows) if j in lst_cols]
 
         # Create DataFrame from rows
-        df_trails = pd.DataFrame(lst_rows, columns=["trail_data"])
+        df_trails = pd.DataFrame(lst_rows, columns=["trail_data"]).reset_index(drop=True)
         
         # Expand DataFrame values into separate columns
         df_trails = df_trails["trail_data"].str.split("|", expand=True)

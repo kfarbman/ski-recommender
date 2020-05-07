@@ -31,7 +31,6 @@ class MakeMountainDF:
         
         self.browser_options = webdriver.ChromeOptions()
         self.browser_options.add_argument('--no-sandbox')
-        self.browser_options.add_argument('--window-size=1420,1080')
         self.browser_options.add_argument('--headless')
         self.browser_options.add_argument('--disable-gpu')
 
@@ -67,7 +66,7 @@ class MakeMountainDF:
 
         self.browser.get(URL)
 
-        time.sleep(3)
+        time.sleep(8)
 
         soup = BeautifulSoup(self.browser.page_source, 'html.parser')
 
@@ -134,8 +133,6 @@ if __name__ == '__main__':
 
     ws = WebscrapeTrails()
     
-    ws.URLs = ws.URLs[0:3]
-
     # Request mountain data from all resorts
     lst_mountain_data = [mountain.get_mountain_data(URL=url) for url in tqdm(ws.URLs)]
     
