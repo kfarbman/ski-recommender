@@ -14,6 +14,13 @@ Resources:
   ECSCluster:
     Type: AWS::ECS::Cluster
 
+  #ECR Repository
+  ECRRepository:
+    Type: AWS::ECR::Repository
+    Description: ECR repository for ski recommender Docker images
+    Properties: 
+      RepositoryName: !Ref 'AWS::StackName'
+
   # A security group for the containers we will run in Fargate.
   # Two rules, allowing network traffic from a public facing load
   # balancer and from other members of the security group.
