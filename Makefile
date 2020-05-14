@@ -20,8 +20,9 @@ develop:
 # Test all scripts
 test: build
 	docker run --rm \
+		-v "$$PWD":/recsys \
 		-t ${DOCKER_IMAGE}:${DOCKER_TAG} \
-		pytest --cov-report term:skip-covered \
+		pytest \
 			--cov=src \
 			--cov=web_app \
 			tests/
