@@ -52,7 +52,7 @@ class SkiRunRecommender:
                 'Winter Park': ['../static/images/winter_park_trail_map.png', 'https://www.winterparkresort.com/the-mountain/mountain-report#/'],
                 'Wolf Creek': ["../static/images/wolf_creek_trail_map.png" , "https://wolfcreekski.com/grooming-report-page/"]}
     
-    def load_resort_data(self):
+    def load_resort_data(self) -> pd.core.frame.DataFrame:
         """
         Load combined trail and mountain data
         """
@@ -62,7 +62,7 @@ class SkiRunRecommender:
         
         return df_resorts
 
-    def dummy_features(self, df):
+    def dummy_features(self, df: pd.core.frame.DataFrame) -> pd.core.frame.DataFrame:
         """
         Dummy features for trail and mountain recommendations
 
@@ -84,7 +84,7 @@ class SkiRunRecommender:
 
         return X_dummied
 
-    def transform_features(self, df, features):
+    def transform_features(self, df: pd.core.frame.DataFrame, features: list) -> pd.core.frame.DataFrame:
         """
         Transform features for cosine similarity matrix
 
@@ -103,7 +103,7 @@ class SkiRunRecommender:
         
         return X_transform
 
-    def mountain_recommendations(self, index, n=5):
+    def mountain_recommendations(self, index: int, n: int = 5) -> (pd.core.frame.DataFrame, list):
         """
         Create mountain recommendations
 
@@ -136,7 +136,7 @@ class SkiRunRecommender:
         # Include additional record with N + 1
         return orig_row, list(df_sorted_recs.index[1:n+1])
 
-    def trail_recommendations(self, index, n=5, resort=None, color=None):
+    def trail_recommendations(self, index: int, n: int = 5, resort: str = None, color: list = None) -> pd.core.frame.DataFrame:
         """
         Cosine similarity recommendations for trails
 

@@ -56,7 +56,7 @@ class MakeMountainDF:
                                    'Winter Park': 139,
                                    'Wolf Creek': 76}
     
-    def get_mountain_data(self, URL):
+    def get_mountain_data(self, URL: str) -> pd.core.frame.DataFrame:
         '''
         Inputs:
             URL from URLs (str)
@@ -99,7 +99,7 @@ class MakeMountainDF:
 
         return df_ski
 
-    def format_mountain_data_frame_values(self, df):
+    def format_mountain_data_frame_values(self, df: pd.core.frame.DataFrame) -> pd.core.frame.DataFrame:
         """
         Pivot DataFrame, and format values
 
@@ -118,7 +118,7 @@ class MakeMountainDF:
 
         return df
 
-    def save_mountain_data(self, df):
+    def save_mountain_data(self, df: pd.core.frame.DataFrame) -> pd.core.frame.DataFrame:
         """
         Save formatted mountain data to Parquet file
         """

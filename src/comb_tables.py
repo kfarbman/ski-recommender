@@ -175,7 +175,7 @@ class CombineTables:
 		self.df_trails['Groomed'] = "Ungroomed"
 		self.df_trails['Groomed'][self.df_trails['Trail Name'].isin(lst_groomed_runs)] = "Groomed"
 
-	def merge_data_frames(self):
+	def merge_data_frames(self) -> pd.core.frame.DataFrame:
 		"""
 		Merge trail and mountain DataFrames into single DataFrame
 

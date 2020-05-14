@@ -71,7 +71,7 @@ class WebscrapeTrails:
 
         self.blank_value = "__NA__"
 
-    def make_tables(self, URL):
+    def make_tables(self, URL: str) -> pd.core.frame.DataFrame:
         '''
         Inputs:
             URL from URLs (str)
@@ -81,7 +81,7 @@ class WebscrapeTrails:
         
         self.browser.get(URL)
 
-        time.sleep(8)
+        time.sleep(3)
 
         soup = BeautifulSoup(self.browser.page_source, 'html.parser')
 
@@ -136,7 +136,7 @@ class WebscrapeTrails:
 
         return df_combined
 
-    def rename_resorts(self, df):
+    def rename_resorts(self, df: pd.core.frame.DataFrame) -> pd.core.frame.DataFrame:
         """
         Rename resorts for recommendation system
 
@@ -180,7 +180,7 @@ class WebscrapeTrails:
         
         return df
 
-    def save_trail_data(self, df):
+    def save_trail_data(self, df: pd.core.frame.DataFrame) -> pd.core.frame.DataFrame:
         """
         Save trail data to Parquet file
         """
