@@ -84,7 +84,7 @@ class SkiRunRecommender:
 
         return X_dummied
 
-    def transform_features(self, df: pd.core.frame.DataFrame, features: list) -> pd.core.frame.DataFrame:
+    def transform_features(self, df: pd.core.frame.DataFrame, features: list) -> np.ndarray:
         """
         Transform features for cosine similarity matrix
 
