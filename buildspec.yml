@@ -16,8 +16,9 @@ phases:
   build:
     commands:
       - echo Build started on `date`
-      - docker build -t $ECR_REPO_NAME:$ECR_IMAGE_TAG .
-      - docker run -t $ECR_REPO_NAME:$ECR_IMAGE_TAG pytest --cov=src tests/
+      - make build
+      - echo Running tests
+      - make test
       - docker tag $ECR_REPO_NAME:$ECR_IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPO_NAME:$ECR_IMAGE_TAG
       - docker tag $ECR_REPO_NAME:$ECR_IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPO_NAME:$GIT_COMMIT_ID      
   post_build:
