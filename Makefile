@@ -2,8 +2,8 @@
 
 # Global variables
 DOCKER_IMAGE=ski-recommender
-DOCKER_TAG=dev
 GIT_COMMIT_ID=$$(git log --format="%H" -n 1 | head -c 7)
+DOCKER_TAG=dev
 
 # Build Docker Image
 build:
@@ -28,6 +28,7 @@ test: build
 			tests/
 
 # Run web app (Development)
+# Option to change DOCKER_TAG
 web_app_dev:
 	docker run --rm \
 		--name ski-recsys \
@@ -37,6 +38,7 @@ web_app_dev:
 		python web_app/app.py
 
 # Run web app (Production)
+# Option to change DOCKER_TAG
 web_app_prod: build
 	docker run --rm \
 		--name ski-recsys \
