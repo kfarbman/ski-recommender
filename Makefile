@@ -1,12 +1,13 @@
 # Makefile for Ski Recommender
 
 # Global variables
-DOCKER_IMAGE=skirec
+DOCKER_IMAGE=ski-recommender
 DOCKER_TAG=dev
+GIT_COMMIT_ID=$$(git log --format="%H" -n 1 | head -c 7)
 
 # Build Docker Image
 build:
-	docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} .
+	docker build -t ${DOCKER_IMAGE}:${GIT_COMMIT_ID} .
 
 # Development
 # Mount repo to Docker image
@@ -14,14 +15,13 @@ develop:
 	docker run --rm -i \
 		--name ski-recsys \
 		-v "$$PWD":/recsys \
-		-t ${DOCKER_IMAGE}:${DOCKER_TAG} \
+		-t ${DOCKER_IMAGE}:${GIT_COMMIT_ID} \
 		ipython
 
 # Test all scripts
 test: build
-	docker run --rm \
-		-v "$$PWD":/recsys \
-		-t ${DOCKER_IMAGE}:${DOCKER_TAG} \
+	docker run \
+		-t ${DOCKER_IMAGE}:${GIT_COMMIT_ID} \
 		pytest \
 			--cov=src \
 			--cov=web_app \
