@@ -2,166 +2,176 @@
 {% block content %}
 
 <style>
-.green {background-color:rgba(0, 255, 0, .3);}
-.blue {background-color:rgba(0, 0, 255, .3);}
-.black {background-color:rgba(0, 0, 0, .3);}
-.bb {color: rgba(255, 255, 255, 1); background-color:rgba(0, 0, 0, .6);}
-.white {background-color:rgba(255, 255, 255, .3);}
-.main {
-  background-color: rgba(255, 255, 255, 0.7);
-  margin-top: 100px;
-
-}
-.move-button {
-  display: flex;
-  justify-content: center;
-  margin-top: 7px;
-}
-button {
-            padding: 1vh 2vw;
-            background-color: cornflowerblue;
-            color: white;
-            border-radius: 16px; 
-            border-color: white;
-            padding-left: 12px; 
-            padding-right: 12px; 
-            font-size: 16px; 
-            font-weight: bold;
-        }
-
-        button:hover {
-            background-color: rgba(0,0,0,0);
-            color: cornflowerblue;
-            border-color: cornflowerblue;
-            border: 2px solid cornflowerblue;
-        }
-body {
-  background-image: url('https://hdwallsource.com/img/2014/5/snow-mountain-16540-17078-hd-wallpapers.jpg');
-  background-size: 100%
-}
-@media only screen and (max-width: 600px) {
-    body {
-        background-size: auto;
+    .green {
+        background-color: rgba(0, 255, 0, 0.3);
     }
-}
+    .blue {
+        background-color: rgba(0, 0, 255, 0.3);
+    }
+    .black {
+        background-color: rgba(0, 0, 0, 0.3);
+    }
+    .bb {
+        color: rgba(255, 255, 255, 1);
+        background-color: rgba(0, 0, 0, 0.6);
+    }
+    .white {
+        background-color: rgba(255, 255, 255, 0.3);
+    }
+    .main {
+        background-color: rgba(255, 255, 255, 0.7);
+        margin-top: 100px;
+    }
+    .move-button {
+        display: flex;
+        justify-content: center;
+        margin-top: 7px;
+    }
+    button {
+        padding: 1vh 2vw;
+        background-color: cornflowerblue;
+        color: white;
+        border-radius: 16px;
+        border-color: white;
+        padding-left: 12px;
+        padding-right: 12px;
+        font-size: 16px;
+        font-weight: bold;
+    }
 
+    button:hover {
+        background-color: rgba(0, 0, 0, 0);
+        color: cornflowerblue;
+        border-color: cornflowerblue;
+        border: 2px solid cornflowerblue;
+    }
+    body {
+        background-image: url("https://hdwallsource.com/img/2014/5/snow-mountain-16540-17078-hd-wallpapers.jpg");
+        background-size: 100%;
+    }
+    @media only screen and (max-width: 600px) {
+        body {
+            background-size: auto;
+        }
+    }
 </style>
 
 <div class="main" style="padding: 20px 25% 20px 25%;">
+    <h3><b>Get recommendations for mountains to ski at based on a run that you like:</b></h3>
 
-  <h3><b>Get recommendations for mountains to ski at based on a run that you like:</b></h3>
+    <br />
 
-<br>
+    <form action="/mtn_recommendations" , method="POST">
+        <div>
+            <h4><b>Step 1: Choose a resort that you have skied at.</b></h4>
+        </div>
+        <select name="resort" id="select_resort" class="selectpicker form-control">
+            <option selected="selected" value="">Select a resort with your favorite trail...</option>
+            {% for resort in df['Resort'].unique()|sort %}
+            <option value="{{ resort }}">{{ resort }}</option>
+            {% endfor %}
+        </select>
 
+        <br />
+        <br />
 
-<form action='/mtn_recommendations', method='POST'>
-  <div><h4><b>Step 1: Choose a resort that you have skied at.</b></h4></div>
-<select name="resort" id="select_resort" class="selectpicker form-control">
-    <option selected="selected" value = ''>Select a resort with your favorite trail...</option>
-    {% for resort in df['Resort'].unique()|sort %}
-    <option value="{{ resort }}">{{ resort }}</option>
-    {% endfor %}
-</select>
+        <div>
+            <h4>
+                <b>Step 2: Choose a trail that you know you liked at that ski area.</b>
+                <a href="#" id="make_url">
+                    <font color="black">
+                        <b><u>Need help remembering trails?</u></b>
+                    </font>
+                </a>
+            </h4>
+        </div>
 
-<br><br>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script charset="utf-8" type="text/javascript">
+            $(function () {
+                var dropdown = {
+                    resort: $("#select_resort"),
+                    trail: $("#select_trail"),
+                };
 
+                function getURL() {
+                    var resort = dropdown.resort.val();
+                    if (resort.length) {
+                        $("#make_url").click(function (e) {
+                            e.preventDefault();
+                            var url = "/trail_map/" + dropdown.resort.val();
+                            window.location.href = url;
+                        });
+                    }
+                }
 
-<div><h4><b>Step 2: Choose a trail that you know you liked at that ski area.</b>
-<a href="#" id="make_url"><font color="black"><b><u>Need help remembering trails?</u></b></font></a></h4></div>
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script charset="utf-8" type="text/javascript">
-    $(function() {
-        var dropdown = {
-            resort: $('#select_resort'),
-            trail: $('#select_trail')
-        };
-
-        function getURL() {
-            var resort = dropdown.resort.val();
-            if (resort.length) {
-              $('#make_url').click(function(e) {
-                e.preventDefault();
-                var url = "/trail_map/"+dropdown.resort.val();
-                window.location.href = url;
-              });
-            }
-        }
-
-        dropdown.resort.on('change', function() {
-            getURL();
-        });
-
-    });
-</script>
-
-
-
-
-<select name="trail" id="select_trail" class="selectpicker form-control" disabled>
-    <option selected="selected" value = ''>Select a Trail...</option>
-</select>
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script charset="utf-8" type="text/javascript">
-    $(function() {
-        var dropdown = {
-            resort: $('#select_resort'),
-            trail: $('#select_trail')
-        };
-
-        // function to call XHR and update goodsrec dropdown
-        function updateTrail() {
-            var resort = dropdown.resort.val();
-            dropdown.trail.attr('disabled', 'disabled');
-            console.log(resort);
-
-            if (resort.length) {
-                dropdown.trail.empty();
-                $.getJSON("{{ url_for('get_trails') }}", {resort: resort}, function(data) {
-                    console.log(data);
-                    data.forEach(function(item) {
-                        dropdown.trail.append(
-                            $('<option>', {
-                                // style: df['colors'].iloc[item.id]
-                                class: item.color,
-                                value: item.id,
-                                text: item.name
-                            })
-                        );
-                    });
-                    dropdown.trail.removeAttr('disabled');
+                dropdown.resort.on("change", function () {
+                    getURL();
                 });
-            }
-        }
+            });
+        </script>
 
-        // event listener to customer dropdown change
-        dropdown.resort.on('change', function() {
-            updateTrail();
-        });
+        <select name="trail" id="select_trail" class="selectpicker form-control" disabled>
+            <option selected="selected" value="">Select a Trail...</option>
+        </select>
 
-    });
-</script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script charset="utf-8" type="text/javascript">
+            $(function () {
+                var dropdown = {
+                    resort: $("#select_resort"),
+                    trail: $("#select_trail"),
+                };
 
-<br><br>
+                // function to call XHR and update goodsrec dropdown
+                function updateTrail() {
+                    var resort = dropdown.resort.val();
+                    dropdown.trail.attr("disabled", "disabled");
+                    console.log(resort);
 
-<div><h4><b>Step 3 (Optional): Choose how many mountain recommendations you want.</b></h4></div>
-<select name="num_recs" id="select_num_recs" class="selectpicker form-control">
-    <option selected="" value=5>How many recommendations would you like?</option>
-    {% for i in range(1,21) %}
-    <option value="{{ i }}">{{ i }}</option>
-    {% endfor %}
-</select>
-<br>
-<div class='move-button'>
-<button type="submit">Recommend</button>
+                    if (resort.length) {
+                        dropdown.trail.empty();
+                        $.getJSON("{{ url_for('get_trails') }}", { resort: resort }, function (data) {
+                            console.log(data);
+                            data.forEach(function (item) {
+                                dropdown.trail.append(
+                                    $("<option>", {
+                                        // style: df['colors'].iloc[item.id]
+                                        class: item.color,
+                                        value: item.id,
+                                        text: item.name,
+                                    })
+                                );
+                            });
+                            dropdown.trail.removeAttr("disabled");
+                        });
+                    }
+                }
+
+                // event listener to customer dropdown change
+                dropdown.resort.on("change", function () {
+                    updateTrail();
+                });
+            });
+        </script>
+
+        <br />
+        <br />
+
+        <div>
+            <h4><b>Step 3 (Optional): Choose how many mountain recommendations you want.</b></h4>
+        </div>
+        <select name="num_recs" id="select_num_recs" class="selectpicker form-control">
+            <option selected="" value="5">How many recommendations would you like?</option>
+            {% for i in range(1,21) %}
+            <option value="{{ i }}">{{ i }}</option>
+            {% endfor %}
+        </select>
+        <br />
+        <div class="move-button">
+            <button type="submit">Recommend</button>
+        </div>
+    </form>
 </div>
-
-</form>
-
-</div>
-
 
 {% endblock %}

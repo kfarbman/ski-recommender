@@ -2,92 +2,97 @@
 {% block content %}
 
 <style>
-.green {background-color:rgb(0, 179, 60); }
-.blue {background-color: cornflowerblue; }
-.black {background-color:rgb(34,34,34); color:rgb(217, 217, 217);}
-.doubleblack {background-color:rgb(34,34,34); color:rgb(217, 217, 217);}
-.table {
-text-align: center;
-display: flex;
-justify-content: center;
-
-}
-@media only screen and (max-width: 1000px) {
+    .green {
+        background-color: rgb(0, 179, 60);
+    }
+    .blue {
+        background-color: cornflowerblue;
+    }
+    .black {
+        background-color: rgb(34, 34, 34);
+        color: rgb(217, 217, 217);
+    }
+    .doubleblack {
+        background-color: rgb(34, 34, 34);
+        color: rgb(217, 217, 217);
+    }
     .table {
         text-align: center;
         display: flex;
-        justify-content: flex-start;
+        justify-content: center;
     }
-}
+    @media only screen and (max-width: 1000px) {
+        .table {
+            text-align: center;
+            display: flex;
+            justify-content: flex-start;
+        }
+    }
 
+    .resort {
+        height: 100%;
+        width: 100%;
+        padding: 10px;
+        margin-left: 8px;
+    }
+    .disclaimer {
+        text-align: center;
+    }
 
-.resort {
-
-  height: 100%;
-  width: 100%;
-  padding: 10px;
-  margin-left: 8px;
-}
-.disclaimer {
-  text-align: center;
-}
-
-.title {
-  text-align: center;
-}
-
-
+    .title {
+        text-align: center;
+    }
 </style>
 
-<h2 class='title'>Your Trail</h2>
-<table class='table'>
-  <tr>
-  {% for col in rec_df.columns %}
-  <th>{{col}}</th>
-  {% endfor %}
-  </tr>
-  {% for _, row in rec_df.iloc[:1].iterrows() %}
-  <tr class="{{ row.Difficulty.lower().replace(' ','') }}">
-    {% for entry in row %}
-    <td>{{ entry }}</td>
+<h2 class="title">Your Trail</h2>
+<table class="table">
+    <tr>
+        {% for col in rec_df.columns %}
+        <th>{{col}}</th>
+        {% endfor %}
+    </tr>
+    {% for _, row in rec_df.iloc[:1].iterrows() %}
+    <tr class="{{ row.Difficulty.lower().replace(' ','') }}">
+        {% for entry in row %}
+        <td>{{ entry }}</td>
+        {% endfor %}
+    </tr>
     {% endfor %}
-  </tr>
-  {% endfor %}
 </table>
 
-<br>
+<br />
 
-<h2 class='title'>Recommendations</h2>
+<h2 class="title">Recommendations</h2>
 
-<table class='table'>
-  <tr>
-  <th>#</th>
-  {% for col in rec_df.columns %}
-  <th>{{col}}</th>
-  {% endfor %}
-  </tr>
-  {% for i, row in rec_df.iloc[1:].iterrows() %}
-  <tr class="{{row.Difficulty.lower().replace(' ','')}}">
-    <td>{{i}}</td>
-    {% for entry in row %}
-    <td>{{ entry }}</td>
+<table class="table">
+    <tr>
+        <th>#</th>
+        {% for col in rec_df.columns %}
+        <th>{{col}}</th>
+        {% endfor %}
+    </tr>
+    {% for i, row in rec_df.iloc[1:].iterrows() %}
+    <tr class="{{row.Difficulty.lower().replace(' ','')}}">
+        <td>{{i}}</td>
+        {% for entry in row %}
+        <td>{{ entry }}</td>
+        {% endfor %}
+    </tr>
     {% endfor %}
-  </tr>
-  {% endfor %}
 </table>
 
-<div class='disclaimer'>
-<i>Disclaimer: Just because a run is in this list, does not mean that you should ski on it! Use your own discretion!</i>
+<div class="disclaimer">
+    <i>Disclaimer: Just because a run is in this list, does not mean that you should ski on it! Use your own discretion!</i>
 </div>
-<br>
+<br />
 <div>
-  <h3>
-<a href={{resort_links[1]}}><center>Today's Trail Report</center></a>
-</h3>
+    <h3>
+        <a href="{{resort_links[1]}}"><center>Today's Trail Report</center></a>
+    </h3>
 </div>
 <div>
-  <center>
-<img class='resort' src={{resort_links[0]}}>
-</center>
+    <center>
+        <img class="resort" src="{{resort_links[0]}}" />
+    </center>
 </div>
 {% endblock %}
