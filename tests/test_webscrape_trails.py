@@ -13,10 +13,14 @@ class TestWebscrapeTrails(unittest.TestCase):
         
     def test_make_tables(self):
         """
-        Test if webscraped trail data is in DataFrame format
-        Test if columns are in DataFrame
-        """
+        GIVEN a URL for trails at a resort
 
+        WHEN trails are webscraped and processed
+
+        THEN test if data structure is a DataFrame
+            and if specified columns exist in DataFrame
+        """
+    
         TEST_URL = "https://jollyturns.com/resort/united-states-of-america/beaver-creek-resort/skiruns-green"
         
         df_trails = self.webscrape.make_tables(URL=TEST_URL)
@@ -29,7 +33,13 @@ class TestWebscrapeTrails(unittest.TestCase):
     
     def test_rename_resorts(self):
         """
-        Test resort gets renamed correctly
+        GIVEN a Pandas DataFrame of trail data
+
+        WHEN resorts are renamed based on the URL
+
+        THEN test if data structure is a DataFrame
+            and Resort column is in DataFrame
+            and tested resort name is Beaver Creek
         """
 
         df_trails = pd.DataFrame({'Trail Name': {0: '\xa0 Anderson Way ', 1: '\xa0 Bear Paw '},

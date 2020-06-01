@@ -13,16 +13,26 @@ class TestSkiRunRecommender(unittest.TestCase):
 
     def test_load_resort_data(self):
         """
-        Test loaded data being in DataFrame structure
-        """
+        GIVEN merged trail and mountain data
 
+        WHEN data is imported into script
+
+        THEN test if data structure is a DataFrame
+        
+        """
         df_trails = self.recsys.load_resort_data()
 
         self.assertIsInstance(df_trails, pd.core.frame.DataFrame)
 
     def test_dummy_features(self):
         """
-        Test if columns are dummied correctly
+        GIVEN merged trail and mountain data
+
+        WHEN data is dummied into categorical values
+
+        THEN test if data structure is a DataFrame
+            and original columns were removed
+            and specified columns are in DataFrame
         """
 
         LST_DUMMIED_COLUMNS = ['Bottom Elev (ft)',
@@ -80,9 +90,13 @@ class TestSkiRunRecommender(unittest.TestCase):
 
     def test_transform_features(self):
         """
-        Test transforming features into matrix
-        """
+        GIVEN a dummied DataFrame 
 
+        WHEN features are transformed
+
+        THEN test if standard deviation is 1 and mean is 0
+        
+        """
         df_transform = pd.read_csv("./tests/test_transform_features_20200421.csv")
 
         X_transform = self.recsys.transform_features(df=df_transform, features=list(df_transform.columns))
@@ -96,9 +110,14 @@ class TestSkiRunRecommender(unittest.TestCase):
 
     def test_mountain_recommendations(self):
         """
-        Test if mountain recommendations return a DataFrame and list
-        """
+        GIVEN a dummied, transformed DataFrame
 
+        WHEN mountain recommendations are requested
+
+        THEN test if requested row is a DataFrame
+            and if the recommended mountains data structure is a list
+        
+        """
         requested_row, mountain_recs = self.recsys.mountain_recommendations(index=2)
 
         self.assertIsInstance(requested_row, pd.core.frame.DataFrame)
@@ -106,9 +125,13 @@ class TestSkiRunRecommender(unittest.TestCase):
 
     def test_trail_recommendations(self):
         """
-        Test if trail recommendations return a DataFrame
-        """
+        GIVEN a dummied, transformed DataFrame
+
+        WHEN trail recommendations are requested
+
+        THEN test if returned data structure is a DataFrame 
         
+        """        
         df_total = self.recsys.trail_recommendations(index=1000, n=5, resort="Alpine Meadows", color=None)
 
         self.assertIsInstance(df_total, pd.core.frame.DataFrame)

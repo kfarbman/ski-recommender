@@ -13,7 +13,13 @@ class TestMakeMountainDF(unittest.TestCase):
 
     def test_get_mountain_data(self):
         """
-        Test if webscraped data is in the DataFrame format
+        GIVEN a resort URL
+
+        WHEN trail data is requested
+
+        THEN test if data structure is a DataFrame
+            and all columns exist in formatted DataFrame
+        
         """
 
         TEST_URL = "https://jollyturns.com/resort/united-states-of-america/aspen-snowmass/"
@@ -27,6 +33,15 @@ class TestMakeMountainDF(unittest.TestCase):
         self.assertTrue(all([col in df_ski.columns for col in test_lst_cols]))
 
     def test_format_mountain_data_frame_values(self):
+        """
+        GIVEN a webscraped DataFrame
+
+        WHEN trail data is formatted
+
+        THEN test if data structure is a DataFrame
+            and all columns exist in formatted DataFrame
+        
+        """
 
         df_mountain = pd.DataFrame({'black': {0: '28'},
             'blue': {0: '49'},
