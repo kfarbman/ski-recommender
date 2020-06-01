@@ -113,12 +113,17 @@ The similarity metric used is the cosine similarity. For the trail recommendatio
 
 ## Future Steps
 
-* Including more trails from more resorts.
-* Automate requesting groomed runs per resort.
+* Including more trails and resorts. The majority of resorts are from Colorado; including more resorts and trails allows for more comparisons, and a better recommendation system.
+* Automate requesting groomed runs per resort. Currently, this is stored as a hard-coded dictionary. This task would ensure runs specified as "Groomed" is true.
+* Request data in parallel. Data is requested and formatted in a serialized format. Parallelization would allow for reduced data processing time.
 
 ## Repo Structure
 
 ```
+├── aws
+│   ├── 1_create_cluster.yaml (Create ECS cluster, ALB, ECR repository, IAM roles, and security groups)
+│   ├── 2_codebuild.yaml (Create CodeBuild project for building & testing code)
+│   └── aws.md (AWS markdown file explaining infrastructure deployment)
 ├── data (contains CSV and Parquet files of trail and mountain data)
 |     ├── combined_data_20200423.csv (CSV of combined trail and mountain data)
 |     ├── mountain_data_20200423.parquet (Parquet file of mountain data)
@@ -132,12 +137,12 @@ The similarity metric used is the cosine similarity. For the trail recommendatio
 |     |       -Maps location based on resort
 |     |       -saves a CSV of the DataFrame
 |     ├── make_mtn_df.py (creates DataFrame of webscraped mountain data)
-|     └── webscrape_trails.py (webscrapes to get trails by color for each resort, saves a pickle of dictionary of results)
+|     └── webscrape_trails.py (webscrapes trail data for each resort, and saves Parquet file of all trail data)
 ├── web_app
 |     ├── static
 |     ├── templates
 |     ├── app.py (runs web app)
-|     └── app.py (runs recommendation system)
+|     └── recsys.py (runs recommendation system)
 └── README.md
 ```
 
