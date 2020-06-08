@@ -21,31 +21,16 @@ As I was prepping for my Professional Ski Instructors of America (PSIA) Level 3 
 
 How awesome would it be to find runs similar to a given run based on their features, even at a mountain you know nothing about? You can find runs at a mountain you're unfamiliar with that are similar to a run you love. Or you can find out what a run you've never skied on is like by comparing similar runs at a resort you know.
 
-## Development
+## Development Commands
 
-### Build Docker Image
+| Description       | Command    |
+| :------------- | :----------: |
+|  Build Docker Image | `make build`   |
+| Mount Image To Repo   | `make develop` |
+| Run Web App (Development)   | `make web_app_dev` |
+| Run Web App (Production)   | `make web_app_prod` |
+| Run Tests   | `make test` |
 
-```bash
-make build
-```
-
-### Mount Image to Repo
-
-```bash
-make develop
-```
-
-### Run Web App (Development)
-
-```bash
-make web_app_dev
-```
-
-## Testing
-
-```bash
-make test
-```
 
 ## Web Application 
 
