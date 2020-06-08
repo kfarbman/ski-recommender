@@ -25,7 +25,7 @@ How awesome would it be to find runs similar to a given run based on their featu
 
 | Description       | Command    |
 | :------------- | :----------: |
-|  Build Docker Image | `make build`   |
+| Build Docker Image | `make build`   |
 | Mount Image To Repo   | `make develop` |
 | Run Web App (Development)   | `make web_app_dev` |
 | Run Web App (Production)   | `make web_app_prod` |
