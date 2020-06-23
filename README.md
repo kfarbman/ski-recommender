@@ -137,6 +137,8 @@ The similarity metric used is the cosine similarity. For the trail recommendatio
 
 * [AWS - ECS CloudFormation Template Snippet](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/quickref-ecs.html#quickref-ecs-example-1.yaml)
 
+* [Flask - Decrease Load Times](https://blog.socratic.org/the-one-weird-trick-that-cut-our-flask-page-load-time-by-70-87145335f679)
+
 * [GitHub - CloudFormation: Create Public VPC](https://github.com/nathanpeck/aws-cloudformation-fargate/blob/master/fargate-networking-stacks/public-vpc.yml)
 
 * [GitHub - CloudFormation: Create Fargate Service](https://github.com/nathanpeck/aws-cloudformation-fargate/blob/master/service-stacks/public-subnet-public-loadbalancer.yml)
