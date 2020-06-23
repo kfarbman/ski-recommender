@@ -117,15 +117,22 @@ def get_trails():
         # Sort trails by name
         sub_df.sort_values(by='Trail Name', inplace=True)
 
-        # Request trail index, trail name, and trail difficulty
-        # (ID, TRAIL NAME, DIFFICULTY)
-        id_name_color = [("", "Select a Trail...", "white")] + list(zip(list(sub_df.index),
-                                                                        list(
-                                                                            sub_df['Trail Name']),
-                                                                        list(sub_df['Difficulty'])))
-        # Convert tuple to dictionary
-        data = [{"id": str(x[0]), "name": x[1], "color": x[2]}
-                for x in id_name_color]
+        # Create index column
+        sub_df["index"] = sub_df.index.astype("str")
+
+        # Subset sub_df
+        sub_df = sub_df[["index", "Trail Name", "Difficulty"]]
+
+        # Rename columns
+        sub_df.rename(columns={
+            "index": "id",
+            "Trail Name": "name",
+            "Difficulty": "color"},
+            inplace=True)
+
+        # Convert DataFrame to list of dictionaries
+        data = sub_df.to_dict("records")
+        
     return jsonify(data)
 
 @app.route('/trail_map/<resort>')
@@ -134,4 +141,8 @@ def trail_map(resort):
     return render_template('trail_map.html',resort_image=resort_image)
     
 if  __name__ == '__main__':
+
+    # Set cache to dictionary; remove cached template limit
+    app.jinja_env.cache = {}
+    
     app.run(host='0.0.0.0', port=8080, debug=True, threaded=True)
