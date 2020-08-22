@@ -18,3 +18,7 @@ Resources:
           Command: 
             - "python web_app/app.py"
           Essential: true
+          PortMappings: 
+          - 
+            ContainerPort: 8080
+            HostPort: 8080
