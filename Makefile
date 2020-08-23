@@ -7,7 +7,7 @@ DOCKER_TAG=dev
 
 # Build Docker Image
 build:
-	docker build -t ${DOCKER_IMAGE}:${GIT_COMMIT_ID} .
+	docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} .
 
 # Development
 # Mount repo to Docker image
@@ -15,13 +15,13 @@ develop:
 	docker run --rm -i \
 		--name ski-recsys \
 		-v "$$PWD":/recsys \
-		-t ${DOCKER_IMAGE}:${GIT_COMMIT_ID} \
-		ipython
+		-t ${DOCKER_IMAGE}:${DOCKER_TAG} \
+		/bin/bash
 
 # Test all scripts
 test: build
 	docker run \
-		-t ${DOCKER_IMAGE}:${GIT_COMMIT_ID} \
+		-t ${DOCKER_IMAGE}:${DOCKER_TAG} \
 		pytest \
 			--cov=src \
 			--cov=web_app \
