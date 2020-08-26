@@ -78,5 +78,6 @@ Resources:
                 - 'ecr:UploadLayerPart'
                 - 'ecr:CompleteLayerUpload'
                 - 'ecr:PutImage'
+                - 's3:*'
                 Effect: Allow
                 Resource: '*'
