@@ -9,6 +9,8 @@ env:
 phases:
   pre_build:
     commands:
+      - git clone https://github.com/gregwchase/ski-recommender
+      - git checkout ski-recommender-v2
       - echo Logging in to Amazon ECR...
       - $(aws ecr get-login --region $AWS_REGION --no-include-email)
       - AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
