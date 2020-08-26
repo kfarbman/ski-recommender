@@ -29,7 +29,7 @@ Resources:
         FilterGroups:
           - - Type: EVENT
               Pattern: PULL_REQUEST_CREATED,PULL_REQUEST_UPDATED
-      TimeoutInMinutes: 5
+      TimeoutInMinutes: 10
       # CloudWatchLogs:
       #   GroupName: '/aws/codebuild/codebuild-ski-recommender'
       #   Status: 'ENABLED'
