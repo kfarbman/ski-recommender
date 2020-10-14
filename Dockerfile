@@ -26,3 +26,5 @@ WORKDIR /recsys
 
 # Copy files to image
 COPY . .
+
+EXPOSE 8000
