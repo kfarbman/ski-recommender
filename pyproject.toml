@@ -1,0 +1,30 @@
+[tool.poetry]
+name = "ski-recommender"
+version = "0.1.0"
+description = "Ski run recommendation system"
+authors = ["Your Name <you@example.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+beautifulsoup4 = "^4.9.3"
+blinker = "^1.4"
+fastapi = "^0.61.1"
+Flask = "^1.1.2"
+Flask-Testing = "^0.8.0"
+ipython = "^7.18.1"
+matplotlib = "^3.3.2"
+numpy = "^1.19.2"
+pandas = "^1.1.3"
+pyarrow = "^1.0.1"
+pytest-cov = "^2.10.1"
+requests = "^2.24.0"
+scikit-learn = "^0.23.2"
+selenium = "^3.141.0"
+tqdm = "^4.50.2"
+uvicorn = "^0.12.1"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
