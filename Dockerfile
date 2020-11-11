@@ -1,5 +1,17 @@
 FROM python:3.7.6-slim
 
+# Set display port to avoid crash
+ENV DISPLAY=:99
+
+# Set Poetry environment variables
+ENV PYTHONFAULTHANDLER=1 \
+  PYTHONUNBUFFERED=1 \
+  PYTHONHASHSEED=random \
+  PIP_NO_CACHE_DIR=off \
+  PIP_DISABLE_PIP_VERSION_CHECK=on \
+  PIP_DEFAULT_TIMEOUT=100 \
+  POETRY_VERSION=1.0.10
+
 RUN apt-get -y update && \
     apt-get install -y gnupg wget curl
 
@@ -14,15 +26,18 @@ RUN apt-get install -yqq unzip && \
     wget -O /tmp/chromedriver.zip http://chromedriver.storage.googleapis.com/`curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE`/chromedriver_linux64.zip && \
     unzip /tmp/chromedriver.zip chromedriver -d /usr/local/bin/
 
-# set display port to avoid crash
-ENV DISPLAY=:99
-
-# Install libraries
-COPY docker_requirements.txt ./
-RUN pip install --no-cache-dir -r docker_requirements.txt
-
 # Create working directory
 WORKDIR /recsys
+
+# System dependencies
+RUN pip install "poetry==$POETRY_VERSION"
+
+# Copy Poetry requirements to cache them in Docker layer
+COPY poetry.lock pyproject.toml /recsys/
+
+# Project initialization
+RUN poetry config virtualenvs.create false \
+    && poetry install
 
 # Copy files to image
 COPY . .
