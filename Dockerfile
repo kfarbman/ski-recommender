@@ -42,4 +42,5 @@ RUN poetry config virtualenvs.create false \
 # Copy files to image
 COPY . .
 
-EXPOSE 8000
+# Expose Flask
+EXPOSE 8080
