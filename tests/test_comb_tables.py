@@ -6,7 +6,6 @@ from src.comb_tables import CombineTables
 
 
 class TestCombineTables(unittest.TestCase):
-
     def __init__(self, *args, **kwargs):
         super(TestCombineTables, self).__init__(*args, **kwargs)
         self.combine = CombineTables()
@@ -34,7 +33,7 @@ class TestCombineTables(unittest.TestCase):
 
         THEN test if data structure is a DataFrame
             and Groomed column is in DataFrame
-        """    
+        """
 
         self.combine.add_groomed_col()
 
@@ -57,5 +56,9 @@ class TestCombineTables(unittest.TestCase):
         self.assertIsInstance(df_merged, pd.core.frame.DataFrame)
 
         self.assertEqual(len(df_merged), 2125, msg="Missing trails in merged DataFrame")
-        
-        self.assertEqual(df_merged.shape[1], 19, msg="Incorrect number of columns in merged DataFrame")
+
+        self.assertEqual(
+            df_merged.shape[1],
+            19,
+            msg="Incorrect number of columns in merged DataFrame",
+        )
