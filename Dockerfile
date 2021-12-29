@@ -1,16 +1,7 @@
-FROM python:3.7.6-slim
+FROM python:3.8.12-slim as base
 
-# Set display port to avoid crash
-ENV DISPLAY=:99
-
-# Set Poetry environment variables
-ENV PYTHONFAULTHANDLER=1 \
-  PYTHONUNBUFFERED=1 \
-  PYTHONHASHSEED=random \
-  PIP_NO_CACHE_DIR=off \
-  PIP_DISABLE_PIP_VERSION_CHECK=on \
-  PIP_DEFAULT_TIMEOUT=100 \
-  POETRY_VERSION=1.0.10
+RUN mkdir /recsys
+WORKDIR /recsys
 
 RUN apt-get -y update && \
     apt-get install -y gnupg wget curl
@@ -25,6 +16,22 @@ RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key
 RUN apt-get install -yqq unzip && \
     wget -O /tmp/chromedriver.zip http://chromedriver.storage.googleapis.com/`curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE`/chromedriver_linux64.zip && \
     unzip /tmp/chromedriver.zip chromedriver -d /usr/local/bin/
+
+FROM python:3.8.12-slim
+
+# Set display port to avoid crash
+ENV DISPLAY=:99
+
+# Set Poetry environment variables
+ENV PYTHONFAULTHANDLER=1 \
+    PYTHONUNBUFFERED=1 \
+    PYTHONHASHSEED=random \
+    PIP_NO_CACHE_DIR=off \
+    PIP_DISABLE_PIP_VERSION_CHECK=on \
+    PIP_DEFAULT_TIMEOUT=100 \
+    POETRY_VERSION=1.1.12
+
+COPY --from=base ./recsys ./recsys
 
 # Create working directory
 WORKDIR /recsys
