@@ -7,20 +7,10 @@ Webscrape mountain statistics from JollyTurns
 """
 
 import os
-import time
-import warnings
 from datetime import date
 
 import pandas as pd
 import requests
-
-# from bs4 import BeautifulSoup
-# from selenium import webdriver
-from tqdm import tqdm
-
-from src.webscrape_trails import WebscrapeTrails
-
-warnings.filterwarnings("ignore")
 
 
 class MakeMountainDF:
@@ -28,13 +18,6 @@ class MakeMountainDF:
 
         self.CURRENT_DIRECTORY = os.getcwd()
         self.ORIGIN_URL = "https://www.coloradoski.com/resort-statistics"
-
-        # self.browser_options = webdriver.ChromeOptions()
-        # self.browser_options.add_argument("--no-sandbox")
-        # self.browser_options.add_argument("--headless")
-        # self.browser_options.add_argument("--disable-gpu")
-
-        # self.browser = webdriver.Chrome(options=self.browser_options)
 
         # 2020 ticket prices, fetched manually
         self.dict_resort_prices = {
@@ -108,37 +91,6 @@ class MakeMountainDF:
 
         return df_mtn
 
-    def format_mountain_data_frame_values(
-        self, df: pd.core.frame.DataFrame
-    ) -> pd.core.frame.DataFrame:
-        """
-        Pivot DataFrame, and format values
-
-        Input
-            df: Pandas DataFrame
-
-        Output
-            Formatted Pandas DataFrame
-        """
-
-        lst_columns = [
-            "Top",
-            "Base",
-            "Lifts",
-            "Vertical rise",
-            "black",
-            "blue",
-            "double black",
-            "green",
-            "terrain park",
-        ]
-
-        df[lst_columns] = df[lst_columns].fillna(0)
-
-        df[lst_columns] = df[lst_columns].astype("int")
-
-        return df
-
     def save_mountain_data(
         self, df: pd.core.frame.DataFrame
     ) -> pd.core.frame.DataFrame:
@@ -158,28 +110,16 @@ if __name__ == "__main__":
 
     mountain = MakeMountainDF()
 
-    # ws = WebscrapeTrails()
-
     # Request mountain data from all resorts
-    # lst_mountain_data = [mountain.get_mountain_data(URL=url) for url in tqdm(ws.URLs)]
-
     df_mountain = mountain.get_mountain_data()
 
-    # Combine mountain data
-    # df_mountain = pd.concat(lst_mountain_data).reset_index(drop=True)
-
-    # df_mountain = ws.rename_resorts(df=df_mountain)
-
     # Fill prices
-    df_mountain["Price"] = df_mountain["Title"].map(mountain.dict_resort_prices)
-
-    # Convert column data types
-    # df_mountain = mountain.format_mountain_data_frame_values(df=df_mountain)
+    df_mountain["Price"] = (
+        df_mountain["Title"].map(mountain.dict_resort_prices).fillna(0)
+    )
 
     # Convert total runs to percentage of total runs per resort
-    # lst_run_types = ["black", "blue", "double black", "green", "terrain park"]
     lst_run_types = ["Green Runs", "Blue Runs", "Black Runs", "Double-Black Runs"]
-    # df_mountain["Total Runs"] = df_mountain[lst_run_types].sum(axis=1)
 
     df_mountain[lst_run_types] = (
         df_mountain[lst_run_types]
