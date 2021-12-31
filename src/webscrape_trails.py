@@ -7,6 +7,7 @@ import time
 from datetime import date
 
 import pandas as pd
+import requests
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from tqdm import tqdm
@@ -59,12 +60,12 @@ class WebscrapeTrails:
             self.WOLF_CREEK_URL,
         ]
 
-        self.browser_options = webdriver.ChromeOptions()
-        self.browser_options.add_argument("--no-sandbox")
-        self.browser_options.add_argument("--headless")
-        self.browser_options.add_argument("--disable-gpu")
+        # self.browser_options = webdriver.ChromeOptions()
+        # self.browser_options.add_argument("--no-sandbox")
+        # self.browser_options.add_argument("--headless")
+        # self.browser_options.add_argument("--disable-gpu")
 
-        self.browser = webdriver.Chrome(options=self.browser_options)
+        # self.browser = webdriver.Chrome(options=self.browser_options)
 
         self.lst_run_difficulty = [
             "skiruns-green",
@@ -83,11 +84,19 @@ class WebscrapeTrails:
             Pandas DataFrame of ski resort information
         """
 
-        self.browser.get(URL)
+        # self.browser.get(URL)
+
+        # TODO: Use Pandas HTML to get the Table values
+        URL = "https://www.coloradoski.com/resort-statistics"
+        html_request_doc = requests.get(URL).text
+
+        df_test = pd.read_html(html_request_doc)[0]
 
         time.sleep(3)
 
-        soup = BeautifulSoup(self.browser.page_source, "html.parser")
+        pd.read_html(html_request_doc)[0]
+
+        soup = BeautifulSoup(html_request_doc, features="lxml")
 
         X_web_trail = soup.select("table.table-striped tr")
 

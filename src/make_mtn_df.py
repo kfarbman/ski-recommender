@@ -12,8 +12,10 @@ import warnings
 from datetime import date
 
 import pandas as pd
-from bs4 import BeautifulSoup
-from selenium import webdriver
+import requests
+
+# from bs4 import BeautifulSoup
+# from selenium import webdriver
 from tqdm import tqdm
 
 from src.webscrape_trails import WebscrapeTrails
@@ -26,12 +28,12 @@ class MakeMountainDF:
 
         self.CURRENT_DIRECTORY = os.getcwd()
 
-        self.browser_options = webdriver.ChromeOptions()
-        self.browser_options.add_argument("--no-sandbox")
-        self.browser_options.add_argument("--headless")
-        self.browser_options.add_argument("--disable-gpu")
+        # self.browser_options = webdriver.ChromeOptions()
+        # self.browser_options.add_argument("--no-sandbox")
+        # self.browser_options.add_argument("--headless")
+        # self.browser_options.add_argument("--disable-gpu")
 
-        self.browser = webdriver.Chrome(options=self.browser_options)
+        # self.browser = webdriver.Chrome(options=self.browser_options)
 
         # 2020 ticket prices, fetched manually
         self.dict_resort_prices = {
@@ -63,48 +65,64 @@ class MakeMountainDF:
             Pandas DataFrame of ski resort information
         """
 
-        self.browser.get(URL)
+        # self.browser.get(URL)
+        # html_request_doc = requests.get(URL).text
+
+        # time.sleep(3)
+
+        # soup = BeautifulSoup(html_request_doc, features="lxml")
+
+        # TODO: Use Pandas HTML to get the Table values
+        URL = "https://www.coloradoski.com/resort-statistics"
+        html_request_doc = requests.get(URL).text
+
+        df_mtn = pd.read_html(html_request_doc)[0]
+
+        # https://stackoverflow.com/questions/66603854/futurewarning-the-default-value-of-regex-will-change-from-true-to-false-in-a-fu
+        df_mtn["Peak"].str.replace(r"[^0-9]+", "", regex=True).astype(int)
+        df_mtn["Base"].str.replace(r"[^0-9]+", "", regex=True).astype(int)
+        df_mtn["10 Year Snowfall Avg."].str.replace(r"[^0-9]+", "", regex=True).astype(
+            int
+        )
 
         time.sleep(3)
 
-        soup = BeautifulSoup(self.browser.page_source, "html.parser")
+        # # JollyTurns parsing (runs breakdown)
+        # X_runs = soup.select(
+        #     "resort-glance div.row div.col-xs-12 div.row.text-left.statistics.ng-scope span.ng-binding"
+        # )
+        # lst_runs = [run.text for run in X_runs]
+        # lst_runs = [run.replace(" ski runs: ", "") for run in lst_runs]
+        # df_ski_runs = pd.DataFrame({"Runs": lst_runs[0::2], "total": lst_runs[1::2]})
+        # df_ski_runs = df_ski_runs.set_index("Runs").T.reset_index(drop=True)
 
-        # JollyTurns parsing (runs breakdown)
-        X_runs = soup.select(
-            "resort-glance div.row div.col-xs-12 div.row.text-left.statistics.ng-scope span.ng-binding"
-        )
-        lst_runs = [run.text for run in X_runs]
-        lst_runs = [run.replace(" ski runs: ", "") for run in lst_runs]
-        df_ski_runs = pd.DataFrame({"Runs": lst_runs[0::2], "total": lst_runs[1::2]})
-        df_ski_runs = df_ski_runs.set_index("Runs").T.reset_index(drop=True)
+        # # JollyTurns parsing (Chairlifts / total runs)
+        # X_lifts = soup.select("div.content-in-circle")
+        # lst_lifts = [lift.text.lstrip() for lift in X_lifts]
+        # df_lifts = pd.DataFrame({"Lifts": lst_lifts[0]}, index=[0])
 
-        # JollyTurns parsing (Chairlifts / total runs)
-        X_lifts = soup.select("div.content-in-circle")
-        lst_lifts = [lift.text.lstrip() for lift in X_lifts]
-        df_lifts = pd.DataFrame({"Lifts": lst_lifts[0]}, index=[0])
+        # # JollyTurns parsing (Elevations)
+        # X_elevations = soup.select("resort-glance div.row div.col-xs-12 table tr td")
+        # lst_elevations = [
+        #     elevation.text for elevation in X_elevations if "Lift" not in elevation.text
+        # ]
+        # lst_elevations = [
+        #     elevation.replace(" \xa0", "") for elevation in lst_elevations
+        # ]
+        # lst_elevations = [elevation.replace(" ft", "") for elevation in lst_elevations]
+        # lst_elevations = [elevation.replace(":", "") for elevation in lst_elevations]
 
-        # JollyTurns parsing (Elevations)
-        X_elevations = soup.select("resort-glance div.row div.col-xs-12 table tr td")
-        lst_elevations = [
-            elevation.text for elevation in X_elevations if "Lift" not in elevation.text
-        ]
-        lst_elevations = [
-            elevation.replace(" \xa0", "") for elevation in lst_elevations
-        ]
-        lst_elevations = [elevation.replace(" ft", "") for elevation in lst_elevations]
-        lst_elevations = [elevation.replace(":", "") for elevation in lst_elevations]
+        # df_elevations = pd.DataFrame(
+        #     {"Elevation": lst_elevations[0::2], "Total": lst_elevations[1::2]}
+        # )
+        # df_elevations = df_elevations.set_index("Elevation").T.reset_index(drop=True)
 
-        df_elevations = pd.DataFrame(
-            {"Elevation": lst_elevations[0::2], "Total": lst_elevations[1::2]}
-        )
-        df_elevations = df_elevations.set_index("Elevation").T.reset_index(drop=True)
+        # # Combine total runs, total lifts, and elevation data
+        # df_ski = pd.concat([df_ski_runs, df_lifts, df_elevations], axis=1)
 
-        # Combine total runs, total lifts, and elevation data
-        df_ski = pd.concat([df_ski_runs, df_lifts, df_elevations], axis=1)
+        # df_ski["URL"] = URL
 
-        df_ski["URL"] = URL
-
-        return df_ski
+        return df_mtn
 
     def format_mountain_data_frame_values(
         self, df: pd.core.frame.DataFrame
