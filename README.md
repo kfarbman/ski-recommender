@@ -142,3 +142,5 @@ The similarity metric used is the cosine similarity. For the trail recommendatio
 * [GitHub - CloudFormation: Create Public VPC](https://github.com/nathanpeck/aws-cloudformation-fargate/blob/master/fargate-networking-stacks/public-vpc.yml)
 
 * [GitHub - CloudFormation: Create Fargate Service](https://github.com/nathanpeck/aws-cloudformation-fargate/blob/master/service-stacks/public-subnet-public-loadbalancer.yml)
+
+* [Medium - Reusable Terraform Infrastructure](https://blog.gruntwork.io/how-to-create-reusable-infrastructure-with-terraform-modules-25526d65f73d)
