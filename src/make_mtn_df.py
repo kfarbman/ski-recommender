@@ -47,7 +47,7 @@ class MakeMountainDF:
             "Buttermilk": 0,
             "Cooper": 0,
             "Beaver Creek": 209,
-            "Copper": 119,
+            "Copper Mountain": 119,
             "Crested Butte": 129,
             "Diamond Peak": 104,
             "Echo Mountain": 0,
@@ -62,6 +62,7 @@ class MakeMountainDF:
             "Powderhorn": 0,
             "Purgatory Resort": 0,
             "Silverton": 0,
+            "Snowmass": 0,
             "Steamboat": 199,
             "Sunlight": 0,
             "Taos": 110,
@@ -170,10 +171,10 @@ if __name__ == "__main__":
     # df_mountain = ws.rename_resorts(df=df_mountain)
 
     # Fill prices
-    df_mountain["Price"] = df_mountain["Resort"].map(mountain.dict_resort_prices)
+    df_mountain["Price"] = df_mountain["Title"].map(mountain.dict_resort_prices)
 
     # Convert column data types
-    df_mountain = mountain.format_mountain_data_frame_values(df=df_mountain)
+    # df_mountain = mountain.format_mountain_data_frame_values(df=df_mountain)
 
     # Convert total runs to percentage of total runs per resort
     # lst_run_types = ["black", "blue", "double black", "green", "terrain park"]
@@ -191,12 +192,10 @@ if __name__ == "__main__":
     # Rename columns
     df_mountain.rename(
         columns={
-            "Vertical rise": "Vertical Rise (ft)",
-            "black": "Percent Blacks",
-            "blue": "Percent Blues",
-            "double black": "Percent Double Blacks",
-            "green": "Percent Greens",
-            "terrain park": "Percent Terrain Parks",
+            "Black Runs": "Percent Blacks",
+            "Blue Runs": "Percent Blues",
+            "Double-Black Runs": "Percent Double Blacks",
+            "Green Runs": "Percent Greens",
         },
         inplace=True,
     )
