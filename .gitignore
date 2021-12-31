@@ -7,3 +7,7 @@ ghostdriver.log
 
 *.vscode
 *.pytest_cache
+
+*.terraform
+*.terraform.lock.hcl
+*terraform.tfstate*
