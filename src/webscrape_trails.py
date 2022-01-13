@@ -71,12 +71,10 @@ class WebscrapeTrails:
 
         self.lst_run_difficulty = [
             "skiruns-green",
-            # "skiruns-blue",
-            # "skiruns-black",
-            # "skiruns-double-black",
+            "skiruns-blue",
+            "skiruns-black",
+            "skiruns-double-black",
         ]
-
-        # self.blank_value = "__NA__"
 
     def make_tables(self, URL: str) -> pd.core.frame.DataFrame:
         """
@@ -160,8 +158,6 @@ if __name__ == "__main__":
     # Combine trail data
     df_trails = pd.concat(lst_trail_data)
 
-    ws.save_trail_data(df=df_trails)
-
     # Create list of all URL's to get lift data
     lst_lift_urls = [f"{url}lifts" for url in ws.URLs]
 
@@ -173,3 +169,15 @@ if __name__ == "__main__":
 
     # Count lifts per resort
     df_lifts = df_lifts.groupby("URL")["Name"].count().reset_index(name="Lifts")
+
+    # Merge trail and lift data
+    df_trails["main_url"] = df_trails["URL"].str.split("skiruns", expand=True)[0]
+
+    df_lifts["main_url"] = df_lifts["URL"].str.split("lifts", expand=True)[0]
+    df_lifts.drop("URL", axis=1, inplace=True)
+
+    df_merge = pd.merge(df_trails, df_lifts, on="main_url", how="inner")
+    df_merge.drop("main_url", axis=1, inplace=True)
+
+    # Save trail data
+    ws.save_trail_data(df=df_merge)
