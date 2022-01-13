@@ -55,42 +55,6 @@ class MakeMountainDF:
             "Wolf Creek": 76,
         }
 
-    # def get_mountain_data(self) -> pd.core.frame.DataFrame:
-    #     """
-    #     Inputs:
-    #         URL from URLs (str)
-    #     Outputs:
-    #         Pandas DataFrame of ski resort information
-    #     """
-
-    #     URL = "https://www.coloradoski.com/resort-statistics"
-    #     html_request_doc = requests.get(self.ORIGIN_URL).text
-
-    #     df_mtn = pd.read_html(html_request_doc)[0]
-
-    #     # https://stackoverflow.com/questions/66603854/futurewarning-the-default-value-of-regex-will-change-from-true-to-false-in-a-fu
-    #     df_mtn["Peak"] = (
-    #         df_mtn["Peak"].str.replace(r"[^0-9]+", "", regex=True).astype(int)
-    #     )
-
-    #     df_mtn["Base"] = (
-    #         df_mtn["Base"].str.replace(r"[^0-9]+", "", regex=True).astype(int)
-    #     )
-
-    #     df_mtn["10 Year Snowfall Avg."] = (
-    #         df_mtn["10 Year Snowfall Avg."]
-    #         .str.replace(r"[^0-9]+", "", regex=True)
-    #         .astype(int)
-    #     )
-
-    #     df_mtn["Total Runs"] = df_mtn[
-    #         ["Green Runs", "Blue Runs", "Black Runs", "Double-Black Runs"]
-    #     ].sum(axis=1)
-
-    #     df_mtn["Vertical Rise (ft)"] = df_mtn["Peak"] - df_mtn["Base"]
-
-    #     return df_mtn
-
     def rename_resorts(self, df: pd.core.frame.DataFrame) -> pd.core.frame.DataFrame:
         """
         Rename resorts for recommendation system
