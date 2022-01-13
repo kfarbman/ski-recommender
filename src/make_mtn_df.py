@@ -55,41 +55,41 @@ class MakeMountainDF:
             "Wolf Creek": 76,
         }
 
-    def get_mountain_data(self) -> pd.core.frame.DataFrame:
-        """
-        Inputs:
-            URL from URLs (str)
-        Outputs:
-            Pandas DataFrame of ski resort information
-        """
+    # def get_mountain_data(self) -> pd.core.frame.DataFrame:
+    #     """
+    #     Inputs:
+    #         URL from URLs (str)
+    #     Outputs:
+    #         Pandas DataFrame of ski resort information
+    #     """
 
-        URL = "https://www.coloradoski.com/resort-statistics"
-        html_request_doc = requests.get(self.ORIGIN_URL).text
+    #     URL = "https://www.coloradoski.com/resort-statistics"
+    #     html_request_doc = requests.get(self.ORIGIN_URL).text
 
-        df_mtn = pd.read_html(html_request_doc)[0]
+    #     df_mtn = pd.read_html(html_request_doc)[0]
 
-        # https://stackoverflow.com/questions/66603854/futurewarning-the-default-value-of-regex-will-change-from-true-to-false-in-a-fu
-        df_mtn["Peak"] = (
-            df_mtn["Peak"].str.replace(r"[^0-9]+", "", regex=True).astype(int)
-        )
+    #     # https://stackoverflow.com/questions/66603854/futurewarning-the-default-value-of-regex-will-change-from-true-to-false-in-a-fu
+    #     df_mtn["Peak"] = (
+    #         df_mtn["Peak"].str.replace(r"[^0-9]+", "", regex=True).astype(int)
+    #     )
 
-        df_mtn["Base"] = (
-            df_mtn["Base"].str.replace(r"[^0-9]+", "", regex=True).astype(int)
-        )
+    #     df_mtn["Base"] = (
+    #         df_mtn["Base"].str.replace(r"[^0-9]+", "", regex=True).astype(int)
+    #     )
 
-        df_mtn["10 Year Snowfall Avg."] = (
-            df_mtn["10 Year Snowfall Avg."]
-            .str.replace(r"[^0-9]+", "", regex=True)
-            .astype(int)
-        )
+    #     df_mtn["10 Year Snowfall Avg."] = (
+    #         df_mtn["10 Year Snowfall Avg."]
+    #         .str.replace(r"[^0-9]+", "", regex=True)
+    #         .astype(int)
+    #     )
 
-        df_mtn["Total Runs"] = df_mtn[
-            ["Green Runs", "Blue Runs", "Black Runs", "Double-Black Runs"]
-        ].sum(axis=1)
+    #     df_mtn["Total Runs"] = df_mtn[
+    #         ["Green Runs", "Blue Runs", "Black Runs", "Double-Black Runs"]
+    #     ].sum(axis=1)
 
-        df_mtn["Vertical Rise (ft)"] = df_mtn["Peak"] - df_mtn["Base"]
+    #     df_mtn["Vertical Rise (ft)"] = df_mtn["Peak"] - df_mtn["Base"]
 
-        return df_mtn
+    #     return df_mtn
 
     def rename_resorts(self, df: pd.core.frame.DataFrame) -> pd.core.frame.DataFrame:
         """
@@ -171,8 +171,20 @@ if __name__ == "__main__":
         df_trails["Length"].str.replace(" mi", "").str.replace(" ft", "").astype(float)
     )
 
+    # Convert run distance from miles to feet
+    df_trails.loc[df_trails["Length"] < 1, "Length"] = df_trails["Length"] * 5280
+
+    # Calculate average steepness
+    df_trails["Average Steepness"] = (
+        df_trails["Vertical drop"] / df_trails["Length"]
+    ).round(2)
+
     # Get resort name for trails
     df_trails = mountain.rename_resorts(df=df_trails)
+
+    # Fill prices
+    # TODO: Correct any with value of 0
+    df_trails["Price"] = df_trails["Resort"].map(mountain.dict_resort_prices).fillna(0)
 
     # Count total runs per resort by difficulty
     df_trails["Total Runs"] = df_trails.groupby(["Resort", "Difficulty"])[
@@ -200,56 +212,20 @@ if __name__ == "__main__":
         .astype(int)
     )
 
-    # Rename difficulty columns to reflect percent calculation
+    # Format column names
     df_combined = df_combined.rename(
         columns={
             "Black": "Percent Blacks",
             "Blue": "Percent Blues",
             "Double-Black": "Percent Double Blacks",
             "Green": "Percent Greens",
+            "Name": "Trail Name",
+            "Top": "Top Elev (ft)",
+            "Bottom": "Bottom Elev (ft)",
+            "Vertical drop": "Vertical Drop (ft)",
+            "Length": "Slope Length (ft)",
         }
     ).copy()
-
-    # Format trail values
-    lst_formatted_cols = [
-        "Bottom Elev (ft)",
-        "Top Elev (ft)",
-        "Vertical Drop (ft)",
-        "Length (mi)",
-    ]
-
-    import pdb
-
-    pdb.set_trace()
-
-    df_resorts[lst_formatted_cols] = df_resorts[lst_formatted_cols].astype("float64")
-
-    # Convert run distance from miles to feet
-    df_resorts.loc[df_resorts["Length (mi)"] < 1, "Length (mi)"] = (
-        df_resorts["Length (mi)"] * 5280
-    )
-
-    # Format trail values as integers
-    df_resorts[lst_formatted_cols] = df_resorts[lst_formatted_cols].astype(int)
-
-    # Rename Length column
-    df_resorts.rename(columns={"Length (mi)": "Slope Length (ft)"}, inplace=True)
-
-    # Calculate average steepness
-    df_resorts["Average Steepness"] = (
-        df_resorts["Vertical Drop (ft)"] / df_resorts["Slope Length (ft)"]
-    ).round(2)
-
-    # Save trail data
-    # ws.save_trail_data(df=df_resorts)
-
-    # # Request mountain data from all resorts
-    # df_mountain = mountain.get_mountain_data()
-
-    # # Fill prices
-    # df_mountain["Price"] = (
-    #     df_mountain["Title"].map(mountain.dict_resort_prices).fillna(0)
-    # )
 
     # Save data
     # mountain.save_mountain_data(df=df_mountain)
