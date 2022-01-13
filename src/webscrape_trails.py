@@ -71,12 +71,12 @@ class WebscrapeTrails:
 
         self.lst_run_difficulty = [
             "skiruns-green",
-            "skiruns-blue",
-            "skiruns-black",
-            "skiruns-double-black",
+            # "skiruns-blue",
+            # "skiruns-black",
+            # "skiruns-double-black",
         ]
 
-        self.blank_value = "__NA__"
+        # self.blank_value = "__NA__"
 
     def make_tables(self, URL: str) -> pd.core.frame.DataFrame:
         """
@@ -103,6 +103,34 @@ class WebscrapeTrails:
 
         return df_trails
 
+    def request_total_lifts(self, URL: str) -> pd.core.frame.DataFrame:
+        """[summary]
+
+        Parameters
+        ----------
+        URL : str
+            [description]
+
+        Returns
+        -------
+        pd.core.frame.DataFrame
+            [description]
+        """
+        self.browser.get(URL)
+        time.sleep(3)
+        render = self.browser.page_source
+
+        try:
+            # Use pd.read_html to format trail metrics from HTML source
+            df_lifts = pd.read_html(render)[0]
+        except ValueError:
+            print(f"No data for {URL}")
+            return None
+
+        df_lifts["URL"] = URL
+
+        return df_lifts
+
     def save_trail_data(self, df: pd.core.frame.DataFrame) -> pd.core.frame.DataFrame:
         """
         Save trail data to Parquet file
@@ -126,10 +154,22 @@ if __name__ == "__main__":
     ]
 
     # Request trail data from all ski resorts
-    # TODO: Request resorts in parallel?
+    # TODO: Request trails in parallel?
     lst_trail_data = [ws.make_tables(URL=url) for url in tqdm(lst_trail_urls)]
 
     # Combine trail data
     df_trails = pd.concat(lst_trail_data)
 
     ws.save_trail_data(df=df_trails)
+
+    # Create list of all URL's to get lift data
+    lst_lift_urls = [f"{url}lifts" for url in ws.URLs]
+
+    # Request lift data from all ski resorts
+    # TODO: Request lift data in parallel?
+    lst_lift_data = [ws.request_total_lifts(URL=url) for url in tqdm(lst_lift_urls)]
+
+    df_lifts = pd.concat(lst_lift_data)
+
+    # Count lifts per resort
+    df_lifts = df_lifts.groupby("URL")["Name"].count().reset_index(name="Lifts")
