@@ -103,50 +103,6 @@ class WebscrapeTrails:
 
         return df_trails
 
-    def rename_resorts(self, df: pd.core.frame.DataFrame) -> pd.core.frame.DataFrame:
-        """
-        Rename resorts for recommendation system
-
-        INPUT
-            df: Pandas DataFrame
-        OUTPUT
-            Pandas DataFrame, with resort_name column altered
-        """
-
-        # TODO: Better way to slice strings than arbitrary column
-        df["Resort"] = df["URL"].str.split("/", expand=True)[5]
-
-        dict_webscrape_trail_names = {
-            "palisades-tahoe-(alpine-meadows)": "Alpine Meadows",
-            "arapahoe-basin": "Arapahoe Basin",
-            "aspen-snowmass": "Aspen Snowmass",
-            "bald-mountain": "Bald Mountain",
-            "beaver-creek-resort": "Beaver Creek",
-            "copper-mountain-resort": "Copper",
-            "crested-butte-mountain-resort": "Crested Butte",
-            "diamond-peak": "Diamond Peak",
-            "eldora-mountain-resort": "Eldora",
-            "jackson-hole": "Jackson Hole",
-            "loveland-ski-area": "Loveland",
-            "monarch-ski-area": "Monarch",
-            "steamboat-ski-resort": "Steamboat",
-            "taos-ski-valley": "Taos",
-            "telluride-ski-resort": "Telluride",
-            "vail-ski-resort": "Vail",
-            "winter-park-resort": "Winter Park",
-            "wolf-creek-ski-area": "Wolf Creek",
-        }
-
-        df["Resort"] = df["Resort"].map(dict_webscrape_trail_names).fillna(df["Resort"])
-
-        # Drop URL column
-        df.drop("URL", axis=1, inplace=True)
-
-        # Reset index
-        df = df.reset_index(drop=True)
-
-        return df
-
     def save_trail_data(self, df: pd.core.frame.DataFrame) -> pd.core.frame.DataFrame:
         """
         Save trail data to Parquet file
@@ -155,7 +111,7 @@ class WebscrapeTrails:
         current_date = date.today().strftime("%Y%m%d")
 
         df.to_parquet(
-            f"{self.CURRENT_DIRECTORY}/data/trail_data_{current_date}.parquet",
+            f"{self.CURRENT_DIRECTORY}/data/trail_data_extract_{current_date}.parquet",
             index=False,
         )
 
@@ -176,88 +132,4 @@ if __name__ == "__main__":
     # Combine trail data
     df_trails = pd.concat(lst_trail_data)
 
-    # Capitalize trail difficulty
-    df_trails["Difficulty"] = df_trails["Difficulty"].str.title()
-
-    # Remove trailing strings from metric columns
-    df_trails["Top"] = df_trails["Top"].str.replace(" ft", "").astype(int)
-    df_trails["Bottom"] = df_trails["Bottom"].str.replace(" ft", "").astype(int)
-    df_trails["Vertical drop"] = (
-        df_trails["Vertical drop"].str.replace(" ft", "").astype(int)
-    )
-
-    # TODO: Convert all to feet when removing strings
-    df_trails["Length"] = (
-        df_trails["Length"].str.replace(" mi", "").str.replace(" ft", "").astype(float)
-    )
-
-    # Get resort name for trails
-    df_trails = ws.rename_resorts(df=df_trails)
-
-    # Count total runs per resort by difficulty
-    df_trails["Total Runs"] = df_trails.groupby(["Resort", "Difficulty"])[
-        "Name"
-    ].transform("count")
-
-    import pdb
-
-    pdb.set_trace()
-
-    # Create count of runs by difficulty per resort
-    df_total_trails_by_difficulty = pd.crosstab(
-        df_trails["Resort"], df_trails["Difficulty"]
-    ).reset_index()
-
-    # Combine trails and aggregate trail metrics
-    df_combined = pd.merge(
-        df_trails, df_total_trails_by_difficulty, on="Resort", how="inner"
-    )
-
-    # Convert total runs to percentage of total runs per resort
-    lst_run_difficulty = df_combined["Difficulty"].unique().tolist()
-
-    df_combined[lst_run_difficulty] = (
-        df_combined[lst_run_difficulty]
-        .div(df_combined["Total Runs"], axis=0)
-        .mul(100)
-        .round()
-        .astype(int)
-    )
-
-    # Rename difficulty columns to reflect percent calculation
-    df_combined = df_combined.rename(
-        columns={
-            "Black": "Percent Blacks",
-            "Blue": "Percent Blues",
-            "Double-Black": "Percent Double Blacks",
-            "Green": "Percent Greens",
-        }
-    ).copy()
-
-    # Format trail values
-    lst_formatted_cols = [
-        "Bottom Elev (ft)",
-        "Top Elev (ft)",
-        "Vertical Drop (ft)",
-        "Length (mi)",
-    ]
-    df_resorts[lst_formatted_cols] = df_resorts[lst_formatted_cols].astype("float64")
-
-    # Convert run distance from miles to feet
-    df_resorts.loc[df_resorts["Length (mi)"] < 1, "Length (mi)"] = (
-        df_resorts["Length (mi)"] * 5280
-    )
-
-    # Format trail values as integers
-    df_resorts[lst_formatted_cols] = df_resorts[lst_formatted_cols].astype(int)
-
-    # Rename Length column
-    df_resorts.rename(columns={"Length (mi)": "Slope Length (ft)"}, inplace=True)
-
-    # Calculate average steepness
-    df_resorts["Average Steepness"] = (
-        df_resorts["Vertical Drop (ft)"] / df_resorts["Slope Length (ft)"]
-    ).round(2)
-
-    # Save trail data
-    # ws.save_trail_data(df=df_resorts)
+    ws.save_trail_data(df=df_trails)
