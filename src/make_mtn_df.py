@@ -109,7 +109,7 @@ class MakeMountainDF:
         current_date = date.today().strftime("%Y%m%d")
 
         df.to_parquet(
-            f"{self.CURRENT_DIRECTORY}/data/mountain_data_{current_date}.parquet",
+            f"{self.CURRENT_DIRECTORY}/data/trail_data_processed_{current_date}.parquet",
             index=False,
         )
 
@@ -192,4 +192,4 @@ if __name__ == "__main__":
     ).copy()
 
     # Save data
-    # mountain.save_mountain_data(df=df_mountain)
+    # mountain.save_mountain_data(df=df_combined)
