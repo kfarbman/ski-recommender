@@ -213,6 +213,27 @@ if __name__ == "__main__":
         df_trails, df_total_trails_by_difficulty, on="Resort", how="inner"
     )
 
+    # Convert total runs to percentage of total runs per resort
+    lst_run_difficulty = df_combined["Difficulty"].unique().tolist()
+
+    df_combined[lst_run_difficulty] = (
+        df_combined[lst_run_difficulty]
+        .div(df_combined["Total Runs"], axis=0)
+        .mul(100)
+        .round()
+        .astype(int)
+    )
+
+    # Rename difficulty columns to reflect percent calculation
+    df_combined = df_combined.rename(
+        columns={
+            "Black": "Percent Blacks",
+            "Blue": "Percent Blues",
+            "Double-Black": "Percent Double Blacks",
+            "Green": "Percent Greens",
+        }
+    ).copy()
+
     # Format trail values
     lst_formatted_cols = [
         "Bottom Elev (ft)",

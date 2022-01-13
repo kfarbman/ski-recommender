@@ -118,27 +118,5 @@ if __name__ == "__main__":
         df_mountain["Title"].map(mountain.dict_resort_prices).fillna(0)
     )
 
-    # Convert total runs to percentage of total runs per resort
-    lst_run_types = ["Green Runs", "Blue Runs", "Black Runs", "Double-Black Runs"]
-
-    df_mountain[lst_run_types] = (
-        df_mountain[lst_run_types]
-        .div(df_mountain["Total Runs"], axis=0)
-        .mul(100)
-        .round()
-        .astype(int)
-    )
-
-    # Rename columns
-    df_mountain.rename(
-        columns={
-            "Black Runs": "Percent Blacks",
-            "Blue Runs": "Percent Blues",
-            "Double-Black Runs": "Percent Double Blacks",
-            "Green Runs": "Percent Greens",
-        },
-        inplace=True,
-    )
-
     # Save data
     # mountain.save_mountain_data(df=df_mountain)
