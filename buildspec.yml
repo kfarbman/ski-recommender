@@ -1,0 +1,32 @@
+version: 0.2
+
+env:
+  parameter-store:
+     AWS_ACCESS_KEY_ID: "/ski-recommender/production/awsAccessKeyId"
+     AWS_SECRET_ACCESS_KEY: "/ski-recommender/production/awsSecretAccessKey"
+     ECR_IMAGE_TAG: "/ski-recommender/production/ecrImageTag"
+     ECR_REPO_NAME: "/ski-recommender/production/ecrRepoName"
+phases:
+  pre_build:
+    commands:
+      # - git clone https://github.com/gregwchase/ski-recommender
+      # - git checkout ski-recommender-v2
+      - echo Logging in to Amazon ECR...
+      - $(aws ecr get-login --region $AWS_REGION --no-include-email)
+      - AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+      - GIT_COMMIT_ID=$(git log --format="%H" -n 1 | head -c 7)
+  build:
+    commands:
+      - echo Building image and running tests
+      - make test
+      - docker tag $ECR_REPO_NAME:$ECR_IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPO_NAME:$ECR_IMAGE_TAG
+      # - docker tag $ECR_REPO_NAME:$ECR_IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPO_NAME:$GIT_COMMIT_ID      
+  post_build:
+    commands:
+      - echo Pushing the Docker image...
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPO_NAME:$ECR_IMAGE_TAG
+      # - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPO_NAME:$GIT_COMMIT_ID
+      - printf '[{"name":"ski-recommender","imageUri":"%s"}]' $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPO_NAME:$ECR_IMAGE_TAG > imagedefinitions.json
+
+artifacts:
+    files: imagedefinitions.json

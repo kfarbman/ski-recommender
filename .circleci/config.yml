@@ -1,0 +1,29 @@
+# Ski Recommender CircleCI configuration file
+
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/python:3.7.4-stretch
+    parallelism: 1
+    working_directory: ~/ski-recommender
+
+    steps:
+      - checkout
+      - setup_remote_docker
+
+      - run:
+          name: Build Docker Image
+          command: |
+            make build
+
+      - run:
+          name: Run Tests
+          command: |
+            make test
+
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build

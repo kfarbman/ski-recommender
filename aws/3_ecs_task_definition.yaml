@@ -1,0 +1,29 @@
+AWSTemplateFormatVersion: 2010-09-09
+Resources:
+  taskdefinition: 
+    Type: AWS::ECS::TaskDefinition
+    Properties: 
+      RequiresCompatibilities:
+        - FARGATE
+      NetworkMode: 'awsvpc'
+      Cpu: 512
+      executionRoleArn:
+        !Sub "arn:aws:iam::${AWS::AccountId}:role/ecsTaskExecutionRole"
+      Family: "ski-recommender"
+      Memory: 1024
+      ContainerDefinitions:
+        - 
+          Name: "ski-recommender"
+          Image: !Sub "${AWS::AccountId}.dkr.ecr.${AWS::Region}.amazonaws.com/ski-recommender:latest"
+          Command: ["python", "web_app/app.py"]
+          Essential: true
+          PortMappings: 
+          - 
+            ContainerPort: 8080
+            HostPort: 8080
+          logConfiguration:
+            logDriver: "awslogs"
+            options:
+              awslogs-group: "/ecs/ski-recommender"
+              awslogs-region: !Sub "${AWS::Region}"
+              awslogs-stream-prefix: "ecs"

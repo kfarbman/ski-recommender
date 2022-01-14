@@ -1,0 +1,83 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: A stack for deploying CodeBuild.
+
+Parameters:
+  VpcId:
+    Type: AWS::EC2::VPC::Id
+    Description: Select a VPC that allows instances access to the Internet.
+  GithubRepo:
+    Type: String
+    Description: Type your GitHub repository URL (e.g. https://github.com/USER_NAME/REPO_NAME)
+Resources:
+  CodeBuildProject:
+    Type: AWS::CodeBuild::Project
+    Properties:
+      Name: !Ref 'AWS::StackName'
+      ServiceRole: !GetAtt CodeBuildRole.Arn
+      Artifacts:
+        Type: NO_ARTIFACTS
+      Environment:
+        Type: LINUX_CONTAINER
+        ComputeType: BUILD_GENERAL1_SMALL
+        Image: aws/codebuild/amazonlinux2-x86_64-standard:3.0
+        PrivilegedMode: true
+      Source:
+        Type: GITHUB
+        Location: !Ref 'GithubRepo'
+      Triggers:
+        Webhook: true
+        FilterGroups:
+          - - Type: EVENT
+              Pattern: PULL_REQUEST_CREATED,PULL_REQUEST_UPDATED
+      TimeoutInMinutes: 10
+      # CloudWatchLogs:
+      #   GroupName: '/aws/codebuild/codebuild-ski-recommender'
+      #   Status: 'ENABLED'
+  CodeBuildRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+        - Action: ['sts:AssumeRole']
+          Effect: Allow
+          Principal:
+            Service: [codebuild.amazonaws.com]
+        Version: '2012-10-17'
+      Path: /
+      Policies:
+        - PolicyName: CodeBuildAccess
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Action:
+                - 'logs:*'
+                - 'ec2:CreateNetworkInterface'
+                - 'ec2:DescribeNetworkInterfaces'
+                - 'ec2:DeleteNetworkInterface'
+                - 'ec2:DescribeSubnets'
+                - 'ec2:DescribeSecurityGroups'
+                - 'ec2:DescribeDhcpOptions'
+                - 'ec2:DescribeVpcs'
+                - 'ec2:CreateNetworkInterfacePermission'
+                - 'ssm:Describe*'
+                - 'ssm:Get*'
+                - 'ssm:List*'
+                - 'ecr:GetAuthorizationToken'
+                - 'ecr:BatchCheckLayerAvailability'
+                - 'ecr:GetDownloadUrlForLayer'
+                - 'ecr:GetRepositoryPolicy'
+                - 'ecr:DescribeRepositories'
+                - 'ecr:ListImages'
+                - 'ecr:DescribeImages'
+                - 'ecr:BatchGetImage'
+                - 'ecr:GetLifecyclePolicy'
+                - 'ecr:GetLifecyclePolicyPreview'
+                - 'ecr:ListTagsForResource'
+                - 'ecr:DescribeImageScanFindings'
+                - 'ecr:InitiateLayerUpload'
+                - 'ecr:UploadLayerPart'
+                - 'ecr:CompleteLayerUpload'
+                - 'ecr:PutImage'
+                - 's3:*'
+                Effect: Allow
+                Resource: '*'

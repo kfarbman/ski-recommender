@@ -2,201 +2,181 @@
 {% block content %}
 
 <style>
-.green {background-color:rgba(0, 255, 0, .3);}
-.blue {background-color:rgba(0, 0, 255, .3);}
-.black {background-color:rgba(0, 0, 0, .3);}
-.bb {color: rgba(255, 255, 255, 1); background-color:rgba(0, 0, 0, .6);}
-.white {background-color:rgba(255, 255, 255,1);}
-.main {
-  background-color: rgba(255, 255, 255, 0.7);
-  margin-top: 50px;
-}
-.move-button {
-  display: flex;
-  justify-content: center;
-}
-body {
-  background-image: url('https://images.fineartamerica.com/images/artworkimages/mediumlarge/1/an-alpine-ski-trail-on-wildcat-mountain-tim-laman.jpg');
-  background-size: 100%
-}
-@media only screen and (max-width: 600px) {
-    body {
-        background-size: auto;
+    .green {background-color:rgba(0, 255, 0, .3);}
+    .blue {background-color:rgba(0, 0, 255, .3);}
+    .black {background-color:rgba(0, 0, 0, .3);}
+    .bb {color: rgba(255, 255, 255, 1); background-color:rgba(0, 0, 0, .6);}
+    .white {background-color:rgba(255, 255, 255,1);}
+    .main {
+    background-color: rgba(255, 255, 255, 0.7);
+    margin-top: 50px;
     }
-}
-
-button {
-            padding: 1vh 2vw;
-            background-color: cornflowerblue;
-            color: white;
-            border-radius: 16px; 
-            border-color:white;
-            padding-left: 12px; 
-            padding-right: 12px; 
-            font-size: 16px; 
-            font-weight: bold;
-        }
-
-        button:hover {
-            background-color: rgba(0,0,0,0);
-            color: cornflowerblue;
-            border-color: cornflowerblue;
-            border: 2px solid cornflowerblue;
-        }
+    .move-button {
+    display: flex;
+    justify-content: center;
+    }
+    body {
+    background-image: url('https://images.fineartamerica.com/images/artworkimages/mediumlarge/1/an-alpine-ski-trail-on-wildcat-mountain-tim-laman.jpg');
+    background-size: 100%
+    }
+    @media only screen and (max-width: 600px) {
+    body {
+    background-size: auto;
+    }
+    }
+    button {
+    padding: 1vh 2vw;
+    background-color: cornflowerblue;
+    color: white;
+    border-radius: 16px; 
+    border-color:white;
+    padding-left: 12px; 
+    padding-right: 12px; 
+    font-size: 16px; 
+    font-weight: bold;
+    }
+    button:hover {
+    background-color: rgba(0,0,0,0);
+    color: cornflowerblue;
+    border-color: cornflowerblue;
+    border: 2px solid cornflowerblue;
+    }
 </style>
-
-
 <div class="main" style="padding: 20px 25% 20px 25%;">
-
-  <h3><b>Get recommendations of trails to ski based on a trail you know like:</b></h3>
-
-<br>
-
-<form action='/recommendations', method='POST'>
-  <div><h4><b>Step 1: Choose a resort that you have skied at.</b></h4></div>
-
-<select name="resort" id="select_resort" class="selectpicker form-control">
-    <option selected="selected" value = ''>Select a resort with your favorite trail...</option>
-    {% for resort in df['resort'].unique()|sort %}
-    <option value="{{ resort }}">{{ resort }}</option>
-    {% endfor %}
-</select>
-
-<br><br>
-
-<div><h4><b>Step 2: Choose a trail that you know you liked at that ski area.</b>
-
-<a href="#" id="make_url"><font color="black"><b><u>Need help remembering trails?</u></b></font></a></h4> </div>
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script charset="utf-8" type="text/javascript">
-    $(function() {
-        var dropdown = {
-            resort: $('#select_resort'),
-            trail: $('#select_trail')
-        };
-
-        function getURL() {
-            var resort = dropdown.resort.val();
-            if (resort.length) {
-              $('#make_url').click(function(e) {
-                e.preventDefault();
-                var url = "/trail_map/"+dropdown.resort.val();
-                window.open(url);
-              });
-            }
-        }
-
-        dropdown.resort.on('change', function() {
-            getURL();
-        });
-
-    });
-</script>
-
-
-<select name="trail" id="select_trail" class="selectpicker form-control" disabled>
-    <option selected="selected" value = ''>Select a Trail...</option>
-</select>
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script charset="utf-8" type="text/javascript">
-    $(function() {
-        var dropdown = {
-            resort: $('#select_resort'),
-            trail: $('#select_trail')
-        };
-
-        // function to call XHR and update goodsrec dropdown
-        function updateTrail() {
-            var resort = dropdown.resort.val();
-            dropdown.trail.attr('disabled', 'disabled');
-            console.log(resort);
-
-            if (resort.length) {
-                dropdown.trail.empty();
-                $.getJSON("{{ url_for('get_trails') }}", {resort: resort}, function(data) {
-                    console.log(data);
-                    data.forEach(function(item) {
-                        dropdown.trail.append(
-                            $('<option>', {
-                                // style: df['colors'].iloc[item.id]
-                                class: item.color,
-                                value: item.id,
-                                text: item.name
-                            })
-                        );
-                    });
-                    dropdown.trail.removeAttr('disabled');
+    <h3><b>Get recommendations of trails to ski based on a trail you know like:</b></h3>
+    <br>
+    <form action='/recommendations', method='POST'>
+        <div>
+            <h4><b>Step 1: Choose a resort that you have skied at.</b></h4>
+        </div>
+        <select name="resort" id="select_resort" class="selectpicker form-control">
+            <option selected="selected" value = ''>Select a resort with your favorite trail...</option>
+            {% for resort in df['Resort'].unique()|sort %}
+            <option value="{{ resort }}">{{ resort }}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+        <div>
+            <h4><b>Step 2: Choose a trail that you know you liked at that ski area.</b>
+                <a href="#" id="make_url"><font color="black"><b><u>Need help remembering trails?</u></b></font></a>
+            </h4>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script charset="utf-8" type="text/javascript">
+            $(function() {
+                var dropdown = {
+                    resort: $('#select_resort'),
+                    trail: $('#select_trail')
+                };
+            
+                function getURL() {
+                    var resort = dropdown.resort.val();
+                    if (resort.length) {
+                      $('#make_url').click(function(e) {
+                        e.preventDefault();
+                        var url = "/trail_map/"+dropdown.resort.val();
+                        window.open(url);
+                      });
+                    }
+                }
+            
+                dropdown.resort.on('change', function() {
+                    getURL();
                 });
-            }
-        }
-
-        // event listener to customer dropdown change
-        dropdown.resort.on('change', function() {
-            updateTrail();
-        });
-
-    });
-</script>
-
-<br>
-<br>
-
-<div><h4><b>Step 3 (Optional): Choose the resort where you want trails recommended. It can be where you are planning to ski today or anywhere for general reference.</b></h4></div>
-
-<select name="dest_resort" id="select_resort_dest" class="selectpicker form-control">
-    <option selected="selected" value = ''>Where are you skiing today?</option>
-    <option value=''>Anywhere</option>
-    {% for dest_resort in df['resort'].unique()|sort %}
-    <option value="{{ dest_resort }}">{{ dest_resort }}</option>
-    {% endfor %}
-</select>
-
-<br>
-<br>
-
-<div><h4><b>Step 4 (Optional): Choose how many recommendations you want.</b></h4></div>
-
-<select name="num_recs" id="select_num_recs" class="selectpicker form-control">
-    <option selected="" value=5>How many recommendations would you like?</option>
-    {% for i in range(1,21) %}
-    <option value="{{ i }}">{{ i }}</option>
-    {% endfor %}
-</select>
-
-<br>
-<br>
-<div><h4><b>Step 5 (Optional): Choose what difficulty level trails you would like recommended.</b></h4></div>
-<div class="white">
-<h5>
-  <b>The highest difficulty I would like recommended is: </b>
-</h5>
-
-
-<h6>
-  <b><i>***Keep an open mind! Trails of the difficulty higher or lower than you typically ski can be just as doable and fun!***</i></b>
-</h6>
-<form action='/recommendations', method='GET'>
-  <input type="checkbox" name="green" value="green"> <b>Green Trails</b><br>
-  <input type="checkbox" name="blue" value="blue"> <b>Blue Trails</b><br>
-  <input type="checkbox" name="black" value="black"> <b>Black Trails</b><br>
-  <input type="checkbox" name="bb" value="bb"> <b>Double Black Trails</b><br>
+            
+            });
+        </script>
+        <select name="trail" id="select_trail" class="selectpicker form-control" disabled>
+            <option selected="selected" value = ''>Select a Trail...</option>
+        </select>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script charset="utf-8" type="text/javascript">
+            $(function() {
+                var dropdown = {
+                    resort: $('#select_resort'),
+                    trail: $('#select_trail')
+                };
+            
+                // function to call XHR and update goodsrec dropdown
+                function updateTrail() {
+                    var resort = dropdown.resort.val();
+                    dropdown.trail.attr('disabled', 'disabled');
+                    console.log(resort);
+            
+                    if (resort.length) {
+                        dropdown.trail.empty();
+                        $.getJSON("{{ url_for('get_trails') }}", {resort: resort}, function(data) {
+                            console.log(data);
+                            data.forEach(function(item) {
+                                dropdown.trail.append(
+                                    $('<option>', {
+                                        // style: df['colors'].iloc[item.id]
+                                        class: item.color,
+                                        value: item.id,
+                                        text: item.name
+                                    })
+                                );
+                            });
+                            dropdown.trail.removeAttr('disabled');
+                        });
+                    }
+                }
+            
+                // event listener to customer dropdown change
+                dropdown.resort.on('change', function() {
+                    updateTrail();
+                });
+            
+            });
+        </script>
+        <br>
+        <br>
+        <div>
+            <h4><b>Step 3 (Optional): Choose the resort where you want trails recommended. It can be where you are planning to ski today or anywhere for general reference.</b></h4>
+        </div>
+        <select name="dest_resort" id="select_resort_dest" class="selectpicker form-control">
+            <option selected="selected" value = ''>Where are you skiing today?</option>
+            <option value=''>Anywhere</option>
+            {% for dest_resort in df['Resort'].unique()|sort %}
+            <option value="{{ dest_resort }}">{{ dest_resort }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <br>
+        <div>
+            <h4><b>Step 4 (Optional): Choose how many recommendations you want.</b></h4>
+        </div>
+        <select name="num_recs" id="select_num_recs" class="selectpicker form-control">
+            <option selected="" value=5>How many recommendations would you like?</option>
+            {% for i in range(1,21) %}
+            <option value="{{ i }}">{{ i }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <br>
+        <div>
+            <h4><b>Step 5 (Optional): Choose what difficulty level trails you would like recommended.</b></h4>
+        </div>
+        <div class="white">
+            <h5>
+                <b>The highest difficulty I would like recommended is: </b>
+            </h5>
+            <h6>
+                <b><i>***Keep an open mind! Trails of the difficulty higher or lower than you typically ski can be just as doable and fun!***</i></b>
+            </h6>
+    <form action='/recommendations', method='GET'>
+    <input type="checkbox" name="green" value="green"> <b>Green Trails</b><br>
+    <input type="checkbox" name="blue" value="blue"> <b>Blue Trails</b><br>
+    <input type="checkbox" name="black" value="black"> <b>Black Trails</b><br>
+    <input type="checkbox" name="bb" value="bb"> <b>Double Black Trails</b><br>
+    </div>
+    <br>
+    <div class='move-button'>
+    <button type="submit">Recommend</button>
+    </div>
+    <br><br>
+    </form>
+    </form>
 </div>
-<br>
-  <div class='move-button'>
-    
-  <button type="submit">Recommend</button>
-
-</div>
-
-<br><br>
-
-</form>
-</form>
-</div>
-
-
 {% endblock %}
+

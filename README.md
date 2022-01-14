@@ -19,7 +19,18 @@ Galvanize Data Science Immersive - October 2017
 
 As I was prepping for my Professional Ski Instructors of America (PSIA) Level 3 exam at Vail (never having skied at Vail), word on the slopes was that the mogul portion of the ski exam was going to be on Prima and Pronto. From my research on Vail, I knew that Prima and Pronto were black and double black, but I didn't know what to compare them to. With Winter Park as my home mountain, I had skied a huge range of black mogul runs, and they were all vastly different. Someone told me that if I could ski Outhouse at Winter Park, that was a pretty good indicator of how I would do on Prima or Pronto - they had a similar slope and width and were ungroomed. 
 
-How awesome would it be to find runs similar to a given run based on their features, even at a mountain you know nothing about? You can find runs at a mountain you're unfamiliar with that are similar to a run you love. Or you can find out what a run you've never skied on is like by finding out which runs it is like at a resort you know.
+How awesome would it be to find runs similar to a given run based on their features, even at a mountain you know nothing about? You can find runs at a mountain you're unfamiliar with that are similar to a run you love. Or you can find out what a run you've never skied on is like by comparing similar runs at a resort you know.
+
+## Development Commands
+
+| Description       | Command    |
+| :------------- | :----------: |
+| Build Docker Image | `make build`   |
+| Mount Image To Repo   | `make develop` |
+| Run Web App (Development)   | `make web_app_dev` |
+| Run Web App (Production)   | `make web_app_prod` |
+| Run Tests   | `make test` |
+
 
 ## Web Application 
 
@@ -35,65 +46,101 @@ Then, you can select a trail that you like from a resort that you know. You have
 
 This will bring up a page with the original trail, as well as the recommendations and their stats, trail maps, and links to the resorts' trail report for that day.
 
-Trail Recommendations:
+### Trail Recommendations
 ![image](web_app/static/images/recommendations_page2.png)
 
-Mountain Recommendations:
+### Mountain Recommendations
 ![image](web_app/static/images/mtn_rec_page2.png)
-
-Created using Flask and self-hosted on AWS.
 
 ## Data Collection and Cleaning
 
-I began by downloading pdfs of the Master Development plans from various mountains. I converted a table of information on the current runs from the pdfs into text files and parsed the text files into tables to put in pandas DataFrames. I needed to pay special attention to the differences in the tables from the different resorts. I found archived grooming reports for each resort to add as another feature. Since the Master Development Plans classify the runs differently than trail maps, I also webscraped Jollyturns.com to get the trails by colors. Since the Master Developments plans didn't necessarily have the same trails that were on the grooming reports and Jollyturns, I had to reconcile which trails I was using (and account for differences in spelling).
+All trail and mountain data is downloaded from [JollyTurns](https://jollyturns.com/resorts/country/united-states-of-america). Once downloaded, all data is formatted in a Pandas DataFrame. Because all data is requested from a one website, the preprocessing pipeline is identical for trail and mountain data. 
 
-I ended up with 1125 runs from 12 different resorts. The features used for trail recommendations include Trail Top Elevation, Trail Bottom Elevation, Vertical Drop, Slope Length, Slope Average Width, Slope Area, Average Grade, Max Grade, and Groomed. The features used for mountain recommendations include all the features for trail recommendations plus Resort Top Elevation, Resort Bottom Elevation, Percent Green, Blue, Black, and Double Black trails, Number of Lifts, and Price.
+Archived grooming reports were utilized to identify runs which are groomed each day. Additionally, the resort ticket price was fetched manually from each resort of interest.
+
+The dataset consists of 2,125 runs from 18 different resorts. The features used for trail and mountain recommendations include:
+* Resort
+* Location
+* Difficulty
+* Groomed
+* Top Elevation (ft)
+* Bottom Elevation (ft)
+* Slope Length (ft)
+* Percent Greens
+* Percent Blues
+* Percent Blacks
+* Percent Double Blacks
+* Terrain Parks
+* Lifts
+* Price
 
 ## Technologies Used
 
-BeautifulSoup, selenium, pandas, numpy, sklearn, matplotlib, flask, html/javascript/css, AWS
+|Software|
+|:----:|
+|AWS|
+|BeautifulSoup|
+|Flask|
+|HTML/ JavaScript/ CSS|
+|Matplotlib|
+|Numpy|
+|Pandas|
+|Scikit Learn|
+|Selenium|
 
 ![image](web_app/static/images/for-karen.png)
 
 ## Recommender System
 
-This recommender takes into account information about the runs. It looks at a run and calculates how similar it is to every other run. The runs are sorted from most similar to least similar and then filtered by resort or difficulty level if desired. So why is this useful for this project? Because you can start with a run you know you like, and it can give you back the ones that are most similar to it.
+This recommender takes into account information about the runs. It looks at a run and calculates how similar it is to every other run. The runs are sorted from most similar to least similar and then filtered by resort or difficulty level if desired. By starting with a run you know you like, the recommendation system returns the runs that are most similar to your initial interest.
 
 The similarity metric used is the cosine similarity. For the trail recommendations, the similarity is calculated between the chosen run and all other runs. For the mountain recommendations, the average of the similarities between the chosen run and all of the runs at each mountain is calculated, and the resorts are sorted by highest average similarity.
 
 ## Future Steps
 
-In the future, I'd like to add more trails from more resorts. Ideally, I'd also like to add information on aspect to indicate snow conditions. A potential addition would be daily grooming information instead of static. 
+* Including more trails and resorts. The majority of resorts are from Colorado; including more resorts and trails allows for more comparisons, and a better recommendation system.
+* Automate requesting groomed runs per resort. Currently, this is stored as a hard-coded dictionary. This task would ensure runs specified as "Groomed" is true.
+* Request data in parallel. Data is requested and formatted in a serialized format. Parallelization would allow for reduced data processing time.
 
-## Repo structure
+## Repo Structure
+
 ```
-├── data (contains txt/csv files from Master Development Plan pdfs and pickles)
-|     ├── df.pkl (pickle of dataframe used for trail recommendations from comb_tables.py)
-|     ├── mtn_df.pkl (pickle of dataframe used for mountain recommendations from make_mtn_df.py)
-|     └── resort_dict.pkl (pickle of dictionary of resort/color dataframes from webscrape_trails.py)
+├── aws
+│   ├── 1_create_cluster.yaml (Create ECS cluster, ALB, ECR repository, IAM roles, and security groups)
+│   ├── 2_codebuild.yaml (Create CodeBuild project for building & testing code)
+│   └── aws.md (AWS markdown file explaining infrastructure deployment)
+├── data (contains CSV and Parquet files of trail and mountain data)
+|     ├── combined_data_20200423.csv (CSV of combined trail and mountain data)
+|     ├── mountain_data_20200423.parquet (Parquet file of mountain data)
+|     └── trail_data_20200423.parquet (Parquet file of trail data)
 ├── notebooks (contains scripts used for testing and visualizations)
-|     ├── clustering.ipynb (visualizations of clustering methods)
-|     ├── supervised_learning.ipynb (a look into classification models of runs)
 |     └── visualizations.ipynb (interesting visualizations)
 ├── src
-|     ├── create_tables (contains scripts which take in pdf/txt/csv and convert to a dataframe by resort; slightly different conditions from tables meant using different scripts)
 |     ├── comb_tables.py
-|     |       -creates a dictionary of resort dataframes (created from scripts in create_tables)
-|     |       -fixes trail names
-|     |       -adds grooming column
-|     |       -adds color column (from webscrape_trails and manually)
-|     |       -removes trails that don't have grooming or color info (were in the master development plan)
-|     |       -puts the dataframes from each resort back together
-|     |       -maps ability levels and colors to numbers
-|     |       -fixes names from Monarch and trails that have the same name at the same resort
-|     |       -saves a pickle of the dataframe
-|     ├── cosine_sims.py (made cosine_sim_recommendations function (actually appears in app.py))
-|     ├── make_mtn_df.py (creates dataframe from pickle of dataframe used for recommendations, webscrapes to add resort level data, saves a pickle of the new dataframe)
-|     ├── resort_stats.py (webscrapes stats by resort, NOT CURRENTLY USING)
-|     └── webscrape_trails.py (webscrapes to get trails by color for each resort, saves a pickle of dictionary of results)
+|     |       -Merge trail and mountain data (created from webscrape_trails and make_mtn_df scripts)
+|     |       -Adds grooming column
+|     |       -Maps location based on resort
+|     |       -saves a CSV of the DataFrame
+|     ├── make_mtn_df.py (creates DataFrame of webscraped mountain data)
+|     └── webscrape_trails.py (webscrapes trail data for each resort, and saves Parquet file of all trail data)
 ├── web_app
 |     ├── static
 |     ├── templates
-|     └── app.py (runs web app)
+|     ├── app.py (runs web app)
+|     └── recsys.py (runs recommendation system)
 └── README.md
 ```
+
+## References
+
+* [AWS - CodeBuild Sample](https://docs.aws.amazon.com/codebuild/latest/userguide/sample-ecr.html)
+
+* [AWS - ECS CloudFormation Template Snippet](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/quickref-ecs.html#quickref-ecs-example-1.yaml)
+
+* [Flask - Decrease Load Times](https://blog.socratic.org/the-one-weird-trick-that-cut-our-flask-page-load-time-by-70-87145335f679)
+
+* [GitHub - CloudFormation: Create Public VPC](https://github.com/nathanpeck/aws-cloudformation-fargate/blob/master/fargate-networking-stacks/public-vpc.yml)
+
+* [GitHub - CloudFormation: Create Fargate Service](https://github.com/nathanpeck/aws-cloudformation-fargate/blob/master/service-stacks/public-subnet-public-loadbalancer.yml)
+
+* [Medium - Reusable Terraform Infrastructure](https://blog.gruntwork.io/how-to-create-reusable-infrastructure-with-terraform-modules-25526d65f73d)
