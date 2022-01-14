@@ -145,7 +145,7 @@ if __name__ == "__main__":
 
     mountain = MakeMountainDF()
 
-    df_trails = pd.read_parquet("./data/trail_data_extract_20220113.parquet")
+    df_trails = pd.read_parquet("./data/trail_data_extract_20220114.parquet")
 
     # Capitalize trail difficulty
     df_trails["Difficulty"] = df_trails["Difficulty"].str.title()
@@ -157,7 +157,7 @@ if __name__ == "__main__":
         df_trails["Vertical drop"].str.replace(" ft", "").astype(int)
     )
 
-    # TODO: Convert all to feet when removing strings
+    # Convert all to feet when removing strings
     df_trails["Length"] = (
         df_trails["Length"].str.replace(" mi", "").str.replace(" ft", "").astype(float)
     )
@@ -187,9 +187,7 @@ if __name__ == "__main__":
     df_trails["Price"] = df_trails["Resort"].map(mountain.dict_resort_prices).fillna(0)
 
     # Count total runs per resort by difficulty
-    df_trails["Total Runs"] = df_trails.groupby(["Resort", "Difficulty"])[
-        "Name"
-    ].transform("count")
+    df_trails["Total Runs"] = df_trails.groupby("Resort")["Name"].transform("count")
 
     # Create count of runs by difficulty per resort
     df_total_trails_by_difficulty = pd.crosstab(
@@ -219,6 +217,7 @@ if __name__ == "__main__":
             "Blue": "Percent Blues",
             "Double-Black": "Percent Double Blacks",
             "Green": "Percent Greens",
+            "Terrain-Park": "Percent Terrain Parks",
             "Name": "Trail Name",
             "Top": "Top Elev (ft)",
             "Bottom": "Bottom Elev (ft)",
