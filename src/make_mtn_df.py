@@ -9,7 +9,6 @@ Webscrape mountain statistics from JollyTurns
 import json
 import os
 from datetime import date
-from itertools import chain
 
 import pandas as pd
 
