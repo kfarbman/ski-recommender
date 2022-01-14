@@ -132,7 +132,7 @@ def get_trails():
         df = recsys.load_resort_data()
 
         # Filter trails by resort
-        sub_df = df[df["Resort"] == resort]
+        sub_df = df[df["Resort"] == resort].copy()
 
         # Sort trails by name
         sub_df.sort_values(by="Trail Name", inplace=True)
