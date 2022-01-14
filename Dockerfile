@@ -1,8 +1,5 @@
 FROM python:3.8.12-slim
 
-RUN mkdir /recsys
-WORKDIR /recsys
-
 RUN apt-get -y update && \
     apt-get install -y gnupg wget curl
 
@@ -17,8 +14,6 @@ RUN apt-get install -yqq unzip && \
     wget -O /tmp/chromedriver.zip http://chromedriver.storage.googleapis.com/`curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE`/chromedriver_linux64.zip && \
     unzip /tmp/chromedriver.zip chromedriver -d /usr/local/bin/
 
-# FROM python:3.8.12-slim
-
 # Set display port to avoid crash
 ENV DISPLAY=:99
 
@@ -30,8 +25,6 @@ ENV PYTHONFAULTHANDLER=1 \
     PIP_DISABLE_PIP_VERSION_CHECK=on \
     PIP_DEFAULT_TIMEOUT=100 \
     POETRY_VERSION=1.1.12
-
-# COPY --from=base ./recsys ./recsys
 
 # Create working directory
 WORKDIR /recsys
