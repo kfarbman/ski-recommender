@@ -35,10 +35,31 @@ class TestMakeMountainDF(unittest.TestCase):
             and Groomed column is in DataFrame
         """
 
-        self.mountain.add_groomed_col()
+        df_trails = pd.DataFrame(
+            {
+                "Name": {0: "Meadow", 1: "Subway", 2: "Alpine Bowl"},
+                "Top": {0: 7071, 1: 6966, 2: 8496},
+                "Bottom": {0: 6916, 1: 6858, 2: 7761},
+                "Vertical drop": {0: 154, 1: 108, 2: 735},
+                "Length": {0: 1056.0, 1: 1056.0, 2: 2428.8},
+                "Difficulty": {0: "Green", 1: "Green", 2: "Blue"},
+                "Lifts": {0: 13, 1: 13, 2: 13},
+                "Average Steepness": {0: 0.15, 1: 0.1, 2: 0.3},
+                "Resort": {
+                    0: "Alpine Meadows",
+                    1: "Alpine Meadows",
+                    2: "Alpine Meadows",
+                },
+            }
+        )
 
-        self.assertIsInstance(self.mountain.df_trails, pd.core.frame.DataFrame)
-        self.assertTrue("Groomed" in self.mountain.df_trails.columns)
+        df_trails["Groomed"] = "N"
+        self.mountain.add_groomed_col(df=df_trails)
+
+        self.assertIsInstance(df_trails, pd.core.frame.DataFrame)
+        self.assertTrue("Groomed" in df_trails.columns)
+        self.assertTrue(df_trails["Groomed"].iloc[0] == "N")
+        self.assertTrue(df_trails["Groomed"].iloc[2] == "Y")
 
     def test_rename_resorts(self):
         """
