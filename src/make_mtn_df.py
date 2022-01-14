@@ -63,7 +63,7 @@ class MakeMountainDF:
             "Wolf Creek": "CO",
         }
 
-    def add_groomed_col(self):
+    def add_groomed_col(self, df: pd.core.frame.DataFrame) -> None:
         """
         Add groomed column to trail data
 
@@ -73,13 +73,15 @@ class MakeMountainDF:
                 df_trails DataFrame with "Groomed" column
         """
 
-        with open("../groomed_trails.json") as groomed_trails:
-            dict_groomed_trails = json.loads(groomed_trails)
+        with open("./data/groomed_trails.json", "r") as groomed_trails:
+            dict_groomed_trails = json.loads(groomed_trails.read())
 
-        lst_groomed_runs = list(chain(*dict_groomed_trails.values()))
-
-        df_trails["Groomed"] = "Ungroomed"
-        df_trails["Groomed"][df_trails["Trail Name"].isin(lst_groomed_runs)] = "Groomed"
+        # Set groomed runs to "Yes" (Y) for each resort
+        for key, val in dict_groomed_trails.items():
+            df.loc[
+                (df["Resort"] == key) & (df["Name"].isin(dict_groomed_trails[key])),
+                "Groomed",
+            ] = "Y"
 
     def rename_resorts(self, df: pd.core.frame.DataFrame) -> pd.core.frame.DataFrame:
         """
@@ -171,6 +173,10 @@ if __name__ == "__main__":
 
     # Get resort name for trails
     df_trails = mountain.rename_resorts(df=df_trails)
+
+    # Create Groomed categorical feature
+    df_trails["Groomed"] = "N"
+    mountain.add_groomed_col(df_trails)
 
     # Get ticket price per resort
     df_trails["Location"] = (
