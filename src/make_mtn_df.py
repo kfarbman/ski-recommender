@@ -6,11 +6,12 @@ Webscrape mountain statistics from JollyTurns
 3. Save data to CSV
 """
 
+import json
 import os
 from datetime import date
+from itertools import chain
 
 import pandas as pd
-import requests
 
 
 class MakeMountainDF:
@@ -40,6 +41,45 @@ class MakeMountainDF:
             "Winter Park": 139,
             "Wolf Creek": 76,
         }
+
+        self.resort_locations = {
+            "Alpine Meadows": "CA",
+            "Arapahoe Basin": "CO",
+            "Aspen Snowmass": "CO",
+            "Bald Mountain": "CO",
+            "Beaver Creek": "CO",
+            "Copper": "CO",
+            "Crested Butte": "CO",
+            "Diamond Peak": "NV",
+            "Eldora": "CO",
+            "Jackson Hole": "WY",
+            "Loveland": "CO",
+            "Monarch": "CO",
+            "Steamboat": "CO",
+            "Taos": "NM",
+            "Telluride": "CO",
+            "Vail": "CO",
+            "Winter Park": "CO",
+            "Wolf Creek": "CO",
+        }
+
+    def add_groomed_col(self):
+        """
+        Add groomed column to trail data
+
+        Inputs:
+                None
+        Outputs:
+                df_trails DataFrame with "Groomed" column
+        """
+
+        with open("../groomed_trails.json") as groomed_trails:
+            dict_groomed_trails = json.loads(groomed_trails)
+
+        lst_groomed_runs = list(chain(*dict_groomed_trails.values()))
+
+        df_trails["Groomed"] = "Ungroomed"
+        df_trails["Groomed"][df_trails["Trail Name"].isin(lst_groomed_runs)] = "Groomed"
 
     def rename_resorts(self, df: pd.core.frame.DataFrame) -> pd.core.frame.DataFrame:
         """
@@ -131,6 +171,11 @@ if __name__ == "__main__":
 
     # Get resort name for trails
     df_trails = mountain.rename_resorts(df=df_trails)
+
+    # Get ticket price per resort
+    df_trails["Location"] = (
+        df_trails["Resort"].map(mountain.resort_locations).fillna("__NA__")
+    )
 
     # Fill prices
     # TODO: Correct any with value of 0
