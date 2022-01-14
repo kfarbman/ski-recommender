@@ -1,7 +1,7 @@
 # Makefile for Ski Recommender
 
 # Global variables
-DOCKER_IMAGE=ski-recommender
+DOCKER_IMAGE=kfarbman/ski-recommender
 GIT_COMMIT_ID=$$(git log --format="%H" -n 1 | head -c 7)
 DOCKER_TAG=latest
 
