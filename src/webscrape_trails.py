@@ -74,6 +74,7 @@ class WebscrapeTrails:
             "skiruns-blue",
             "skiruns-black",
             "skiruns-double-black",
+            "skiruns-terrain-park",
         ]
 
     def request_resort_data(self, URL: str) -> pd.core.frame.DataFrame:
