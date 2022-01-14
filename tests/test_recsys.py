@@ -1,8 +1,8 @@
 import unittest
 
-from web_app.recsys import SkiRunRecommender
-import pandas as pd
 import numpy as np
+import pandas as pd
+from web_app.recsys import SkiRunRecommender
 
 
 class TestSkiRunRecommender(unittest.TestCase):
@@ -47,10 +47,11 @@ class TestSkiRunRecommender(unittest.TestCase):
             "Price",
             "Difficulty_Black",
             "Difficulty_Blue",
-            "Difficulty_Double Black",
+            "Difficulty_Double-Black",
             "Difficulty_Green",
-            "Groomed_Groomed",
-            "Groomed_Ungroomed",
+            "Difficulty_Terrain-Park",
+            "Groomed_Y",
+            "Groomed_N",
             "Location_CA",
             "Location_CO",
             "Location_NM",

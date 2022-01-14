@@ -9,7 +9,6 @@ class TestMakeMountainDF(unittest.TestCase):
         super(TestMakeMountainDF, self).__init__(*args, **kwargs)
         self.mountain = MakeMountainDF()
 
-    # FIXME: Test is failing
     def test_rename_resorts(self):
         """
         GIVEN trail and mountain DataFrames
