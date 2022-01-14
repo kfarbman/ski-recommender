@@ -1,3 +1,5 @@
+from typing import Tuple
+
 import numpy as np
 import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
@@ -112,9 +114,9 @@ class SkiRunRecommender:
         Load combined trail and mountain data
         """
 
-        df_resorts = pd.read_csv(
-            "./data/combined_data_20200423.csv", usecols=self.MODEL_FEATURES
-        )
+        df_resorts = pd.read_parquet("./data/trail_data_processed_20220114.parquet")[
+            self.MODEL_FEATURES
+        ]
 
         return df_resorts
 
@@ -165,7 +167,7 @@ class SkiRunRecommender:
 
     def mountain_recommendations(
         self, index: int, n: int = 5
-    ) -> (pd.core.frame.DataFrame, list):
+    ) -> Tuple[pd.core.frame.DataFrame, list]:
         """
         Create mountain recommendations
 
