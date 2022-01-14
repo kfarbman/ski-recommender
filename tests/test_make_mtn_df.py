@@ -1,8 +1,7 @@
 import unittest
 
-from src.make_mtn_df import MakeMountainDF
 import pandas as pd
-import numpy as np
+from src.make_mtn_df import MakeMountainDF
 
 
 class TestMakeMountainDF(unittest.TestCase):
@@ -10,84 +9,65 @@ class TestMakeMountainDF(unittest.TestCase):
         super(TestMakeMountainDF, self).__init__(*args, **kwargs)
         self.mountain = MakeMountainDF()
 
-    def test_get_mountain_data(self):
+    # FIXME: Test is failing
+    def test_rename_resorts(self):
         """
-        GIVEN a resort URL
+        GIVEN trail and mountain DataFrames
 
-        WHEN trail data is requested
+        WHEN location is mapped based on resort name
+
+        THEN test if the data structure is a DataFrame
+            and Location column is in DataFrame
+        """
+
+        self.mountain.rename_resorts()
+
+        self.assertIsInstance(self.mountain.df_mountains, pd.core.frame.DataFrame)
+        self.assertTrue("Location" in self.mountain.df_mountains.columns)
+
+    def test_add_groomed_col(self):
+        """
+        GIVEN trail data as DataFrame
+
+        WHEN a Groomed column is added based on trail name
 
         THEN test if data structure is a DataFrame
-            and all columns exist in formatted DataFrame
-
+            and Groomed column is in DataFrame
         """
 
-        TEST_URL = (
-            "https://jollyturns.com/resort/united-states-of-america/aspen-snowmass/"
-        )
+        self.mountain.add_groomed_col()
 
-        df_ski = self.mountain.get_mountain_data(URL=TEST_URL)
+        self.assertIsInstance(self.mountain.df_trails, pd.core.frame.DataFrame)
+        self.assertTrue("Groomed" in self.mountain.df_trails.columns)
 
-        self.assertIsInstance(df_ski, pd.core.frame.DataFrame)
-
-        test_lst_cols = [
-            "black",
-            "blue",
-            "double black",
-            "green",
-            "terrain park",
-            "Lifts",
-            "Base",
-            "Top",
-            "Vertical rise",
-            "URL",
-        ]
-
-        self.assertTrue(all([col in df_ski.columns for col in test_lst_cols]))
-
-    def test_format_mountain_data_frame_values(self):
+    def test_rename_resorts(self):
         """
-        GIVEN a webscraped DataFrame
+        GIVEN a Pandas DataFrame of trail data
 
-        WHEN trail data is formatted
+        WHEN resorts are renamed based on the URL
 
         THEN test if data structure is a DataFrame
-            and all columns exist in formatted DataFrame
-
+            and Resort column is in DataFrame
+            and tested resort name is Beaver Creek
         """
 
-        df_mountain = pd.DataFrame(
+        df_trails = pd.DataFrame(
             {
-                "black": {0: "28"},
-                "blue": {0: "49"},
-                "double black": {0: "30"},
-                "green": {0: "8"},
-                "terrain park": {0: "3"},
-                "Lifts": {0: "17"},
-                "Base": {0: "8116"},
-                "Top": {0: "12542"},
-                "Vertical rise": {0: "4426"},
+                "Trail Name": {0: "\xa0 Anderson Way ", 1: "\xa0 Bear Paw "},
+                "Bottom Elev (ft)": {0: "8025 ft", 1: "8501 ft"},
+                "Top Elev (ft)": {0: "8238 ft", 1: "8547 ft"},
+                "Vertical Drop (ft)": {0: "213 ft", 1: "43 ft"},
+                "Length (mi)": {0: "0.73 mi", 1: "0.17 mi"},
                 "URL": {
-                    0: "https://jollyturns.com/resort/united-states-of-america/aspen-snowmass/"
+                    0: "https://jollyturns.com/resort/united-states-of-america/beaver-creek-resort/skiruns-green",
+                    1: "https://jollyturns.com/resort/united-states-of-america/beaver-creek-resort/skiruns-green",
                 },
             }
         )
 
-        df_mountain = self.mountain.format_mountain_data_frame_values(df=df_mountain)
+        df_trails = self.mountain.rename_resorts(df=df_trails)
 
-        self.assertIsInstance(df_mountain, pd.core.frame.DataFrame)
+        self.assertIsInstance(df_trails, pd.core.frame.DataFrame)
 
-        test_formatted_cols = [
-            "Top",
-            "Base",
-            "Lifts",
-            "Vertical rise",
-            "black",
-            "blue",
-            "double black",
-            "green",
-            "terrain park",
-        ]
-
-        self.assertTrue(
-            all(["int" == df_mountain[col].dtype for col in test_formatted_cols])
-        )
+        self.assertTrue("Resort" in list(df_trails.columns))
+        self.assertTrue(all(df_trails["Resort"] == "Beaver Creek"))
