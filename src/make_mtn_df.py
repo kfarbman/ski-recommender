@@ -186,10 +186,10 @@ if __name__ == "__main__":
     # TODO: Correct any with value of 0
     df_trails["Price"] = df_trails["Resort"].map(mountain.dict_resort_prices).fillna(0)
 
-    # Count total runs per resort by difficulty
+    # Count total runs per resort
     df_trails["Total Runs"] = df_trails.groupby("Resort")["Name"].transform("count")
 
-    # Create count of runs by difficulty per resort
+    # Count total runs per resort by difficulty
     df_total_trails_by_difficulty = pd.crosstab(
         df_trails["Resort"], df_trails["Difficulty"]
     ).reset_index()
