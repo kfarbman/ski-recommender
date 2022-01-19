@@ -103,19 +103,34 @@ resource "aws_ecs_task_definition" "recsys_task_definition" {
 
 # BUG - Service not launching
 resource "aws_ecs_service" "reccys_ecs_service" {
-  name            = "${var.product_name}-${var.environment}-ecs-service"
-  cluster         = aws_ecs_cluster.recsys_cluster.id
-  task_definition = aws_ecs_task_definition.recsys_task_definition.arn
-  desired_count   = 1
-  iam_role        = aws_iam_role.ecs_task_execution_role.arn
-  depends_on      = [aws_iam_role_policy_attachment.ecs_task_execution_policy]
-
+  name    = "${var.product_name}-${var.environment}-ecs-service"
+  cluster = aws_ecs_cluster.recsys_cluster.arn
   load_balancer {
     target_group_arn = aws_lb_target_group.recsys_alb_target_group.arn
     container_name   = "${var.product_name}-${var.environment}-container"
     container_port   = 8080
   }
+  desired_count                      = 1
+  launch_type                        = "FARGATE"
+  platform_version                   = "LATEST"
+  task_definition                    = aws_ecs_task_definition.recsys_task_definition.arn
+  deployment_maximum_percent         = 200
+  deployment_minimum_healthy_percent = 100
+
+  network_configuration {
+    assign_public_ip = true
+    security_groups = [
+      "sg-010a4c60c842fabff"
+    ]
+    subnets = [
+      "subnet-00b3c45a",
+      "subnet-978fbedf"
+    ]
+  }
+  health_check_grace_period_seconds = 0
+  scheduling_strategy               = "REPLICA"
 }
+
 
 resource "aws_cloudwatch_log_group" "recsys_log_group" {
   name              = "/ecs/${var.product_name}-${var.environment}"

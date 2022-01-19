@@ -13,10 +13,21 @@ resource "aws_lb" "recsys_alb" {
 }
 
 resource "aws_lb_target_group" "recsys_alb_target_group" {
-  name     = "${var.product_name}-${var.environment}-tg"
-  port     = 8080
-  protocol = "HTTP"
-  vpc_id   = var.vpc_id
+  health_check {
+    interval            = 30
+    path                = "/"
+    port                = "traffic-port"
+    protocol            = "HTTP"
+    timeout             = 5
+    unhealthy_threshold = 2
+    healthy_threshold   = 5
+    matcher             = "200"
+  }
+  port        = 8080
+  protocol    = "HTTP"
+  target_type = "ip"
+  vpc_id      = var.vpc_id
+  name        = "${var.product_name}-${var.environment}-tg"
 }
 
 resource "aws_lb_listener" "https_listener" {
