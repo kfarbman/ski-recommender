@@ -5,25 +5,6 @@ from src.make_mtn_df import MakeMountainDF
 
 
 class TestMakeMountainDF(unittest.TestCase):
-    def __init__(self, *args, **kwargs):
-        super(TestMakeMountainDF, self).__init__(*args, **kwargs)
-        self.mountain = MakeMountainDF()
-
-    def test_rename_resorts(self):
-        """
-        GIVEN trail and mountain DataFrames
-
-        WHEN location is mapped based on resort name
-
-        THEN test if the data structure is a DataFrame
-            and Location column is in DataFrame
-        """
-
-        self.mountain.rename_resorts()
-
-        self.assertIsInstance(self.mountain.df_mountains, pd.core.frame.DataFrame)
-        self.assertTrue("Location" in self.mountain.df_mountains.columns)
-
     def test_add_groomed_col(self):
         """
         GIVEN trail data as DataFrame
@@ -33,6 +14,8 @@ class TestMakeMountainDF(unittest.TestCase):
         THEN test if data structure is a DataFrame
             and Groomed column is in DataFrame
         """
+
+        mountain = MakeMountainDF()
 
         df_trails = pd.DataFrame(
             {
@@ -53,7 +36,8 @@ class TestMakeMountainDF(unittest.TestCase):
         )
 
         df_trails["Groomed"] = "N"
-        self.mountain.add_groomed_col(df=df_trails)
+
+        mountain.add_groomed_col(df=df_trails)
 
         self.assertIsInstance(df_trails, pd.core.frame.DataFrame)
         self.assertTrue("Groomed" in df_trails.columns)
@@ -71,6 +55,8 @@ class TestMakeMountainDF(unittest.TestCase):
             and tested resort name is Beaver Creek
         """
 
+        mountain = MakeMountainDF()
+
         df_trails = pd.DataFrame(
             {
                 "Trail Name": {0: "\xa0 Anderson Way ", 1: "\xa0 Bear Paw "},
@@ -85,7 +71,7 @@ class TestMakeMountainDF(unittest.TestCase):
             }
         )
 
-        df_trails = self.mountain.rename_resorts(df=df_trails)
+        df_trails = mountain.rename_resorts(df=df_trails)
 
         self.assertIsInstance(df_trails, pd.core.frame.DataFrame)
 
