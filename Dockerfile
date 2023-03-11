@@ -1,4 +1,4 @@
-FROM python:3.8.12-slim
+FROM python:3.8.16-slim
 
 RUN apt-get -y update && \
     apt-get install -y gnupg wget curl
@@ -24,7 +24,7 @@ ENV PYTHONFAULTHANDLER=1 \
     PIP_NO_CACHE_DIR=off \
     PIP_DISABLE_PIP_VERSION_CHECK=on \
     PIP_DEFAULT_TIMEOUT=100 \
-    POETRY_VERSION=1.1.12
+    POETRY_VERSION=1.4.0
 
 # Create working directory
 WORKDIR /recsys
