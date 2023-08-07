@@ -15,7 +15,7 @@ phases:
       - echo Building image and running tests
       - make test
       - ECR_IMAGE_NAME=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPO_NAME:$GIT_COMMIT_ID
-      - docker tag $ECR_REPO_NAME:$ECR_IMAGE_TAG $ECR_IMAGE_NAME
+      - docker tag kfarbman/ski-recommender:latest $ECR_IMAGE_NAME
   post_build:
     commands:
       - echo Pushing the Docker image...
