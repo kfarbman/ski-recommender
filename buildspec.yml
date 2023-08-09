@@ -20,7 +20,7 @@ phases:
     commands:
       - echo Pushing the Docker image...
       - docker push $ECR_IMAGE_NAME
-      - printf '[{"name":"ski-recommender-development","imageUri":"%s"}]' $ECR_IMAGE_NAME > imagedefinitions.json
+      - printf '[{"name":"ski-recommender-development-container","imageUri":"%s"}]' $ECR_IMAGE_NAME > imagedefinitions.json
 
 artifacts:
   files: imagedefinitions.json
