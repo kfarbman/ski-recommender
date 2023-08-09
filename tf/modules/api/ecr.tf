@@ -1,6 +1,6 @@
 resource "aws_ecr_repository" "ecr_repository" {
   name                 = "${var.product_name}-${var.environment}"
-  image_tag_mutability = "MUTABLE"
+  image_tag_mutability = "IMMUTABLE"
 
   encryption_configuration {
     encryption_type = "KMS"
