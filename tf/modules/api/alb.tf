@@ -42,3 +42,26 @@ resource "aws_lb_listener" "https_listener" {
     target_group_arn = aws_lb_target_group.recsys_alb_target_group.arn
   }
 }
+
+resource "aws_security_group" "alb" {
+  name   = "${var.product_name}-allow-http"
+  vpc_id = "vpc-a11b53d8"
+
+  ingress {
+    from_port   = 80
+    protocol    = "tcp"
+    to_port     = 80
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    protocol    = "-1"
+    to_port     = 0
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "${var.product_name}-allow-http"
+  }
+}
