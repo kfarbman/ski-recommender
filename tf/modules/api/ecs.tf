@@ -17,7 +17,7 @@ resource "aws_iam_role" "ecs_task_execution_role" {
         {
           "Action" : "sts:AssumeRole",
           "Principal" : {
-            "Service" : "ecs-tasks.amazonaws.com"
+            "Service" : ["ecs.amazonaws.com", "ecs-tasks.amazonaws.com"]
           },
           "Effect" : "Allow",
           "Sid" : ""
@@ -37,7 +37,7 @@ resource "aws_iam_role" "ecs_task_role" {
         {
           "Action" : "sts:AssumeRole",
           "Principal" : {
-            "Service" : "ecs-tasks.amazonaws.com"
+            "Service" : ["ecs.amazonaws.com", "ecs-tasks.amazonaws.com"]
           },
           "Effect" : "Allow",
           "Sid" : ""
@@ -101,7 +101,6 @@ resource "aws_ecs_task_definition" "recsys_task_definition" {
 
 }
 
-# BUG - Service not launching
 resource "aws_ecs_service" "reccys_ecs_service" {
   name    = "${var.product_name}-${var.environment}-ecs-service"
   cluster = aws_ecs_cluster.recsys_cluster.arn
@@ -120,7 +119,7 @@ resource "aws_ecs_service" "reccys_ecs_service" {
   network_configuration {
     assign_public_ip = true
     security_groups = [
-      "sg-010a4c60c842fabff"
+      "sg-017bf7dd6620262bf"
     ]
     subnets = [
       "subnet-00b3c45a",
@@ -129,6 +128,10 @@ resource "aws_ecs_service" "reccys_ecs_service" {
   }
   health_check_grace_period_seconds = 0
   scheduling_strategy               = "REPLICA"
+
+  deployment_controller {
+    type = "ECS"
+  }
 }
 
 
