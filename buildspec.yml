@@ -21,7 +21,6 @@ phases:
       - echo Pushing the Docker image...
       - docker push $ECR_IMAGE_NAME
       - printf '[{"name":"ski-recommender-development-container","imageUri":"%s"}]' $ECR_IMAGE_NAME > imagedefinitions.json
-      - touch appspec.yml
 
 artifacts:
   files:
