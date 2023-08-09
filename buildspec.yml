@@ -25,4 +25,4 @@ phases:
 artifacts:
   files:
     - imageDetail.json
-    - appspec.yml
+    - appspec.yaml
